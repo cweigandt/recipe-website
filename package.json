@@ -31,5 +31,9 @@
     "prop-types": "^15.7.2",
     "pug": "^2.0.4",
     "tls": "0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://weigac10@bitbucket.org/christianweigandt/recipe-website-react.git"
   }
 }

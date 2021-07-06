@@ -1,0 +1,64 @@
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+
+import '../styles/DeckBanner.css'
+
+function DeckBanner(props) {
+  const [isSearching, setIsSearching] = useState(false)
+
+  function handleSearchText(e) {
+    let searchText = e.target.value
+    window.scrollTo(0, 0)
+    props.onSearchText(searchText)
+
+    if (searchText) {
+      setIsSearching(true)
+    } else {
+      setIsSearching(false)
+    }
+  }
+
+  const backgroundImageProperty = props.imageLocation
+    ? 'url(' + props.imageLocation + ')'
+    : 'linear-gradient(black, black)'
+
+  const recipeName = props.name || ''
+  const linkURL = '/recipe/' + recipeName.replace(/ /g, '_')
+
+  return (
+    <div id='bannerWrapper' class={isSearching ? 'searching' : ''}>
+      <div
+        id='bannerImage'
+        style={{ backgroundImage: backgroundImageProperty }}
+      ></div>
+      <form
+        class='search-wrapper form-inline d-flex justify-content-center md-form form-sm mt-0'
+        onsubmit='return false;'
+      >
+        <div class='searchBar-wrapper'>
+          <input
+            id='searchBar'
+            autocomplete='off'
+            class='form-control form-control-sm'
+            type='text'
+            placeholder='Search'
+            aria-label='Search'
+            onInput={handleSearchText}
+          ></input>
+        </div>
+      </form>
+      <div id='bannerTitle'>
+        <Link to={linkURL}>{recipeName}</Link>
+      </div>
+    </div>
+  )
+}
+
+DeckBanner.propTypes = {
+  name: PropTypes.string.isRequired,
+  imageLocation: PropTypes.string.isRequired,
+  onSearchText: PropTypes.func.isRequired,
+}
+
+export default DeckBanner

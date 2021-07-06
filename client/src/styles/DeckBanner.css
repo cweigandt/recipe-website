@@ -1,0 +1,110 @@
+#bannerWrapper {
+  position: relative;
+  height: calc(80vh - 56px);
+  top: -4px; /* not sure */
+  transition: 0.8s height;
+}
+
+#bannerWrapper.searching {
+  height: 180px;
+}
+
+#bannerWrapper #bannerImage {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  position: relative;
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+
+  display: block;
+  transition: 0.5s opacity;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  #bannerWrapper #bannerImage {
+    background-attachment: scroll; /* fixed not supported on mobile */
+  }
+}
+
+#bannerWrapper #bannerTitle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: white;
+  padding: 5px;
+  background-color: rgb(0, 0, 0, 0.4);
+  border-radius: 5px;
+  max-width: 90%;
+}
+
+#bannerWrapper #bannerTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-wrapper {
+  position: absolute;
+  top: 0;
+
+  height: 100%;
+  width: 100%;
+}
+
+.searchBar-wrapper {
+  position: relative;
+  display: flex;
+  margin: auto;
+  min-width: 284px;
+  width: 30%;
+  padding: 0 22px 0 22px;
+  height: 75px;
+  background-color: var(
+    --dark-theme-searchbar-wrapper-bg,
+    rgb(255, 255, 255, 0.5)
+  );
+  backdrop-filter: saturate(200%) blur(4px);
+  -webkit-backdrop-filter: saturate(200%) blur(4px);
+  border-radius: 8px;
+}
+
+#searchBar {
+  display: block;
+  position: relative;
+  margin: auto;
+  width: 100%;
+  background-color: var(--dark-theme-searchbar-bg, white);
+  border: none;
+  color: var(--dark-theme-form-text-color, initial);
+}
+
+#searchBar::placeholder {
+  color: var(--dark-theme-searchbar-placeholder-color, black);
+}
+
+@media screen and (max-width: 500px) {
+  #bannerWrapper #bannerTitle {
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  #bannerWrapper #bannerTitle {
+    right: 10px;
+    left: unset;
+    transform: unset;
+  }
+
+  #bannerWrapper {
+    height: calc(70vh - 56px);
+  }
+}

@@ -1,0 +1,27 @@
+body {
+  background-color: var(--dark-theme-bg, rgb(250, 250, 255));
+}
+
+body.dark-theme {
+  --dark-theme-bg: #0d0d0f;
+
+  --dark-theme-navbar-bg: rgba(29, 29, 35, 0.8);
+
+  --dark-theme-searchbar-bg: black;
+  --dark-theme-searchbar-border-color: #7d7d7d;
+  --dark-theme-searchbar-wrapper-bg: rgba(0, 0, 0, 0.5);
+  --dark-theme-searchbar-placeholder-color: white;
+
+  --dark-theme-banner-image-opacity: 0.3;
+
+  --dark-theme-recipe-card-title-color: rgb(250, 250, 250);
+  --dark-theme-recipe-card-box-shadow: none;
+  --dark-theme-recipe-card-bg: #242424;
+
+  --dark-theme-recipe-text-color: #eeeeee;
+
+  --dark-theme-form-text-color: rgb(240, 240, 245);
+  --dark-theme-form-control-bg: black;
+  --dark-theme-form-control-border-color: #7d7d7d;
+  --dark-theme-form-select-bg: #242424;
+}

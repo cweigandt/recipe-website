@@ -1,0 +1,44 @@
+.form-control {
+  background-color: var(--dark-theme-form-control-bg, initial);
+  border-color: var(--dark-theme-form-control-border-color, initial);
+  color: var(--dark-theme-form-text-color, initial);
+}
+
+.form-control:disabled {
+  background-color: var(--dark-theme-form-control-bg, initial);
+}
+
+.form-control:focus {
+  background-color: initial;
+  color: var(--dark-theme-form-text-color, initial);
+}
+
+select {
+  background-color: var(--dark-theme-form-select-bg, initial);
+  color: var(--dark-theme-form-text-color, initial);
+}
+
+#formWrapper {
+  padding: 100px;
+  transition: 0.5s padding;
+  color: var(--dark-theme-form-text-color, initial);
+}
+
+@media screen and (max-width: 559px) {
+  #formWrapper {
+    padding: 10px;
+  }
+}
+
+recipe-picker-form-populater #recipePicker {
+  margin-left: 100px;
+  margin-top: 80px;
+  transition: 0.5s margin;
+}
+
+@media screen and (max-width: 559px) {
+  recipe-picker-form-populater #recipePicker {
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+}

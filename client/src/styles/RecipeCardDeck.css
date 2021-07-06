@@ -1,0 +1,17 @@
+#numRecipesCounter {
+  color: var(--dark-theme-form-text-color, initial);
+  font-family: benton-sans, sans-serif;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#recipeCardDeck {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: space-around;
+}

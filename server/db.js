@@ -1,20 +1,11 @@
 const Firestore = require('@google-cloud/firestore')
 
-let dbHandle = null
-const getDBHandle = function () {
-  return (
-    dbHandle ||
-    new Firestore({
-      projectId: 'recipe-website-269020',
-      keyFilename: './server/credentials/firecloud-credentials.json',
-    })
-  )
-}
-dbHandle = getDBHandle()
+const db = new Firestore({
+  projectId: 'recipe-website-269020',
+  keyFilename: './server/credentials/firecloud-credentials.json',
+})
 
 exports.handleUploadForm = function (body, file, thumbnail) {
-  const db = getDBHandle()
-
   let item = rinseInput(body, file, thumbnail)
 
   let recipesDoc = db.collection('recipes').doc(item.name)
@@ -22,8 +13,6 @@ exports.handleUploadForm = function (body, file, thumbnail) {
 }
 
 exports.handleEditForm = function (body, file, thumbnail) {
-  const db = getDBHandle()
-
   let item = rinseInput(body, file, thumbnail)
   if (item.imageLocation === '') {
     // When a user doesn't choose to update an image then use the one already stored
@@ -36,8 +25,6 @@ exports.handleEditForm = function (body, file, thumbnail) {
 }
 
 exports.manuallyUpdate = function (docName, field, value) {
-  const db = getDBHandle()
-
   let item = {}
   item[field] = value
 
@@ -74,14 +61,10 @@ exports.getRecipeImages = function () {
 }
 
 var addToDatabase = function (doc, json) {
-  console.log('Adding to database')
-  console.log(json)
   doc.set(json)
 }
 
 var updateDatabase = function (doc, json) {
-  console.log('Updating recipe in database')
-  console.log(json)
   doc.update(json)
 }
 
@@ -164,8 +147,6 @@ var splitAndTrim = function (str, splitItem) {
 
 var requestDocFromDB = function (collectionName, docName) {
   var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     // If docname provided then query that otherwise only query the entire collection
     db.collection(collectionName)
       .doc(docName)
@@ -198,8 +179,6 @@ Clients should then call requestPaginatedRecipesFromDB for more results
  */
 var requestAllRecipesFromDB = function (disablePagination) {
   var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     const dbRes = db
       .collection('recipes')
       .orderBy('uploadTime', 'desc')
@@ -224,8 +203,6 @@ var requestAllRecipesFromDB = function (disablePagination) {
 
 var requestRecipeNamesFromDB = function () {
   var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     const dbRes = db
       .collection('recipes')
       .orderBy('uploadTime', 'desc')
@@ -247,36 +224,8 @@ var requestRecipeNamesFromDB = function () {
   return promise
 }
 
-var requestPaginatedRecipesFromDB = function (startAfter) {
-  var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
-    const dbRes = db
-      .collection('recipes')
-      .where('uploadTime', '<', parseInt(startAfter))
-      .orderBy('uploadTime', 'desc')
-      .select('name', 'uploadTime', 'section', 'imageLocation', 'thumbnail')
-      .limit(20)
-      .get()
-      .then((snapshot) => {
-        // snapshot.map isn't a function...
-        var data = []
-        snapshot.forEach((doc) => {
-          data.push(doc.data())
-        })
-        resolve(data)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-  return promise
-}
-
 var requestSectionRecipesFromDB = function (section) {
   var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     db.collection('recipes')
       .where('section', '==', section)
       .orderBy('uploadTime', 'desc')
@@ -299,8 +248,6 @@ var requestSectionRecipesFromDB = function (section) {
 
 var requestTagFromDB = function (tagName) {
   var promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     db.collection('recipes')
       .where('tags', 'array-contains', tagName)
       .orderBy('uploadTime', 'desc')
@@ -323,8 +270,6 @@ var requestTagFromDB = function (tagName) {
 
 const requestAllImagesFromDB = function () {
   const promise = new Promise(function (resolve, reject) {
-    const db = getDBHandle()
-
     db.collection('recipes')
       .orderBy('uploadTime', 'desc')
       .select('name', 'thumbnail')

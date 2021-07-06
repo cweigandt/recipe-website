@@ -6,7 +6,7 @@ import '../styles/UploadForm.css'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
-  const [cookies, setCookie] = useCookies(['user'])
+  const [, setCookie] = useCookies(['user'])
 
   useEffect(() => {
     // query api
@@ -70,7 +70,7 @@ function UploadForm(props) {
         additionalProps: {
           required: true,
           placeholder: 'Recipe',
-          value: props.recipe.name || '',
+          defaultValue: props.recipe.name || '',
         },
       })}
 
@@ -82,10 +82,10 @@ function UploadForm(props) {
           class='form-control'
           id='sectionInput'
           name='section'
-          value={props.recipe.section || ''}
+          defaultValue={props.recipe.section || ''}
         >
           {sections.map((section) => (
-            <option value={section}>{section}</option>
+            <option defaultValue={section}>{section}</option>
           ))}
         </select>
       </div>
@@ -94,7 +94,7 @@ function UploadForm(props) {
         id: 'servingsInput',
         title: 'Servings',
         name: 'servings',
-        additionalProps: { min: 1, value: props.recipe.servings || '' },
+        additionalProps: { min: 1, defaultValue: props.recipe.servings || '' },
       })}
 
       {renderTextLineInput({
@@ -103,7 +103,7 @@ function UploadForm(props) {
         name: 'time',
         additionalProps: {
           placeholder: 'e.g. 1h 30m',
-          value: props.recipe.time || '',
+          defaultValue: props.recipe.time || '',
         },
       })}
 
@@ -128,7 +128,7 @@ function UploadForm(props) {
           id='ingredientsInput'
           name='ingredients'
           rows='10'
-          value={
+          defaultValue={
             props.recipe.ingredients ? props.recipe.ingredients.join('\n') : ''
           }
           required
@@ -141,7 +141,7 @@ function UploadForm(props) {
         name: 'subIngredients1Name',
         additionalProps: {
           placeholder: 'Name',
-          value: props.recipe.subIngredients1Name || '',
+          defaultValue: props.recipe.subIngredients1Name || '',
         },
         children: (
           <textarea
@@ -149,7 +149,7 @@ function UploadForm(props) {
             id='subIngredients1Input'
             name='subIngredients1'
             rows='5'
-            value={
+            defaultValue={
               props.recipe.subIngredients1
                 ? props.recipe.subIngredients1.join('\n')
                 : ''
@@ -164,7 +164,7 @@ function UploadForm(props) {
         name: 'subIngredients2Name',
         additionalProps: {
           placeholder: 'Name',
-          value: props.recipe.subIngredients2Name || '',
+          defaultValue: props.recipe.subIngredients2Name || '',
         },
         children: (
           <textarea
@@ -172,7 +172,7 @@ function UploadForm(props) {
             id='subIngredients2Input'
             name='subIngredients2'
             rows='5'
-            value={
+            defaultValue={
               props.recipe.subIngredients2
                 ? props.recipe.subIngredients2.join('\n')
                 : ''
@@ -190,7 +190,7 @@ function UploadForm(props) {
           id='stepsInput'
           name='steps'
           rows='12'
-          value={props.recipe.steps ? props.recipe.steps.join('\n') : ''}
+          defaultValue={props.recipe.steps ? props.recipe.steps.join('\n') : ''}
           required
         ></textarea>
       </div>
@@ -201,7 +201,9 @@ function UploadForm(props) {
         name: 'tags',
         additionalProps: {
           placeholder: 'e.g. Desserts, Breakfast',
-          value: props.recipe.tags ? props.recipe.tags.join(', ').trim() : '',
+          defaultValue: props.recipe.tags
+            ? props.recipe.tags.join(', ').trim()
+            : '',
         },
       })}
 
@@ -209,7 +211,9 @@ function UploadForm(props) {
         id: 'uploaderInput',
         title: 'Uploader',
         name: 'uploader',
-        additionalProps: { value: props.recipe.uploader || 'Brittany Cormier' },
+        additionalProps: {
+          defaultValue: props.recipe.uploader || 'Brittany Cormier',
+        },
       })}
 
       <button type='submit' id='submitInput' class='btn btn-primary'>
@@ -235,6 +239,10 @@ UploadForm.propTypes = {
     tags: PropTypes.array.isRequired,
     uploader: PropTypes.string.isRequired,
   }),
+}
+
+UploadForm.defaultProps = {
+  recipe: {},
 }
 
 export default UploadForm

@@ -8,7 +8,7 @@ const Jimp = require('jimp')
 
 module.exports = function (app) {
   let multerStorage = multerGoogleStorage.storageEngine({
-    keyFilename: './certs/gcs-credentials.json',
+    keyFilename: './server/credentials/gcs-credentials.json',
     bucket: 'recipe-website-269020.appspot.com',
     projectId: 'recipe-website-269020',
     acl: 'publicRead',
@@ -25,12 +25,12 @@ module.exports = function (app) {
     },
   })
 
-  let uploadStorage = new Storage({
-    keyFilename: './certs/gcs-credentials.json',
+  const uploadStorage = new Storage({
+    keyFilename: './server/credentials/gcs-credentials.json',
     projectId: 'recipe-website-269020',
   })
 
-  var uploadHandler = multer({
+  const uploadHandler = multer({
     storage: multerStorage,
   })
 
@@ -177,7 +177,8 @@ module.exports = function (app) {
           })
           resolve('Successful image upload')
         })
-        .on('error', () => {
+        .on('error', (err) => {
+          console.log(err)
           reject(`Unable to upload image, something went wrong`)
         })
         .end(imageBuffer)

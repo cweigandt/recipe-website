@@ -3,7 +3,6 @@ const customDB = require('./db')
 module.exports = function (app) {
   app.get('/request/recipe/:recipeName', (req, res) => {
     var requestedRecipe = req.params.recipeName
-    console.log('Requesting recipe ' + requestedRecipe)
 
     requestedRecipe = requestedRecipe.replace(/_/g, ' ')
     var dbPromise = customDB.requestRecipe(requestedRecipe)

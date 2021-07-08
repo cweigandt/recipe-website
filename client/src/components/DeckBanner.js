@@ -19,19 +19,14 @@ function DeckBanner(props) {
     }
   }
 
-  const backgroundImageProperty = props.imageLocation
-    ? 'url(' + props.imageLocation + ')'
-    : 'linear-gradient(black, black)'
-
   const recipeName = props.name || ''
   const linkURL = '/recipe/' + recipeName.replace(/ /g, '_')
 
   return (
     <div id='bannerWrapper' class={isSearching ? 'searching' : ''}>
-      <div
-        id='bannerImage'
-        style={{ backgroundImage: backgroundImageProperty }}
-      ></div>
+      {props.imageLocation && (
+        <img id='bannerImage' src={props.imageLocation} alt='' />
+      )}
       <form
         class='search-wrapper form-inline d-flex justify-content-center md-form form-sm mt-0'
         onsubmit='return false;'

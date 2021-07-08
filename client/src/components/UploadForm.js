@@ -94,7 +94,7 @@ function UploadForm(props) {
         id: 'servingsInput',
         title: 'Servings',
         name: 'servings',
-        additionalProps: { min: 1, defaultValue: props.recipe.servings || '' },
+        additionalProps: { defaultValue: props.recipe.servings || '' },
       })}
 
       {renderTextLineInput({

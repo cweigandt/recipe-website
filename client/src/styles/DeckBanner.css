@@ -15,19 +15,10 @@
   opacity: 1;
   position: relative;
 
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
+  object-fit: cover;
 
   display: block;
   transition: 0.5s opacity;
-}
-
-@supports (-webkit-overflow-scrolling: touch) {
-  #bannerWrapper #bannerImage {
-    background-attachment: scroll; /* fixed not supported on mobile */
-  }
 }
 
 #bannerWrapper #bannerTitle {

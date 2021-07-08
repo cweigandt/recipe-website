@@ -9,7 +9,12 @@ function GridCard(props) {
 
   return (
     <Link to={linkURL} class='grid-card'>
-      <img src={props.thumbnail} class='grid-card-image' alt={props.name} />
+      <img
+        src={props.thumbnail}
+        class='grid-card-image'
+        alt={props.name}
+        loading='lazy'
+      />
       <div class='grid-card-title'>{props.name}</div>
     </Link>
   )

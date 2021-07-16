@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "node --inspect server/index.js",
+    "dev": "export PORT=3001 && node --inspect server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm install && npm run build",
+    "quick-build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "Christian Weigandt",
@@ -22,6 +23,7 @@
     "bunyan": "^1.8.14",
     "eslint": "^7.30.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "jimp": "^0.16.1",
     "jshint": "^2.13.0",
     "mime": "^2.4.4",

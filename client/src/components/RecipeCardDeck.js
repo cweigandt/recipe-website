@@ -10,14 +10,17 @@ function RecipeCardDeck(props) {
   const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState([])
 
+  const initializeData = (recipes) => {
+    setRecipes(recipes)
+    setVisibleRecipes(recipes)
+    setRandomRecipe(recipes[Math.floor(Math.random() * recipes.length)])
+  }
+
   useEffect(() => {
-    // query api
     fetch(props.requestURL)
       .then((response) => response.json())
       .then((data) => {
-        setRecipes(data)
-        setVisibleRecipes(data)
-        setRandomRecipe(data[Math.floor(Math.random() * data.length)])
+        initializeData(data)
       })
   }, [props.requestURL])
 

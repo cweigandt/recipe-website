@@ -8,7 +8,10 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta name="theme-color" content="#000000" />
-    <meta property="og:title" content="" />
+    <meta property="og:title" content="%OG_TITLE%" />
+    <meta property="og:image" content="%OG_IMAGE%" />
+    <meta property="og:description" content="%OG_DESCRIPTION%" />
+
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="BC Cookbook" />
@@ -65,6 +68,9 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <script>
+      window.serverData = %DATA%;
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS-->
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>

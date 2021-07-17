@@ -96,6 +96,7 @@ function Recipe(props) {
   setTimeout(() => {
     wrapperRef.current.classList.add('loaded')
   }, 200)
+
   return (
     <div id='recipeWrapper' class='print' ref={wrapperRef}>
       <div id='recipeTitle'>{recipe.name}</div>
@@ -106,7 +107,13 @@ function Recipe(props) {
         <span id='servingsNumber'>{recipe.servings}</span>
       </div>
       <div id='socialButtons' class='noprint'>
-        <button class='btn socialIcon' onclick='window.print(); return false;'>
+        <button
+          class='btn socialIcon'
+          onClick={() => {
+            window.print()
+            return false
+          }}
+        >
           <i class='fa fa-print'></i>
         </button>
         {cookies['bccookbook-can-edit'] && (

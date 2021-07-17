@@ -29,15 +29,14 @@ select {
     padding: 10px;
   }
 }
-
-recipe-picker-form-populater #recipePicker {
+#recipePicker {
   margin-left: 100px;
   margin-top: 80px;
   transition: 0.5s margin;
 }
 
 @media screen and (max-width: 559px) {
-  recipe-picker-form-populater #recipePicker {
+  #recipePicker {
     margin-left: 5px;
     margin-top: 10px;
   }

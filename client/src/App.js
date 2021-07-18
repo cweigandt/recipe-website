@@ -31,7 +31,9 @@ function App() {
           path='/sections/:sectionName'
           render={(props) => (
             <RecipeCardDeck
-              requestURL={'/request/recipes/' + props.match.params.sectionName}
+              filter={(recipe) =>
+                props.match.params.sectionName === recipe.section
+              }
             ></RecipeCardDeck>
           )}
         ></Route>
@@ -49,7 +51,7 @@ function App() {
           exact
           path='/'
           render={(props) => (
-            <RecipeCardDeck requestURL='/request/all-recipes'></RecipeCardDeck>
+            <RecipeCardDeck filter={(recipe) => true}></RecipeCardDeck>
           )}
         />
         <Route component={NotFound} />

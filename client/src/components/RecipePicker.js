@@ -18,13 +18,8 @@ function RecipePicker(props) {
   const dropdownRef = useRef(null)
 
   useEffect(() => {
-    // query api
-    fetch('/request/all-recipe-names')
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipes(sortRecipes(data))
-        props.onChange({ target: dropdownRef.current })
-      })
+    setRecipes(sortRecipes(window.serverData.allRecipes))
+    props.onChange({ target: dropdownRef.current })
   }, [props])
 
   const renderOption = (name) => {

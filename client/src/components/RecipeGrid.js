@@ -8,12 +8,7 @@ function RecipeGrid(props) {
   const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
-    // query api
-    fetch('/request/all-grid-recipes')
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipes(data)
-      })
+    setRecipes(window.serverData.allRecipes)
   }, [])
 
   return (

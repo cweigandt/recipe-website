@@ -45,7 +45,12 @@ function UploadForm(props) {
           type='text'
           class='form-control'
           id={id}
-          onkeydown="return event.key != 'Enter';"
+          onKeyDown={(e) => {
+            if (e.keyCode === 13 || e.key === 13) {
+              e.preventDefault()
+              return false
+            }
+          }}
           name={name}
           {...additionalProps}
         />

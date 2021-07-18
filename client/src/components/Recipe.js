@@ -12,26 +12,13 @@ function Recipe(props) {
 
   const wrapperRef = React.useRef()
 
-  const hasServerLoadedRecipe = (recipeName) => {
-    return (
-      window.serverData &&
-      typeof window.serverData === 'object' &&
-      !Array.isArray(window.serverData) &&
-      window.serverData.name === recipeName
-    )
-  }
-
   useEffect(() => {
-    if (hasServerLoadedRecipe(props.urlName.replace(/_/g, ' '))) {
-      setRecipe(window.serverData)
-    } else {
-      // query api
-      fetch('/request/recipe/' + props.urlName)
-        .then((response) => response.json())
-        .then((data) => {
-          setRecipe(data)
-        })
-    }
+    const recipeName = props.urlName.replace(/_/g, ' ')
+    const foundRecipe = window.serverData.allRecipes.find(
+      (r) => r.name === recipeName
+    )
+
+    setRecipe(foundRecipe)
   }, [props.urlName])
 
   function renderIngredients(ingredients) {

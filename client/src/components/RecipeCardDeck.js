@@ -11,18 +11,20 @@ function RecipeCardDeck(props) {
   const [randomRecipe, setRandomRecipe] = useState([])
 
   const initializeData = (recipes) => {
+    setRandomRecipe(recipes[Math.floor(Math.random() * recipes.length)])
+
     setRecipes(recipes)
     setVisibleRecipes(recipes)
-    setRandomRecipe(recipes[Math.floor(Math.random() * recipes.length)])
   }
 
+  const { filter } = props
   useEffect(() => {
-    fetch(props.requestURL)
-      .then((response) => response.json())
-      .then((data) => {
-        initializeData(data)
-      })
-  }, [props.requestURL])
+    const filteredRecipes = window.serverData.allRecipes.filter((recipe) =>
+      filter(recipe)
+    )
+
+    initializeData(filteredRecipes)
+  }, [filter])
 
   function handleSearchText(searchText) {
     setVisibleRecipes(
@@ -35,6 +37,12 @@ function RecipeCardDeck(props) {
         return false
       })
     )
+
+    if (visibleRecipes.length > 0) {
+      setRandomRecipe(
+        visibleRecipes[Math.floor(Math.random() * visibleRecipes.length)]
+      )
+    }
   }
 
   return (
@@ -55,7 +63,7 @@ function RecipeCardDeck(props) {
 }
 
 RecipeCardDeck.propTypes = {
-  requestURL: PropTypes.string.isRequired,
+  filter: PropTypes.func.isRequired,
 }
 
 export default RecipeCardDeck

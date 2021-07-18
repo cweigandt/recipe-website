@@ -29,7 +29,7 @@ module.exports = function (app) {
   })
 
   app.get('/request/all-recipes', (req, res) => {
-    var dbPromise = customDB.getAllRecipes(true)
+    var dbPromise = customDB.getAllRecipes()
     dbPromise
       .then((recipes) => {
         res.send(recipes)

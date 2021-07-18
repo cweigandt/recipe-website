@@ -1,0 +1,78 @@
+@media print {
+  body {
+    visibility: hidden;
+    background-color: white !important;
+    font-family: benton-sans, sans-serif;
+    padding-left: 4%;
+    width: 100%;
+  }
+
+  body * {
+    color: black !important;
+  }
+
+  .print {
+    visibility: visible;
+  }
+
+  .noprint {
+    display: none !important;
+  }
+
+  #recipeWrapper {
+    padding: 0 !important;
+  }
+
+  #recipeWrapper #recipeTitle {
+    text-align: left;
+    width: 100%;
+    position: relative;
+    font-size: 20pt;
+  }
+  #recipeWrapper #subTitle {
+    position: relative;
+  }
+
+  #dotSeparator {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  #recipeWrapper #recipeImage {
+    width: 40vmin;
+    height: 30vmin;
+    position: relative;
+    object-fit: cover;
+  }
+
+  #recipeBody {
+    margin-top: 20px;
+  }
+
+  #recipeWrapper #ingredientsColumn .ingredients-title,
+  #recipeWrapper #stepsColumn #stepsList .stepTitle {
+    font-weight: bold;
+  }
+
+  #recipeWrapper #stepsColumn {
+    top: calc(-30vmin - 20px);
+  }
+
+  #recipeWrapper #ingredientsColumn ul {
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
+
+  #recipeWrapper #stepsColumn ul {
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
+
+  #recipeWrapper #stepsColumn ul li {
+    padding-bottom: 10px;
+  }
+
+  @page {
+    size: 8.5in 11in;
+  }
+}

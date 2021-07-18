@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import '../styles/Recipe.css'
+import '../styles/Print.css'
 import Badge from './Badge'
 
 function Recipe(props) {

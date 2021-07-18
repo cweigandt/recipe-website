@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useCookies } from 'react-cookie'
+import { connect } from 'react-redux'
 
 import '../styles/UploadForm.css'
+
+import { addAlert } from '../actions/alertsActions'
+import { ALERT_TYPES } from './alerts/Alert'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
   const [, setCookie] = useCookies(['user'])
+
+  const formRef = useRef(null)
 
   useEffect(() => {
     // query api
@@ -24,9 +30,27 @@ function UploadForm(props) {
     })
   }, [setCookie])
 
-  const handleFormSubmit = () => {
-    props.location.history.push(props.location.pathname)
-    return true
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+
+    fetch(props.formSubmitAction || '/upload-recipe', {
+      method: 'POST',
+      redirect: 'manual',
+      body: new FormData(formRef.current),
+    }).then((response) => {
+      response.json().then((data) => {
+        let status = ALERT_TYPES.SUCCESS
+        if (response.status !== 200) {
+          status = ALERT_TYPES.ERROR
+          console.log(data.stack)
+        } else {
+          formRef.current.reset()
+        }
+
+        props.dispatch(addAlert(data.response, status))
+      })
+    })
+    return false
   }
 
   const renderTextLineInput = ({
@@ -62,11 +86,9 @@ function UploadForm(props) {
   return (
     <form
       id='formWrapper'
-      method='post'
-      enctype='multipart/form-data'
       name='uploadForm'
-      action={props.formSubmitAction || '/upload-recipe'}
       onSubmit={handleFormSubmit}
+      ref={formRef}
     >
       {renderTextLineInput({
         id: 'nameInput',
@@ -250,4 +272,4 @@ UploadForm.defaultProps = {
   recipe: {},
 }
 
-export default UploadForm
+export default connect()(UploadForm)

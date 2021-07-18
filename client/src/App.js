@@ -11,6 +11,7 @@ import EditForm from './components/EditForm'
 import UploadForm from './components/UploadForm'
 import TagsList from './components/TagsList'
 import NotFound from './components/NotFound'
+import AlertsOverlay from './components/alerts/AlertsOverlay'
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         />
         <Route component={NotFound} />
       </Switch>
+      <AlertsOverlay />
     </div>
   )
 }

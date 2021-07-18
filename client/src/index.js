@@ -4,16 +4,26 @@ import './index.css'
 import './styles/darkTheme.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import reducer from './reducers'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <Router>
-        <App />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -9,6 +9,7 @@ import Recipe from './components/Recipe'
 import RecipeGrid from './components/RecipeGrid'
 import EditForm from './components/EditForm'
 import UploadForm from './components/UploadForm'
+import TagsList from './components/TagsList'
 import NotFound from './components/NotFound'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           )}
         ></Route>
         <Route path='/grid' component={RecipeGrid} />
+        <Route path='/tags' component={TagsList} />
         <Route path='/upload' component={UploadForm} />
         <Route path='/edit' component={EditForm} />
         <Route

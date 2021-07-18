@@ -77,15 +77,15 @@
   left: 50%;
 }
 
-#recipeWrapper #ingredientsColumn .tag-wrapper {
+#recipeWrapper #ingredientsColumn .badge-list {
   display: initial;
 }
 
-#recipeWrapper #stepsColumn .tag-wrapper {
+#recipeWrapper #stepsColumn .badge-list {
   display: none;
 }
 
-#recipeWrapper .tag-wrapper a.tag-link {
+#recipeWrapper .badge-list a.tag-link {
   color: white;
   text-decoration: none;
 }
@@ -115,30 +115,6 @@
 #recipeWrapper #ingredientsColumn {
   padding-right: 20px;
   margin-bottom: 20px;
-}
-
-#recipeWrapper #ingredientsColumn .badge,
-#recipeWrapper #stepsColumn .badge {
-  margin: 3px;
-  display: inline-block;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1.2;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem;
-  border: 1px solid white;
-}
-
-.badge.badge-primary {
-  color: #fff;
-  background-color: #007bff;
 }
 
 #recipeWrapper #ingredientsColumn .tagTitle {
@@ -183,11 +159,11 @@
 }
 
 @media screen and (max-width: 559px) {
-  #recipeWrapper #ingredientsColumn .tag-wrapper {
+  #recipeWrapper #ingredientsColumn .badge-list {
     display: none;
   }
 
-  #recipeWrapper #stepsColumn .tag-wrapper {
+  #recipeWrapper #stepsColumn .badge-list {
     display: inherit;
   }
 

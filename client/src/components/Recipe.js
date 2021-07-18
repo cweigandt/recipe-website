@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import '../styles/Recipe.css'
+import Badge from './Badge'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -72,15 +73,15 @@ function Recipe(props) {
   function renderTags(tags) {
     return (
       tags.length > 0 && (
-        <div class='tag-wrapper noprint'>
+        <div class='badge-list noprint'>
           <div class='tagTitle'>Tags</div>
           {tags.map((tag) => {
             return (
-              <div class='badge badge-primary'>
+              <Badge>
                 <a href={'/tag/' + tag.replace(/ /g, '_')} class='tag-link'>
                   {tag}
                 </a>
-              </div>
+              </Badge>
             )
           })}
         </div>

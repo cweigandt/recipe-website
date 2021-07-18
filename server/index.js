@@ -14,10 +14,10 @@ const html = fs
   .readFileSync(path.resolve(__dirname, '../client/build/index.html'))
   .toString()
 
-const getHTMLString = ({ serverData, ogTitle, ogImage, ogDescription }) => {
+const getHTMLString = ({ serverData, title, ogImage, ogDescription }) => {
   return html
     .replace(/%DATA%/, serverData)
-    .replace(/%OG_TITLE%/, ogTitle)
+    .replace(/%TITLE%/g, title)
     .replace(/%OG_IMAGE%/, ogImage)
     .replace(/%OG_DESCRIPTION%/, ogDescription)
 }
@@ -39,7 +39,7 @@ app.get('/recipe/:recipeName', (req, res) => {
 
       const htmlCopy = getHTMLString({
         serverData: JSON.stringify({ allRecipes: allRecipes }),
-        ogTitle: requestedRecipe.name,
+        title: requestedRecipe.name,
         ogImage: requestedRecipe.imageLocation,
         ogDescription: 'Create delicious recipes',
       })

@@ -22,15 +22,25 @@ const getHTMLString = ({ serverData, ogTitle, ogImage, ogDescription }) => {
     .replace(/%OG_DESCRIPTION%/, ogDescription)
 }
 
+const getServerData = () => {
+  return customDB.getAllRecipes()
+}
+
+const findRecipe = (allRecipes, recipeName) => {
+  return allRecipes.find((r) => r.name === recipeName)
+}
+
 app.get('/recipe/:recipeName', (req, res) => {
-  var requestedRecipe = req.params.recipeName.replace(/_/g, ' ')
-  var dbPromise = customDB.requestRecipe(requestedRecipe)
+  var requestedRecipeName = req.params.recipeName.replace(/_/g, ' ')
+  var dbPromise = getServerData()
   dbPromise
-    .then((recipeData) => {
+    .then((allRecipes) => {
+      const requestedRecipe = findRecipe(allRecipes, requestedRecipeName)
+
       const htmlCopy = getHTMLString({
-        serverData: JSON.stringify(recipeData),
-        ogTitle: recipeData.name,
-        ogImage: recipeData.imageLocation,
+        serverData: JSON.stringify({ allRecipes: allRecipes }),
+        ogTitle: requestedRecipe.name,
+        ogImage: requestedRecipe.imageLocation,
         ogDescription: 'Create delicious recipes',
       })
       res.send(htmlCopy)
@@ -43,15 +53,23 @@ app.get('/recipe/:recipeName', (req, res) => {
 
 // Match all routes and exclude all files with extensions (checking for periods)
 app.get(/^[^\.]*$/, (req, res) => {
-  // Use Avocado Toast as default image
-  const htmlCopy = getHTMLString({
-    serverData: 'null',
-    ogTitle: 'B+C Cookbook',
-    ogImage:
-      'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Avocado_Toast.jpeg',
-    ogDescription: 'Create delicious recipes',
-  })
-  res.send(htmlCopy)
+  var dbPromise = getServerData()
+  dbPromise
+    .then((allRecipes) => {
+      const htmlCopy = getHTMLString({
+        serverData: JSON.stringify({ allRecipes: allRecipes }),
+        ogTitle: 'B+C Cookbook',
+        // Use Avocado Toast as default image
+        ogImage:
+          'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Avocado_Toast.jpeg',
+        ogDescription: 'Create delicious recipes',
+      })
+      res.send(htmlCopy)
+    })
+    .catch((err) => {
+      res.status(500)
+      console.log(err)
+    })
 })
 
 app.use(express.static(path.resolve(__dirname, '../client/build')))

@@ -40,8 +40,8 @@ exports.getSections = function () {
   return requestDocFromDB('global', 'sections')
 }
 
-exports.getAllRecipes = function (disablePagination) {
-  return requestAllRecipesFromDB(disablePagination)
+exports.getAllRecipes = function () {
+  return requestAllRecipesFromDB()
 }
 
 exports.getNamesOfRecipes = function () {
@@ -173,17 +173,11 @@ var requestDocFromDB = function (collectionName, docName) {
   return promise
 }
 
-/* 
-Will give a limited list of recipes for pagination
-Clients should then call requestPaginatedRecipesFromDB for more results
- */
-var requestAllRecipesFromDB = function (disablePagination) {
+var requestAllRecipesFromDB = function () {
   var promise = new Promise(function (resolve, reject) {
     const dbRes = db
       .collection('recipes')
       .orderBy('uploadTime', 'desc')
-      .select('name', 'uploadTime', 'section', 'imageLocation', 'thumbnail')
-      .limit(disablePagination ? 10000 : 20)
       .get()
       .then((snapshot) => {
         // snapshot.map isn't a function...

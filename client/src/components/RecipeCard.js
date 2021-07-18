@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 
 import '../styles/RecipeCard.css'
-import '../styles/Badge.css'
 import SectionColors from '../enums/SectionColors'
+import CardBookmark, { BOOKMARK_TYPES } from './CardBookmark'
 
 function RecipeCard(props) {
   function getDaysOld(uploadTime) {
@@ -17,6 +17,25 @@ function RecipeCard(props) {
     return Math.floor(days)
   }
 
+  const renderFavoritesTag = () => {
+    let text = ''
+    if (props.tags.includes(`Brittany's Favorites`)) {
+      text += ' ⭐ '
+    }
+
+    if (props.tags.includes(`Christian's Favorites`)) {
+      text += ' ⭐ '
+    }
+
+    if (text) {
+      return (
+        <CardBookmark text={text} type={BOOKMARK_TYPES.INFO}></CardBookmark>
+      )
+    }
+
+    return null
+  }
+
   const linkURL = '/recipe/' + props.name.replace(/ /g, '_')
 
   const imageLocation =
@@ -24,6 +43,7 @@ function RecipeCard(props) {
     'https://www.medicinalgenomics.com/wp-content/uploads/2019/01/image-coming-soon-ecc.png'
 
   const daysOld = getDaysOld(props.uploadTime)
+
   return (
     <Link
       to={linkURL}
@@ -43,7 +63,12 @@ function RecipeCard(props) {
         <div class='recipe-section'>{props.section}</div>
         <div class='recipe-title'>{props.name}</div>
       </div>
-      {daysOld <= 3 ? <div class='recipe-age badge badge-info'>New</div> : ''}
+      {daysOld <= 3 ? (
+        <CardBookmark text='New' type={BOOKMARK_TYPES.NEW}></CardBookmark>
+      ) : (
+        ''
+      )}
+      {renderFavoritesTag()}
     </Link>
   )
 }
@@ -53,6 +78,7 @@ RecipeCard.propTypes = {
   section: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   uploadTime: PropTypes.number.isRequired,
+  tags: PropTypes.array.isRequired,
 }
 
 export default RecipeCard

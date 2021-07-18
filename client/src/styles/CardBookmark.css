@@ -1,0 +1,33 @@
+.card-bookmark {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant: small-caps;
+  white-space: pre;
+
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+
+  position: absolute;
+  top: 8px;
+  right: 0;
+
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+
+  color: #fff;
+  background-color: #007bff;
+
+  box-shadow: 0 0 10px 6px rgb(0 0 0 / 78%);
+}
+
+.card-bookmark.new {
+  background-color: #007bff;
+}
+
+.card-bookmark.info {
+  background-color: brown;
+}

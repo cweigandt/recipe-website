@@ -10,7 +10,6 @@ function EditForm(props) {
   const [recipe, setRecipe] = useState({})
 
   useEffect(() => {
-    // query api
     fetch('/request/recipe/' + recipeName.replace(/ /g, '_'))
       .then((response) => response.json())
       .then((data) => {

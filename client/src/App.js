@@ -1,5 +1,4 @@
 import './App.css'
-import './styles/bootstrapOverrides.css'
 
 import { Route, Switch } from 'react-router-dom'
 

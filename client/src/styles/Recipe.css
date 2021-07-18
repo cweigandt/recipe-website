@@ -35,7 +35,6 @@
 }
 
 #recipeWrapper #socialButtons {
-  display: inline-block;
   float: right;
 }
 
@@ -44,6 +43,8 @@
 }
 
 #recipeWrapper #socialButtons .socialIcon {
+  display: inline-block;
+
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -86,6 +87,7 @@
 
 #recipeWrapper .tag-wrapper a.tag-link {
   color: white;
+  text-decoration: none;
 }
 
 #recipeWrapper.loaded {
@@ -118,6 +120,25 @@
 #recipeWrapper #ingredientsColumn .badge,
 #recipeWrapper #stepsColumn .badge {
   margin: 3px;
+  display: inline-block;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  border: 1px solid white;
+}
+
+.badge.badge-primary {
+  color: #fff;
+  background-color: #007bff;
 }
 
 #recipeWrapper #ingredientsColumn .tagTitle {
@@ -135,9 +156,6 @@
 
 #recipeWrapper #stepsList .stepTitle {
   font-weight: bold;
-}
-
-#recipeWrapper #stepsList .stepText {
 }
 
 #recipeWrapper .sticky {

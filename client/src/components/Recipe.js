@@ -107,7 +107,7 @@ function Recipe(props) {
         <span id='servingsNumber'>{recipe.servings}</span>
       </div>
       <div id='socialButtons' class='noprint'>
-        <button
+        <div
           class='btn socialIcon'
           onClick={() => {
             window.print()
@@ -115,7 +115,7 @@ function Recipe(props) {
           }}
         >
           <i class='fa fa-print'></i>
-        </button>
+        </div>
         {cookies['bccookbook-can-edit'] && (
           <Link
             to={{

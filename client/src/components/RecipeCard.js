@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import LazyLoad from 'react-lazyload'
 
 import '../styles/RecipeCard.css'
 import '../styles/Badge.css'
@@ -30,12 +31,14 @@ function RecipeCard(props) {
       style={{ '--section-color': SectionColors[props.section] }}
     >
       <div class='recipe-image-wrapper'></div>
-      <img
-        src={imageLocation}
-        class='recipe-image'
-        alt={props.name}
-        loading='lazy'
-      />
+      <LazyLoad height={160} once resize={true} offset={200}>
+        <img
+          src={imageLocation}
+          class='recipe-image'
+          alt={props.name}
+          loading='lazy'
+        />
+      </LazyLoad>
       <div class='recipe-body'>
         <div class='recipe-section'>{props.section}</div>
         <div class='recipe-title'>{props.name}</div>

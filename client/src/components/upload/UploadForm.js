@@ -70,7 +70,7 @@ function UploadForm(props) {
           class='form-control'
           id={id}
           onKeyDown={(e) => {
-            if (e.keyCode === 13 || e.key === 13) {
+            if (e.keyCode === 13 || e.key === 'Enter') {
               e.preventDefault()
               return false
             }

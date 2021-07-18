@@ -9,7 +9,7 @@ import Recipe from './components/Recipe'
 import RecipeGrid from './components/grid/RecipeGrid'
 import EditForm from './components/upload/EditForm'
 import UploadForm from './components/upload/UploadForm'
-import TagsList from './components/widgets/TagsList'
+import TagsList from './components/TagsList'
 import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 

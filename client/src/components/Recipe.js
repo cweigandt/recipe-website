@@ -66,9 +66,9 @@ function Recipe(props) {
           {tags.map((tag) => {
             return (
               <Badge>
-                <a href={'/tag/' + tag.replace(/ /g, '_')} class='tag-link'>
+                <Link to={'/tag/' + tag.replace(/ /g, '_')} class='tag-link'>
                   {tag}
-                </a>
+                </Link>
               </Badge>
             )
           })}

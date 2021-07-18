@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import RecipePicker from './RecipePicker'
 import UploadForm from './UploadForm'
-import '../styles/UploadForm.css'
+import '../../styles/UploadForm.css'
 
 function EditForm(props) {
   const [recipeName, setRecipeName] = useState('')

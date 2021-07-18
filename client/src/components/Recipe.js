@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 
 import '../styles/Recipe.css'
 import '../styles/Print.css'
-import Badge from './Badge'
+import Badge from './widgets/Badge'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})

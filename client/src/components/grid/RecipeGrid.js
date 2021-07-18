@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import GridCard from './GridCard'
-import '../styles/RecipeGrid.css'
+import '../../styles/RecipeGrid.css'
 
 function RecipeGrid(props) {
   const [recipes, setRecipes] = useState([])

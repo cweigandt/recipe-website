@@ -4,12 +4,12 @@ import { Route, Switch } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
 
-import RecipeCardDeck from './components/RecipeCardDeck'
+import RecipeCardDeck from './components/carddeck/RecipeCardDeck'
 import Recipe from './components/Recipe'
-import RecipeGrid from './components/RecipeGrid'
-import EditForm from './components/EditForm'
-import UploadForm from './components/UploadForm'
-import TagsList from './components/TagsList'
+import RecipeGrid from './components/grid/RecipeGrid'
+import EditForm from './components/upload/EditForm'
+import UploadForm from './components/upload/UploadForm'
+import TagsList from './components/widgets/TagsList'
 import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 

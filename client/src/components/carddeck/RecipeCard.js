@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 
-import '../styles/RecipeCard.css'
-import SectionColors from '../enums/SectionColors'
-import CardBookmark, { BOOKMARK_TYPES } from './CardBookmark'
+import '../../styles/RecipeCard.css'
+import SectionColors from '../../enums/SectionColors'
+import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
 
 function RecipeCard(props) {
   function getDaysOld(uploadTime) {

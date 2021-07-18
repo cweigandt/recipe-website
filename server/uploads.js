@@ -42,10 +42,10 @@ module.exports = function (app) {
         try {
           customDB.handleUploadForm(req.body, req.file, thumbnail)
           res.status(200)
-          res.redirect('back')
+          res.send({ response: `Uploaded ${req.body.name}` })
         } catch (err) {
           res.status(500)
-          res.send({ err: { msg: err.message, stack: err.stack } })
+          res.send({ response: err.message, stack: err.stack })
         }
       })
     }
@@ -59,10 +59,10 @@ module.exports = function (app) {
         try {
           customDB.handleEditForm(req.body, req.file, thumbnail)
           res.status(200)
-          res.redirect('back')
+          res.send({ response: `Edit for ${req.body.name} was successful` })
         } catch (err) {
           res.status(500)
-          res.send({ err: { msg: err.message, stack: err.stack } })
+          res.send({ response: err.message, stack: err.stack })
         }
       })
     }

@@ -10,11 +10,10 @@ function EditForm(props) {
   const [recipe, setRecipe] = useState({})
 
   useEffect(() => {
-    fetch('/request/recipe/' + recipeName.replace(/ /g, '_'))
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipe(data)
-      })
+    const foundRecipe = window.serverData.allRecipes.find(
+      (r) => r.name === recipeName
+    )
+    setRecipe(foundRecipe || {})
   }, [recipeName])
 
   return (

@@ -121,8 +121,8 @@ function Recipe(props) {
         <img id='recipeImage' src={recipe.imageLocation} alt='' />
       </div>
 
-      <div class='row no-gutters' id='recipeBody'>
-        <div class='col-sm-4' id='ingredientsColumn'>
+      <div id='recipeBody'>
+        <div id='ingredientsColumn'>
           <div class='sticky' id='ingredientsColumnSticky'>
             <div class='ingredients-title'>Ingredients</div>
             {renderIngredients(recipe.ingredients)}
@@ -138,7 +138,7 @@ function Recipe(props) {
           </div>
         </div>
 
-        <div class='col-sm-8' id='stepsColumn'>
+        <div id='stepsColumn'>
           {renderStepsList(recipe.steps)}
           {renderTags(recipe.tags)}
         </div>

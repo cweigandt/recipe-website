@@ -96,11 +96,19 @@
 }
 
 #recipeWrapper #recipeBody {
+  display: flex;
+  flex-wrap: wrap;
+
   font-size: 14px;
 }
 
 #recipeWrapper .ingredients-title {
   font-weight: bold;
+}
+
+#recipeWrapper #ingredientsColumnSticky {
+  position: sticky;
+  position: -webkit-sticky;
 }
 
 #recipeWrapper #ingredientsColumn ul {
@@ -113,8 +121,14 @@
 }
 
 #recipeWrapper #ingredientsColumn {
+  width: 40%;
+
   padding-right: 20px;
   margin-bottom: 20px;
+}
+
+#recipeWrapper #stepsColumn {
+  width: 60%;
 }
 
 #recipeWrapper #ingredientsColumn .tagTitle {
@@ -170,5 +184,13 @@
   #recipeWrapper .sticky {
     position: relative;
     top: 0px;
+  }
+
+  #recipeWrapper #ingredientsColumn {
+    width: 100%;
+  }
+
+  #recipeWrapper #stepsColumn {
+    width: 100%;
   }
 }

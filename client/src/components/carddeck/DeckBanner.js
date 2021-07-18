@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import '../styles/DeckBanner.css'
+import '../../styles/DeckBanner.css'
 
 function DeckBanner(props) {
   const [isSearching, setIsSearching] = useState(false)

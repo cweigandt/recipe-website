@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { useCookies } from 'react-cookie'
 import { connect } from 'react-redux'
 
-import '../styles/UploadForm.css'
+import '../../styles/UploadForm.css'
 
-import { addAlert } from '../actions/alertsActions'
-import { ALERT_TYPES } from './alerts/Alert'
+import { addAlert } from '../../actions/alertsActions'
+import { ALERT_TYPES } from '../alerts/Alert'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])

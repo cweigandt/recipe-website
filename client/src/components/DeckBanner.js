@@ -27,15 +27,12 @@ function DeckBanner(props) {
       {props.imageLocation && (
         <img id='bannerImage' src={props.imageLocation} alt='' />
       )}
-      <form
-        class='search-wrapper form-inline d-flex justify-content-center md-form form-sm mt-0'
-        onsubmit='return false;'
-      >
+      <form class='search-wrapper' onSubmit={() => false}>
         <div class='searchBar-wrapper'>
           <input
             id='searchBar'
             autocomplete='off'
-            class='form-control form-control-sm'
+            class='form-control'
             type='text'
             placeholder='Search'
             aria-label='Search'

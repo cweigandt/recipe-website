@@ -1,0 +1,101 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 52px;
+  z-index: 2;
+
+  backdrop-filter: saturate(200%) blur(20px);
+  -webkit-backdrop-filter: saturate(200%) blur(20px);
+  background-color: var(--dark-theme-navbar-bg, rgba(225, 225, 225, 0.8));
+
+  /* Taken from bootstrap navbar*/
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.navbar .menu-toggler {
+  color: gray;
+  font-size: 24px;
+  background-color: transparent;
+
+  width: 40px;
+  text-align: center;
+}
+
+/* Center the logo up top */
+.navbar-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.1s opacity;
+
+  text-decoration: none;
+  font-size: 20px;
+
+  color: white;
+  width: calc(100% - 170px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.navbar-menu {
+  position: fixed;
+  height: calc(100vh - 52px);
+  width: 250px;
+  top: 52px;
+  left: -250px;
+  opacity: 0;
+  z-index: 2;
+
+  transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  box-shadow: 12px 0 15px -4px rgb(0, 0, 0, 0.6);
+  backdrop-filter: saturate(200%) blur(20px);
+  -webkit-backdrop-filter: saturate(200%) blur(20px);
+  background-color: var(--dark-theme-navbar-bg, hsla(0, 0%, 88.2%, 0.8));
+}
+
+.navbar-menu.navbar-menu-visible {
+  left: 0;
+  opacity: 1;
+}
+
+.navbar-menu .navbar-menu-list {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.navbar-menu .navbar-menu-link {
+  display: block;
+
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+
+  padding: 0.5rem 1rem;
+}
+
+.navbar-menu .navbar-menu-link:hover {
+  font-weight: bold;
+}
+
+body {
+  position: relative;
+  padding-top: 60px;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}

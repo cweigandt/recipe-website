@@ -38,7 +38,7 @@ function UploadForm(props) {
   }) => {
     return (
       <div class='form-group'>
-        <label for={id} class='col-form-label'>
+        <label for={id} class='form-label'>
           {title}
         </label>
         <input
@@ -75,17 +75,17 @@ function UploadForm(props) {
       })}
 
       <div class='form-group'>
-        <label for='sectionInput' class='col-form-label'>
+        <label for='sectionInput' class='form-label'>
           Section
         </label>
-        <select
-          class='form-control'
-          id='sectionInput'
-          name='section'
-          defaultValue={props.recipe.section || ''}
-        >
+        <select class='form-control' id='sectionInput' name='section'>
           {sections.map((section) => (
-            <option defaultValue={section}>{section}</option>
+            <option
+              value={section}
+              selected={props.recipe.section === section ? true : false}
+            >
+              {section}
+            </option>
           ))}
         </select>
       </div>
@@ -108,19 +108,19 @@ function UploadForm(props) {
       })}
 
       <div class='form-group'>
-        <label for='imageInput' class='col-form-label'>
-          Image
+        <label for='imageInput' class='form-label'>
+          Image:
         </label>
         <input
           type='file'
-          class='form-control-file form-control-md'
+          class='form-control-file'
           id='imageInput'
           name='image'
         />
       </div>
 
       <div class='form-group'>
-        <label for='ingredientsInput' class='col-form-label'>
+        <label for='ingredientsInput' class='form-label'>
           Ingredients
         </label>
         <textarea
@@ -182,7 +182,7 @@ function UploadForm(props) {
       })}
 
       <div class='form-group'>
-        <label for='stepsInput' class='col-form-label'>
+        <label for='stepsInput' class='form-label'>
           Steps
         </label>
         <textarea
@@ -216,7 +216,7 @@ function UploadForm(props) {
         },
       })}
 
-      <button type='submit' id='submitInput' class='btn btn-primary'>
+      <button type='submit' id='submitInput' class='btn'>
         Submit
       </button>
     </form>

@@ -1,7 +1,42 @@
+.form-group {
+  margin: 30px 0 30px 0;
+}
+
 .form-control {
-  background-color: var(--dark-theme-form-control-bg, initial);
-  border-color: var(--dark-theme-form-control-border-color, initial);
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--dark-theme-form-text-color, initial);
+  background-color: var(--dark-theme-form-control-bg, initial);
+  background-clip: padding-box;
+  border: 1px solid var(--dark-theme-form-control-border-color, initial);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  font-family: inherit;
+}
+
+textarea.form-control {
+  height: auto;
+  overflow: auto;
+  resize: vertical;
+  margin: 0;
+}
+
+.form-control-file {
+  margin-left: 10px;
+}
+
+.form-label {
+  display: inline-block;
+  padding-top: calc(0.375rem + 1px);
+  padding-bottom: calc(0.375rem + 1px);
+  margin-bottom: 5px;
+  font-size: inherit;
 }
 
 .form-control:disabled {
@@ -16,10 +51,13 @@
 select {
   background-color: var(--dark-theme-form-select-bg, initial);
   color: var(--dark-theme-form-text-color, initial);
+
+  width: calc(100% - 200px);
+  padding: 6px;
 }
 
 #formWrapper {
-  padding: 100px;
+  padding: 40px 100px 40px 100px;
   transition: 0.5s padding;
   color: var(--dark-theme-form-text-color, initial);
 }

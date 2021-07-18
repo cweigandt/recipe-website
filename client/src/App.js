@@ -41,9 +41,11 @@ function App() {
           path='/tag/:tagName'
           render={(props) => (
             <RecipeCardDeck
-              requestURL={
-                '/request/tag/' + props.match.params.tagName.replace(/_/g, ' ')
-              }
+              filter={(recipe) => {
+                return recipe.tags.includes(
+                  props.match.params.tagName.replace(/_/g, ' ')
+                )
+              }}
             ></RecipeCardDeck>
           )}
         ></Route>

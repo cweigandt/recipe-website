@@ -18,7 +18,7 @@ function RecipePicker(props) {
   const dropdownRef = useRef(null)
 
   useEffect(() => {
-    setRecipes(sortRecipes(window.serverData.allRecipes))
+    setRecipes(sortRecipes([...window.serverData.allRecipes]))
     props.onChange({ target: dropdownRef.current })
   }, [props])
 

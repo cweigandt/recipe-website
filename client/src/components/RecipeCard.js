@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import '../styles/RecipeCard.css'
+import '../styles/Badge.css'
 import SectionColors from '../enums/SectionColors'
 
 function RecipeCard(props) {

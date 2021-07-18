@@ -9,11 +9,16 @@
   vertical-align: baseline;
   border-radius: 0.25rem;
   border: 1px solid white;
+
+  color: #fff;
 }
 
 .badge.badge-primary {
-  color: #fff;
   background-color: #007bff;
+}
+
+.badge.badge-info {
+  background-color: #17a2b8;
 }
 
 .badge a {

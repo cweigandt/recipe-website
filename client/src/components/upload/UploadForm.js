@@ -2,17 +2,22 @@ import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useCookies } from 'react-cookie'
 import { connect } from 'react-redux'
+import Tags from '@yaireo/tagify/dist/react.tagify'
 
 import '../../styles/UploadForm.css'
+import '@yaireo/tagify/dist/tagify.css'
 
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
+import { getAllTags } from '../../utilities/RecipesUtilities'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
   const [, setCookie] = useCookies(['user'])
 
+  const tagifyRef = useRef(null)
   const formRef = useRef(null)
+  const allTags = getAllTags()
 
   useEffect(() => {
     // query api
@@ -33,10 +38,12 @@ function UploadForm(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
+    const formData = new FormData(formRef.current)
+
     fetch(props.formSubmitAction || '/upload-recipe', {
       method: 'POST',
       redirect: 'manual',
-      body: new FormData(formRef.current),
+      body: formData,
     }).then((response) => {
       response.json().then((data) => {
         let status = ALERT_TYPES.SUCCESS
@@ -222,17 +229,29 @@ function UploadForm(props) {
         ></textarea>
       </div>
 
-      {renderTextLineInput({
-        id: 'tagsInput',
-        title: 'Tags',
-        name: 'tags',
-        additionalProps: {
-          placeholder: 'e.g. Desserts, Breakfast',
-          defaultValue: props.recipe.tags
-            ? props.recipe.tags.join(', ').trim()
-            : '',
-        },
-      })}
+      <div class='form-group'>
+        <label for={'tags'} class='form-label'>
+          Tags
+        </label>
+        <Tags
+          tagifyRef={tagifyRef}
+          name='tags'
+          className='tagsInput'
+          value={props.recipe.tags ? props.recipe.tags.join(', ').trim() : ''}
+          settings={{
+            whitelist: allTags,
+            placeholder: 'e.g. Desserts, Breakfast',
+            originalInputValueFormat: (valuesArr) =>
+              valuesArr.map((item) => item.value).join(','),
+            dropdown: {
+              maxItems: 60,
+              classname: 'tags-look',
+              enabled: 1,
+              closeOnSelect: false,
+            },
+          }}
+        ></Tags>
+      </div>
 
       {renderTextLineInput({
         id: 'uploaderInput',

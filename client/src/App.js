@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
 import RecipeCardDeck from './components/carddeck/RecipeCardDeck'
-import Recipe from './components/Recipe'
+import Recipe from './components/recipe/Recipe'
 import RecipeGrid from './components/grid/RecipeGrid'
 import EditForm from './components/upload/EditForm'
 import UploadForm from './components/upload/UploadForm'

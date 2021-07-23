@@ -1,0 +1,29 @@
+.nutrition {
+  display: inline-block;
+  cursor: default;
+}
+
+.nutrition .nutrition-info {
+  color: white;
+
+  font-size: 0.7em;
+  font-weight: bold;
+  border-radius: 30%;
+  border: 2px solid white;
+  padding: 2px;
+  margin: 3px;
+  white-space: pre;
+
+  background-color: rgba(40, 167, 69, 1);
+}
+
+.nutrition .nutrition-price {
+  font-size: 0.85em;
+  font-variant: small-caps;
+
+  margin-right: 5px;
+}
+
+.nutrition .nutrition-error {
+  background-color: tomato;
+}

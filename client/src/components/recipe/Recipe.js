@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import '../styles/Recipe.css'
-import '../styles/Print.css'
-import Badge from './widgets/Badge'
+import '../../styles/Recipe.css'
+import '../../styles/Print.css'
+import Badge from '../widgets/Badge'
+import Nutrition from './Nutrition'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -94,6 +95,8 @@ function Recipe(props) {
         <span id='dotSeparator'>&#9679;</span>
         <span id='servings'>servings | </span>
         <span id='servingsNumber'>{recipe.servings}</span>
+        <span id='dotSeparator'>&#9679;</span>
+        <Nutrition recipe={recipe} />
       </div>
       <div id='socialButtons' class='noprint'>
         <div

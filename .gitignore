@@ -1,5 +1,6 @@
 /node_modules
 /server/credentials
+/client/src/api/credentials.js
 
 .DS_Store
 .github_pat

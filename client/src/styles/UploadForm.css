@@ -12,7 +12,7 @@
   color: var(--dark-theme-form-text-color, initial);
   background-color: var(--dark-theme-form-control-bg, initial);
   background-clip: padding-box;
-  border: 1px solid var(--dark-theme-form-control-border-color, initial);
+  border: 1px solid var(--dark-theme-form-control-border-color, black);
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 

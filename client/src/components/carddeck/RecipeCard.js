@@ -50,8 +50,13 @@ function RecipeCard(props) {
       class='recipe-card'
       style={{ '--section-color': SectionColors[props.section] }}
     >
-      <div class='recipe-image-wrapper'></div>
-      <LazyLoad height={160} once resize={true} offset={200}>
+      <LazyLoad
+        height={160}
+        once
+        resize={true}
+        offset={200}
+        style={{ height: '160px', overflow: 'hidden' }}
+      >
         <img
           src={imageLocation}
           class='recipe-image'

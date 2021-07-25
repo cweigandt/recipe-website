@@ -6,6 +6,7 @@ body.dark-theme {
   --dark-theme-bg: #0d0d0f;
 
   --dark-theme-navbar-bg: rgba(29, 29, 35, 0.8);
+  --dark-theme-navbar-text: #fff;
 
   --dark-theme-searchbar-bg: black;
   --dark-theme-searchbar-border-color: #7d7d7d;
@@ -24,4 +25,8 @@ body.dark-theme {
   --dark-theme-form-control-bg: black;
   --dark-theme-form-control-border-color: #7d7d7d;
   --dark-theme-form-select-bg: #242424;
+
+  --dark-theme-nutrition-border: white;
+
+  --dark-theme-badge-border: white;
 }

@@ -9,7 +9,7 @@
   font-size: 0.7em;
   font-weight: bold;
   border-radius: 30%;
-  border: 2px solid white;
+  border: 2px solid var(--dark-theme-nutrition-border, gray);
   padding: 2px;
   margin: 3px;
   white-space: pre;

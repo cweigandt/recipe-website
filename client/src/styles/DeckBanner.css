@@ -1,7 +1,7 @@
 #bannerWrapper {
   position: relative;
-  height: calc(80vh - 56px);
-  top: -4px; /* not sure */
+  height: calc(80vh - 52px); /* navbar size */
+  top: -8px; /* not sure */
   transition: 0.8s height;
 }
 

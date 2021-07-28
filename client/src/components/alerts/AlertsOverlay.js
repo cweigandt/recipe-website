@@ -6,9 +6,11 @@ import Alert from './Alert'
 const AlertsOverlay = (props) => {
   var { alerts } = props
 
-  var renderAlerts = function () {
-    return alerts.map(function (alert) {
-      return <Alert alert={alert}></Alert>
+  var renderAlerts = () => {
+    return alerts.map((alert, i) => {
+      return (
+        <Alert alert={alert} isMostRecent={i === alerts.length - 1}></Alert>
+      )
     })
   }
 

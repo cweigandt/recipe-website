@@ -9,6 +9,7 @@ You will need a few extra files:
 
 - Add ./server/credentials/firecloud-credentials.json
 - Add ./server/credentials/gcs-credentials.json
+- Add ./server/credentials/jwtKey.txt
 - Add ./client/src/api/credentials.js
   - (Needs to include an exported API_KEYS object with spoonacular field for its api key)
 

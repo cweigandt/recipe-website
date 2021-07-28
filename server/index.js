@@ -1,14 +1,18 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const cookieParser = require('cookie-parser')
 
 const PORT = process.env.PORT || 8080
 
 const app = express()
+app.use(cookieParser())
 
 const customDB = require('./db')
 require('./requests')(app)
 require('./uploads')(app)
+const auth = require('./auth')
+auth.listen(app, customDB)
 
 const html = fs
   .readFileSync(path.resolve(__dirname, '../client/build/index.html'))

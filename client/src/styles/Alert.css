@@ -1,14 +1,22 @@
+.alerts-overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: block;
+}
+
 .alert {
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
 
-  position: fixed;
+  position: relative;
   top: 80px;
   width: 50%;
   left: 50%;
   transform: translateX(-50%);
+  margin: 10px 0;
 
   padding: 10px;
 
@@ -37,4 +45,10 @@
   background-color: #ff5757;
   border: 1px solid white;
   color: white;
+}
+
+.alert.status {
+  background-color: #bbb;
+  border: 1px solid black;
+  color: black;
 }

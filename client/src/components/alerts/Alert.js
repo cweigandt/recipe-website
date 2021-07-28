@@ -9,9 +9,10 @@ export const ALERT_TYPES = {
   SUCCESS: 'success',
   WARNING: 'warning',
   ERROR: 'error',
+  STATUS: 'status',
 }
 
-function Alert({ alert, dispatch }) {
+function Alert({ alert, dispatch, isMostRecent = false }) {
   let timeout = null
 
   const handleClose = () => {
@@ -21,6 +22,10 @@ function Alert({ alert, dispatch }) {
 
   if (alert.style === ALERT_TYPES.SUCCESS) {
     timeout = setTimeout(handleClose, 4000)
+  }
+
+  if (alert.style === ALERT_TYPES.STATUS && !isMostRecent) {
+    dispatch(removeAlert(alert.id))
   }
 
   return (
@@ -36,6 +41,7 @@ function Alert({ alert, dispatch }) {
 Alert.propTypes = {
   alert: PropTypes.object.isRequired,
   dispatch: PropTypes.object.isRequired,
+  isMostRecent: PropTypes.bool,
 }
 
 export default connect()(Alert)

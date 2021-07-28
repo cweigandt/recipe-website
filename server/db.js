@@ -60,6 +60,10 @@ exports.getRecipeImages = function () {
   return requestAllImagesFromDB()
 }
 
+exports.validateCredentials = function (credentials) {
+  return validateCredentials(credentials)
+}
+
 var addToDatabase = function (doc, json) {
   doc.set(json)
 }
@@ -275,6 +279,33 @@ const requestAllImagesFromDB = function () {
           data.push(doc.data())
         })
         resolve(data)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+  return promise
+}
+
+const validateCredentials = (credentials) => {
+  const promise = new Promise(function (resolve, reject) {
+    db.collection('users')
+      .get()
+      .then((snapshot) => {
+        const { username, password } = credentials
+        let found = false
+        snapshot.forEach((doc) => {
+          const data = doc.data()
+          const docUsername = data.username
+          const docPassword = data.password
+          if (docUsername === username && docPassword === password) {
+            resolve(username)
+            found = true
+          }
+        })
+        if (!found) {
+          reject(username)
+        }
       })
       .catch((err) => {
         reject(err)

@@ -2,6 +2,7 @@ const customDB = require('./db')
 const multer = require('multer')
 const multerGoogleStorage = require('multer-google-storage')
 const { Storage } = require('@google-cloud/storage')
+const auth = require('./auth')
 
 const mime = require('mime')
 const Jimp = require('jimp')
@@ -13,6 +14,10 @@ module.exports = function (app) {
     projectId: 'recipe-website-269020',
     acl: 'publicRead',
     filename: function (req, file, cb) {
+      if (!auth.validateJWT(req)) {
+        return null
+      }
+
       if (file) {
         cb(
           null,
@@ -38,6 +43,11 @@ module.exports = function (app) {
     '/upload-recipe',
     uploadHandler.single('image'),
     async function (req, res, next) {
+      if (!auth.validateJWT(req)) {
+        res.status(401).end()
+        return
+      }
+
       saveThumbnail(req, res).then((thumbnail) => {
         try {
           customDB.handleUploadForm(req.body, req.file, thumbnail)
@@ -55,6 +65,11 @@ module.exports = function (app) {
     '/edit-recipe',
     uploadHandler.single('image'),
     async function (req, res, next) {
+      if (!auth.validateJWT(req)) {
+        res.status(401).end()
+        return
+      }
+
       saveThumbnail(req, res).then((thumbnail) => {
         try {
           customDB.handleEditForm(req.body, req.file, thumbnail)

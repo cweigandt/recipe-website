@@ -8,6 +8,15 @@ const PORT = process.env.PORT || 8080
 const app = express()
 app.use(cookieParser())
 
+if (process.env.NODE_ENV === 'production') {
+  // In production, redirect all traffic to https
+  app.enable('trust proxy')
+
+  app.use((req, res, next) => {
+    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+  })
+}
+
 const customDB = require('./db')
 require('./requests')(app)
 require('./uploads')(app)

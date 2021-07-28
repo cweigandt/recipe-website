@@ -73,9 +73,9 @@ function Nutrition({ recipe }) {
   return (
     <div class='nutrition'>
       {nutritionInfo.pricePerServing && (
-        <span class='nutrition-price' title='Price per serving'>{`$${
+        <span class='nutrition-price' title='Price per serving'>{`$${(
           Math.floor(nutritionInfo.pricePerServing) / 100
-        }`}</span>
+        ).toFixed(2)}`}</span>
       )}
       {nutritionInfo.vegetarian && (
         <span class='nutrition-info vegetarian' title='Vegetarian'>

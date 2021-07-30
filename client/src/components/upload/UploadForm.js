@@ -7,6 +7,7 @@ import Tags from '@yaireo/tagify/dist/react.tagify'
 import '../../styles/UploadForm.css'
 import '../../styles/SignInModal.css'
 import '@yaireo/tagify/dist/tagify.css'
+import ConfettiGenerator from 'confetti-js'
 
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
@@ -37,6 +38,18 @@ function UploadForm(props) {
     })
   }, [setCookie])
 
+  const handleUploadSuccess = () => {
+    formRef.current.reset()
+    window.scrollTo(0, 0)
+
+    var confettiSettings = { target: 'confettiCanvas' }
+    var confetti = new ConfettiGenerator(confettiSettings)
+    confetti.render()
+    setTimeout(() => {
+      confetti.clear()
+    }, 3000)
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
@@ -55,8 +68,7 @@ function UploadForm(props) {
           status = ALERT_TYPES.ERROR
           console.log(data.stack)
         } else {
-          formRef.current.reset()
-          window.scrollTo(0, 0)
+          handleUploadSuccess()
         }
 
         props.dispatch(addAlert(data.response, status))
@@ -277,6 +289,10 @@ function UploadForm(props) {
         </button>
       </form>
       <SignInModal />
+      <canvas
+        id='confettiCanvas'
+        style={{ position: 'absolute', top: 0 }}
+      ></canvas>
     </Fragment>
   )
 }

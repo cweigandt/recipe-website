@@ -73,7 +73,7 @@ function RecipeCard(props) {
       ) : (
         ''
       )}
-      {renderFavoritesTag()}
+      {daysOld > 3 && renderFavoritesTag()}
     </Link>
   )
 }

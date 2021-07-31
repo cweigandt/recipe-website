@@ -108,7 +108,7 @@ function Recipe(props) {
         >
           <i class='fa fa-print'></i>
         </div>
-        {cookies['bccookbook-can-edit'] && (
+        {cookies['token'] && (
           <Link
             to={{
               pathname: '/edit',

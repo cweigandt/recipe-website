@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { useCookies } from 'react-cookie'
 import { connect } from 'react-redux'
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
@@ -16,7 +15,6 @@ import SignInModal from './SignInModal'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
-  const [, setCookie] = useCookies(['user'])
 
   const tagifyRef = useRef(null)
   const formRef = useRef(null)
@@ -30,13 +28,6 @@ function UploadForm(props) {
         setSections(data)
       })
   }, [])
-
-  useEffect(() => {
-    setCookie('bccookbook-can-edit', true, {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 180, // 180 days
-    })
-  }, [setCookie])
 
   const handleUploadSuccess = () => {
     formRef.current.reset()

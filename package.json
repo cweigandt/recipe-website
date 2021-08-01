@@ -12,7 +12,6 @@
   },
   "keywords": [],
   "author": "Christian Weigandt",
-  "license": "ISC",
   "engines": {
     "node": ">=8.0.0"
   },

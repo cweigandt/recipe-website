@@ -197,12 +197,3 @@
     width: 100%;
   }
 }
-
-@media screen and (max-width: 430px) {
-  #recipeWrapper #socialButtons {
-    top: 46px;
-    z-index: 3;
-    background-color: black;
-    border-radius: 3px;
-  }
-}

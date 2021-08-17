@@ -61,7 +61,7 @@ function NavBar(props) {
 
     return (
       <div class='navbar-button' onClick={handleLoginClick}>
-        <img src='icons/login.svg' alt='Login'></img>
+        <img src='/icons/login.svg' alt='Login'></img>
       </div>
     )
   }

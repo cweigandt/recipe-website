@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
@@ -8,7 +8,7 @@ import '../../styles/RecipeMadeButton.css'
 const RecipeMadeButton = ({ recipeName, cookedDates }) => {
   const [showButton, setShowButton] = useState(true)
 
-  const handleButtonClick = () => {
+  const handleButtonClick = useCallback(() => {
     // Help avoid accidental double clicks
     setShowButton(false)
 
@@ -19,7 +19,7 @@ const RecipeMadeButton = ({ recipeName, cookedDates }) => {
         recipeName,
       }),
     })
-  }
+  }, [setShowButton, recipeName])
 
   if (cookedDates) {
     const today = new Date()

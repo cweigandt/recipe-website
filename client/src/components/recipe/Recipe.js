@@ -8,6 +8,7 @@ import '../../styles/Print.css'
 import Badge from '../widgets/Badge'
 import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
+import RecipeCookedDates from './RecipeCookedDates'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -132,6 +133,8 @@ function Recipe(props) {
         <img id='recipeImage' src={recipe.imageLocation} alt='' />
       </div>
 
+      <RecipeCookedDates dates={recipe.cookedDates} />
+
       <div id='recipeBody'>
         <div id='ingredientsColumn'>
           <div class='sticky' id='ingredientsColumnSticky'>
@@ -154,7 +157,10 @@ function Recipe(props) {
           {renderTags(recipe.tags)}
         </div>
 
-        <RecipeMadeButton recipeName={recipe.name} />
+        <RecipeMadeButton
+          recipeName={recipe.name}
+          cookedDates={recipe.cookedDates}
+        />
       </div>
     </div>
   )

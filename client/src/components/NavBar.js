@@ -1,12 +1,18 @@
 import React, { useEffect, useState, Fragment } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+
+import { showModal } from '../actions/modalActions'
+import * as ModalTypes from './modals/ModalTypes'
 
 import '../styles/NavBar.css'
 
 function NavBar(props) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
+  const [cookies] = useCookies(['user'])
 
   useEffect(() => {
     // query api
@@ -16,6 +22,10 @@ function NavBar(props) {
         setSections(data)
       })
   }, [])
+
+  const handleLoginClick = () => {
+    props.dispatch(showModal(ModalTypes.LOGIN))
+  }
 
   const renderLink = (link, text) => {
     return (
@@ -44,6 +54,18 @@ function NavBar(props) {
     )
   }
 
+  const renderLoginButton = () => {
+    if (cookies['token']) {
+      return <div class='navbar-logged-in'></div>
+    }
+
+    return (
+      <div class='navbar-button' onClick={handleLoginClick}>
+        <img src='icons/login.svg' alt='Login'></img>
+      </div>
+    )
+  }
+
   return (
     <Fragment>
       <nav id='navbarParent' class='noprint navbar'>
@@ -55,13 +77,17 @@ function NavBar(props) {
           {props.title}
         </Link>
 
-        <div>
-          <Link to='/grid' style={{ color: 'gray', 'font-size': '24px' }}>
+        <div class='navbar-right'>
+          <Link
+            to='/grid'
+            style={{ display: 'flex', color: 'gray', 'font-size': '24px' }}
+          >
             <i
               class='fa fa-th-large'
               style={{ 'background-color': 'transparent' }}
             ></i>
           </Link>
+          {renderLoginButton()}
         </div>
       </nav>
       {renderMenu()}
@@ -73,4 +99,4 @@ NavBar.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-export default NavBar
+export default connect()(NavBar)

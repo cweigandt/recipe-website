@@ -8,7 +8,6 @@ import '../../styles/Print.css'
 import Badge from '../widgets/Badge'
 import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
-import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -155,7 +154,7 @@ function Recipe(props) {
           {renderTags(recipe.tags)}
         </div>
 
-        <RecipeMadeButton />
+        <RecipeMadeButton recipeName={recipe.name} />
       </div>
     </div>
   )

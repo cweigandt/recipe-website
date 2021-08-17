@@ -3,7 +3,8 @@ const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
 
-const jwtExpirySeconds = 60 * 60 * 24
+// Cookie expires yearly
+const jwtExpirySeconds = 60 * 60 * 24 * 365
 
 const jwtKey = fs
   .readFileSync(path.resolve(__dirname, './credentials/jwtKey.txt'))

@@ -1,17 +1,38 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
 
+import { showModal } from '../../actions/modalActions'
+import * as ModalTypes from '../modals/ModalTypes'
+
 import '../../styles/RecipeMadeButton.css'
 
-const RecipeMadeButton = ({ recipeName, cookedDates }) => {
+let modalId = -1
+
+const RecipeMadeButton = ({
+  confirmedAreYouSureIds,
+  recipeName,
+  cookedDates,
+  dispatch,
+}) => {
   const [showButton, setShowButton] = useState(true)
 
   const handleButtonClick = useCallback(() => {
+    const action = showModal(ModalTypes.ARE_YOU_SURE)
+    modalId = action.id
+    dispatch(action)
+  }, [dispatch])
+
+  useEffect(() => {
+    if (!confirmedAreYouSureIds.includes(modalId)) {
+      return
+    }
+
+    modalId = -1
     // Help avoid accidental double clicks
     setShowButton(false)
-
     fetch('/i-made-dis', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -19,7 +40,7 @@ const RecipeMadeButton = ({ recipeName, cookedDates }) => {
         recipeName,
       }),
     })
-  }, [setShowButton, recipeName])
+  }, [confirmedAreYouSureIds, setShowButton, recipeName])
 
   if (cookedDates) {
     const today = new Date()
@@ -44,8 +65,14 @@ const RecipeMadeButton = ({ recipeName, cookedDates }) => {
 }
 
 RecipeMadeButton.propTypes = {
+  confirmedAreYouSureIds: PropTypes.array.isRequired,
   recipeName: PropTypes.string.isRequired,
   cookedDates: PropTypes.array,
 }
 
-export default withLoggedInVisibility(RecipeMadeButton)
+const mapStateToProps = (state) => ({
+  confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
+})
+export default connect(mapStateToProps)(
+  withLoggedInVisibility(RecipeMadeButton)
+)

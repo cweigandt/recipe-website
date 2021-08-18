@@ -32,7 +32,7 @@ function SignInModal(props) {
         props.dispatch(addAlert('Error logging in', status))
       } else {
         formRef.current.reset()
-        props.dispatch(hideModal())
+        props.dispatch(hideModal(props.id))
         props.dispatch(addAlert('Logged in', status))
       }
     })

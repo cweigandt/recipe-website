@@ -7,6 +7,8 @@ import '../../styles/Recipe.css'
 import '../../styles/Print.css'
 import Badge from '../widgets/Badge'
 import Nutrition from './Nutrition'
+import RecipeMadeButton from './RecipeMadeButton'
+import RecipeCookedDates from './RecipeCookedDates'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -22,6 +24,22 @@ function Recipe(props) {
 
     setRecipe(foundRecipe)
   }, [props.urlName])
+
+  function renderEditButton() {
+    return (
+      cookies['token'] && (
+        <Link
+          to={{
+            pathname: '/edit',
+            state: { initialRecipeName: recipe.name },
+          }}
+          class='btn socialIcon'
+        >
+          <i class='fa fa-edit'></i>
+        </Link>
+      )
+    )
+  }
 
   function renderIngredients(ingredients) {
     return (
@@ -108,22 +126,14 @@ function Recipe(props) {
         >
           <i class='fa fa-print'></i>
         </div>
-        {cookies['token'] && (
-          <Link
-            to={{
-              pathname: '/edit',
-              state: { initialRecipeName: recipe.name },
-            }}
-            class='btn socialIcon'
-          >
-            <i class='fa fa-edit'></i>
-          </Link>
-        )}
+        {renderEditButton()}
       </div>
 
       <div class='image-wrapper'>
         <img id='recipeImage' src={recipe.imageLocation} alt='' />
       </div>
+
+      <RecipeCookedDates dates={recipe.cookedDates} />
 
       <div id='recipeBody'>
         <div id='ingredientsColumn'>
@@ -146,6 +156,11 @@ function Recipe(props) {
           {renderStepsList(recipe.steps)}
           {renderTags(recipe.tags)}
         </div>
+
+        <RecipeMadeButton
+          recipeName={recipe.name}
+          cookedDates={recipe.cookedDates}
+        />
       </div>
     </div>
   )

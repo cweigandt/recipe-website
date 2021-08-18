@@ -1,17 +1,13 @@
-import React, { useState, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { useCookies } from 'react-cookie'
+import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 
 import '../../styles/SignInModal.css'
 
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
+import { hideModal } from '../../actions/modalActions'
 
 function SignInModal(props) {
-  const [cookies] = useCookies(['user'])
-  const [showModal, setShowModal] = useState(!cookies['token'])
-
   const formRef = useRef(null)
 
   const handleFormSubmit = (e) => {
@@ -36,16 +32,11 @@ function SignInModal(props) {
         props.dispatch(addAlert('Error logging in', status))
       } else {
         formRef.current.reset()
-        setShowModal(false)
+        props.dispatch(hideModal(props.id))
         props.dispatch(addAlert('Logged in', status))
       }
     })
     return false
-  }
-
-  if (!showModal) {
-    // If there is a token cookie then they are logged in
-    return null
   }
 
   return (

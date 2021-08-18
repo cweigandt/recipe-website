@@ -24,6 +24,16 @@ exports.handleEditForm = function (body, file, thumbnail) {
   updateDatabase(recipesDoc, item)
 }
 
+exports.handleIMadeThis = (recipeName) => {
+  return requestDocFromDB('recipes', recipeName).then((recipeData) => {
+    const cookedDates = recipeData.cookedDates || []
+    const newCookedDates = [new Date().getTime(), ...cookedDates]
+
+    const recipeDoc = db.collection('recipes').doc(recipeName)
+    updateDatabase(recipeDoc, { cookedDates: newCookedDates })
+  })
+}
+
 exports.manuallyUpdate = function (docName, field, value) {
   let item = {}
   item[field] = value

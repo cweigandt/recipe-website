@@ -48,6 +48,29 @@
   text-align: center;
 }
 
+.navbar-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-right > * {
+  margin: 0 10px 0 10px;
+  width: 24px;
+  height: 24px;
+}
+
+.navbar-button {
+  cursor: pointer;
+}
+
+.navbar-logged-in {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: yellowgreen;
+}
+
 .navbar-menu {
   position: fixed;
   height: calc(100vh - 52px);

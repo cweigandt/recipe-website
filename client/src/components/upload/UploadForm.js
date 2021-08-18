@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Tags from '@yaireo/tagify/dist/react.tagify'
+import { useCookies } from 'react-cookie'
 
 import '../../styles/UploadForm.css'
 import '../../styles/SignInModal.css'
@@ -10,15 +11,22 @@ import confetti from 'canvas-confetti'
 
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
+import { showModal } from '../../actions/modalActions'
+import * as ModalTypes from '../modals/ModalTypes'
+
 import { getAllTags } from '../../utilities/RecipesUtilities'
-import SignInModal from './SignInModal'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
+  const [cookies] = useCookies(['user'])
 
   const tagifyRef = useRef(null)
   const formRef = useRef(null)
   const allTags = getAllTags()
+
+  if (!cookies['token']) {
+    props.dispatch(showModal(ModalTypes.LOGIN))
+  }
 
   useEffect(() => {
     // query api
@@ -280,7 +288,6 @@ function UploadForm(props) {
           Submit
         </button>
       </form>
-      <SignInModal />
     </Fragment>
   )
 }

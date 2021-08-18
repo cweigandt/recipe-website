@@ -2,6 +2,8 @@ const customDB = require('./db')
 const multer = require('multer')
 const multerGoogleStorage = require('multer-google-storage')
 const { Storage } = require('@google-cloud/storage')
+const express = require('express')
+
 const auth = require('./auth')
 
 const mime = require('mime')
@@ -82,6 +84,25 @@ module.exports = function (app) {
       })
     }
   )
+
+  app.post('/i-made-dis', express.json(), (req, res) => {
+    if (!auth.validateJWT(req)) {
+      res.status(401).end()
+      return
+    }
+
+    const recipeName = req.body.recipeName
+    customDB
+      .handleIMadeThis(recipeName)
+      .then(() => {
+        res.status(200)
+        res.send({ response: `Edit for ${recipeName} was successful` })
+      })
+      .catch(() => {
+        res.status(500)
+        res.send({ response: err.message, stack: err.stack })
+      })
+  })
 
   app.get('/createAllThumbnails', async function (req, res, next) {
     // This code is here for a template

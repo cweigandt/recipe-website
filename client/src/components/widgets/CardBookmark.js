@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import '../../styles/CardBookmark.css'
+import '../../styles/widgets/CardBookmark.css'
 
 export const BOOKMARK_TYPES = {
   NEW: 'new',

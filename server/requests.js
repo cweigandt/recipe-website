@@ -1,94 +1,45 @@
-const customDB = require('./db')
+const customDB = require('./db/db')
+
+const reactToDBPromise = (promise, res) => {
+  promise
+    .then((data) => {
+      res.send(data)
+    })
+    .catch((err) => {
+      res.status(500)
+      console.log(err)
+    })
+}
 
 module.exports = function (app) {
   app.get('/request/recipe/:recipeName', (req, res) => {
-    var requestedRecipe = req.params.recipeName
-
-    requestedRecipe = requestedRecipe.replace(/_/g, ' ')
-    var dbPromise = customDB.requestRecipe(requestedRecipe)
-    dbPromise
-      .then((recipeData) => {
-        res.send(recipeData)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    const requestedRecipe = req.params.recipeName.replace(/_/g, ' ')
+    reactToDBPromise(customDB.requestRecipe(requestedRecipe), res)
   })
 
   app.get('/request/sections', (req, res) => {
-    var dbPromise = customDB.getSections()
-    dbPromise
-      .then((sections) => {
-        res.send(sections.data)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    reactToDBPromise(customDB.getSections(), res)
   })
 
   app.get('/request/all-recipes', (req, res) => {
-    var dbPromise = customDB.getAllRecipes()
-    dbPromise
-      .then((recipes) => {
-        res.send(recipes)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    reactToDBPromise(customDB.getAllRecipes(), res)
   })
 
   app.get('/request/all-grid-recipes', (req, res) => {
-    var dbPromise = customDB.getRecipeImages()
-    dbPromise
-      .then((recipes) => {
-        res.send(recipes)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    reactToDBPromise(customDB.getRecipeImages(), res)
   })
 
   app.get('/request/all-recipe-names', (req, res) => {
-    var dbPromise = customDB.getNamesOfRecipes()
-    dbPromise
-      .then((recipes) => {
-        res.send(recipes)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    reactToDBPromise(customDB.getNamesOfRecipes(), res)
   })
 
   app.get('/request/recipes/:sectionName', (req, res) => {
-    var sectionName = req.params.sectionName
-
-    var dbPromise = customDB.getSectionRecipes(sectionName)
-    dbPromise
-      .then((recipes) => {
-        res.send(recipes)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    const sectionName = req.params.sectionName
+    reactToDBPromise(customDB.getSectionRecipes(sectionName), res)
   })
 
   app.get('/request/tag/:tagName', (req, res) => {
-    var tagName = req.params.tagName
-
-    var dbPromise = customDB.getRecipesWithTag(tagName)
-    dbPromise
-      .then((recipes) => {
-        res.send(recipes)
-      })
-      .catch((err) => {
-        res.status(500)
-        console.log(err)
-      })
+    const tagName = req.params.tagName
+    reactToDBPromise(customDB.getRecipesWithTag(tagName), res)
   })
 }

@@ -14,52 +14,42 @@ import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 import ModalOverlay from './components/modals/ModalOverlay'
 
-function App() {
+const RecipeRoute = (props) => (
+  <Recipe urlName={props.match.params.recipeName} />
+)
+
+const SectionRoute = (props) => (
+  <RecipeCardDeck
+    filter={(recipe) => props.match.params.sectionName === recipe.section}
+  />
+)
+
+const TagRoute = (props) => (
+  <RecipeCardDeck
+    filter={(recipe) => {
+      return recipe.tags.includes(props.match.params.tagName.replace(/_/g, ' '))
+    }}
+  />
+)
+
+const App = () => {
+  const renderRoutes = () => (
+    <Switch>
+      <Route path='/recipe/:recipeName' component={RecipeRoute} />
+      <Route path='/grid' component={RecipeGrid} />
+      <Route path='/tags' component={TagsList} />
+      <Route path='/upload' component={UploadForm} />
+      <Route path='/edit' component={EditForm} />
+      <Route path='/sections/:sectionName' component={SectionRoute} />
+      <Route path='/tag/:tagName' component={TagRoute} />
+      <Route exact path='/' component={RecipeCardDeck} />
+      <Route component={NotFound} />
+    </Switch>
+  )
   return (
     <div className='App'>
       <NavBar title='B+C Cookbook'></NavBar>
-      <Switch>
-        <Route
-          path='/recipe/:recipeName'
-          render={(props) => (
-            <Recipe urlName={props.match.params.recipeName}></Recipe>
-          )}
-        ></Route>
-        <Route path='/grid' component={RecipeGrid} />
-        <Route path='/tags' component={TagsList} />
-        <Route path='/upload' component={UploadForm} />
-        <Route path='/edit' component={EditForm} />
-        <Route
-          path='/sections/:sectionName'
-          render={(props) => (
-            <RecipeCardDeck
-              filter={(recipe) =>
-                props.match.params.sectionName === recipe.section
-              }
-            ></RecipeCardDeck>
-          )}
-        ></Route>
-        <Route
-          path='/tag/:tagName'
-          render={(props) => (
-            <RecipeCardDeck
-              filter={(recipe) => {
-                return recipe.tags.includes(
-                  props.match.params.tagName.replace(/_/g, ' ')
-                )
-              }}
-            ></RecipeCardDeck>
-          )}
-        ></Route>
-        <Route
-          exact
-          path='/'
-          render={(props) => (
-            <RecipeCardDeck filter={(recipe) => true}></RecipeCardDeck>
-          )}
-        />
-        <Route component={NotFound} />
-      </Switch>
+      {renderRoutes()}
       <ModalOverlay />
       <AlertsOverlay />
     </div>

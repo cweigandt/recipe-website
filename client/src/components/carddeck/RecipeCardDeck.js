@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import RecipeCard from './RecipeCard'
 import DeckBanner from './DeckBanner'
-import '../../styles/RecipeCardDeck.css'
+import '../../styles/carddeck/RecipeCardDeck.css'
 
 function RecipeCardDeck(props) {
   const [recipes, setRecipes] = useState([])
@@ -64,6 +64,10 @@ function RecipeCardDeck(props) {
 
 RecipeCardDeck.propTypes = {
   filter: PropTypes.func.isRequired,
+}
+
+RecipeCardDeck.defaultProps = {
+  filter: () => true,
 }
 
 export default RecipeCardDeck

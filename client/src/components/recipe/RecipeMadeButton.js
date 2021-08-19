@@ -7,7 +7,7 @@ import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
 import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../modals/ModalTypes'
 
-import '../../styles/RecipeMadeButton.css'
+import '../../styles/recipe/RecipeMadeButton.css'
 
 let modalId = -1
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-import '../../styles/UploadForm.css'
+import '../../styles/upload/UploadForm.css'
 
 const sortRecipes = (recipes) => {
   return recipes.sort((a, b) => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 
-import '../../styles/GridCard.css'
+import '../../styles/grid/GridCard.css'
 
 function GridCard(props) {
   const linkURL = '/recipe/' + props.name.replace(/ /g, '_')

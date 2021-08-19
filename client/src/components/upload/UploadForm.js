@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import Tags from '@yaireo/tagify/dist/react.tagify'
 import { useCookies } from 'react-cookie'
 
-import '../../styles/UploadForm.css'
-import '../../styles/SignInModal.css'
+import '../../styles/upload/UploadForm.css'
 import '@yaireo/tagify/dist/tagify.css'
 import confetti from 'canvas-confetti'
 

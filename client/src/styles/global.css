@@ -1,5 +1,17 @@
 body {
   background-color: var(--dark-theme-bg, rgb(250, 250, 255));
+
+  --Appetizers-color: #c2185b; /* pink */
+  --Breakfast-color: #7b1fa2; /* purple */
+  --Dessert-color: #1976d2; /* blue */
+  --Sauces-color: #009688; /* teal */
+  --Entrees-color: #689f38; /* light green */
+  --Salad-color: #f57c00; /* orange */
+  --Seasoning-color: #d32f2f; /* red */
+  --Sides-color: #455a64; /* blue gray */
+  --Drinks-color: #795548; /* brown */
+  --Snacks-color: #ffc107; /* dark yellow */
+  --Soup-color: #6d6d6d; /* dark gray */
 }
 
 body.dark-theme {

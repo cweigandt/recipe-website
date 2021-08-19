@@ -26,6 +26,12 @@ $ npm run build
 $ npm start
 ```
 
+## Testing
+
+Using Mocha and Selenium for tests.
+
+See `npm test` script.
+
 ## Scripts
 
 - `npm run build`
@@ -38,6 +44,9 @@ $ npm start
 - `npm run dev`
   - Sets the port to 3001 and connects NodeJS debugger
   - Can then hook up Chrome's NodeJS debugger to the server
+- `npm test`
+  - Runs selenium tests
+  - Note: Need to start the server before this as it uses localhost:8080
 
 ## License
 

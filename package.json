@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "export PORT=3001 && node --inspect server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build": "npm install && cd client && npm install && npm run build",
     "quick-build": "cd client && npm run build"
   },
@@ -40,5 +40,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/cweigandt/recipe-website.git"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.3",
+    "selenium-webdriver": "^4.0.0-beta.4"
   }
 }

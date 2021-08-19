@@ -34,6 +34,7 @@ function Recipe(props) {
             state: { initialRecipeName: recipe.name },
           }}
           class='btn socialIcon'
+          data-test-id='edit-button'
         >
           <i class='fa fa-edit'></i>
         </Link>

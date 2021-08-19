@@ -66,4 +66,8 @@ RecipeCardDeck.propTypes = {
   filter: PropTypes.func.isRequired,
 }
 
+RecipeCardDeck.defaultProps = {
+  filter: () => true,
+}
+
 export default RecipeCardDeck

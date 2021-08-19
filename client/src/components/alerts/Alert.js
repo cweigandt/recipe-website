@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import '../../styles/Alert.css'
+import '../../styles/alerts/Alert.css'
 import { removeAlert } from '../../actions/alertsActions'
 
 export const ALERT_TYPES = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import '../../styles/RecipeCookedDates.css'
+import '../../styles/recipe/RecipeCookedDates.css'
 
 const RecipeCookedDates = ({ dates }) => {
   if (!dates) {

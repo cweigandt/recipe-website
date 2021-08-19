@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import '../../styles/Nutrition.css'
+import '../../styles/recipe/Nutrition.css'
 
 import { API_KEYS } from '../../api/credentials'
 

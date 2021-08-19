@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import '../styles/Badge.css'
+import '../styles/widgets/Badge.css'
 
 function TagsList(props) {
   const [tagCounts, setTagCounts] = useState({})

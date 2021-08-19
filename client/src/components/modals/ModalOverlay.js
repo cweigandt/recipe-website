@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import SignInModal from './SignInModal'
+
 import * as ModalTypes from './ModalTypes'
+
+import SignInModal from './SignInModal'
 import AreYouSureModal from './AreYouSureModal'
 
 const ModalOverlay = (props) => {

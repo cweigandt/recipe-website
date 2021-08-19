@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 
-import '../../styles/RecipeCard.css'
-import SectionColors from '../../enums/SectionColors'
+import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
 
 function RecipeCard(props) {
@@ -48,7 +47,7 @@ function RecipeCard(props) {
     <Link
       to={linkURL}
       class='recipe-card'
-      style={{ '--section-color': SectionColors[props.section] }}
+      style={{ '--section-color': `var(--${props.section}-color)` }}
     >
       <LazyLoad
         height={160}

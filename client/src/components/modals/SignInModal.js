@@ -1,7 +1,9 @@
 import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 
-import '../../styles/SignInModal.css'
+import '../../styles/modals/SignInModal.css'
+
+import Modal from './Modal'
 
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
@@ -40,55 +42,53 @@ function SignInModal(props) {
   }
 
   return (
-    <div class='modal-bg'>
-      <div class='sign-in-modal'>
-        <div>Sign In</div>
-        <form
-          id='signInForm'
-          name='signInForm'
-          onSubmit={handleFormSubmit}
-          ref={formRef}
-        >
-          <div class='form-group'>
-            <label for={'username'} class='form-label'>
-              Username:
-            </label>
-            <input
-              type='text'
-              class='form-control'
-              id='username'
-              onKeyDown={(e) => {
-                if (e.keyCode === 13 || e.key === 'Enter') {
-                  e.preventDefault()
-                  return false
-                }
-              }}
-              name='username'
-            />
-          </div>
-          <div class='form-group'>
-            <label for={'password'} class='form-label'>
-              Password:
-            </label>
-            <input
-              type='text'
-              class='form-control'
-              id='password'
-              onKeyDown={(e) => {
-                if (e.keyCode === 13 || e.key === 'Enter') {
-                  e.preventDefault()
-                  return false
-                }
-              }}
-              name='password'
-            />
-          </div>
-          <button type='submit' id='signOnSubmit' class='btn'>
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+    <Modal class='sign-in-modal'>
+      <div>Sign In</div>
+      <form
+        id='signInForm'
+        name='signInForm'
+        onSubmit={handleFormSubmit}
+        ref={formRef}
+      >
+        <div class='form-group'>
+          <label for={'username'} class='form-label'>
+            Username:
+          </label>
+          <input
+            type='text'
+            class='form-control'
+            id='username'
+            onKeyDown={(e) => {
+              if (e.keyCode === 13 || e.key === 'Enter') {
+                e.preventDefault()
+                return false
+              }
+            }}
+            name='username'
+          />
+        </div>
+        <div class='form-group'>
+          <label for={'password'} class='form-label'>
+            Password:
+          </label>
+          <input
+            type='text'
+            class='form-control'
+            id='password'
+            onKeyDown={(e) => {
+              if (e.keyCode === 13 || e.key === 'Enter') {
+                e.preventDefault()
+                return false
+              }
+            }}
+            name='password'
+          />
+        </div>
+        <button type='submit' id='signOnSubmit' class='btn'>
+          Submit
+        </button>
+      </form>
+    </Modal>
   )
 }
 

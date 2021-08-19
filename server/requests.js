@@ -1,4 +1,4 @@
-const customDB = require('./db')
+const customDB = require('./db/db')
 
 module.exports = function (app) {
   app.get('/request/recipe/:recipeName', (req, res) => {

@@ -13,7 +13,9 @@ exports.requestRecipe = function (recipeName) {
 }
 
 exports.getSections = function () {
-  return Queries.doc(db, 'global', 'sections')
+  return Queries.doc(db, 'global', 'sections').then(
+    (sectionsData) => sectionsData.data
+  )
 }
 
 exports.getAllRecipes = function () {

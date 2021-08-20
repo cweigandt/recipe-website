@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie'
 import '../../styles/recipe/Recipe.css'
 import '../../styles/recipe/Print.css'
 import Badge from '../widgets/Badge'
-import Nutrition from './Nutrition'
+// import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 
@@ -115,7 +115,7 @@ function Recipe(props) {
         <span id='servings'>servings | </span>
         <span id='servingsNumber'>{recipe.servings}</span>
         <span id='dotSeparator'>&#9679;</span>
-        <Nutrition recipe={recipe} />
+        {/*<Nutrition recipe={recipe} />*/}
       </div>
       <div id='socialButtons' class='noprint'>
         <div

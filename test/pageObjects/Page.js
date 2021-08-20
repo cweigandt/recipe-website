@@ -1,5 +1,4 @@
 const { Builder, By, Capabilities, until } = require('selenium-webdriver')
-require('chromedriver')
 
 module.exports = class Page {
   constructor() {
@@ -14,7 +13,9 @@ module.exports = class Page {
       ],
     })
 
-    this.driver = new Builder().withCapabilities(capabilities).build()
+    this.driver =
+      process.env.CHROMEWEBDRIVER ||
+      new Builder().withCapabilities(capabilities).build()
   }
 
   visit(theUrl) {

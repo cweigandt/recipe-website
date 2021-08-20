@@ -47,6 +47,9 @@ See `npm test` script.
 - `npm test`
   - Runs selenium tests
   - Note: Need to start the server before this as it uses localhost:8080
+- `npm run full-test`
+  - Starts server with 'test' env
+  - Runs selenium tests
 
 ## License
 

@@ -1,4 +1,4 @@
-const customDB = require('./db/db')
+const customDB = require('./db/getDB')
 const multer = require('multer')
 const multerGoogleStorage = require('multer-google-storage')
 const { Storage } = require('@google-cloud/storage')

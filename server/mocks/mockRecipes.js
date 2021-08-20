@@ -1,0 +1,130 @@
+const recipe1 = {
+  subIngredients1Name: '',
+  time: '',
+  thumbnail:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Game_Day_Board_thumbnail.jpeg',
+  subIngredients2: [],
+  servings: '-',
+  ingredients: [
+    '2 stalks of celery, cut',
+    'Baby carrots',
+    'Blue cheese dressing',
+    'Purple potatoes',
+    'Parsnips (or japanese sweet potatoes)',
+    '1lb chicken wings',
+    'Old Bay',
+    'Honey sriracha sauce (from sauces section)',
+    'Canola oil',
+  ],
+  section: 'Appetizers',
+  uploader: 'Brittany Cormier',
+  uploadTime: 1620499610411,
+  name: 'Game Day Board',
+  imageLocation:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Game_Day_Board.jpeg',
+  tags: [
+    'Chicken Wings',
+    'Fries',
+    'Carrots',
+    'Celery',
+    'Blue Cheese Dressing',
+    'Parsnips',
+    'Sweet Potatoes',
+    'Hosting',
+  ],
+  subIngredients1: [],
+  steps: [
+    'Preheat oven to 400 F. Peel parsnips. Slice purple potatoes and parsnips into long fries.',
+    'Place on baking sheet and toss with olive oil. Season with salt and pepper. Spread fries in an even layer.',
+    'Bake for 15 minutes. Flip each fry over and rearrange in an even layer. Bake for 10–15 more minutes, broiling on high for a few minutes at the end when fries are almost done.',
+    'For chicken wings, heat canola oil to 350 F. Cover a baking tray with paper towels to catch oil. When oil is hot, add a few chicken wings and cook 4 minutes per side (if the wings are larger, cooking time may be longer) or until 165 F internal temp.  Add chicken wings to baking sheet to cool.',
+    'When chicken wings are cool, toss half the batch with old bay seasoning and the other half with honey sriracha sauce.',
+  ],
+  subIngredients2Name: '',
+}
+
+const recipe2 = {
+  uploader: 'Brittany Cormier',
+  section: 'Breakfast',
+  name: 'Scrambled Eggs with Sweet Potato and Brussel Sprout Hash',
+  steps: [
+    'Chop and shred all veggies',
+    'Heat pan over medium with olive oil. Saute veggies until crispy, leaving them for a few minutes to brown occasionally. Add in butter, salt, pepper, and garlic powder as desired.',
+    'Cook pork sausage in a separate sauté pan and then mix into hash.',
+    'Cook eggs as desired and top over hash. Top with goat cheese and red pepper flakes.',
+  ],
+  imageLocation:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Scrambled_Eggs_with_Sweet_Potato_and_Brussel_Sprout_Hash.jpeg',
+  time: '',
+  cookedDates: [1629175412678],
+  tags: [
+    'Hash',
+    'Sweet Potato',
+    'Red Onion',
+    'Brussel Sprouts',
+    'Eggs',
+    'Red Pepper Flakes',
+    'Goat Cheese',
+    'Ground Pork',
+  ],
+  servings: '1',
+  thumbnail:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Scrambled_Eggs_with_Sweet_Potato_and_Brussel_Sprout_Hash_thumbnail.jpeg',
+  ingredients: [
+    '1 lb brussel sprouts, chopped',
+    '1/2 red onion, finely chopped',
+    '1 sweet potato, shredded',
+    '2 eggs',
+    '1lb ground pork (we used pork from the farm that already had rosemary and time mixed in)',
+    'Goat cheese',
+    'Salt',
+    'Pepper',
+    'Garlic powder',
+    'Red pepper flakes',
+    'A few tbsps butter',
+  ],
+  uploadTime: 1629150609822,
+  subIngredients1Name: '',
+  subIngredients1: [],
+  subIngredients2Name: '',
+  subIngredients2: [],
+}
+
+const recipe3 = {
+  uploader: 'Brittany Cormier',
+  uploadTime: 1625710383940,
+  section: 'Drinks',
+  name: 'Frozen Strawberry Margaritas',
+  time: '',
+  servings: '2',
+  steps: [
+    'Combine the ingredients in a blender with desired amount of ice and blend until smooth.',
+    'Slice whole strawberries 3/4 way down the middle.',
+    'Pour into glasses and garnish with strawberries.',
+  ],
+  subIngredients1Name: '',
+  subIngredients1: [],
+  ingredients: [
+    '4 oz tequila',
+    '2 oz triple sec',
+    '1 oz fresh lime juice',
+    '1/2 cup strawberries',
+    '2 whole strawberries, for garnish (optional)',
+  ],
+  tags: [
+    'Tequila',
+    'Margarita',
+    'Triple Sec',
+    'Lime Juice',
+    'Strawberries',
+    'Ice',
+  ],
+  subIngredients2Name: '',
+  thumbnail:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas_thumbnail.jpeg',
+  imageLocation:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas.jpeg',
+  subIngredients2: [],
+}
+
+module.exports = [recipe1, recipe2, recipe3]

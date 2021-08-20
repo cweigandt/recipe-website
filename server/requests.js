@@ -1,4 +1,4 @@
-const customDB = require('./db/db')
+const customDB = require('./db/getDB')
 
 const reactToDBPromise = (promise, res) => {
   promise

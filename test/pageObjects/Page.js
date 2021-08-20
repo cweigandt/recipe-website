@@ -13,9 +13,9 @@ module.exports = class Page {
       ],
     })
 
-    this.driver =
-      process.env.CHROMEWEBDRIVER ||
-      new Builder().withCapabilities(capabilities).build()
+    this.driver = new Builder(process.env.CHROMEWEBDRIVER)
+      .withCapabilities(capabilities)
+      .build()
   }
 
   visit(theUrl) {

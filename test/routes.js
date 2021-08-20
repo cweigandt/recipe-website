@@ -15,37 +15,37 @@ describe('Routes', function () {
     done()
   })
 
-  it('loads index', async () => {
+  it('loads /', async () => {
     await page.visit(pageRoot)
     return page.findByCSS('.App #pageWrapper')
   })
 
-  it('loads grid', async () => {
+  it('loads /grid', async () => {
     await page.driver.get(`${pageRoot}/grid`)
     return page.findByCSS('#recipeGrid')
   })
 
-  it('loads recipe', async () => {
+  it('loads /recipe', async () => {
     await page.driver.get(`${pageRoot}/recipe/Game_Day_Board`)
     return page.findByCSS('#recipeWrapper')
   })
 
-  it('loads section', async () => {
+  it('loads /sections', async () => {
     await page.driver.get(`${pageRoot}/sections/Appetizers`)
     return page.findByCSS('.App #pageWrapper')
   })
 
-  it('loads tag', async () => {
+  it('loads /tag', async () => {
     await page.driver.get(`${pageRoot}/tag/Christian's_Favorites`)
     return page.findByCSS('.App #pageWrapper')
   })
 
-  it('loads edit', async () => {
+  it('loads /edit', async () => {
     await page.driver.get(`${pageRoot}/edit`)
     return page.findByCSS('#formWrapper')
   })
 
-  it('loads upload', async () => {
+  it('loads /upload', async () => {
     await page.driver.get(`${pageRoot}/upload`)
     return page.findByCSS('#formWrapper')
   })

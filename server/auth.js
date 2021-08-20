@@ -29,7 +29,7 @@ exports.listen = function (app, customDB) {
       .validateCredentials({ username, password })
       .then(() => {
         // Create a new token with the username in the payload
-        // and which expires 1d after issue
+        // and which expires 1y after issue
         const token = jwt.sign({ username }, jwtKey, {
           algorithm: 'HS256',
           expiresIn: jwtExpirySeconds,

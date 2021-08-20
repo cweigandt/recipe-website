@@ -1,8 +1,19 @@
-const { Builder, By, until } = require('selenium-webdriver')
+const { Builder, By, Capabilities, until } = require('selenium-webdriver')
+require('chromedriver')
 
 module.exports = class Page {
   constructor() {
-    this.driver = new Builder().forBrowser('chrome').build()
+    const capabilities = Capabilities.chrome()
+    capabilities.set('chromeOptions', {
+      args: [
+        '--headless',
+        '--no-sandbox',
+        '--disable-gpu',
+        '--window-size=1980,1200',
+      ],
+    })
+
+    this.driver = new Builder().withCapabilities(capabilities).build()
   }
 
   visit(theUrl) {

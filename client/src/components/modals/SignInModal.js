@@ -8,6 +8,7 @@ import Modal from './Modal'
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
 import { hideModal } from '../../actions/modalActions'
+import { logIn } from '../../actions/loginActions'
 
 function SignInModal(props) {
   const formRef = useRef(null)
@@ -34,6 +35,7 @@ function SignInModal(props) {
         props.dispatch(addAlert('Error logging in', status))
       } else {
         formRef.current.reset()
+        props.dispatch(logIn())
         props.dispatch(hideModal(props.id))
         props.dispatch(addAlert('Logged in', status))
       }

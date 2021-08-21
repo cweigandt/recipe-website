@@ -8,8 +8,9 @@ import { showModal } from '../actions/modalActions'
 import * as ModalTypes from './modals/ModalTypes'
 
 import '../styles/NavBar.css'
+import { logIn } from '../actions/loginActions'
 
-function NavBar(props) {
+function NavBar({ dispatch, title, isLoggedIn }) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -23,8 +24,15 @@ function NavBar(props) {
       })
   }, [])
 
+  useEffect(() => {
+    // Navbar is responsible for setting initial logged in state
+    if (cookies['token']) {
+      dispatch(logIn())
+    }
+  }, [dispatch, cookies])
+
   const handleLoginClick = () => {
-    props.dispatch(showModal(ModalTypes.LOGIN))
+    dispatch(showModal(ModalTypes.LOGIN))
   }
 
   const renderLink = (link, text) => {
@@ -51,8 +59,8 @@ function NavBar(props) {
         <ul class='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home')}
           {renderLink('/grid', 'Grid')}
-          {cookies['token'] && renderLink('/edit', 'Edit')}
-          {cookies['token'] && renderLink('/upload', 'Upload')}
+          {isLoggedIn && renderLink('/edit', 'Edit')}
+          {isLoggedIn && renderLink('/upload', 'Upload')}
           {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)
@@ -63,7 +71,7 @@ function NavBar(props) {
   }
 
   const renderLoginButton = () => {
-    if (cookies['token']) {
+    if (isLoggedIn) {
       return <div class='navbar-logged-in'></div>
     }
 
@@ -93,7 +101,7 @@ function NavBar(props) {
         </div>
 
         <Link to='/' class='navbar-brand' id='navBarBrand'>
-          {props.title}
+          {title}
         </Link>
 
         <div class='navbar-right'>{renderLoginButton()}</div>
@@ -107,4 +115,6 @@ NavBar.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-export default connect()(NavBar)
+export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+  NavBar
+)

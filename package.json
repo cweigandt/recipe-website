@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
+    "start-test-env": "export NODE_ENV='test' && npm start",
     "dev": "export PORT=3001 && node --inspect server/index.js",
     "test": "mocha",
     "build": "npm install && cd client && npm install && npm run build",

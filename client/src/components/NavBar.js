@@ -88,7 +88,12 @@ function NavBar(props) {
         <div class='navbar-right'>
           <Link
             to='/grid'
-            style={{ display: 'flex', color: 'gray', 'font-size': '24px' }}
+            style={{
+              display: 'flex',
+              color: 'gray',
+              'font-size': '24px',
+              'text-decoration': 'none',
+            }}
           >
             <i
               class='fa fa-th-large'

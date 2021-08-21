@@ -25,6 +25,9 @@ If you want to set up your own recipes, you will need a few extra files:
   - I need to update this with how to export this from google cloud platform
 - ./server/credentials/jwtKey.txt
   - Text file containing one line of only a random UID for JSON web token (can be anything)
+- ./server/credentials/api-keys.json
+  - JSON object containing the following keys with string values for the api key
+    - spoonacular
 
 ## Testing
 

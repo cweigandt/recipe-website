@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 
 import '../../styles/recipe/Nutrition.css'
 
-import { API_KEYS } from '../../api/credentials'
-
-const spoonacularAPI = `https://api.spoonacular.com/recipes/analyze?apiKey=${API_KEYS.spoonacular}&includeNutrition=false`
-
 const cachedNutritionInfo = {}
 
 function Nutrition({ recipe }) {
@@ -24,50 +20,15 @@ function Nutrition({ recipe }) {
       return
     }
 
-    // Make sure every step ends in a period when joined
-    const steps = recipe.steps
-      .map((step) => {
-        let trimmed = step.trim()
-        if (trimmed[trimmed.length - 1] !== '.') {
-          trimmed = trimmed + '.'
-        }
-        return trimmed
-      })
-      .join(' ')
-
-    const body = {
-      title: recipe.name,
-      servings: recipe.servings === '-' ? 4 : JSON.parse(recipe.servings),
-      ingredients: recipe.ingredients
-        .concat(recipe.subIngredients1)
-        .concat(recipe.subIngredients2),
-      instructions: steps,
-    }
-
-    fetch(spoonacularAPI, {
+    fetch('/request/nutrition', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    }).then((response) => {
-      if (response.status === 402) {
-        // No more tokens for today
-        setNutritionInfo({
-          error: 'Nutrition api usage limit reached today',
-        })
-      } else if (response.status !== 200) {
-        console.log(response)
-        setNutritionInfo({
-          error: `Unknown ${response.status} error occurred`,
-        })
-      } else {
-        response.json().then((data) => {
-          cachedNutritionInfo[recipe.name] = data
-          setNutritionInfo({
-            ...data,
-          })
-        })
-      }
+      body: JSON.stringify(recipe),
     })
+      .then((response) => response.json())
+      .then((response) => {
+        setNutritionInfo(response)
+      })
   }, [recipe])
 
   return (

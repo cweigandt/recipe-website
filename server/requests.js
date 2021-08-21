@@ -1,4 +1,6 @@
 const customDB = require('./db/getDB')
+const express = require('express')
+const api = require('./getAPI')
 
 const reactToDBPromise = (promise, res) => {
   promise
@@ -41,5 +43,32 @@ module.exports = function (app) {
   app.get('/request/tag/:tagName', (req, res) => {
     const tagName = req.params.tagName
     reactToDBPromise(customDB.getRecipesWithTag(tagName), res)
+  })
+
+  app.post('/request/nutrition', express.json(), (req, res) => {
+    const recipe = req.body
+
+    // Make sure every step ends in a period when joined
+    const steps = recipe.steps
+      .map((step) => {
+        let trimmed = step.trim()
+        if (trimmed[trimmed.length - 1] !== '.') {
+          trimmed = trimmed + '.'
+        }
+        return trimmed
+      })
+      .join(' ')
+
+    const body = {
+      title: recipe.name,
+      servings: recipe.servings === '-' ? 4 : JSON.parse(recipe.servings),
+      ingredients: recipe.ingredients
+        .concat(recipe.subIngredients1)
+        .concat(recipe.subIngredients2),
+      instructions: steps,
+    }
+
+    res.set('Content-Type', 'application/json')
+    reactToDBPromise(api.spoonacularFetch(body), res)
   })
 }

@@ -28,6 +28,13 @@
 
   width: 40px;
   text-align: center;
+
+  transition: transform 0.6s;
+  transform-origin: center;
+}
+
+.navbar .menu-toggler.open {
+  transform: rotateY(180deg);
 }
 
 /* Center the logo up top */

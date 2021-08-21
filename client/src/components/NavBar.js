@@ -85,8 +85,11 @@ function NavBar(props) {
   return (
     <Fragment>
       <nav id='navbarParent' class='noprint navbar'>
-        <div onClick={toggleMenu} class='menu-toggler'>
-          <i class={'fa fa-angle-double-' + (showMenu ? 'left' : 'right')}></i>
+        <div
+          onClick={toggleMenu}
+          class={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
+        >
+          <i class='fa fa-angle-double-right'></i>
         </div>
 
         <Link to='/' class='navbar-brand' id='navBarBrand'>

@@ -1,6 +1,7 @@
 import './App.css'
 
-import { Route, Switch } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
 
@@ -13,6 +14,19 @@ import TagsList from './components/TagsList'
 import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 import ModalOverlay from './components/modals/ModalOverlay'
+
+const ScrollToTop = withRouter(({ history }) => {
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      window.scrollTo(0, 0)
+    })
+    return () => {
+      unlisten()
+    }
+  }, [history])
+
+  return null
+})
 
 const RecipeRoute = (props) => (
   <Recipe urlName={props.match.params.recipeName} />
@@ -34,17 +48,20 @@ const TagRoute = (props) => (
 
 const App = () => {
   const renderRoutes = () => (
-    <Switch>
-      <Route path='/recipe/:recipeName' component={RecipeRoute} />
-      <Route path='/grid' component={RecipeGrid} />
-      <Route path='/tags' component={TagsList} />
-      <Route path='/upload' component={UploadForm} />
-      <Route path='/edit' component={EditForm} />
-      <Route path='/sections/:sectionName' component={SectionRoute} />
-      <Route path='/tag/:tagName' component={TagRoute} />
-      <Route exact path='/' component={RecipeCardDeck} />
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path='/recipe/:recipeName' component={RecipeRoute} />
+        <Route path='/grid' component={RecipeGrid} />
+        <Route path='/tags' component={TagsList} />
+        <Route path='/upload' component={UploadForm} />
+        <Route path='/edit' component={EditForm} />
+        <Route path='/sections/:sectionName' component={SectionRoute} />
+        <Route path='/tag/:tagName' component={TagRoute} />
+        <Route exact path='/' component={RecipeCardDeck} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   )
   return (
     <div className='App'>

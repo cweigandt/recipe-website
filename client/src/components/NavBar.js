@@ -65,7 +65,11 @@ function NavBar(props) {
         data-test-id='login-button'
         onClick={handleLoginClick}
       >
-        <img src='/icons/login.svg' alt='Login'></img>
+        <img
+          src='/icons/login.svg'
+          style={{ transform: 'scale(1.5)' }}
+          alt='Login'
+        ></img>
       </div>
     )
   }

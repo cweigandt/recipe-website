@@ -68,11 +68,9 @@ describe('Home', function () {
 
   describe('Deck', () => {
     it('has all recipes displayed', async () => {
-      return page.driver
-        .findElements(By.css(`a.recipe-card`))
-        .then((elements) => {
-          expect(elements.length).toBe(3)
-        })
+      return page.getElementCount(`a.recipe-card`).then((count) => {
+        expect(count).toBe(3)
+      })
     })
   })
 

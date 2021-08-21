@@ -51,4 +51,10 @@ module.exports = class Page {
     )
     return this.driver.findElement(By.css(css))
   }
+
+  getElementCount(css) {
+    return this.driver
+      .findElements(By.css(css))
+      .then((elements) => elements.length)
+  }
 }

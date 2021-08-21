@@ -85,14 +85,14 @@ describe('Recipe', function () {
 
   describe('Logged in', () => {
     it('hides logged in affordances', async () => {
-      await page.driver
-        .findElements(By.css(`[data-test-id='edit-button']`))
-        .then((elements) => {
-          expect(elements.length).toBe(0)
+      await page
+        .getElementCount(`[data-test-id='edit-button']`)
+        .then((count) => {
+          expect(count).toBe(0)
         })
 
-      return page.driver.findElements(By.css(`#iMadeThis`)).then((elements) => {
-        expect(elements.length).toBe(0)
+      return page.getElementCount(`#iMadeThis`).then((count) => {
+        expect(count).toBe(0)
       })
     })
 
@@ -101,8 +101,8 @@ describe('Recipe', function () {
 
       await page.findByCSS(`[data-test-id='edit-button']`)
 
-      return page.driver.findElements(By.css(`#iMadeThis`)).then((elements) => {
-        expect(elements.length).toBe(1)
+      return page.getElementCount(`#iMadeThis`).then((count) => {
+        expect(count).toBe(1)
       })
     })
   })

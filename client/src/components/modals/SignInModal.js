@@ -57,6 +57,7 @@ function SignInModal(props) {
           <input
             type='text'
             class='form-control'
+            data-test-id='login-username'
             id='username'
             onKeyDown={(e) => {
               if (e.keyCode === 13 || e.key === 'Enter') {
@@ -74,6 +75,7 @@ function SignInModal(props) {
           <input
             type='text'
             class='form-control'
+            data-test-id='login-password'
             id='password'
             onKeyDown={(e) => {
               if (e.keyCode === 13 || e.key === 'Enter') {
@@ -84,7 +86,12 @@ function SignInModal(props) {
             name='password'
           />
         </div>
-        <button type='submit' id='signOnSubmit' class='btn'>
+        <button
+          type='submit'
+          id='signOnSubmit'
+          data-test-id='login-submit'
+          class='btn'
+        >
           Submit
         </button>
       </form>

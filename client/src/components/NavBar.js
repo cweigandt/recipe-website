@@ -51,6 +51,8 @@ function NavBar(props) {
         <ul class='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home')}
           {renderLink('/grid', 'Grid')}
+          {cookies['token'] && renderLink('/edit', 'Edit')}
+          {cookies['token'] && renderLink('/upload', 'Upload')}
           {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)

@@ -1,6 +1,7 @@
-const customDB = require('./db/getDB')
 const express = require('express')
-const api = require('./getAPI')
+
+const customDB = require('./getters/getDB')
+const api = require('./getters/getAPI')
 
 const reactToDBPromise = (promise, res) => {
   promise

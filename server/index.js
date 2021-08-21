@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-const customDB = require('./db/getDB')
+const customDB = require('./getters/getDB')
 require('./requests')(app)
 require('./uploads')(app)
 const auth = require('./auth')

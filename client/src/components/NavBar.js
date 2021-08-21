@@ -37,6 +37,10 @@ function NavBar(props) {
     )
   }
 
+  const renderSeparator = () => {
+    return <li class='nav-item separator' />
+  }
+
   const toggleMenu = () => {
     setShowMenu(!showMenu)
   }
@@ -46,6 +50,10 @@ function NavBar(props) {
       <div class={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}>
         <ul class='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home')}
+          {renderLink('/grid', 'Grid')}
+          {cookies['token'] && renderLink('/edit', 'Edit')}
+          {cookies['token'] && renderLink('/upload', 'Upload')}
+          {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)
           })}
@@ -65,7 +73,11 @@ function NavBar(props) {
         data-test-id='login-button'
         onClick={handleLoginClick}
       >
-        <img src='/icons/login.svg' alt='Login'></img>
+        <img
+          src='/icons/login.svg'
+          style={{ transform: 'scale(1.5)' }}
+          alt='Login'
+        ></img>
       </div>
     )
   }
@@ -81,18 +93,7 @@ function NavBar(props) {
           {props.title}
         </Link>
 
-        <div class='navbar-right'>
-          <Link
-            to='/grid'
-            style={{ display: 'flex', color: 'gray', 'font-size': '24px' }}
-          >
-            <i
-              class='fa fa-th-large'
-              style={{ 'background-color': 'transparent' }}
-            ></i>
-          </Link>
-          {renderLoginButton()}
-        </div>
+        <div class='navbar-right'>{renderLoginButton()}</div>
       </nav>
       {renderMenu()}
     </Fragment>

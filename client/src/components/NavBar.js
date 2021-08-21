@@ -37,6 +37,10 @@ function NavBar(props) {
     )
   }
 
+  const renderSeparator = () => {
+    return <li class='nav-item separator' />
+  }
+
   const toggleMenu = () => {
     setShowMenu(!showMenu)
   }
@@ -46,6 +50,8 @@ function NavBar(props) {
       <div class={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}>
         <ul class='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home')}
+          {renderLink('/grid', 'Grid')}
+          {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)
           })}
@@ -85,23 +91,7 @@ function NavBar(props) {
           {props.title}
         </Link>
 
-        <div class='navbar-right'>
-          <Link
-            to='/grid'
-            style={{
-              display: 'flex',
-              color: 'gray',
-              'font-size': '24px',
-              'text-decoration': 'none',
-            }}
-          >
-            <i
-              class='fa fa-th-large'
-              style={{ 'background-color': 'transparent' }}
-            ></i>
-          </Link>
-          {renderLoginButton()}
-        </div>
+        <div class='navbar-right'>{renderLoginButton()}</div>
       </nav>
       {renderMenu()}
     </Fragment>

@@ -106,10 +106,19 @@
   text-decoration: none;
 
   padding: 0.5rem 1rem;
+
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.navbar-menu .nav-item.separator {
+  border-bottom: 1px solid var(--dark-theme-navbar-text, black);
+  margin: 20px;
+  opacity: 0.2;
 }
 
 .navbar-menu .navbar-menu-link:hover {
-  font-weight: bold;
+  transform: scale(1.1);
 }
 
 body {

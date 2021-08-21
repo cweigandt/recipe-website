@@ -1,18 +1,14 @@
 name: Selenium CI
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+on: [] #[push, pull_request]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v2

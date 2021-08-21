@@ -32,6 +32,7 @@ function DeckBanner(props) {
           <input
             id='searchBar'
             autocomplete='off'
+            data-test-id='search-bar'
             class='form-control'
             type='text'
             placeholder='Search'

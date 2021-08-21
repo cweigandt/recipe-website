@@ -53,6 +53,36 @@ describe('Recipe', function () {
     })
   })
 
+  describe('Meta', () => {
+    it('has proper title tag', async () => {
+      // TODO: hook this up to be the recipe
+      return page.driver.getTitle().then((title) => {
+        expect(title).toBe('B+C Cookbook')
+      })
+    })
+
+    it('has OG tags', async () => {
+      await page
+        .findByCSS(`meta[property='og:title']`)
+        .getAttribute('content')
+        .then((text) => {
+          expect(text).toBe(page.recipe.name)
+        })
+      await page
+        .findByCSS(`meta[property='og:image']`)
+        .getAttribute('content')
+        .then((text) => {
+          expect(text).toBe(page.recipe.imageLocation)
+        })
+      await page
+        .findByCSS(`meta[property='og:description']`)
+        .getAttribute('content')
+        .then((text) => {
+          expect(text).not.toBeNull()
+        })
+    })
+  })
+
   describe('Logged in', () => {
     it('hides logged in affordances', async () => {
       await page.driver
@@ -67,11 +97,7 @@ describe('Recipe', function () {
     })
 
     it('logs in properly', async () => {
-      // set fake token cookie and reload
-      await page.driver
-        .manage()
-        .addCookie({ name: 'token', value: 'test-token' })
-      await page.driver.navigate().refresh()
+      await page.fakeLogin()
 
       await page.findByCSS(`[data-test-id='edit-button']`)
 

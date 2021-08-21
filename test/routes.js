@@ -4,8 +4,6 @@ const Page = require('./pageObjects/Page')
 const By = webdriver.By
 const until = webdriver.until
 
-const pageRoot = 'http://127.0.0.1:8080'
-
 describe('Routes', function () {
   this.timeout(10000)
   let page
@@ -16,37 +14,37 @@ describe('Routes', function () {
   })
 
   it('loads /', async () => {
-    await page.visit(pageRoot)
+    await page.visit()
     return page.findByCSS('.App #pageWrapper')
   })
 
   it('loads /grid', async () => {
-    await page.driver.get(`${pageRoot}/grid`)
+    await page.visit('grid')
     return page.findByCSS('#recipeGrid')
   })
 
   it('loads /recipe', async () => {
-    await page.driver.get(`${pageRoot}/recipe/Game_Day_Board`)
+    await page.visit(`recipe/Game_Day_Board`)
     return page.findByCSS('#recipeWrapper')
   })
 
   it('loads /sections', async () => {
-    await page.driver.get(`${pageRoot}/sections/Appetizers`)
+    await page.visit(`sections/Appetizers`)
     return page.findByCSS('.App #pageWrapper')
   })
 
   it('loads /tag', async () => {
-    await page.driver.get(`${pageRoot}/tag/Christian's_Favorites`)
+    await page.visit(`tag/Christian's_Favorites`)
     return page.findByCSS('.App #pageWrapper')
   })
 
   it('loads /edit', async () => {
-    await page.driver.get(`${pageRoot}/edit`)
+    await page.visit(`edit`)
     return page.findByCSS('#formWrapper')
   })
 
   it('loads /upload', async () => {
-    await page.driver.get(`${pageRoot}/upload`)
+    await page.visit(`upload`)
     return page.findByCSS('#formWrapper')
   })
 

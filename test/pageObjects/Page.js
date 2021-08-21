@@ -7,6 +7,8 @@ chrome.setDefaultService(
   new chrome.ServiceBuilder(process.env.CHROMEWEBDRIVER).build()
 )
 
+const pageRoot = 'http://127.0.0.1:8080'
+
 module.exports = class Page {
   constructor() {
     const capabilities = Capabilities.chrome()
@@ -23,8 +25,8 @@ module.exports = class Page {
     this.driver = new Builder().withCapabilities(capabilities).build()
   }
 
-  visit(theUrl) {
-    return this.driver.get(theUrl)
+  visit(ext) {
+    return this.driver.get(`${pageRoot}/${ext || ''}`)
   }
 
   sleep(ms) {
@@ -33,6 +35,12 @@ module.exports = class Page {
 
   quit() {
     return this.driver.quit()
+  }
+
+  async fakeLogin() {
+    // set fake token cookie and reload
+    await this.driver.manage().addCookie({ name: 'token', value: 'test-token' })
+    return this.driver.navigate().refresh()
   }
 
   findByCSS(css) {

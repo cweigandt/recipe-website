@@ -6,9 +6,14 @@ const bodyParser = require('body-parser')
 // Cookie expires yearly
 const jwtExpirySeconds = 60 * 60 * 24 * 365
 
-const jwtKey = fs
-  .readFileSync(path.resolve(__dirname, './credentials/jwtKey.txt'))
-  .toString()
+let jwtKey
+if (process.env.NODE_ENV === 'test') {
+  jwtKey = 'My_Test_Environment_JWT_Key'
+} else {
+  jwtKey = fs
+    .readFileSync(path.resolve(__dirname, './credentials/jwtKey.txt'))
+    .toString()
+}
 
 exports.listen = function (app, customDB) {
   const middleware = bodyParser.urlencoded({ extended: true })
@@ -29,7 +34,7 @@ exports.listen = function (app, customDB) {
       .validateCredentials({ username, password })
       .then(() => {
         // Create a new token with the username in the payload
-        // and which expires 1d after issue
+        // and which expires 1y after issue
         const token = jwt.sign({ username }, jwtKey, {
           algorithm: 'HS256',
           expiresIn: jwtExpirySeconds,

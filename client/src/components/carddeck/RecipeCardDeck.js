@@ -52,7 +52,9 @@ function RecipeCardDeck(props) {
         {...randomRecipe}
       ></DeckBanner>
 
-      <div id='numRecipesCounter'>{visibleRecipes.length}</div>
+      <div id='numRecipesCounter' data-test-id='recipe-counter'>
+        {visibleRecipes.length}
+      </div>
       <div id='recipeCardDeck' class={recipes.length === 0 ? '' : 'loaded'}>
         {visibleRecipes.map((recipe) => {
           return <RecipeCard {...recipe}></RecipeCard>

@@ -101,7 +101,13 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
 
   const renderLoginButton = () => {
     if (isLoggedIn) {
-      return <div class='navbar-logged-in' onClick={handleLogoutClick}></div>
+      return (
+        <div
+          class='navbar-logged-in'
+          data-test-id='logout-button'
+          onClick={handleLogoutClick}
+        ></div>
+      )
     }
 
     return (

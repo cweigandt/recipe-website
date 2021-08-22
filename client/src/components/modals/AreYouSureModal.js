@@ -38,12 +38,18 @@ const AreYouSureModal = (props) => {
         <button
           type='button'
           onClick={handleClose}
+          data-test-id='are-you-sure-close'
           id='areYouSureCancel'
           class='btn'
         >
           Cancel
         </button>
-        <button type='submit' id='areYouSureSubmit' class='btn'>
+        <button
+          type='submit'
+          id='areYouSureSubmit'
+          data-test-id='are-you-sure-submit'
+          class='btn'
+        >
           Confirm
         </button>
       </form>

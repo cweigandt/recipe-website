@@ -5,21 +5,22 @@ import RecipeCard from './RecipeCard'
 import DeckBanner from './DeckBanner'
 import '../../styles/carddeck/RecipeCardDeck.css'
 
-function RecipeCardDeck(props) {
+const chooseRandomRecipe = (recipes) => {
+  // Loop 3 times trying to find a recipe with an image
+  let iter = 0
+  let randomRecipe = { imageLocation: '' }
+  while (recipes.length && !randomRecipe.imageLocation && iter < 3) {
+    randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
+    iter++
+  }
+  return randomRecipe
+}
+
+const RecipeCardDeck = ({ filter }) => {
   const [recipes, setRecipes] = useState([])
   const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState([])
 
-  const chooseRandomRecipe = (recipes) => {
-    // Loop 3 times trying to find a recipe with an image
-    let iter = 0
-    let randomRecipe = { imageLocation: '' }
-    while (!randomRecipe.imageLocation && iter < 3) {
-      randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
-      iter++
-    }
-    return randomRecipe
-  }
   const initializeData = useCallback((recipes) => {
     setRandomRecipe(chooseRandomRecipe(recipes))
 
@@ -27,7 +28,6 @@ function RecipeCardDeck(props) {
     setVisibleRecipes(recipes)
   }, [])
 
-  const { filter } = props
   useEffect(() => {
     const filteredRecipes = window.serverData.allRecipes.filter((recipe) =>
       filter(recipe)
@@ -36,22 +36,25 @@ function RecipeCardDeck(props) {
     initializeData(filteredRecipes)
   }, [filter, initializeData])
 
-  const handleSearchText = useCallback((searchText) => {
-    setVisibleRecipes(
-      recipes.filter((recipe, index) => {
-        if (
-          recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null
-        ) {
-          return true
-        }
-        return false
-      })
-    )
+  const handleSearchText = useCallback(
+    (searchText) => {
+      setVisibleRecipes(
+        recipes.filter((recipe, index) => {
+          if (
+            recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null
+          ) {
+            return true
+          }
+          return false
+        })
+      )
 
-    if (visibleRecipes.length > 0) {
-      setRandomRecipe(chooseRandomRecipe(visibleRecipes))
-    }
-  }, [])
+      if (visibleRecipes.length > 0) {
+        setRandomRecipe(chooseRandomRecipe(visibleRecipes))
+      }
+    },
+    [recipes, visibleRecipes]
+  )
 
   return (
     <div id='pageWrapper'>

@@ -32,7 +32,8 @@
   transition: transform 0.6s;
   transform-origin: center;
 
-  perspective: 900000px;
+  z-index: 3;
+  transform: translateZ(-1px);
 }
 
 .navbar .menu-toggler.open {

@@ -7,8 +7,15 @@ import { useCookies } from 'react-cookie'
 import { showModal } from '../actions/modalActions'
 import * as ModalTypes from './modals/ModalTypes'
 
-import '../styles/NavBar.css'
 import { logIn, logOut } from '../actions/loginActions'
+
+import '../styles/NavBar.css'
+import { ReactComponent as GridSVG } from '../svg/grid.svg'
+import { ReactComponent as HomeSVG } from '../svg/home.svg'
+import { ReactComponent as EditSVG } from '../svg/edit.svg'
+import { ReactComponent as UploadSVG } from '../svg/upload.svg'
+
+import { ReactComponent as LoginSVG } from '../svg/login.svg'
 
 let modalId = -1
 
@@ -64,10 +71,12 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     dispatch(action)
   }
 
-  const renderLink = (link, text) => {
+  const renderLink = (link, text, icon) => {
     return (
       <li class='nav-item'>
         <Link to={link} onClick={toggleMenu} class='navbar-menu-link'>
+          {icon}
+          {icon && '| '}
           {text}
         </Link>
       </li>
@@ -86,10 +95,10 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     return (
       <div class={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}>
         <ul class='navbar-menu-list' id='navbarListHolder'>
-          {renderLink('/', 'Home')}
-          {renderLink('/grid', 'Grid')}
-          {isLoggedIn && renderLink('/edit', 'Edit')}
-          {isLoggedIn && renderLink('/upload', 'Upload')}
+          {renderLink('/', 'Home', <HomeSVG />)}
+          {renderLink('/grid', 'Grid', <GridSVG />)}
+          {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
+          {isLoggedIn && renderLink('/upload', 'Upload', <UploadSVG />)}
           {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)
@@ -116,11 +125,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
         data-test-id='login-button'
         onClick={handleLoginClick}
       >
-        <img
-          src='/icons/login.svg'
-          style={{ transform: 'scale(1.5)' }}
-          alt='Login'
-        ></img>
+        <LoginSVG class='login-svg' />
       </div>
     )
   }

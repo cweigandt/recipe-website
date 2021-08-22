@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RecipeCard from './RecipeCard'
@@ -10,12 +10,22 @@ function RecipeCardDeck(props) {
   const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState([])
 
-  const initializeData = (recipes) => {
-    setRandomRecipe(recipes[Math.floor(Math.random() * recipes.length)])
+  const chooseRandomRecipe = (recipes) => {
+    // Loop 3 times trying to find a recipe with an image
+    let iter = 0
+    let randomRecipe = { imageLocation: '' }
+    while (!randomRecipe.imageLocation && iter < 3) {
+      randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
+      iter++
+    }
+    return randomRecipe
+  }
+  const initializeData = useCallback((recipes) => {
+    setRandomRecipe(chooseRandomRecipe(recipes))
 
     setRecipes(recipes)
     setVisibleRecipes(recipes)
-  }
+  }, [])
 
   const { filter } = props
   useEffect(() => {
@@ -24,9 +34,9 @@ function RecipeCardDeck(props) {
     )
 
     initializeData(filteredRecipes)
-  }, [filter])
+  }, [filter, initializeData])
 
-  function handleSearchText(searchText) {
+  const handleSearchText = useCallback((searchText) => {
     setVisibleRecipes(
       recipes.filter((recipe, index) => {
         if (
@@ -39,11 +49,9 @@ function RecipeCardDeck(props) {
     )
 
     if (visibleRecipes.length > 0) {
-      setRandomRecipe(
-        visibleRecipes[Math.floor(Math.random() * visibleRecipes.length)]
-      )
+      setRandomRecipe(chooseRandomRecipe(visibleRecipes))
     }
-  }
+  }, [])
 
   return (
     <div id='pageWrapper'>

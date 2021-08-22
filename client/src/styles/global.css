@@ -20,6 +20,8 @@ body.dark-theme {
   --dark-theme-navbar-bg: rgba(29, 29, 35, 0.8);
   --dark-theme-navbar-text: #fff;
 
+  --dark-theme-svg-color: #fff;
+
   --dark-theme-searchbar-bg: black;
   --dark-theme-searchbar-border-color: #7d7d7d;
   --dark-theme-searchbar-wrapper-bg: rgba(0, 0, 0, 0.5);
@@ -41,6 +43,12 @@ body.dark-theme {
   --dark-theme-nutrition-border: white;
 
   --dark-theme-badge-border: white;
+}
+
+svg path,
+svg rect,
+svg polygon {
+  fill: var(--dark-theme-svg-color, darkgray);
 }
 
 @font-face {

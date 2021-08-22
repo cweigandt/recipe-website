@@ -133,7 +133,8 @@
   width: 60%;
 }
 
-#recipeWrapper #ingredientsColumn .tagTitle {
+#recipeWrapper #ingredientsColumn .tagTitle,
+#recipeWrapper #stepsColumn .tagTitle {
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 4px;

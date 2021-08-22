@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import '../../styles/modals/SignInModal.css'
 
@@ -10,7 +11,7 @@ import { ALERT_TYPES } from '../alerts/Alert'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 
-function SignInModal(props) {
+function SignInModal({ dispatch, id }) {
   const formRef = useRef(null)
 
   const handleFormSubmit = (e) => {
@@ -32,20 +33,27 @@ function SignInModal(props) {
       let status = ALERT_TYPES.SUCCESS
       if (response.status !== 200) {
         status = ALERT_TYPES.ERROR
-        props.dispatch(addAlert('Error logging in', status))
+        dispatch(addAlert('Error logging in', status))
       } else {
         formRef.current.reset()
-        props.dispatch(logIn())
-        props.dispatch(hideModal(props.id))
-        props.dispatch(addAlert('Logged in', status))
+        dispatch(logIn())
+        dispatch(hideModal(id))
+        dispatch(addAlert('Logged in', status))
       }
     })
     return false
   }
 
+  const handleClose = useCallback(() => {
+    dispatch(hideModal(id))
+  }, [dispatch, id])
+
   return (
     <Modal class='sign-in-modal'>
       <div>Sign In</div>
+      <div class='modal-close-button' onClick={handleClose}>
+        ❌
+      </div>
       <form
         id='signInForm'
         name='signInForm'
@@ -101,8 +109,9 @@ function SignInModal(props) {
   )
 }
 
-SignInModal.propTypes = {}
-
-SignInModal.defaultProps = {}
+SignInModal.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+}
 
 export default connect()(SignInModal)

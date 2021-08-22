@@ -1,2 +1,9 @@
-.modal.sign-in-modal {
+.modal.sign-in-modal .modal-close-button {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+
+  font-size: 20px;
+
+  cursor: pointer;
 }

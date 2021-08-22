@@ -19,8 +19,6 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-
-  perspective: 900000px;
 }
 
 .navbar .menu-toggler {
@@ -33,6 +31,8 @@
 
   transition: transform 0.6s;
   transform-origin: center;
+
+  perspective: 900000px;
 }
 
 .navbar .menu-toggler.open {
@@ -94,7 +94,7 @@
   z-index: 2;
 
   font-family: 'Bebas_Neue';
-  font-size: 26px;
+  font-size: 24px;
 
   transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
@@ -112,6 +112,12 @@
 .navbar-menu .navbar-menu-list {
   list-style-type: none;
   padding: 5px;
+  margin-top: 5px;
+
+  padding-bottom: 30px;
+  overflow-y: scroll;
+  height: calc(100% - 52px);
+  -webkit-overflow-scrolling: touch;
 }
 
 .navbar-menu .navbar-menu-link {
@@ -120,7 +126,7 @@
   color: var(--dark-theme-navbar-text, black);
   text-decoration: none;
 
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
 
   transition: transform 0.3s;
   transform-origin: left;

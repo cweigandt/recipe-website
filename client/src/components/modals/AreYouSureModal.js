@@ -25,7 +25,10 @@ const AreYouSureModal = (props) => {
 
   return (
     <Modal class='are-you-sure-modal'>
-      <div>Are you sure?</div>
+      <h4 style={{ margin: '20px' }}>Are you sure?</h4>
+      <div style={{ 'font-size': '16px', 'font-style': 'italic' }}>
+        {props.additionalText}
+      </div>
       <form
         id='areYouSureForm'
         name='areYouSureForm'
@@ -35,12 +38,18 @@ const AreYouSureModal = (props) => {
         <button
           type='button'
           onClick={handleClose}
+          data-test-id='are-you-sure-close'
           id='areYouSureCancel'
           class='btn'
         >
           Cancel
         </button>
-        <button type='submit' id='areYouSureSubmit' class='btn'>
+        <button
+          type='submit'
+          id='areYouSureSubmit'
+          data-test-id='are-you-sure-submit'
+          class='btn'
+        >
           Confirm
         </button>
       </form>
@@ -50,6 +59,7 @@ const AreYouSureModal = (props) => {
 
 AreYouSureModal.propTypes = {
   id: PropTypes.number.isRequired,
+  additionalText: PropTypes.string,
 }
 
 AreYouSureModal.defaultProps = {}

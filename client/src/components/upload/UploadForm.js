@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Tags from '@yaireo/tagify/dist/react.tagify'
-import { useCookies } from 'react-cookie'
 
 import '../../styles/upload/UploadForm.css'
 import '@yaireo/tagify/dist/tagify.css'
@@ -17,13 +16,12 @@ import { getAllTags } from '../../utilities/RecipesUtilities'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
-  const [cookies] = useCookies(['user'])
 
   const tagifyRef = useRef(null)
   const formRef = useRef(null)
   const allTags = getAllTags()
 
-  if (!cookies['token']) {
+  if (!props.isLoggedIn) {
     props.dispatch(showModal(ModalTypes.LOGIN))
   }
 
@@ -313,4 +311,6 @@ UploadForm.defaultProps = {
   recipe: {},
 }
 
-export default connect()(UploadForm)
+export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+  UploadForm
+)

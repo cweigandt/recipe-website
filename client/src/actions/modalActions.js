@@ -1,10 +1,11 @@
 let uid = 0
 
-export const showModal = (modalType) => {
+export const showModal = (modalType, additionalText) => {
   return {
     type: 'SHOW_MODAL',
     modal: modalType,
     id: uid++,
+    additionalText,
   }
 }
 

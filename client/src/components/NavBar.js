@@ -8,8 +8,11 @@ import { showModal } from '../actions/modalActions'
 import * as ModalTypes from './modals/ModalTypes'
 
 import '../styles/NavBar.css'
+import { logIn, logOut } from '../actions/loginActions'
 
-function NavBar(props) {
+let modalId = -1
+
+function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -23,8 +26,42 @@ function NavBar(props) {
       })
   }, [])
 
+  useEffect(() => {
+    // Navbar is responsible for setting initial logged in state
+    if (cookies['token']) {
+      dispatch(logIn())
+    }
+  }, [dispatch, cookies])
+
+  useEffect(() => {
+    if (!confirmedAreYouSureIds.includes(modalId)) {
+      return
+    }
+
+    fetch('/signout', {
+      method: 'POST',
+      redirect: 'manual',
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }).then((response) => {
+      modalId = -1
+      dispatch(logOut())
+    })
+  }, [confirmedAreYouSureIds, dispatch])
+
   const handleLoginClick = () => {
-    props.dispatch(showModal(ModalTypes.LOGIN))
+    dispatch(showModal(ModalTypes.LOGIN))
+  }
+
+  const handleLogoutClick = () => {
+    const action = showModal(
+      ModalTypes.ARE_YOU_SURE,
+      'Would you like to log out?'
+    )
+    modalId = action.id
+    dispatch(action)
   }
 
   const renderLink = (link, text) => {
@@ -51,8 +88,8 @@ function NavBar(props) {
         <ul class='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home')}
           {renderLink('/grid', 'Grid')}
-          {cookies['token'] && renderLink('/edit', 'Edit')}
-          {cookies['token'] && renderLink('/upload', 'Upload')}
+          {isLoggedIn && renderLink('/edit', 'Edit')}
+          {isLoggedIn && renderLink('/upload', 'Upload')}
           {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)
@@ -63,8 +100,14 @@ function NavBar(props) {
   }
 
   const renderLoginButton = () => {
-    if (cookies['token']) {
-      return <div class='navbar-logged-in'></div>
+    if (isLoggedIn) {
+      return (
+        <div
+          class='navbar-logged-in'
+          data-test-id='logout-button'
+          onClick={handleLogoutClick}
+        ></div>
+      )
     }
 
     return (
@@ -93,7 +136,7 @@ function NavBar(props) {
         </div>
 
         <Link to='/' class='navbar-brand' id='navBarBrand'>
-          {props.title}
+          {title}
         </Link>
 
         <div class='navbar-right'>{renderLoginButton()}</div>
@@ -104,7 +147,11 @@ function NavBar(props) {
 }
 
 NavBar.propTypes = {
+  confirmedAreYouSureIds: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
 }
 
-export default connect()(NavBar)
+export default connect((state) => ({
+  confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
+  isLoggedIn: state.login.isLoggedIn,
+}))(NavBar)

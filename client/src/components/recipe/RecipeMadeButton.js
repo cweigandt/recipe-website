@@ -20,7 +20,10 @@ const RecipeMadeButton = ({
   const [showButton, setShowButton] = useState(true)
 
   const handleButtonClick = useCallback(() => {
-    const action = showModal(ModalTypes.ARE_YOU_SURE)
+    const action = showModal(
+      ModalTypes.ARE_YOU_SURE,
+      'Did you really make this today?'
+    )
     modalId = action.id
     dispatch(action)
   }, [dispatch])

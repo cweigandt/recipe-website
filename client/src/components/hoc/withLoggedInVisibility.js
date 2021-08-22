@@ -1,15 +1,12 @@
 import React from 'react'
-import { useCookies } from 'react-cookie'
+import { connect } from 'react-redux'
 
-function withLoggedInVisibility(WrappedComponent) {
-  return (props) => {
-    const [cookies] = useCookies(['user'])
-    if (!cookies['token']) {
-      return null
+const withLoggedInVisibility = (WrappedComponent) => {
+  return connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+    (props) => {
+      return props.isLoggedIn && <WrappedComponent {...props} />
     }
-
-    return <WrappedComponent {...props} />
-  }
+  )
 }
 
 export default withLoggedInVisibility

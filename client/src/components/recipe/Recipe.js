@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 
 import '../../styles/recipe/Recipe.css'
 import '../../styles/recipe/Print.css'
@@ -12,7 +12,6 @@ import RecipeCookedDates from './RecipeCookedDates'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
-  const [cookies] = useCookies(['user'])
 
   const wrapperRef = React.useRef()
 
@@ -27,7 +26,7 @@ function Recipe(props) {
 
   function renderEditButton() {
     return (
-      cookies['token'] && (
+      props.isLoggedIn && (
         <Link
           to={{
             pathname: '/edit',
@@ -171,4 +170,6 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default Recipe
+export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+  Recipe
+)

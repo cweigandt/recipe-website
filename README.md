@@ -1,8 +1,18 @@
+## Table of Contents
+
+- [General Info](#general-info)
+- [Installation](#installation)
+- [Production](#production)
+- [Database](#database)
+- [Testing](#testing)
+- [Scripts](#scripts)
+- [License](#license)
+
 ## General Info
 
 This website is served at https://bccookbook.com and is meant for an internal-only cookbook of our recipes.
 
-![Home Screen](https://storage.googleapis.com/recipe-website-269020.appspot.com/public/README-img/home-screen.png)
+![Home Screen](https://storage.googleapis.com/recipe-website-269020.appspot.com/public/README-img/home-screen-2.png)
 
 ## Installation
 

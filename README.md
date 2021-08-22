@@ -25,11 +25,11 @@ $ npm run build
 $ npm run start-test-env
 ```
 
-This will run in the test environment with dummy recipes
+This will run in the test environment which installs a mock database
 
 ## Production
 
-If you would like to enable `npm start` and connect to your own database, you will need to do the following:
+If you would like to enable `npm start` and connect to your own database, you will need to add the following files and initialize your own database on firecloud.
 
 All of the following should be placed in `server/credentials`
 

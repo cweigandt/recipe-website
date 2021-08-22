@@ -9,6 +9,7 @@ var modalReducer = (state = originalState, action) => {
         ...state,
         modal: action.modal,
         id: action.id,
+        additionalText: action.additionalText,
       }
 
     case 'HIDE_MODAL':

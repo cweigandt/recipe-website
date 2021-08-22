@@ -56,7 +56,10 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
   }
 
   const handleLogoutClick = () => {
-    const action = showModal(ModalTypes.ARE_YOU_SURE)
+    const action = showModal(
+      ModalTypes.ARE_YOU_SURE,
+      'Would you like to log out?'
+    )
     modalId = action.id
     dispatch(action)
   }

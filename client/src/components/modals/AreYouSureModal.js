@@ -25,7 +25,10 @@ const AreYouSureModal = (props) => {
 
   return (
     <Modal class='are-you-sure-modal'>
-      <div>Are you sure?</div>
+      <h4 style={{ margin: '20px' }}>Are you sure?</h4>
+      <div style={{ 'font-size': '16px', 'font-style': 'italic' }}>
+        {props.additionalText}
+      </div>
       <form
         id='areYouSureForm'
         name='areYouSureForm'
@@ -50,6 +53,7 @@ const AreYouSureModal = (props) => {
 
 AreYouSureModal.propTypes = {
   id: PropTypes.number.isRequired,
+  additionalText: PropTypes.string,
 }
 
 AreYouSureModal.defaultProps = {}

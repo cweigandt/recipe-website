@@ -16,7 +16,9 @@ const ModalOverlay = (props) => {
     }
 
     if (modal.modal === ModalTypes.ARE_YOU_SURE) {
-      return <AreYouSureModal id={modal.id} />
+      return (
+        <AreYouSureModal id={modal.id} additionalText={modal.additionalText} />
+      )
     }
   }
 

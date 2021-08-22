@@ -17,17 +17,25 @@ $ npm run start-test-env
 
 This will run in the test environment with dummy recipes
 
-If you want to set up your own recipes, you will need a few extra files:
+## Production
 
-- ./server/credentials/firecloud-credentials.json
-  - I need to update this with how to export this from firecloud
-- ./server/credentials/gcs-credentials.json
-  - I need to update this with how to export this from google cloud platform
-- ./server/credentials/jwtKey.txt
-  - Text file containing one line of only a random UID for JSON web token (can be anything)
-- ./server/credentials/api-keys.json
+If you would like to enable `npm start` and connect to your own database, you will need to do the following:
+
+All of the following should be placed in `server/credentials`
+
+- `firecloud-credentials.json`
+  - Follow instructions [here](https://firebase.google.com/docs/firestore/quickstart#initialize) under 'Initialize on your own server' using a service account
+- `gcs-credentials.json`
+  - Follow instructions [here](https://firebase.google.com/docs/firestore/quickstart#initialize) under 'Initialize on your own server' using a service account
+- `jwtKey.txt`
+  - Text file containing one line of only a random UID for JSON web token (can be anything - I used this [online uuid generator](https://www.uuidgenerator.net/))
+- `api-keys.json`
   - JSON object containing the following keys with string values for the api key
-    - spoonacular
+    - `spoonacular` - see https://spoonacular.com/food-api
+
+## Database
+
+_Coming soon - structure of the database_
 
 ## Testing
 

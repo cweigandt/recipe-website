@@ -83,7 +83,7 @@ recipes
 
 ## Testing
 
-Using Mocha and Selenium for tests.
+Using Mocha and Selenium for integration tests.
 
 Currently running **29** testpoints
 
@@ -114,7 +114,3 @@ See `npm test` and `npm run full-test` scripts.
 ## License
 
 This code is provided without license.
-
-```
-
-```

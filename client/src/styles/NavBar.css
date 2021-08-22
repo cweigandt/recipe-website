@@ -29,6 +29,7 @@
   width: 40px;
   text-align: center;
 
+  -webkit-transition: none;
   transition: transform 0.6s;
   transform-origin: center;
 
@@ -36,6 +37,8 @@
 }
 
 .navbar .menu-toggler.open {
+  -webkit-transform: rotateZ(180deg); /* On ios, rotateY isn't rendered */
+
   transform: rotateY(180deg);
 }
 

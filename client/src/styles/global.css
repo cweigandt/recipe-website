@@ -47,19 +47,19 @@ body.dark-theme {
   font-family: 'Bebas_Neue';
   src: local('Bebas_Neue'),
     url(./fonts/Bebas_Neue/BebasNeue-Regular.ttf) format('truetype');
-  font-display: fallback;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'Righteous';
   src: local('Righteous-Regular'),
     url(./fonts/Righteous/Righteous-Regular.ttf) format('truetype');
-  font-display: fallback;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'Neucha';
   src: local('Neucha-Regular'),
     url(./fonts/Neucha/Neucha-Regular.ttf) format('truetype');
-  font-display: fallback;
+  font-display: block;
 }

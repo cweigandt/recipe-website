@@ -29,16 +29,17 @@
   width: 40px;
   text-align: center;
 
-  -webkit-transition: none;
-  transition: transform 0.6s;
-  transform-origin: center;
+  transform: translateZ(50px); /* Safari hack for rotateY */
 
   z-index: 3;
 }
 
-.navbar .menu-toggler.open {
-  -webkit-transform: rotateZ(180deg); /* On ios, rotateY isn't rendered */
+.navbar .menu-toggler i {
+  transition: transform 0.6s;
+  transform-origin: center;
+}
 
+.navbar .menu-toggler.open i {
   transform: rotateY(180deg);
 }
 

@@ -50,6 +50,13 @@ exports.listen = function (app, customDB) {
         res.status(401).end()
       })
   })
+
+  app.post('/signout', (req, res) => {
+    // Set token cookie to -maxAge
+    res.cookie('token', 'expired', { maxAge: -1 * 1000 * 60 * 60 * 24 })
+    res.status(200)
+    res.end()
+  })
 }
 
 exports.validateJWT = (req) => {

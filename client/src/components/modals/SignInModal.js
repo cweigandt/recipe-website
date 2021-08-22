@@ -75,7 +75,7 @@ function SignInModal(props) {
             Password:
           </label>
           <input
-            type='text'
+            type='password'
             class='form-control'
             data-test-id='login-password'
             id='password'

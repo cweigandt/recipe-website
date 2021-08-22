@@ -8,9 +8,11 @@ import { showModal } from '../actions/modalActions'
 import * as ModalTypes from './modals/ModalTypes'
 
 import '../styles/NavBar.css'
-import { logIn } from '../actions/loginActions'
+import { logIn, logOut } from '../actions/loginActions'
 
-function NavBar({ dispatch, title, isLoggedIn }) {
+let modalId = -1
+
+function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [cookies] = useCookies(['user'])
@@ -31,8 +33,32 @@ function NavBar({ dispatch, title, isLoggedIn }) {
     }
   }, [dispatch, cookies])
 
+  useEffect(() => {
+    if (!confirmedAreYouSureIds.includes(modalId)) {
+      return
+    }
+
+    fetch('/signout', {
+      method: 'POST',
+      redirect: 'manual',
+      body: JSON.stringify({}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }).then((response) => {
+      modalId = -1
+      dispatch(logOut())
+    })
+  }, [confirmedAreYouSureIds, dispatch])
+
   const handleLoginClick = () => {
     dispatch(showModal(ModalTypes.LOGIN))
+  }
+
+  const handleLogoutClick = () => {
+    const action = showModal(ModalTypes.ARE_YOU_SURE)
+    modalId = action.id
+    dispatch(action)
   }
 
   const renderLink = (link, text) => {
@@ -72,7 +98,7 @@ function NavBar({ dispatch, title, isLoggedIn }) {
 
   const renderLoginButton = () => {
     if (isLoggedIn) {
-      return <div class='navbar-logged-in'></div>
+      return <div class='navbar-logged-in' onClick={handleLogoutClick}></div>
     }
 
     return (
@@ -112,9 +138,11 @@ function NavBar({ dispatch, title, isLoggedIn }) {
 }
 
 NavBar.propTypes = {
+  confirmedAreYouSureIds: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
 }
 
-export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
-  NavBar
-)
+export default connect((state) => ({
+  confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
+  isLoggedIn: state.login.isLoggedIn,
+}))(NavBar)

@@ -46,8 +46,12 @@
   transform: translateX(-50%);
   transition: 0.1s opacity;
 
+  font-family: 'Bebas_Neue';
+
   text-decoration: none;
-  font-size: 20px;
+  font-size: 30px;
+
+  margin-top: 1px;
 
   color: var(--dark-theme-navbar-text, #000);
   width: calc(100% - 170px);
@@ -89,6 +93,9 @@
   opacity: 0;
   z-index: 2;
 
+  font-family: 'Bebas_Neue';
+  font-size: 26px;
+
   transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   box-shadow: 12px 0 15px -4px rgb(0, 0, 0, 0.6);
@@ -111,7 +118,6 @@
   display: block;
 
   color: var(--dark-theme-navbar-text, black);
-  font-size: 20px;
   text-decoration: none;
 
   padding: 0.5rem 1rem;

@@ -1,6 +1,7 @@
 #numRecipesCounter {
-  color: var(--dark-theme-form-text-color, initial);
-  font-family: benton-sans, sans-serif;
+  color: gray;
+  font-family: Bebas_Neue, benton-sans, sans-serif;
+  font-size: 22px;
   margin-top: 20px;
   text-align: center;
 }

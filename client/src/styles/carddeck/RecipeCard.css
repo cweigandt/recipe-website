@@ -35,7 +35,7 @@
 
 #recipeCardDeck .recipe-card .recipe-section {
   color: var(--section-color);
-  font-family: benton-sans, sans-serif;
+  font-family: 'Righteous', benton-sans, sans-serif;
   font-weight: 600;
   font-size: 12px;
   text-align: left;
@@ -43,10 +43,10 @@
 
 #recipeCardDeck .recipe-card .recipe-title {
   color: var(--dark-theme-recipe-card-title-color, rgb(50, 50, 50));
-  font-weight: 500;
-  font-family: benton-sans, sans-serif;
-  font-size: 16px;
+  font-family: 'Neucha', benton-sans, sans-serif;
+  font-size: 20px;
   text-align: left;
+  margin-top: 4px;
 }
 
 #recipeCardDeck .recipe-card:hover {

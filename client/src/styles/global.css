@@ -27,7 +27,7 @@ body.dark-theme {
 
   --dark-theme-banner-image-opacity: 0.3;
 
-  --dark-theme-recipe-card-title-color: rgb(250, 250, 250);
+  --dark-theme-recipe-card-title-color: rgb(200, 200, 200);
   --dark-theme-recipe-card-box-shadow: none;
   --dark-theme-recipe-card-bg: #242424;
 
@@ -41,4 +41,25 @@ body.dark-theme {
   --dark-theme-nutrition-border: white;
 
   --dark-theme-badge-border: white;
+}
+
+@font-face {
+  font-family: 'Bebas_Neue';
+  src: local('Bebas_Neue'),
+    url(./fonts/Bebas_Neue/BebasNeue-Regular.ttf) format('truetype');
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Righteous';
+  src: local('Righteous-Regular'),
+    url(./fonts/Righteous/Righteous-Regular.ttf) format('truetype');
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Neucha';
+  src: local('Neucha-Regular'),
+    url(./fonts/Neucha/Neucha-Regular.ttf) format('truetype');
+  font-display: fallback;
 }

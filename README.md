@@ -35,11 +35,47 @@ All of the following should be placed in `server/credentials`
 
 ## Database
 
-_Coming soon - structure of the database_
+The following is the structure of the database hosted on firecloud.
+The only setup you would have to do is create the `global` collection manually.
+You can then upload any recipes you want and they should be added to the `recipes` collection with the following format.
+
+```cpp
+global
+  |
+  |___ sections
+      |
+      |___ data : array<string>
+
+recipes
+  |
+  |___ $RECIPE NAME 1$
+      |
+      |___ createdDates : array<number>     // optional array of unix timestamps for when the recipe was made
+      |___ imageLocation : string           // src location of image
+      |___ ingredients : array<string>      // e.g. '1 cup of flour'
+      |___ name : string                    // name of recipe, can include spaces
+      |___ section : string                 // same string as one of the section names in global>sections
+      |___ servings : string                // e.g. '4', '3-4', '-' for unknown
+      |___ steps : array<string>            // e.g. 'Preheat oven to 350'
+      |___ subIngredients1 : array<string>  // optional array
+      |___ subIngredients1Name : string     // e.g. 'Cajun Sauce', '' for n/a
+      |___ subIngredients2 : string         // optional array
+      |___ subIngredients2Name : string     // e.g. 'Crumble Topping', '' for n/a
+      |___ tags : array<string>             // array of tags
+      |___ thumbnail : string               // src location of smaller image, used for cards
+      |___ time : string                    // how long to make, e.g. '1h 30m'
+      |___ uploadTime : number              // unix timestamp of when recipe was uploaded
+      |___ uploader: string                 // name of uploader
+  |
+  |___ $RECIPE NAME 2$
+      |___ ...
+```
 
 ## Testing
 
 Using Mocha and Selenium for tests.
+
+Currently running **29** testpoints
 
 See `npm test` and `npm run full-test` scripts.
 
@@ -68,3 +104,7 @@ See `npm test` and `npm run full-test` scripts.
 ## License
 
 This code is provided without license.
+
+```
+
+```

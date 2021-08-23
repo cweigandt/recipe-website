@@ -1,5 +1,5 @@
 const { Builder, By, Capabilities, until } = require('selenium-webdriver')
-// const chrome = require('selenium-webdriver/chrome')
+const chrome = require('selenium-webdriver/chrome')
 
 console.log('Making chromedriver')
 // console.log(process.env.CHROMEWEBDRIVER)
@@ -15,12 +15,16 @@ module.exports = class Page {
     capabilities.set('chromeOptions', {
       args: [
         '--no-sandbox',
+        '--headless',
         '--disable-dev-shm-usage',
         '--window-size=1980,1200',
       ],
     })
 
-    this.driver = new Builder().withCapabilities(capabilities).build()
+    this.driver = new Builder()
+      .forBrowser('chrome')
+      .setChromeOptions(chrome.Options.fromCapabilities(capabilities))
+      .build()
   }
 
   visit(ext) {

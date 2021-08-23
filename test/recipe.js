@@ -15,7 +15,7 @@ describe('Recipe', function () {
     await page.visit()
 
     // Fonts are blocking so wait 1/2 second
-    return page.sleep(500)
+    return page.sleep(5000)
   })
 
   describe('Content', () => {

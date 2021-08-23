@@ -14,9 +14,7 @@ module.exports = class Page {
     const capabilities = Capabilities.chrome()
     capabilities.set('chromeOptions', {
       args: [
-        '--headless',
         '--no-sandbox',
-        '--disable-gpu',
         '--disable-dev-shm-usage',
         '--window-size=1980,1200',
       ],

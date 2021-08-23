@@ -17,7 +17,7 @@ module.exports = class Page {
         '--headless',
         '--no-sandbox',
         '--disable-gpu',
-        '--disable-dev-shm-using',
+        '--disable-dev-shm-usage',
         '--window-size=1980,1200',
       ],
     })

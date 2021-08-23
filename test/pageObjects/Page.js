@@ -1,12 +1,6 @@
 const { Builder, By, Capabilities, until } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
 
-console.log('Making chromedriver')
-// console.log(process.env.CHROMEWEBDRIVER)
-// chrome.setDefaultService(
-//   new chrome.ServiceBuilder(process.env.CHROMEWEBDRIVER).build()
-// )
-
 const pageRoot = 'http://127.0.0.1:8080'
 
 module.exports = class Page {

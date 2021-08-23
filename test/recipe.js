@@ -12,7 +12,10 @@ describe('Recipe', function () {
 
   before(async () => {
     page = new RecipePage()
-    return page.visit()
+    await page.visit()
+
+    // Fonts are blocking so wait 1/2 second
+    return page.sleep(500)
   })
 
   describe('Content', () => {

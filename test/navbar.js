@@ -2,8 +2,6 @@ const { By } = require('selenium-webdriver')
 const Page = require('./pageObjects/Page')
 const expect = require('expect')
 
-const { NoSuchCookieError } = require('selenium-webdriver/lib/error')
-
 describe('NavBar', function () {
   this.timeout(10000)
   let page

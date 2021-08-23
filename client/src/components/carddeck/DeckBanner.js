@@ -35,7 +35,7 @@ function DeckBanner(props) {
             data-test-id='search-bar'
             class='form-control'
             type='text'
-            placeholder='Search'
+            placeholder='Search names or tags'
             aria-label='Search'
             onInput={handleSearchText}
           ></input>

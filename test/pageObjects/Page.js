@@ -1,12 +1,6 @@
 const { Builder, By, Capabilities, until } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
 
-console.log('Making chromedriver')
-console.log(process.env.CHROMEWEBDRIVER)
-chrome.setDefaultService(
-  new chrome.ServiceBuilder(process.env.CHROMEWEBDRIVER).build()
-)
-
 const pageRoot = 'http://127.0.0.1:8080'
 
 module.exports = class Page {
@@ -14,15 +8,17 @@ module.exports = class Page {
     const capabilities = Capabilities.chrome()
     capabilities.set('chromeOptions', {
       args: [
-        '--headless',
         '--no-sandbox',
-        '--disable-gpu',
-        '--disable-dev-shm-using',
+        '--headless',
+        '--disable-dev-shm-usage',
         '--window-size=1980,1200',
       ],
     })
 
-    this.driver = new Builder().withCapabilities(capabilities).build()
+    this.driver = new Builder()
+      .forBrowser('chrome')
+      .setChromeOptions(chrome.Options.fromCapabilities(capabilities))
+      .build()
   }
 
   visit(ext) {

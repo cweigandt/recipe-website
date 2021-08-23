@@ -2,8 +2,6 @@ const { By } = require('selenium-webdriver')
 const Page = require('./pageObjects/Page')
 const expect = require('expect')
 
-const { NoSuchCookieError } = require('selenium-webdriver/lib/error')
-
 describe('NavBar', function () {
   this.timeout(10000)
   let page
@@ -86,7 +84,7 @@ describe('NavBar', function () {
           expect(1).toBe(2)
         })
         .catch((err) => {
-          expect(err instanceof NoSuchCookieError).toBe(true)
+          expect(err).not.toBeNull()
         })
     })
   })

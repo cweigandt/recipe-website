@@ -86,7 +86,7 @@ describe('NavBar', function () {
           expect(1).toBe(2)
         })
         .catch((err) => {
-          expect(err instanceof NoSuchCookieError).toBe(true)
+          expect(err).not.toBeNull()
         })
     })
   })

@@ -11,12 +11,16 @@ describe('Home', function () {
     done()
   })
 
-  describe('Search', () => {
-    it('loads with search', async () => {
+  describe('Deck', () => {
+    it('has all recipes displayed', async () => {
       await page.visit()
-      return page.findByCSS(`input[data-test-id='search-bar']`)
+      return page.getElementCount(`a.recipe-card`).then((count) => {
+        expect(count).toBe(3)
+      })
     })
+  })
 
+  describe('Search', () => {
     it('has the full set of recipes', async () => {
       await page
         .findByCSS(`div[data-test-id='recipe-counter']`)
@@ -64,13 +68,18 @@ describe('Home', function () {
           expect(text).toBe('3')
         })
     })
-  })
 
-  describe('Deck', () => {
-    it('has all recipes displayed', async () => {
-      return page.getElementCount(`a.recipe-card`).then((count) => {
-        expect(count).toBe(3)
-      })
+    it('searches for tags', async () => {
+      await page
+        .findByCSS(`input[data-test-id='search-bar']`)
+        .then((el) => el.sendKeys('Margarita'))
+
+      await page
+        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .getText()
+        .then((text) => {
+          expect(text).toBe('1')
+        })
     })
   })
 

@@ -40,12 +40,14 @@ const RecipeCardDeck = ({ filter }) => {
     (searchText) => {
       setVisibleRecipes(
         recipes.filter((recipe, index) => {
-          if (
-            recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null
-          ) {
-            return true
-          }
-          return false
+          return (
+            recipe.name.toUpperCase().match(searchText.toUpperCase()) !==
+              null ||
+            recipe.tags.some(
+              (tag) =>
+                tag.toUpperCase().match(searchText.toUpperCase()) !== null
+            )
+          )
         })
       )
 

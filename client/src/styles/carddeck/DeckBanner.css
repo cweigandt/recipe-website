@@ -80,8 +80,8 @@ input#searchBar:focus-visible {
   outline-width: 0;
 }
 
-#searchBar::placeholder {
-  color: var(--dark-theme-searchbar-placeholder-color, black);
+input#searchBar::placeholder {
+  color: gray;
 }
 
 @media screen and (max-width: 500px) {

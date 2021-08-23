@@ -7,15 +7,15 @@ const By = webdriver.By
 const until = webdriver.until
 
 describe('Recipe', function () {
-  this.timeout(10000)
+  this.timeout(20000)
   let page
 
   before(async () => {
     page = new RecipePage()
     await page.visit()
 
-    // Fonts are blocking so wait 1/2 second
-    return page.sleep(5000)
+    // Fonts are blocking so wait 3 full seconds
+    return page.sleep(3000)
   })
 
   describe('Content', () => {

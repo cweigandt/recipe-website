@@ -3,7 +3,7 @@ const Page = require('./pageObjects/Page')
 const expect = require('expect')
 
 describe('Home', function () {
-  this.timeout(10000)
+  this.timeout(20000)
   let page
 
   before((done) => {

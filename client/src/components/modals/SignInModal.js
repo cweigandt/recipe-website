@@ -11,8 +11,12 @@ import { ALERT_TYPES } from '../alerts/Alert'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 
-function SignInModal({ dispatch, id }) {
+function SignInModal({ dispatch, id, isLoggedIn }) {
   const formRef = useRef(null)
+
+  if (isLoggedIn) {
+    dispatch(hideModal(id))
+  }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -37,7 +41,6 @@ function SignInModal({ dispatch, id }) {
       } else {
         formRef.current.reset()
         dispatch(logIn())
-        dispatch(hideModal(id))
         dispatch(addAlert('Logged in', status))
       }
     })
@@ -112,6 +115,9 @@ function SignInModal({ dispatch, id }) {
 SignInModal.propTypes = {
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 }
 
-export default connect()(SignInModal)
+export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+  SignInModal
+)

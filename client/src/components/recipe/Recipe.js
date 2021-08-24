@@ -10,6 +10,9 @@ import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 
+import { ReactComponent as PrintSVG } from '../../svg/print.svg'
+import { ReactComponent as EditSVG } from '../../svg/edit.svg'
+
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
 
@@ -35,7 +38,7 @@ function Recipe(props) {
           class='btn socialIcon'
           data-test-id='edit-button'
         >
-          <i class='fa fa-edit'></i>
+          <EditSVG />
         </Link>
       )
     )
@@ -124,7 +127,7 @@ function Recipe(props) {
             return false
           }}
         >
-          <i class='fa fa-print'></i>
+          <PrintSVG />
         </div>
         {renderEditButton()}
       </div>

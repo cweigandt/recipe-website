@@ -4,6 +4,12 @@ export const logIn = () => {
   }
 }
 
+export const logInStatusSynced = () => {
+  return {
+    type: 'LOGIN_SYNCED',
+  }
+}
+
 export const logOut = () => {
   return {
     type: 'LOGOUT',

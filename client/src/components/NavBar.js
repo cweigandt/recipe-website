@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie'
 import { showModal } from '../actions/modalActions'
 import * as ModalTypes from './modals/ModalTypes'
 
-import { logIn, logOut } from '../actions/loginActions'
+import { logIn, logInStatusSynced, logOut } from '../actions/loginActions'
 
 import '../styles/NavBar.css'
 import { ReactComponent as GridSVG } from '../svg/grid.svg'
@@ -38,6 +38,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     if (cookies['token']) {
       dispatch(logIn())
     }
+    dispatch(logInStatusSynced())
   }, [dispatch, cookies])
 
   useEffect(() => {

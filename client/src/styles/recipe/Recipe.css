@@ -52,6 +52,7 @@
   text-align: center;
   transition: color 0.3s ease-out;
   padding: 0;
+  margin: 0 3px;
 }
 
 #recipeWrapper #socialButtons .socialIcon:hover {

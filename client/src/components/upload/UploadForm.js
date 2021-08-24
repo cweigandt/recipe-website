@@ -21,7 +21,7 @@ function UploadForm(props) {
   const formRef = useRef(null)
   const allTags = getAllTags()
 
-  if (!props.isLoggedIn) {
+  if (props.isLoginUpToDate && !props.isLoggedIn) {
     props.dispatch(showModal(ModalTypes.LOGIN))
   }
 
@@ -311,6 +311,7 @@ UploadForm.defaultProps = {
   recipe: {},
 }
 
-export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
-  UploadForm
-)
+export default connect((state) => ({
+  isLoggedIn: state.login.isLoggedIn,
+  isLoginUpToDate: state.login.isUpToDate,
+}))(UploadForm)

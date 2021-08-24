@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const path = require('path')
 const fs = require('fs')
 const cookieParser = require('cookie-parser')
@@ -7,6 +8,12 @@ const PORT = process.env.PORT || 8080
 
 const app = express()
 app.use(cookieParser())
+
+const corsOptions = {
+  origin: [/\.bccookbook.com$/, 'localhost:8080', 'localhost:3001'],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions))
 
 if (process.env.NODE_ENV === 'production') {
   // In production, redirect all traffic to https

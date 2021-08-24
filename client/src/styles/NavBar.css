@@ -124,7 +124,8 @@
 }
 
 .navbar-menu .navbar-menu-link {
-  display: block;
+  display: flex;
+  align-items: center;
 
   color: var(--dark-theme-navbar-text, black);
   text-decoration: none;
@@ -148,7 +149,6 @@
   width: 20px;
   height: 20px;
   margin-right: 0.5rem;
-  margin-top: -2px;
 }
 
 .navbar svg.login-svg path,

@@ -7,7 +7,7 @@
     "start": "node server/index.js",
     "start-test-env": "export NODE_ENV='test' && npm start && export NODE_ENV=''",
     "dev": "export PORT=3001 && node --inspect server/index.js",
-    "test": "mocha",
+    "test": "mocha ./test/tests",
     "build": "npm install && cd client && npm install && npm run build",
     "quick-build": "cd client && npm run build",
     "full-test": "start-server-and-test start-test-env http://localhost:8080 test"

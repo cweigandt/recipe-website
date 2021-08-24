@@ -1,6 +1,7 @@
 const { By, Key } = require('selenium-webdriver')
-const Page = require('./pageObjects/Page')
+const Page = require('../pageObjects/Page')
 const expect = require('expect')
+const { HOME } = require('../selectors')
 
 describe('Home', function () {
   this.timeout(20000)
@@ -14,7 +15,7 @@ describe('Home', function () {
   describe('Deck', () => {
     it('has all recipes displayed', async () => {
       await page.visit()
-      return page.getElementCount(`a.recipe-card`).then((count) => {
+      return page.getElementCount(HOME.RECIPE_CARD).then((count) => {
         expect(count).toBe(3)
       })
     })
@@ -23,7 +24,7 @@ describe('Home', function () {
   describe('Search', () => {
     it('has the full set of recipes', async () => {
       await page
-        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .findByCSS(HOME.COUNTER)
         .getText()
         .then((text) => {
           expect(text).toBe('3')
@@ -31,12 +32,10 @@ describe('Home', function () {
     })
 
     it('searches for recipes', async () => {
-      await page
-        .findByCSS(`input[data-test-id='search-bar']`)
-        .then((el) => el.sendKeys('am'))
+      await page.findByCSS(HOME.SEARCH_BAR).then((el) => el.sendKeys('am'))
 
       await page
-        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .findByCSS(HOME.COUNTER)
         .getText()
         .then((text) => {
           expect(text).toBe('2')
@@ -44,12 +43,10 @@ describe('Home', function () {
     })
 
     it('continues search', async () => {
-      await page
-        .findByCSS(`input[data-test-id='search-bar']`)
-        .then((el) => el.sendKeys('e'))
+      await page.findByCSS(HOME.SEARCH_BAR).then((el) => el.sendKeys('e'))
 
       await page
-        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .findByCSS(HOME.COUNTER)
         .getText()
         .then((text) => {
           expect(text).toBe('1')
@@ -58,11 +55,11 @@ describe('Home', function () {
 
     it('updates on search clear', async () => {
       await page
-        .findByCSS(`input[data-test-id='search-bar']`)
+        .findByCSS(HOME.SEARCH_BAR)
         .sendKeys(Key.BACK_SPACE + Key.BACK_SPACE + Key.BACK_SPACE)
 
       await page
-        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .findByCSS(HOME.COUNTER)
         .getText()
         .then((text) => {
           expect(text).toBe('3')
@@ -71,11 +68,11 @@ describe('Home', function () {
 
     it('searches for tags', async () => {
       await page
-        .findByCSS(`input[data-test-id='search-bar']`)
+        .findByCSS(HOME.SEARCH_BAR)
         .then((el) => el.sendKeys('Margarita'))
 
       await page
-        .findByCSS(`div[data-test-id='recipe-counter']`)
+        .findByCSS(HOME.COUNTER)
         .getText()
         .then((text) => {
           expect(text).toBe('1')

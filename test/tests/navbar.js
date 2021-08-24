@@ -1,6 +1,6 @@
-const { By } = require('selenium-webdriver')
-const Page = require('./pageObjects/Page')
+const Page = require('../pageObjects/Page')
 const expect = require('expect')
+const { NAVBAR } = require('../selectors')
 
 describe('NavBar', function () {
   this.timeout(10000)
@@ -14,25 +14,21 @@ describe('NavBar', function () {
   describe('Login', () => {
     it('opens sign in modal', async () => {
       await page.visit()
-      await page.findByCSS(`div[data-test-id='login-button']`).click()
+      await page.findByCSS(NAVBAR.LOGIN_BUTTON).click()
 
-      return page.findByCSS(`div.sign-in-modal`)
+      return page.findByCSS(NAVBAR.SIGN_IN_MODAL)
     })
 
     it('accepts username and password and removes modal', async () => {
-      await page
-        .findByCSS(`input[data-test-id='login-username']`)
-        .sendKeys('my_user')
-      await page
-        .findByCSS(`input[data-test-id='login-password']`)
-        .sendKeys('my_pass')
+      await page.findByCSS(NAVBAR.SIGN_IN_USERNAME).sendKeys('my_user')
+      await page.findByCSS(NAVBAR.SIGN_IN_PASSWORD).sendKeys('my_pass')
 
-      await page.findByCSS(`button[data-test-id='login-submit']`).click()
+      await page.findByCSS(NAVBAR.SIGN_IN_SUBMIT).click()
 
       // give time for round trip api call
       await page.sleep(500)
 
-      return page.getElementCount(`div.sign-in-modal`).then((count) => {
+      return page.getElementCount(NAVBAR.SIGN_IN_MODAL).then((count) => {
         expect(count).toBe(0)
       })
     })
@@ -47,33 +43,33 @@ describe('NavBar', function () {
     })
 
     it('hides login button when logged in', async () => {
-      page.getElementCount(`div[data-test-id='login-button']`).then((count) => {
+      page.getElementCount(NAVBAR.LOGIN_BUTTON).then((count) => {
         expect(count).toBe(0)
       })
 
-      return page.findByCSS(`div.navbar-logged-in`)
+      return page.findByCSS(NAVBAR.LOG_OUT_BUTTON)
     })
   })
 
   describe('Logout', () => {
     it('clicks logout button', async () => {
-      await page.findByCSS(`div[data-test-id='logout-button']`).click()
+      await page.findByCSS(NAVBAR.LOG_OUT_BUTTON).click()
 
-      return page.findByCSS(`div.are-you-sure-modal`)
+      return page.findByCSS(NAVBAR.ARE_YOU_SURE_MODAL)
     })
 
     it('confirms modal and logs out', async () => {
-      await page.findByCSS(`button[data-test-id='are-you-sure-submit']`).click()
+      await page.findByCSS(NAVBAR.ARE_YOU_SURE_SUBMIT).click()
 
       // give time for round trip api call
       await page.sleep(500)
 
-      return page.findByCSS(`div[data-test-id='login-button']`)
+      return page.findByCSS(NAVBAR.LOGIN_BUTTON)
     })
 
     it('remains logged out on page refresh', async () => {
       await page.driver.navigate().refresh()
-      return page.findByCSS(`div[data-test-id='login-button']`)
+      return page.findByCSS(NAVBAR.LOGIN_BUTTON)
     })
 
     it('has cleared cookie when logged out', async () => {

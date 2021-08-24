@@ -60,7 +60,11 @@ const RecipeMadeButton = ({
 
   return (
     showButton && (
-      <button id='iMadeThis' onClick={handleButtonClick}>
+      <button
+        id='iMadeThis'
+        data-test-id='i-made-this-button'
+        onClick={handleButtonClick}
+      >
         I made this today
       </button>
     )

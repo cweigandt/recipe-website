@@ -1,10 +1,10 @@
 const webdriver = require('selenium-webdriver')
 const expect = require('expect')
 
-const RecipePage = require('./pageObjects/RecipePage')
+const RecipePage = require('../pageObjects/RecipePage')
+const { RECIPE, META } = require('../selectors')
 
 const By = webdriver.By
-const until = webdriver.until
 
 describe('Recipe', function () {
   this.timeout(20000)
@@ -66,19 +66,19 @@ describe('Recipe', function () {
 
     it('has OG tags', async () => {
       await page
-        .findByCSS(`meta[property='og:title']`)
+        .findByCSS(META.OG_TITLE)
         .getAttribute('content')
         .then((text) => {
           expect(text).toBe(page.recipe.name)
         })
       await page
-        .findByCSS(`meta[property='og:image']`)
+        .findByCSS(META.OG_IMAGE)
         .getAttribute('content')
         .then((text) => {
           expect(text).toBe(page.recipe.imageLocation)
         })
       await page
-        .findByCSS(`meta[property='og:description']`)
+        .findByCSS(META.OG_DESCRIPTION)
         .getAttribute('content')
         .then((text) => {
           expect(text).not.toBeNull()
@@ -88,13 +88,11 @@ describe('Recipe', function () {
 
   describe('Logged in', () => {
     it('hides logged in affordances', async () => {
-      await page
-        .getElementCount(`[data-test-id='edit-button']`)
-        .then((count) => {
-          expect(count).toBe(0)
-        })
+      await page.getElementCount(RECIPE.EDIT_BUTTON).then((count) => {
+        expect(count).toBe(0)
+      })
 
-      return page.getElementCount(`#iMadeThis`).then((count) => {
+      return page.getElementCount(RECIPE.I_MADE_THIS_BUTTON).then((count) => {
         expect(count).toBe(0)
       })
     })
@@ -102,9 +100,9 @@ describe('Recipe', function () {
     it('logs in properly', async () => {
       await page.fakeLogin()
 
-      await page.findByCSS(`[data-test-id='edit-button']`)
+      await page.findByCSS(RECIPE.EDIT_BUTTON)
 
-      return page.getElementCount(`#iMadeThis`).then((count) => {
+      return page.getElementCount(RECIPE.I_MADE_THIS_BUTTON).then((count) => {
         expect(count).toBe(1)
       })
     })

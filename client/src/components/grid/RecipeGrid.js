@@ -18,12 +18,7 @@ function RecipeGrid(props) {
           return recipe.thumbnail && recipe.thumbnail.length > 0
         })
         .map((recipe) => {
-          return (
-            <GridCard
-              name={recipe.name}
-              thumbnail={recipe.thumbnail}
-            ></GridCard>
-          )
+          return <GridCard {...recipe}></GridCard>
         })}
     </div>
   )

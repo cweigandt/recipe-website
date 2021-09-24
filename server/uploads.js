@@ -98,7 +98,7 @@ module.exports = function (app) {
         res.status(200)
         res.send({ response: `Edit for ${recipeName} was successful` })
       })
-      .catch(() => {
+      .catch((err) => {
         res.status(500)
         res.send({ response: err.message, stack: err.stack })
       })

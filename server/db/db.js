@@ -62,7 +62,7 @@ exports.handleEditForm = function (body, file, thumbnail) {
 }
 
 exports.handleIMadeThis = (recipeName) => {
-  return Queries.doc('recipes', recipeName).then((recipeData) => {
+  return Queries.doc(db, 'recipes', recipeName).then((recipeData) => {
     const cookedDates = recipeData.cookedDates || []
     const newCookedDates = [new Date().getTime(), ...cookedDates]
 

@@ -10,7 +10,7 @@ import * as ModalTypes from './modals/ModalTypes'
 import { logIn, logInStatusSynced, logOut } from '../actions/loginActions'
 
 import '../styles/NavBar.css'
-import { ReactComponent as GridSVG } from '../svg/grid.svg'
+import { ReactComponent as GridSVG } from '../svg/grid-alt.svg'
 import { ReactComponent as HomeSVG } from '../svg/home.svg'
 import { ReactComponent as EditSVG } from '../svg/edit.svg'
 import { ReactComponent as UploadSVG } from '../svg/upload.svg'
@@ -77,7 +77,6 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
       <li class='nav-item'>
         <Link to={link} onClick={toggleMenu} class='navbar-menu-link'>
           {icon}
-          {icon && '| '}
           {text}
         </Link>
       </li>

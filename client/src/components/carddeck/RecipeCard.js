@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazyload'
 
 import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
+import { ReactComponent as StarSVG } from '../../svg/star.svg'
 
 function RecipeCard(props) {
   function getDaysOld(uploadTime) {
@@ -17,19 +18,17 @@ function RecipeCard(props) {
   }
 
   const renderFavoritesTag = () => {
-    let text = ''
+    let children = []
     if (props.tags.includes(`Brittany's Favorites`)) {
-      text += ' ⭐ '
+      children.push(<StarSVG />)
     }
 
     if (props.tags.includes(`Christian's Favorites`)) {
-      text += ' ⭐ '
+      children.push(<StarSVG />)
     }
 
-    if (text) {
-      return (
-        <CardBookmark text={text} type={BOOKMARK_TYPES.INFO}></CardBookmark>
-      )
+    if (children.length > 0) {
+      return <CardBookmark type={BOOKMARK_TYPES.STAR}>{children}</CardBookmark>
     }
 
     return null
@@ -68,7 +67,7 @@ function RecipeCard(props) {
         <div class='recipe-title'>{props.name}</div>
       </div>
       {daysOld <= 3 ? (
-        <CardBookmark text='New' type={BOOKMARK_TYPES.NEW}></CardBookmark>
+        <CardBookmark type={BOOKMARK_TYPES.NEW}>NEW</CardBookmark>
       ) : (
         ''
       )}

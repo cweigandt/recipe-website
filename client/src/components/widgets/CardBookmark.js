@@ -6,14 +6,14 @@ import '../../styles/widgets/CardBookmark.css'
 export const BOOKMARK_TYPES = {
   NEW: 'new',
   INFO: 'info',
+  STAR: 'star',
 }
 
 function CardBookmark(props) {
-  return <div class={`card-bookmark ${props.type || ''}`}>{props.text}</div>
+  return <div class={`card-bookmark ${props.type || ''}`}>{props.children}</div>
 }
 
 CardBookmark.propTypes = {
-  text: PropTypes.string.isRequired,
   type: PropTypes.instanceOf(BOOKMARK_TYPES),
 }
 

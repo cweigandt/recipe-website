@@ -50,7 +50,7 @@
   transform: translateX(-50%);
   transition: 0.1s opacity;
 
-  font-family: 'Bebas_Neue';
+  font-family: 'Satisfy';
 
   text-decoration: none;
   font-size: 30px;
@@ -97,8 +97,8 @@
   opacity: 0;
   z-index: 2;
 
-  font-family: 'Bebas_Neue';
-  font-size: 24px;
+  font-family: 'Lato', benton-sans, sans-serif;
+  font-size: 20px;
 
   transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
@@ -134,6 +134,8 @@
 .navbar-menu .nav-item {
   display: flex;
   align-items: center;
+
+  line-height: 26px;
 
   padding: 0.3rem 0 0.3rem 1rem;
 

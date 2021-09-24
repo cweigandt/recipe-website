@@ -4,9 +4,9 @@ body {
   --Appetizers-color: #c2185b; /* pink */
   --Breakfast-color: #7b1fa2; /* purple */
   --Dessert-color: #1976d2; /* blue */
-  --Sauces-color: #009688; /* teal */
-  --Entrees-color: #689f38; /* light green */
-  --Salad-color: #f57c00; /* orange */
+  --Sauces-color: #f57c00; /* orange */
+  --Entrees-color: #009688; /* teal */
+  --Salad-color: #689f38; /* light green */
   --Seasoning-color: #d32f2f; /* red */
   --Sides-color: #455a64; /* blue gray */
   --Drinks-color: #795548; /* brown */
@@ -58,9 +58,9 @@ svg polygon {
 }
 
 @font-face {
-  font-family: 'Righteous';
-  src: local('Righteous-Regular'),
-    url(./fonts/Righteous/Righteous-Regular.ttf) format('truetype');
+  font-family: 'Open_Sans';
+  src: local('Open_Sans'),
+    url(./fonts/Open_Sans/OpenSans-Regular.ttf) format('truetype');
   font-display: block;
 }
 
@@ -68,5 +68,19 @@ svg polygon {
   font-family: 'Neucha';
   src: local('Neucha-Regular'),
     url(./fonts/Neucha/Neucha-Regular.ttf) format('truetype');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato-Regular'),
+    url(./fonts/Lato/Lato-Regular.ttf) format('truetype');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Satisfy';
+  src: local('Satisfy-Regular'),
+    url(./fonts/Satisfy/Satisfy-Regular.ttf) format('truetype');
   font-display: block;
 }

@@ -51,6 +51,9 @@ function UploadForm(props) {
     e.preventDefault()
 
     const formData = new FormData(formRef.current)
+    if (props.recipe && props.recipe.name !== formData.get('name')) {
+      formData.set('oldName', props.recipe.name)
+    }
 
     props.dispatch(addAlert('Uploading', ALERT_TYPES.STATUS))
 

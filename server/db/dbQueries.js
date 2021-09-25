@@ -51,6 +51,19 @@ exports.allRecipes = function (db) {
   return promise
 }
 
+exports.delete = function (db, collectionName, docName) {
+  var promise = new Promise(function (resolve, reject) {
+    db.collection(collectionName)
+      .doc(docName)
+      .delete()
+      .then(resolve)
+      .catch((err) => {
+        reject(err)
+      })
+  })
+  return promise
+}
+
 exports.allRecipeNames = function (db) {
   var promise = new Promise(function (resolve, reject) {
     const dbRes = db

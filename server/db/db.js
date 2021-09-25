@@ -46,10 +46,10 @@ exports.handleUploadForm = function (body, file, thumbnail) {
   let item = rinseInput(body, file, thumbnail)
 
   let recipesDoc = getDBRecipe(db, item.name)
-  recipesDoc.set(item)
+  return recipesDoc.set(item)
 }
 
-exports.handleEditForm = function (body, file, thumbnail) {
+exports.handleEditForm = async function (body, file, thumbnail) {
   let item = rinseInput(body, file, thumbnail)
   if (item.imageLocation === '') {
     // When a user doesn't choose to update an image then use the one already stored
@@ -57,8 +57,22 @@ exports.handleEditForm = function (body, file, thumbnail) {
     delete item.thumbnail
   }
 
-  let recipesDoc = getDBRecipe(db, item.name)
-  recipesDoc.update(item)
+  if (body.oldName && body.oldName !== '') {
+    // If there was a name change then treat this as an upload and delete the old name
+    return Queries.doc(db, 'recipes', body.oldName).then((oldRecipe) => {
+      item.imageLocation = oldRecipe.imageLocation
+      item.thumbnail = oldRecipe.thumbnail
+
+      const recipesDoc = getDBRecipe(db, item.name)
+      return recipesDoc.set(item).then(() => {
+        return Queries.delete(db, 'recipes', body.oldName)
+      })
+    })
+  }
+
+  const recipesDoc = getDBRecipe(db, item.name)
+
+  return recipesDoc.update(item)
 }
 
 exports.handleIMadeThis = (recipeName) => {

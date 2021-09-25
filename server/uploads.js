@@ -41,6 +41,21 @@ module.exports = function (app) {
     storage: multerStorage,
   })
 
+  const handleUploadForm = (req, res, thumbnail) => {
+    customDB
+      .handleUploadForm(req.body, req.file, thumbnail)
+      .then(() => {
+        res.status(200)
+        res.send({
+          response: `Edit for ${req.body.name} was successful`,
+        })
+      })
+      .catch((err) => {
+        res.status(500)
+        res.send({ response: err.message, stack: err.stack })
+      })
+  }
+
   app.post(
     '/upload-recipe',
     uploadHandler.single('image'),
@@ -51,14 +66,7 @@ module.exports = function (app) {
       }
 
       saveThumbnail(req, res).then((thumbnail) => {
-        try {
-          customDB.handleUploadForm(req.body, req.file, thumbnail)
-          res.status(200)
-          res.send({ response: `Uploaded ${req.body.name}` })
-        } catch (err) {
-          res.status(500)
-          res.send({ response: err.message, stack: err.stack })
-        }
+        handleUploadForm(req, res, thumbnail)
       })
     }
   )
@@ -73,14 +81,16 @@ module.exports = function (app) {
       }
 
       saveThumbnail(req, res).then((thumbnail) => {
-        try {
-          customDB.handleEditForm(req.body, req.file, thumbnail)
-          res.status(200)
-          res.send({ response: `Edit for ${req.body.name} was successful` })
-        } catch (err) {
-          res.status(500)
-          res.send({ response: err.message, stack: err.stack })
-        }
+        customDB
+          .handleEditForm(req.body, req.file, thumbnail)
+          .then(() => {
+            res.status(200)
+            res.send({ response: `Edit for ${req.body.name} was successful` })
+          })
+          .catch((err) => {
+            res.status(500)
+            res.send({ response: err.message, stack: err.stack })
+          })
       })
     }
   )

@@ -8,13 +8,26 @@
 
   font-size: 0.7em;
   font-weight: bold;
-  border-radius: 30%;
-  border: 2px solid var(--dark-theme-nutrition-border, gray);
-  padding: 2px;
+  border-radius: 5px 10px;
+  padding: 3px 4px;
   margin: 3px;
   white-space: pre;
+}
 
-  background-color: rgba(40, 167, 69, 1);
+.nutrition .nutrition-info.vegan {
+  background-color: var(--Salad-color);
+}
+
+.nutrition .nutrition-info.vegetarian {
+  background-color: var(--Entrees-color);
+}
+
+.nutrition .nutrition-info.dairy-free {
+  background-color: var(--Dessert-color);
+}
+
+.nutrition .nutrition-info.gluten-free {
+  background-color: var(--Drinks-color);
 }
 
 .nutrition .nutrition-price {

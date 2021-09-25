@@ -1,6 +1,6 @@
 ![Tests](https://github.com/cweigandt/recipe-website/actions/workflows/selenium_ci.yaml/badge.svg)
 [![GitHub last commit](https://img.shields.io/github/last-commit/cweigandt/recipe-website.svg?style=flat)]()
-[![Version](https://badge.fury.io/gh/cweigandt%2Frecipe-website.svg)](https://badge.fury.io/gh/tterb%2FHyde)
+[![Version](https://badge.fury.io/gh/cweigandt%2Frecipe-website.svg)]()
 
 ## Table of Contents
 

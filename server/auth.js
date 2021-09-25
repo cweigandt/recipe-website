@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
+const Hashes = require('jshashes')
 
 // Cookie expires yearly
 const jwtExpirySeconds = 60 * 60 * 24 * 365
@@ -30,8 +31,9 @@ exports.listen = function (app, customDB) {
       return res.status(401).end()
     }
 
+    const encryptedPassword = new Hashes.SHA1().b64(password)
     customDB
-      .validateCredentials({ username, password })
+      .validateCredentials({ username, password: encryptedPassword })
       .then(() => {
         // Create a new token with the username in the payload
         // and which expires 1y after issue

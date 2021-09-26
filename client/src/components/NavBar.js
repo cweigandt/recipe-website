@@ -16,6 +16,7 @@ import { ReactComponent as EditSVG } from '../svg/edit.svg'
 import { ReactComponent as UploadSVG } from '../svg/upload.svg'
 
 import { ReactComponent as LoginSVG } from '../svg/login.svg'
+import Toggle from './widgets/Toggle'
 
 let modalId = -1
 
@@ -83,6 +84,14 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     )
   }
 
+  const renderDarkModeToggle = () => {
+    return (
+      <div className='settings-holder'>
+        <Toggle />
+      </div>
+    )
+  }
+
   const renderSeparator = () => {
     return <li class='nav-item separator' />
   }
@@ -104,6 +113,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
             return renderLink('/sections/' + section, section)
           })}
         </ul>
+        {renderDarkModeToggle()}
       </div>
     )
   }

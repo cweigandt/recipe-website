@@ -24,6 +24,14 @@ function Recipe(props) {
       (r) => r.name === recipeName
     )
 
+    fetch('/recipe-visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recipeName,
+      }),
+    })
+
     setRecipe(foundRecipe)
   }, [props.urlName])
 

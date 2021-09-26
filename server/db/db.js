@@ -85,6 +85,16 @@ exports.handleIMadeThis = (recipeName) => {
   })
 }
 
+exports.handleRecipeVisit = (recipeName) => {
+  return Queries.doc(db, 'recipes', recipeName).then((recipeData) => {
+    const visits = recipeData.visits || 0
+    const newVisits = visits + 1
+
+    const recipeDoc = getDBRecipe(db, recipeName)
+    recipeDoc.update({ visits: newVisits })
+  })
+}
+
 exports.manuallyUpdate = function (docName, field, value) {
   let item = {}
   item[field] = value
@@ -93,7 +103,7 @@ exports.manuallyUpdate = function (docName, field, value) {
   recipesDoc.update(item)
 }
 
-const validateCredentials = (credentials) => {
+exports.validateCredentials = (credentials) => {
   const promise = new Promise(function (resolve, reject) {
     db.collection('users')
       .get()
@@ -118,8 +128,4 @@ const validateCredentials = (credentials) => {
       })
   })
   return promise
-}
-
-exports.validateCredentials = function (credentials) {
-  return validateCredentials(credentials)
 }

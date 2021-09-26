@@ -77,8 +77,8 @@ exports.validateJWT = (req) => {
     payload = jwt.verify(token, jwtKey)
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
-      // if the error thrown is because the JWT is unauthorized, log it
-      console.log('Invalid token')
+      // If the error thrown is because the JWT is unauthorized, do nothing
+      // Ideally I could log the attempt somewhere and investigate
     }
     // otherwise, return false
     return false

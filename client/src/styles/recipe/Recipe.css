@@ -3,7 +3,7 @@
   padding-right: 25%;
   padding-bottom: 5%;
   font-family: 'Open_Sans', benton-sans, sans-serif;
-  color: var(--dark-theme-recipe-text-color, #4a4a4a);
+  color: var(--recipe-text-color);
   width: 100%;
   position: relative;
   opacity: 0;
@@ -40,7 +40,7 @@
 }
 
 #recipeWrapper #socialButtons .btn {
-  color: var(--dark-theme-recipe-text-color, initial);
+  color: var(--recipe-text-color);
 }
 
 #recipeWrapper #socialButtons .socialIcon {

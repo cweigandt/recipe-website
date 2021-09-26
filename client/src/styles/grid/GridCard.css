@@ -15,7 +15,7 @@
   width: 100%;
   height: 100%;
 
-  border: 4px solid var(--dark-theme-bg, rgb(255, 255, 255));
+  border: 4px solid var(--background-color);
   border-radius: 30px;
 
   opacity: 0;

@@ -10,8 +10,8 @@
   max-height: 100vw;
   max-width: 350px;
   border-radius: 10px;
-  box-shadow: var(--dark-theme-recipe-card-box-shadow, 0 0 12px 0px lightgrey);
-  background-color: var(--dark-theme-recipe-card-bg, none);
+  box-shadow: var(--recipe-card-box-shadow);
+  background-color: var(--recipe-card-bg);
   opacity: 0;
   text-decoration: none;
   overflow: hidden;
@@ -42,7 +42,7 @@
 }
 
 #recipeCardDeck .recipe-card .recipe-title {
-  color: var(--dark-theme-recipe-card-title-color, rgb(50, 50, 50));
+  color: var(--recipe-card-title-color);
   font-family: 'Lato', benton-sans, sans-serif;
   font-size: 16px;
   text-align: left;

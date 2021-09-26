@@ -8,7 +8,7 @@
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0.25rem;
-  border: 1px solid var(--dark-theme-badge-border, black);
+  border: 1px solid var(--badge-border);
 
   color: #fff;
 }

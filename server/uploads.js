@@ -114,6 +114,22 @@ module.exports = function (app) {
       })
   })
 
+  app.post('/recipe-visit', express.json(), (req, res) => {
+    // Intentionally don't check auth here so all requests are logged
+
+    const recipeName = req.body.recipeName
+    customDB
+      .handleRecipeVisit(recipeName)
+      .then(() => {
+        res.status(200)
+        res.send({ response: `Edit for ${recipeName} was successful` })
+      })
+      .catch((err) => {
+        res.status(500)
+        res.send({ response: err.message, stack: err.stack })
+      })
+  })
+
   app.get('/createAllThumbnails', async function (req, res, next) {
     // This code is here for a template
     res.redirect('/')

@@ -65,6 +65,12 @@ exports.handleIMadeThis = (recipeName) => {
   console.error('should not be editing with mock yet')
 }
 
+exports.handleRecipeVisit = (recipeName) => {
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
+}
+
 exports.manuallyUpdate = function (docName, field, value) {
   console.error('should not be manually updating with mock yet')
 }

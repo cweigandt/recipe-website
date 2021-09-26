@@ -115,10 +115,7 @@ module.exports = function (app) {
   })
 
   app.post('/recipe-visit', express.json(), (req, res) => {
-    if (!auth.validateJWT(req)) {
-      res.status(401).end()
-      return
-    }
+    // Intentionally don't check auth here so all requests are logged
 
     const recipeName = req.body.recipeName
     customDB

@@ -33,7 +33,7 @@ const DarkThemeToggle = () => {
       }
       BComponent={
         <SunSVG
-          className={`dark-theme-toggle-svg ${
+          className={`dark-theme-toggle-svg right ${
             isDarkMode ? 'toggle-off' : 'toggle-on'
           }`}
         />

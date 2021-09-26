@@ -28,6 +28,13 @@ const SlantToggle = ({
         {AComponent}
       </div>
       <div
+        className='toggle-slant'
+        style={{
+          backgroundColor: selectedSide === 'A' ? colorA : '#444',
+        }}
+        onClick={() => handleClick('A')}
+      ></div>
+      <div
         className='slant-toggle-B'
         style={{ backgroundColor: selectedSide === 'B' ? colorB : '#444' }}
         onClick={() => handleClick('B')}

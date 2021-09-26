@@ -4,19 +4,19 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import { showModal } from '../actions/modalActions'
-import * as ModalTypes from './modals/ModalTypes'
+import { showModal } from '../../actions/modalActions'
+import * as ModalTypes from '../modals/ModalTypes'
 
-import { logIn, logInStatusSynced, logOut } from '../actions/loginActions'
+import { logIn, logInStatusSynced, logOut } from '../../actions/loginActions'
 
-import '../styles/NavBar.css'
-import { ReactComponent as GridSVG } from '../svg/grid-alt.svg'
-import { ReactComponent as HomeSVG } from '../svg/home.svg'
-import { ReactComponent as EditSVG } from '../svg/edit.svg'
-import { ReactComponent as UploadSVG } from '../svg/upload.svg'
+import '../../styles/navbar/NavBar.css'
+import { ReactComponent as GridSVG } from '../../svg/grid-alt.svg'
+import { ReactComponent as HomeSVG } from '../../svg/home.svg'
+import { ReactComponent as EditSVG } from '../../svg/edit.svg'
+import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
 
-import { ReactComponent as LoginSVG } from '../svg/login.svg'
-import DarkThemeToggle from './navbar/DarkThemeToggle'
+import { ReactComponent as LoginSVG } from '../../svg/login.svg'
+import DarkThemeToggle from './DarkThemeToggle'
 
 let modalId = -1
 

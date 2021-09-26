@@ -3,7 +3,7 @@ import './App.css'
 import { useEffect } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
-import NavBar from './components/NavBar'
+import NavBar from './components/navbar/NavBar'
 
 import RecipeCardDeck from './components/carddeck/RecipeCardDeck'
 import Recipe from './components/recipe/Recipe'

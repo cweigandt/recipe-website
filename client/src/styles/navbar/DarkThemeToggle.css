@@ -7,7 +7,7 @@
 
 .dark-theme-toggle-svg.toggle-on {
   opacity: 0.6;
-  transform: scale(3.6) translate(9px, 6px);
+  transform: scale(3.6) translate(6px, 6px);
 }
 
 .dark-theme-toggle-svg.right {

@@ -280,7 +280,7 @@ function UploadForm(props) {
           title: 'Uploader',
           name: 'uploader',
           additionalProps: {
-            defaultValue: props.recipe.uploader || 'Brittany Cormier',
+            defaultValue: props.recipe.uploader || 'Brittany Weigandt',
           },
         })}
 

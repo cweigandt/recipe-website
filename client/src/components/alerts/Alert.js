@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import '../../styles/alerts/Alert.css'
 import { removeAlert } from '../../actions/alertsActions'
+import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 
 export const ALERT_TYPES = {
   SUCCESS: 'success',
@@ -31,7 +32,7 @@ function Alert({ alert, dispatch, isMostRecent = false }) {
   return (
     <div class={`alert ${alert.style}`} key={alert.id}>
       <div class='alert-close' onClick={handleClose}>
-        <i class='fa fa-times-circle'></i>
+        <XCircle />
       </div>
       <div class='alert-text'>{alert.text}</div>
     </div>

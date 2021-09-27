@@ -14,6 +14,7 @@ import { ReactComponent as GridSVG } from '../../svg/grid-alt.svg'
 import { ReactComponent as HomeSVG } from '../../svg/home.svg'
 import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
+import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
 
 import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
@@ -151,7 +152,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
           class={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
           data-test-id='navbar-menu-toggle'
         >
-          <i class='fa fa-angle-double-right'></i>
+          <ChevronsRight />
         </div>
 
         <Link to='/' class='navbar-brand' id='navBarBrand'>

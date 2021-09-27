@@ -34,12 +34,12 @@
   z-index: 3;
 }
 
-.navbar .menu-toggler i {
+.navbar .menu-toggler svg {
   transition: transform 0.6s;
   transform-origin: center;
 }
 
-.navbar .menu-toggler.open i {
+.navbar .menu-toggler.open svg {
   transform: rotateY(180deg);
 }
 
@@ -85,7 +85,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: yellowgreen;
+  background-color: #638819;
 }
 
 .navbar-menu {
@@ -166,10 +166,11 @@
 }
 
 .navbar-menu .settings-holder {
-  position: fixed;
+  position: relative;
   width: 100%;
   height: 60px;
 
+  top: -20px;
   bottom: 0;
 
   background-color: rgba(255, 255, 255, 0.2);

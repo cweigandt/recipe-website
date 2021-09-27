@@ -1,6 +1,6 @@
 const Page = require('../pageObjects/Page')
 const expect = require('expect')
-const { NAVBAR } = require('../selectors')
+const { HOME, NAVBAR } = require('../selectors')
 
 describe('NavBar', function () {
   this.timeout(10000)
@@ -82,6 +82,36 @@ describe('NavBar', function () {
         .catch((err) => {
           expect(err).not.toBeNull()
         })
+    })
+  })
+
+  describe('Menu', () => {
+    it('opens navbar menu', async () => {
+      await page.findByCSS(NAVBAR.MENU_TOGGLE).click()
+      return page.findByCSS(NAVBAR.MENU)
+    })
+
+    describe('Dark Mode', () => {
+      it('has dark mode by default', async () => {
+        await page.findByCSS(HOME.DARK_BODY)
+
+        return page.findByCSS(NAVBAR.DARK_MODE_DARK_ON)
+      })
+
+      it('switches to light mode', async () => {
+        await page.findByCSS(NAVBAR.DARK_MODE_LIGHT).click()
+        await page.findByCSS(HOME.LIGHT_BODY)
+
+        return page.findByCSS(NAVBAR.DARK_MODE_LIGHT_ON)
+      })
+
+      it('switches back to dark mode when clicking slant', async () => {
+        await page.findByCSS(NAVBAR.DARK_MODE_SLANT).click()
+        await page.findByCSS(HOME.DARK_BODY)
+
+        await page.findByCSS(NAVBAR.DARK_MODE_SLANT_ON)
+        return page.findByCSS(NAVBAR.DARK_MODE_DARK_ON)
+      })
     })
   })
 

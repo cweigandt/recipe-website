@@ -4,18 +4,19 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import { showModal } from '../actions/modalActions'
-import * as ModalTypes from './modals/ModalTypes'
+import { showModal } from '../../actions/modalActions'
+import * as ModalTypes from '../modals/ModalTypes'
 
-import { logIn, logInStatusSynced, logOut } from '../actions/loginActions'
+import { logIn, logInStatusSynced, logOut } from '../../actions/loginActions'
 
-import '../styles/NavBar.css'
-import { ReactComponent as GridSVG } from '../svg/grid-alt.svg'
-import { ReactComponent as HomeSVG } from '../svg/home.svg'
-import { ReactComponent as EditSVG } from '../svg/edit.svg'
-import { ReactComponent as UploadSVG } from '../svg/upload.svg'
+import '../../styles/navbar/NavBar.css'
+import { ReactComponent as GridSVG } from '../../svg/grid-alt.svg'
+import { ReactComponent as HomeSVG } from '../../svg/home.svg'
+import { ReactComponent as EditSVG } from '../../svg/edit.svg'
+import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
 
-import { ReactComponent as LoginSVG } from '../svg/login.svg'
+import { ReactComponent as LoginSVG } from '../../svg/login.svg'
+import DarkThemeToggle from './DarkThemeToggle'
 
 let modalId = -1
 
@@ -83,6 +84,14 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     )
   }
 
+  const renderDarkModeToggle = () => {
+    return (
+      <div className='settings-holder'>
+        <DarkThemeToggle />
+      </div>
+    )
+  }
+
   const renderSeparator = () => {
     return <li class='nav-item separator' />
   }
@@ -93,8 +102,11 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
 
   const renderMenu = () => {
     return (
-      <div class={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}>
-        <ul class='navbar-menu-list' id='navbarListHolder'>
+      <div
+        className={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}
+        data-test-id='navbar-menu'
+      >
+        <ul className='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home', <HomeSVG />)}
           {renderLink('/grid', 'Grid', <GridSVG />)}
           {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
@@ -104,6 +116,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
             return renderLink('/sections/' + section, section)
           })}
         </ul>
+        {renderDarkModeToggle()}
       </div>
     )
   }
@@ -136,6 +149,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
         <div
           onClick={toggleMenu}
           class={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
+          data-test-id='navbar-menu-toggle'
         >
           <i class='fa fa-angle-double-right'></i>
         </div>

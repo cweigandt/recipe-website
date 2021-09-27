@@ -1,0 +1,19 @@
+.dark-theme-toggle-svg {
+  --svg-color: white;
+  transform: scale(3) translate(9px, 8px);
+
+  transition: transform 0.8s ease;
+}
+
+.dark-theme-toggle-svg.toggle-on {
+  opacity: 0.6;
+  transform: scale(3.6) translate(6px, 6px);
+}
+
+.dark-theme-toggle-svg.right {
+  transform: scale(3) translate(30px, 6px);
+}
+
+.dark-theme-toggle-svg.right.toggle-on {
+  transform: scale(3.6) translate(30px, 4px);
+}

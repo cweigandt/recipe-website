@@ -24,6 +24,9 @@ const SlantToggle = ({
         className='slant-toggle-A'
         style={{ backgroundColor: selectedSide === 'A' ? colorA : '#444' }}
         onClick={() => handleClick('A')}
+        data-test-id={`slant-toggle-A${
+          selectedSide === 'A' ? ' toggle-on' : ''
+        }`}
       >
         {AComponent}
       </div>
@@ -33,11 +36,17 @@ const SlantToggle = ({
           backgroundColor: selectedSide === 'A' ? colorA : '#444',
         }}
         onClick={() => handleClick('A')}
+        data-test-id={`slant-toggle-slant${
+          selectedSide === 'A' ? ' toggle-on' : ''
+        }`}
       ></div>
       <div
         className='slant-toggle-B'
         style={{ backgroundColor: selectedSide === 'B' ? colorB : '#444' }}
         onClick={() => handleClick('B')}
+        data-test-id={`slant-toggle-B${
+          selectedSide === 'B' ? ' toggle-on' : ''
+        }`}
       >
         {BComponent}
       </div>

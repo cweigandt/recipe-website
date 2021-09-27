@@ -102,8 +102,11 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
 
   const renderMenu = () => {
     return (
-      <div class={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}>
-        <ul class='navbar-menu-list' id='navbarListHolder'>
+      <div
+        className={'navbar-menu ' + (showMenu ? 'navbar-menu-visible' : '')}
+        data-test-id='navbar-menu'
+      >
+        <ul className='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home', <HomeSVG />)}
           {renderLink('/grid', 'Grid', <GridSVG />)}
           {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
@@ -146,6 +149,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
         <div
           onClick={toggleMenu}
           class={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
+          data-test-id='navbar-menu-toggle'
         >
           <i class='fa fa-angle-double-right'></i>
         </div>

@@ -89,7 +89,7 @@ recipes
 
 Using Mocha and Selenium for integration tests.
 
-Currently running **29** testpoints
+Currently running **33** testpoints
 
 See `npm test` and `npm run full-test` scripts.
 

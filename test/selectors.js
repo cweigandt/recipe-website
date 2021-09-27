@@ -8,7 +8,11 @@ module.exports = {
     RECIPE_CARD: `a.recipe-card`,
     COUNTER: `div[data-test-id='recipe-counter']`,
     SEARCH_BAR: `input[data-test-id='search-bar']`,
+
+    LIGHT_BODY: `body:not(.dark-theme)`,
+    DARK_BODY: `body.dark-theme`,
   },
+
   NAVBAR: {
     LOGIN_BUTTON: `div[data-test-id='login-button']`,
     LOG_OUT_BUTTON: `div[data-test-id='logout-button']`,
@@ -20,6 +24,16 @@ module.exports = {
 
     ARE_YOU_SURE_MODAL: `div.are-you-sure-modal`,
     ARE_YOU_SURE_SUBMIT: `button[data-test-id='are-you-sure-submit']`,
+
+    MENU_TOGGLE: `[data-test-id='navbar-menu-toggle']`,
+    MENU: `.navbar-menu-visible[data-test-id='navbar-menu']`,
+
+    DARK_MODE_DARK: `.slant-toggle-wrapper [data-test-id='slant-toggle-A']`,
+    DARK_MODE_DARK_ON: `.slant-toggle-wrapper [data-test-id='slant-toggle-A toggle-on']`,
+    DARK_MODE_SLANT: `.slant-toggle-wrapper [data-test-id='slant-toggle-slant']`,
+    DARK_MODE_SLANT_ON: `.slant-toggle-wrapper [data-test-id='slant-toggle-slant toggle-on']`,
+    DARK_MODE_LIGHT: `.slant-toggle-wrapper [data-test-id='slant-toggle-B']`,
+    DARK_MODE_LIGHT_ON: `.slant-toggle-wrapper [data-test-id='slant-toggle-B toggle-on']`,
   },
   RECIPE: {
     EDIT_BUTTON: `[data-test-id='edit-button']`,

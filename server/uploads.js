@@ -42,18 +42,23 @@ module.exports = function (app) {
   })
 
   const handleUploadForm = (req, res, thumbnail) => {
-    customDB
-      .handleUploadForm(req.body, req.file, thumbnail)
-      .then(() => {
-        res.status(200)
-        res.send({
-          response: `Edit for ${req.body.name} was successful`,
+    try {
+      customDB
+        .handleUploadForm(req.body, req.file, thumbnail)
+        .then(() => {
+          res.status(200)
+          res.send({
+            response: `Edit for ${req.body.name} was successful`,
+          })
         })
-      })
-      .catch((err) => {
-        res.status(500)
-        res.send({ response: err.message, stack: err.stack })
-      })
+        .catch((err) => {
+          res.status(500)
+          res.send({ response: err.message, stack: err.stack })
+        })
+    } catch (err) {
+      res.status(500)
+      res.send({ response: err.message, stack: err.stack })
+    }
   }
 
   app.post(
@@ -80,18 +85,23 @@ module.exports = function (app) {
         return
       }
 
-      saveThumbnail(req, res).then((thumbnail) => {
-        customDB
-          .handleEditForm(req.body, req.file, thumbnail)
-          .then(() => {
-            res.status(200)
-            res.send({ response: `Edit for ${req.body.name} was successful` })
-          })
-          .catch((err) => {
-            res.status(500)
-            res.send({ response: err.message, stack: err.stack })
-          })
-      })
+      try {
+        saveThumbnail(req, res).then((thumbnail) => {
+          customDB
+            .handleEditForm(req.body, req.file, thumbnail)
+            .then(() => {
+              res.status(200)
+              res.send({ response: `Edit for ${req.body.name} was successful` })
+            })
+            .catch((err) => {
+              res.status(500)
+              res.send({ response: err.message, stack: err.stack })
+            })
+        })
+      } catch (err) {
+        res.status(500)
+        res.send({ response: err.message, stack: err.stack })
+      }
     }
   )
 
@@ -185,14 +195,10 @@ module.exports = function (app) {
 
     if (imagePath) {
       //this resizes the image
-      const file = await Jimp.read(imagePath)
-        .then(async (image) => {
-          image.resize(350, Jimp.AUTO)
-          return image.getBufferAsync(Jimp.AUTO)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+      const file = await Jimp.read(imagePath).then(async (image) => {
+        image.resize(350, Jimp.AUTO)
+        return image.getBufferAsync(Jimp.AUTO)
+      })
 
       const recipeTitle = recipeName || req.body.name
       const extension = req.file
@@ -203,13 +209,9 @@ module.exports = function (app) {
         recipeTitle.replace(/ /g, '_') +
         '_thumbnail.' +
         extension
-      await uploadImage(file, thumbnailImagePath)
-        .then((str) => {
-          console.log(str)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+      await uploadImage(file, thumbnailImagePath).then((str) => {
+        console.log(str)
+      })
       return (
         'https://recipe-website-269020.appspot.com.storage.googleapis.com/' +
         thumbnailImagePath
@@ -232,10 +234,8 @@ module.exports = function (app) {
         .on('finish', () => {
           blob.makePublic((err, apiResponse) => {
             if (err) {
-              console.log('Error making image public')
-              console.log(err)
+              reject(err.message)
             }
-            console.log(apiResponse)
           })
           resolve('Successful image upload')
         })

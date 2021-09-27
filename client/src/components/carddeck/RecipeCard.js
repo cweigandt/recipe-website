@@ -38,6 +38,7 @@ function RecipeCard(props) {
 
   const imageLocation =
     props.thumbnail ||
+    props.imageLocation ||
     'https://www.medicinalgenomics.com/wp-content/uploads/2019/01/image-coming-soon-ecc.png'
 
   const daysOld = getDaysOld(props.uploadTime)

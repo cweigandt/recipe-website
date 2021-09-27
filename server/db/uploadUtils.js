@@ -17,7 +17,18 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
   const rinsedItem = {}
 
   let name = json.name
-  rinsedItem.name = name
+  rinsedItem.name = name.trim()
+  if (/^[0-9]/.test(name)) {
+    throw new Error('Name cannot start with a number')
+  }
+  if (/_/.test(name)) {
+    throw new Error('Name cannot contain an underscore')
+  }
+  if (/[^-a-zA-Z0-9 ',]/.test(name)) {
+    throw new Error(
+      `Name can only contain letters, numbers, space ( ), hyphen (-), comma (,), and single quote (')`
+    )
+  }
 
   let section = json.section
   rinsedItem.section = section
@@ -27,6 +38,9 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
     servings = '-'
   }
   rinsedItem.servings = servings
+  if (/^[^0-9- ]/.test(servings)) {
+    throw new Error('Servings must be empty, a number, a range, or -')
+  }
 
   let time = json.time
   rinsedItem.time = time

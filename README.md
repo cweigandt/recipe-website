@@ -100,29 +100,46 @@ See `npm test` and `npm run integration` scripts.
 
 ## Scripts
 
+### Build
+
 - `npm run build`
+  - _When building from scratch or changing dependencies_
   - Calls `npm install` on both server and client repos
   - Builds the client folder
 - `npm run quick-build`
+  - _Build only the client-side React app_
   - Builds the client folder without running npm install
+
+### Run
+
 - `npm start`
+  - _Run the full db-connected app_
   - Starts up the server on port 8080
 - `npm run dev`
+  - _Enable NodeJS debugging_
   - Sets the port to 3001 and connects NodeJS debugger
   - Can then hook up Chrome's NodeJS debugger to the server
 - `npm run start-test-env`
+  - _Start the app without a database_
   - Sets env to TEST (uses mock data)
   - Starts up server
-- `npm test`
-  - Runs selenium tests
-  - Note: Need to start the server before this as it uses localhost:8080
-- `npm run integration`
-  - Starts server with 'test' env
-  - Runs selenium tests
-- `npm run unit-test`
-  - Runs unit tests for changed files
-- `npm run unit-test-all`
-  - Runs all unit tests
+
+### Test
+
+- Integration
+  - `npm test`
+    - _Run the selenium integration tests on a pre-opened server_
+    - Runs selenium tests
+    - Note: Need to start the server before this as it uses localhost:8080
+  - `npm run integration`
+    - _Run the selenium tests with a new test server_
+    - Starts server with 'test' env
+    - Runs selenium tests
+- Unit
+  - `npm run unit-test`
+    - _Run client unit tests for changed files_
+  - `npm run unit-test-all`
+    - _Run all client unit tests_
 
 ## License
 

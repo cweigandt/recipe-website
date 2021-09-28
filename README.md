@@ -92,7 +92,7 @@ Using Mocha and Selenium for integration tests.
 
 Currently running **35** testpoints
 
-See `npm test` and `npm run full-test` scripts.
+See `npm test` and `npm run integration` scripts.
 
 ## Scripts
 
@@ -112,7 +112,7 @@ See `npm test` and `npm run full-test` scripts.
 - `npm test`
   - Runs selenium tests
   - Note: Need to start the server before this as it uses localhost:8080
-- `npm run full-test`
+- `npm run integration`
   - Starts server with 'test' env
   - Runs selenium tests
 

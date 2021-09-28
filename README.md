@@ -64,7 +64,7 @@ recipes
   |
   |___ $RECIPE NAME 1$
       |
-      |___ createdDates : array<number>     // optional array of unix timestamps for when the recipe was made
+      |___ cookedDates : array<number>      // optional array of unix timestamps for when the recipe was made
       |___ imageLocation : string           // src location of image
       |___ ingredients : array<string>      // e.g. '1 cup of flour'
       |___ name : string                    // name of recipe, can include spaces
@@ -80,6 +80,7 @@ recipes
       |___ time : string                    // how long to make, e.g. '1h 30m'
       |___ uploadTime : number              // unix timestamp of when recipe was uploaded
       |___ uploader: string                 // name of uploader
+      |___ visits: number                   // optional count of visits to the recipe
   |
   |___ $RECIPE NAME 2$
       |___ ...

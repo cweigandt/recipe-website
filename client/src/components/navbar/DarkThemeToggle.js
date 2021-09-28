@@ -13,7 +13,12 @@ const DarkThemeToggle = () => {
   const [isDarkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
-    setDarkMode(cookies['light-mode-enabled'] === 'false')
+    if (
+      cookies['light-mode-enabled'] &&
+      cookies['light-mode-enabled'] === 'true'
+    ) {
+      setDarkMode(false)
+    }
   }, [cookies])
 
   useEffect(() => {

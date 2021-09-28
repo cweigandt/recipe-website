@@ -19,6 +19,8 @@ module.exports = class Page {
       .forBrowser('chrome')
       .setChromeOptions(chrome.Options.fromCapabilities(capabilities))
       .build()
+
+    this.driver.manage().deleteAllCookies()
   }
 
   visit(ext) {
@@ -40,12 +42,11 @@ module.exports = class Page {
   }
 
   findByCSS(css) {
-    this.driver.wait(
+    return this.driver.wait(
       until.elementLocated(By.css(css)),
       15000,
       'Looking for element'
     )
-    return this.driver.findElement(By.css(css))
   }
 
   getElementCount(css) {

@@ -1,5 +1,6 @@
 [![Selenium CI](https://github.com/cweigandt/recipe-website/actions/workflows/selenium_ci.yaml/badge.svg)](https://github.com/cweigandt/recipe-website/actions/workflows/selenium_ci.yaml)[![Unit Tests CI](https://github.com/cweigandt/recipe-website/actions/workflows/unit_ci.yaml/badge.svg)](https://github.com/cweigandt/recipe-website/actions/workflows/unit_ci.yaml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/cweigandt/recipe-website.svg?style=flat)]()
+[![Activity](https://img.shields.io/github/commit-activity/m/cweigandt/recipe-website)]()
 [![Version](https://badge.fury.io/gh/cweigandt%2Frecipe-website.svg)]()
 
 ## Table of Contents
@@ -88,15 +89,11 @@ recipes
 
 ## Testing
 
-Using Mocha and Selenium for integration tests.
+Using `mocha` and `selenium` for integration tests.
 
-Currently running **35** integration testpoints
+Using `jest` and `enzyme` for unit tests.
 
-Using Jest and Enzyme for unit tests.
-
-Currently running **1** unit testpoints
-
-See `npm test` and `npm run integration` scripts.
+See **Test** section of **Scripts**
 
 ## Scripts
 

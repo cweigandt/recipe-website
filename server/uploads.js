@@ -140,7 +140,7 @@ module.exports = function (app) {
       })
   })
 
-  app.get('/createAllThumbnails', async function (req, res, next) {
+  app.get('/manualUpdate', async function (req, res, next) {
     // This code is here for a template
     res.redirect('/')
     return
@@ -150,30 +150,16 @@ module.exports = function (app) {
       .getAllRecipes()
       .then((recipes) => {
         recipes.forEach(async (recipe, index) => {
-          if (!recipe.thumbnail && recipe.imageLocation) {
-            setTimeout(async () => {
-              console.log(recipe.name)
-              const thumbnail = await saveThumbnail(
-                req,
-                res,
-                recipe.name,
-                recipe.imageLocation
-              ).catch(console.error)
-              customDB.manuallyUpdate(recipe.name, 'thumbnail', thumbnail)
+          setTimeout(async () => {
+            console.log(recipe.name)
+            await customDB.manuallyUpdate(recipe.name, 'visits', 0)
 
-              handled = handled + 1
-              if (handled === recipes.length) {
-                res.status(200)
-                res.redirect('/')
-              }
-            }, 4000 * (index - handled))
-          } else {
             handled = handled + 1
             if (handled === recipes.length) {
               res.status(200)
               res.redirect('/')
             }
-          }
+          }, 100 * (index - handled))
         })
       })
       .catch(console.error)

@@ -20,7 +20,7 @@ const DarkThemeToggle = () => {
     if (isInitialMount.current) {
       isInitialMount.current = false
     } else {
-      document.body.classList.toggle('dark-theme')
+      document.body.classList.toggle('dark-theme', isDarkMode)
       setCookie('light-mode-enabled', !isDarkMode, {
         maxAge: 60 * 60 * 24 * 365 * 1000, // yearly
       })

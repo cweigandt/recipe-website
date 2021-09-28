@@ -81,7 +81,7 @@ exports.handleIMadeThis = (recipeName) => {
     const newCookedDates = [new Date().getTime(), ...cookedDates]
 
     const recipeDoc = getDBRecipe(db, recipeName)
-    recipeDoc.update({ cookedDates: newCookedDates })
+    return recipeDoc.update({ cookedDates: newCookedDates })
   })
 }
 
@@ -91,7 +91,7 @@ exports.handleRecipeVisit = (recipeName) => {
     const newVisits = visits + 1
 
     const recipeDoc = getDBRecipe(db, recipeName)
-    recipeDoc.update({ visits: newVisits })
+    return recipeDoc.update({ visits: newVisits })
   })
 }
 
@@ -100,7 +100,7 @@ exports.manuallyUpdate = function (docName, field, value) {
   item[field] = value
 
   let recipesDoc = getDBRecipe(db, docName)
-  recipesDoc.update(item)
+  return recipesDoc.update(item)
 }
 
 exports.validateCredentials = (credentials) => {

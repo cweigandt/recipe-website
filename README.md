@@ -1,4 +1,5 @@
-![Tests](https://github.com/cweigandt/recipe-website/actions/workflows/selenium_ci.yaml/badge.svg)
+![Selenium Tests CI](https://github.com/cweigandt/recipe-website/actions/workflows/selenium_ci.yaml/badge.svg)
+[![Unit Tests CI](https://github.com/cweigandt/recipe-website/actions/workflows/unit_ci.yaml/badge.svg)](https://github.com/cweigandt/recipe-website/actions/workflows/unit_ci.yaml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/cweigandt/recipe-website.svg?style=flat)]()
 [![Version](https://badge.fury.io/gh/cweigandt%2Frecipe-website.svg)]()
 

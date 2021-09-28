@@ -90,7 +90,11 @@ recipes
 
 Using Mocha and Selenium for integration tests.
 
-Currently running **35** testpoints
+Currently running **35** integration testpoints
+
+Using Jest and Enzyme for unit tests.
+
+Currently running **1** unit testpoints
 
 See `npm test` and `npm run integration` scripts.
 
@@ -115,6 +119,10 @@ See `npm test` and `npm run integration` scripts.
 - `npm run integration`
   - Starts server with 'test' env
   - Runs selenium tests
+- `npm run unit-test`
+  - Runs unit tests for changed files
+- `npm run unit-test-all`
+  - Runs all unit tests
 
 ## License
 

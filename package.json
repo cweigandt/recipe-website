@@ -8,8 +8,8 @@
     "start-test-env": "export NODE_ENV='test' && npm start && export NODE_ENV=''",
     "dev": "export PORT=3001 && node --inspect server/index.js",
     "test": "mocha ./test/tests",
-    "test-unit": "cd client && npm test",
-    "test-unit-all": "export CI=true && npm run test-unit && export CI=false",
+    "unit-test": "cd client && npm test",
+    "unit-test-all": "export CI=true && npm run unit-test && export CI=false",
     "build": "npm install && cd client && npm install && npm run build",
     "quick-build": "cd client && npm run build",
     "integration": "start-server-and-test start-test-env http://localhost:8080 test"

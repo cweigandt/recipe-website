@@ -1,4 +1,5 @@
 import SlantToggle from '../widgets/SlantToggle'
+import { useCookies } from 'react-cookie'
 
 import { ReactComponent as MoonSVG } from '../../svg/moon.svg'
 import { ReactComponent as SunSVG } from '../../svg/sun.svg'
@@ -7,16 +8,29 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import '../../styles/navbar/DarkThemeToggle.css'
 
 const DarkThemeToggle = () => {
-  const [isDarkMode, setDarkMode] = useState(true)
   const isInitialMount = useRef(true)
+  const [cookies, setCookie] = useCookies(['user'])
+  const [isDarkMode, setDarkMode] = useState(true)
+
+  useEffect(() => {
+    if (
+      cookies['light-mode-enabled'] &&
+      cookies['light-mode-enabled'] === 'true'
+    ) {
+      setDarkMode(false)
+    }
+  }, [cookies])
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false
     } else {
-      document.body.classList.toggle('dark-theme')
+      document.body.classList.toggle('dark-theme', isDarkMode)
+      setCookie('light-mode-enabled', !isDarkMode, {
+        maxAge: 60 * 60 * 24 * 365 * 1000, // yearly
+      })
     }
-  }, [isDarkMode])
+  }, [isDarkMode, setCookie])
 
   const handleChange = useCallback((side) => {
     setDarkMode(side === 'A')

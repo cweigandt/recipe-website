@@ -88,19 +88,42 @@ describe('NavBar', function () {
   describe('Menu', () => {
     it('opens navbar menu', async () => {
       await page.findByCSS(NAVBAR.MENU_TOGGLE).click()
+      await page.sleep(500) // animation
       return page.findByCSS(NAVBAR.MENU)
+    })
+
+    it('closes navbar menu', async () => {
+      await page.findByCSS(NAVBAR.MENU_TOGGLE).click()
+      return page.getElementCount(NAVBAR.MENU).then((count) => {
+        expect(count).toBe(0)
+      })
     })
 
     describe('Dark Mode', () => {
       it('has dark mode by default', async () => {
-        await page.findByCSS(HOME.DARK_BODY)
+        await page.findByCSS(NAVBAR.MENU_TOGGLE).click()
+        await page.sleep(500) // animation
 
+        await page.findByCSS(HOME.DARK_BODY)
         return page.findByCSS(NAVBAR.DARK_MODE_DARK_ON)
       })
 
       it('switches to light mode', async () => {
         await page.findByCSS(NAVBAR.DARK_MODE_LIGHT).click()
         await page.findByCSS(HOME.LIGHT_BODY)
+
+        await page.findByCSS(NAVBAR.DARK_MODE_LIGHT_ON)
+      })
+
+      it('keeps light mode on refresh', async () => {
+        await page.driver.navigate().refresh()
+        await page.getElementCount(HOME.DARK_BODY).then((count) => {
+          expect(count).toBe(0)
+        })
+        await page.findByCSS(HOME.LIGHT_BODY)
+
+        await page.findByCSS(NAVBAR.MENU_TOGGLE).click()
+        await page.sleep(500) // animation
 
         return page.findByCSS(NAVBAR.DARK_MODE_LIGHT_ON)
       })

@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 
 import '../../styles/carddeck/DeckBanner.css'
 
-function DeckBanner(props) {
+function DeckBanner({ name, imageLocation, onSearchText }) {
   const [isSearching, setIsSearching] = useState(false)
 
   function handleSearchText(e) {
     let searchText = e.target.value
     window.scrollTo(0, 0)
-    props.onSearchText(searchText)
+    onSearchText(searchText)
 
     if (searchText) {
       setIsSearching(true)
@@ -19,14 +19,12 @@ function DeckBanner(props) {
     }
   }
 
-  const recipeName = props.name || ''
+  const recipeName = name || ''
   const linkURL = '/recipe/' + recipeName.replace(/ /g, '_')
 
   return (
     <div id='bannerWrapper' class={isSearching ? 'searching' : ''}>
-      {props.imageLocation && (
-        <img id='bannerImage' src={props.imageLocation} alt='' />
-      )}
+      {imageLocation && <img id='bannerImage' src={imageLocation} alt='' />}
       <form class='search-wrapper' onSubmit={() => false}>
         <div class='searchBar-wrapper'>
           <input

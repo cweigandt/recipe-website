@@ -48,16 +48,26 @@ function UploadForm(props) {
   window.confetti = handleUploadSuccess
 
   const handleFormSubmit = (e) => {
+    const { dispatch, formSubmitAction, recipe } = props
     e.preventDefault()
 
     const formData = new FormData(formRef.current)
-    if (props.recipe && props.recipe.name !== formData.get('name')) {
-      formData.set('oldName', props.recipe.name)
+    if (recipe && recipe.name !== formData.get('name')) {
+      formData.set('oldName', recipe.name)
+    }
+    if (recipe && recipe.uploadTime) {
+      formData.set('uploadTime', recipe.uploadTime)
+    }
+    if (recipe && recipe.visits) {
+      formData.set('visits', recipe.visits)
+    }
+    if (recipe && recipe.cookedDates) {
+      formData.set('cookedDates', recipe.cookedDates)
     }
 
-    props.dispatch(addAlert('Uploading', ALERT_TYPES.STATUS))
+    dispatch(addAlert('Uploading', ALERT_TYPES.STATUS))
 
-    fetch(props.formSubmitAction || '/upload-recipe', {
+    fetch(formSubmitAction || '/upload-recipe', {
       method: 'POST',
       redirect: 'manual',
       body: formData,
@@ -71,7 +81,7 @@ function UploadForm(props) {
           handleUploadSuccess()
         }
 
-        props.dispatch(addAlert(data.response, status))
+        dispatch(addAlert(data.response, status))
       })
     })
     return false

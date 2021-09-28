@@ -34,12 +34,23 @@ const html = fs
   .readFileSync(path.resolve(__dirname, '../client/build/index.html'))
   .toString()
 
-const getHTMLString = ({ serverData, ogTitle, ogImage, ogDescription }) => {
-  return html
+const getHTMLString = ({
+  serverData,
+  ogTitle,
+  ogImage,
+  ogDescription,
+  isLightMode,
+}) => {
+  let newString = html
     .replace(/%DATA%/, serverData)
     .replace(/%OG_TITLE%/g, ogTitle)
     .replace(/%OG_IMAGE%/, ogImage)
     .replace(/%OG_DESCRIPTION%/, ogDescription)
+
+  if (isLightMode) {
+    newString = newString.replace(`class="dark-theme"`, '')
+  }
+  return newString
 }
 
 const getServerData = () => {
@@ -62,6 +73,7 @@ app.get('/recipe/:recipeName', (req, res) => {
         ogTitle: requestedRecipe.name,
         ogImage: requestedRecipe.imageLocation,
         ogDescription: 'Create delicious recipes',
+        isLightMode: req.cookies['light-mode-enabled'] === 'true',
       })
       res.send(htmlCopy)
     })
@@ -83,6 +95,7 @@ app.get(/^[^\.]*$/, (req, res) => {
         ogImage:
           'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Avocado_Toast.jpeg',
         ogDescription: 'Create delicious recipes',
+        isLightMode: req.cookies['light-mode-enabled'] === 'true',
       })
       res.send(htmlCopy)
     })

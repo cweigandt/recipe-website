@@ -38,24 +38,22 @@ const RecipeCardDeck = ({ filter }) => {
 
   const handleSearchText = useCallback(
     (searchText) => {
-      setVisibleRecipes(
-        recipes.filter((recipe, index) => {
-          return (
-            recipe.name.toUpperCase().match(searchText.toUpperCase()) !==
-              null ||
-            recipe.tags.some(
-              (tag) =>
-                tag.toUpperCase().match(searchText.toUpperCase()) !== null
-            )
+      const newVisibleRecipes = recipes.filter((recipe, index) => {
+        return (
+          recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null ||
+          recipe.tags.some(
+            (tag) => tag.toUpperCase().match(searchText.toUpperCase()) !== null
           )
-        })
-      )
+        )
+      })
 
-      if (visibleRecipes.length > 0) {
-        setRandomRecipe(chooseRandomRecipe(visibleRecipes))
+      setVisibleRecipes(newVisibleRecipes)
+
+      if (newVisibleRecipes.length > 0) {
+        setRandomRecipe(chooseRandomRecipe(newVisibleRecipes))
       }
     },
-    [recipes, visibleRecipes]
+    [recipes]
   )
 
   return (

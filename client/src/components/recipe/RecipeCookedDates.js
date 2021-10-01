@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import '../../styles/recipe/RecipeCookedDates.css'
 
 const RecipeCookedDates = ({ dates }) => {
-  if (!dates) {
+  if (!dates || dates.length === 0) {
     return null
   }
 

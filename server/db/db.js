@@ -1,7 +1,7 @@
 const Firestore = require('@google-cloud/firestore')
 
 const Queries = require('./dbQueries')
-const { rinseInput } = require('./uploadUtils')
+const { datesAreOnSameDay, rinseInput } = require('./uploadUtils')
 
 const db = new Firestore({
   projectId: 'recipe-website-269020',
@@ -78,6 +78,14 @@ exports.handleEditForm = async function (body, file, thumbnail) {
 exports.handleIMadeThis = (recipeName) => {
   return Queries.doc(db, 'recipes', recipeName).then((recipeData) => {
     const cookedDates = recipeData.cookedDates || []
+
+    if (
+      cookedDates.length > 0 &&
+      datesAreOnSameDay(new Date(cookedDates[0]), new Date())
+    ) {
+      return Promise.resolve()
+    }
+
     const newCookedDates = [new Date().getTime(), ...cookedDates]
 
     const recipeDoc = getDBRecipe(db, recipeName)

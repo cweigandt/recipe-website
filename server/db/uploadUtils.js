@@ -90,3 +90,8 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
 
   return rinsedItem
 }
+
+exports.datesAreOnSameDay = (first, second) =>
+  first.getFullYear() === second.getFullYear() &&
+  first.getMonth() === second.getMonth() &&
+  first.getDate() === second.getDate()

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import RecipeCard from './RecipeCard'
 import DeckBanner from './DeckBanner'
 import '../../styles/carddeck/RecipeCardDeck.css'
+import SortBar from '../sort/SortBar'
+import { sortByType, SORT_TYPES } from '../../utilities/SortUtilities'
 
 const chooseRandomRecipe = (recipes) => {
   // Loop 3 times trying to find a recipe with an image
@@ -20,6 +22,7 @@ const RecipeCardDeck = ({ filter }) => {
   const [recipes, setRecipes] = useState([])
   const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState([])
+  const [sortType, setSortType] = useState(SORT_TYPES.UPLOAD)
 
   const initializeData = useCallback((recipes) => {
     setRandomRecipe(chooseRandomRecipe(recipes))
@@ -38,7 +41,7 @@ const RecipeCardDeck = ({ filter }) => {
 
   const handleSearchText = useCallback(
     (searchText) => {
-      const newVisibleRecipes = recipes.filter((recipe, index) => {
+      let newVisibleRecipes = recipes.filter((recipe, index) => {
         return (
           recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null ||
           recipe.tags.some(
@@ -47,13 +50,26 @@ const RecipeCardDeck = ({ filter }) => {
         )
       })
 
+      newVisibleRecipes = sortByType(sortType, newVisibleRecipes)
       setVisibleRecipes(newVisibleRecipes)
 
       if (newVisibleRecipes.length > 0) {
         setRandomRecipe(chooseRandomRecipe(newVisibleRecipes))
       }
     },
-    [recipes]
+    [recipes, sortType]
+  )
+
+  const handleSortChange = useCallback(
+    (type) => {
+      setSortType(type)
+
+      if (visibleRecipes.length > 1) {
+        const newVisibleRecipes = sortByType(type, visibleRecipes)
+        setVisibleRecipes(newVisibleRecipes)
+      }
+    },
+    [visibleRecipes]
   )
 
   return (
@@ -66,6 +82,7 @@ const RecipeCardDeck = ({ filter }) => {
       <div id='numRecipesCounter' data-test-id='recipe-counter'>
         {visibleRecipes.length}
       </div>
+      <SortBar selectedType={sortType} onSortChange={handleSortChange} />
       <div id='recipeCardDeck' class={recipes.length === 0 ? '' : 'loaded'}>
         {visibleRecipes.map((recipe) => {
           return <RecipeCard {...recipe}></RecipeCard>

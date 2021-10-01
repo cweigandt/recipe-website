@@ -7,16 +7,16 @@ import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
 import { ReactComponent as StarSVG } from '../../svg/star.svg'
 
-function RecipeCard(props) {
-  function getDaysOld(uploadTime) {
-    let ms = Date.now() - uploadTime
-    let seconds = ms / 1000
-    let minutes = seconds / 60
-    let hours = minutes / 60
-    let days = hours / 24
-    return Math.floor(days)
-  }
+const getDaysOld = (uploadTime) => {
+  let ms = Date.now() - uploadTime
+  let seconds = ms / 1000
+  let minutes = seconds / 60
+  let hours = minutes / 60
+  let days = hours / 24
+  return Math.floor(days)
+}
 
+const RecipeCard = (props) => {
   const renderFavoritesTag = () => {
     let children = []
     if (props.tags.includes(`Brittany's Favorites`)) {

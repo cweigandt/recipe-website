@@ -26,6 +26,7 @@ const SortBar = ({ selectedType, onSortChange }) => {
 
   return (
     <div className='sort-bar'>
+      Sort by:
       {renderBubble(SORT_TYPES.UPLOAD, 'Upload')}
       {renderBubble(SORT_TYPES.VISITS, 'Visits')}
       {renderBubble(SORT_TYPES.COOKED_DATES, 'Cooked')}

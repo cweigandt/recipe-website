@@ -111,25 +111,17 @@ exports.manuallyUpdate = function (docName, field, value) {
   return recipesDoc.update(item)
 }
 
-exports.validateCredentials = (credentials) => {
+exports.getUsers = () => {
   const promise = new Promise(function (resolve, reject) {
     db.collection('users')
       .get()
       .then((snapshot) => {
-        const { username, password } = credentials
-        let found = false
+        let users = []
         snapshot.forEach((doc) => {
           const data = doc.data()
-          const docUsername = data.username
-          const docPassword = data.password
-          if (docUsername === username && docPassword === password) {
-            resolve(username)
-            found = true
-          }
+          users.push({ username: data.username, password: data.password })
         })
-        if (!found) {
-          reject(username)
-        }
+        resolve(users)
       })
       .catch((err) => {
         reject(err)

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
-const Hashes = require('jshashes')
+const bcrypt = require('bcrypt')
 
 // Cookie expires yearly
 const jwtExpirySeconds = 60 * 60 * 24 * 365
@@ -14,6 +14,21 @@ if (process.env.NODE_ENV === 'test') {
   jwtKey = fs
     .readFileSync(path.resolve(__dirname, './credentials/jwtKey.txt'))
     .toString()
+}
+
+const applyToken = (username, res) => {
+  // Create a new token with the username in the payload
+  // and which expires 1y after issue
+  const token = jwt.sign({ username }, jwtKey, {
+    algorithm: 'HS256',
+    expiresIn: jwtExpirySeconds,
+  })
+
+  // set the cookie as the token string, with a similar max age as the token
+  // here, the max age is in milliseconds, so we multiply by 1000
+  res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 })
+  res.status(200)
+  res.end()
 }
 
 exports.listen = function (app, customDB) {
@@ -31,25 +46,37 @@ exports.listen = function (app, customDB) {
       return res.status(401).end()
     }
 
-    const encryptedPassword = new Hashes.SHA1().b64(password)
     customDB
-      .validateCredentials({ username, password: encryptedPassword })
-      .then(() => {
-        // Create a new token with the username in the payload
-        // and which expires 1y after issue
-        const token = jwt.sign({ username }, jwtKey, {
-          algorithm: 'HS256',
-          expiresIn: jwtExpirySeconds,
-        })
+      .getUsers()
+      .then(
+        (users) => {
+          const foundUser = users.find((user) => user.username === username)
+          if (!foundUser) {
+            // Could not find user for given username
+            res.status(401).send('Username not found')
+            return
+          }
 
-        // set the cookie as the token string, with a similar max age as the token
-        // here, the max age is in milliseconds, so we multiply by 1000
-        res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 })
-        res.status(200)
-        res.end()
-      })
+          bcrypt.compare(password, foundUser.password, (err, isMatch) => {
+            if (!isMatch) {
+              res.status(401).send('Password is not a match')
+              return
+            }
+            if (err) {
+              res.status(500).send('Error logging in')
+            }
+
+            applyToken(foundUser.username, res)
+          })
+        },
+        () => {
+          // Read of users in db was rejected
+          res.status(500).end()
+        }
+      )
       .catch(() => {
-        res.status(401).end()
+        // Read of users in db errored
+        res.status(500).end()
       })
   })
 

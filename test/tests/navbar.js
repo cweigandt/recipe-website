@@ -19,7 +19,41 @@ describe('NavBar', function () {
       return page.findByCSS(NAVBAR.SIGN_IN_MODAL)
     })
 
-    it('accepts username and password and removes modal', async () => {
+    it('errors on bad username', async () => {
+      await page.findByCSS(NAVBAR.SIGN_IN_USERNAME).sendKeys('not_my_user')
+      await page.findByCSS(NAVBAR.SIGN_IN_PASSWORD).sendKeys('my_pass')
+
+      await page.findByCSS(NAVBAR.SIGN_IN_SUBMIT).click()
+
+      // give time for round trip api call
+      await page.sleep(500)
+
+      await page.getElementCount(NAVBAR.SIGN_IN_MODAL).then((count) => {
+        expect(count).toBe(1)
+      })
+
+      await page.clearInput(NAVBAR.SIGN_IN_USERNAME)
+      return page.clearInput(NAVBAR.SIGN_IN_PASSWORD)
+    })
+
+    it('errors on bad password', async () => {
+      await page.findByCSS(NAVBAR.SIGN_IN_USERNAME).sendKeys('my_user')
+      await page.findByCSS(NAVBAR.SIGN_IN_PASSWORD).sendKeys('not_my_pass')
+
+      await page.findByCSS(NAVBAR.SIGN_IN_SUBMIT).click()
+
+      // give time for round trip api call
+      await page.sleep(500)
+
+      await page.getElementCount(NAVBAR.SIGN_IN_MODAL).then((count) => {
+        expect(count).toBe(1)
+      })
+
+      await page.clearInput(NAVBAR.SIGN_IN_USERNAME)
+      return page.clearInput(NAVBAR.SIGN_IN_PASSWORD)
+    })
+
+    it('accepts correct username and password and removes modal', async () => {
       await page.findByCSS(NAVBAR.SIGN_IN_USERNAME).sendKeys('my_user')
       await page.findByCSS(NAVBAR.SIGN_IN_PASSWORD).sendKeys('my_pass')
 

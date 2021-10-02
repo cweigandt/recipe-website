@@ -51,8 +51,10 @@ All of the following should be placed in `server/credentials`
 ## Database
 
 The following is the structure of the database hosted on firecloud.
-The only setup you would have to do is create the `global` collection manually.
+The only setup you would have to do is create the `global` and `users` collections manually.
 You can then upload any recipes you want and they should be added to the `recipes` collection with the following format.
+
+_Note: There is no UI for creating users. Only for signing in. This was on purpose as I didn't need to add anyone else. However if you are re-using this repo, you will need to populate the `users` collection and hash your own passwords. See https://www.npmjs.com/package/bcrypt_
 
 ```cpp
 global
@@ -84,6 +86,16 @@ recipes
       |___ visits: number                   // optional count of visits to the recipe
   |
   |___ $RECIPE NAME 2$
+      |___ ...
+
+users
+  |
+  |___ $USERNAME 1$
+      |
+      |___ username : string
+      |___ password : string                // bcrypt-encrypted password
+  |
+  |___ $USERNAME 2$
       |___ ...
 ```
 

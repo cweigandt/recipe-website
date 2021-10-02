@@ -1,4 +1,5 @@
 const recipes = require('./mockRecipes')
+const bcrypt = require('bcrypt')
 
 exports.requestRecipe = function (recipeName) {
   return new Promise((resolve, reject) => {
@@ -75,8 +76,13 @@ exports.manuallyUpdate = function (docName, field, value) {
   console.error('should not be manually updating with mock yet')
 }
 
-exports.validateCredentials = function (credentials) {
+exports.getUsers = function () {
   return new Promise((resolve, reject) => {
-    resolve(credentials.username)
+    bcrypt.hash('my_pass', 2, function (err, hash) {
+      resolve([
+        { username: 'other_user', password: 'not my password' },
+        { username: 'my_user', password: hash },
+      ])
+    })
   })
 }

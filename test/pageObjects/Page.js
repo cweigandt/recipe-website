@@ -1,4 +1,4 @@
-const { Builder, By, Capabilities, until } = require('selenium-webdriver')
+const { Builder, By, Capabilities, Key, until } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
 
 const pageRoot = 'http://127.0.0.1:8080'
@@ -53,5 +53,13 @@ module.exports = class Page {
     return this.driver
       .findElements(By.css(css))
       .then((elements) => elements.length)
+  }
+
+  async clearInput(css) {
+    const input = this.findByCSS(css)
+    const text = await input.getAttribute('value')
+    for (let count = 0; count < text.length; count++) {
+      await input.sendKeys(Key.BACK_SPACE)
+    }
   }
 }

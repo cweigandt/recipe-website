@@ -9,9 +9,7 @@ import Badge from '../widgets/Badge'
 import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
-
-import { ReactComponent as PrintSVG } from '../../svg/print.svg'
-import { ReactComponent as EditSVG } from '../../svg/edit.svg'
+import RecipeButtons from './RecipeButtons'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -37,23 +35,6 @@ function Recipe(props) {
 
     setRecipe(foundRecipe)
   }, [props.urlName])
-
-  function renderEditButton() {
-    return (
-      props.isLoggedIn && (
-        <Link
-          to={{
-            pathname: '/edit',
-            state: { initialRecipeName: recipe.name },
-          }}
-          className='btn socialIcon'
-          data-test-id='edit-button'
-        >
-          <EditSVG />
-        </Link>
-      )
-    )
-  }
 
   function renderIngredients(ingredients) {
     return (
@@ -133,18 +114,7 @@ function Recipe(props) {
         <span id='dotSeparator'>&#9679;</span>
         {<Nutrition recipe={recipe} />}
       </div>
-      <div id='socialButtons' className='noprint'>
-        <div
-          className='btn socialIcon'
-          onClick={() => {
-            window.print()
-            return false
-          }}
-        >
-          <PrintSVG />
-        </div>
-        {renderEditButton()}
-      </div>
+      <RecipeButtons isLoggedIn={props.isLoggedIn} recipe={recipe} />
 
       <div className='image-wrapper'>
         <img id='recipeImage' src={recipe.imageLocation} alt='' />

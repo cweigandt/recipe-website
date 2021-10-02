@@ -9,7 +9,7 @@ import Badge from '../widgets/Badge'
 import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
-import RecipeButtons from './RecipeButtons'
+import OptionsButtons from './OptionsButtons'
 
 function Recipe(props) {
   const [recipe, setRecipe] = useState({})
@@ -114,7 +114,7 @@ function Recipe(props) {
         <span id='dotSeparator'>&#9679;</span>
         {<Nutrition recipe={recipe} />}
       </div>
-      <RecipeButtons isLoggedIn={props.isLoggedIn} recipe={recipe} />
+      <OptionsButtons isLoggedIn={props.isLoggedIn} recipe={recipe} />
 
       <div className='image-wrapper'>
         <img id='recipeImage' src={recipe.imageLocation} alt='' />

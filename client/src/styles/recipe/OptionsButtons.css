@@ -1,0 +1,22 @@
+#recipeWrapper #optionsButtons {
+  float: right;
+  position: relative;
+}
+
+#recipeWrapper #optionsButtons .btn {
+  color: var(--recipe-text-color);
+
+  cursor: pointer;
+}
+
+#recipeWrapper #optionsButtons .options-icon {
+  display: inline-block;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  transition: color 0.3s ease-out;
+  padding: 0;
+  margin: 0 3px;
+}

@@ -3,6 +3,8 @@ import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as JSONSVG } from '../../svg/json.svg'
 import { Link } from 'react-router-dom'
 
+import '../../styles/recipe/OptionsButtons.css'
+
 const RecipeButtons = ({ isLoggedIn, recipe }) => {
   const renderEditButton = () => {
     return (
@@ -24,7 +26,7 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
   const renderJSONButton = () => {
     return (
       <div
-        className='btn socialIcon'
+        className='btn options-icon'
         onClick={() => {
           window.navigator.clipboard.writeText(JSON.stringify(recipe, null, 2))
           return false
@@ -36,9 +38,9 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
   }
 
   return (
-    <div id='socialButtons' className='noprint'>
+    <div id='optionsButtons' className='noprint'>
       <div
-        className='btn socialIcon'
+        className='btn options-icon'
         onClick={() => {
           window.print()
           return false

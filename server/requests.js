@@ -5,9 +5,15 @@ const api = require('./getters/getAPI')
 
 const reactToDBPromise = (promise, res) => {
   promise
-    .then((data) => {
-      res.send(data)
-    })
+    .then(
+      (data) => {
+        res.send(data)
+      },
+      (err) => {
+        res.status(500)
+        console.log(err)
+      }
+    )
     .catch((err) => {
       res.status(500)
       console.log(err)
@@ -62,7 +68,7 @@ module.exports = function (app) {
 
     const body = {
       title: recipe.name,
-      servings: recipe.servings === '-' ? 4 : JSON.parse(recipe.servings),
+      servings: recipe.servings === '-' ? 4 : recipe.servings,
       ingredients: recipe.ingredients
         .concat(recipe.subIngredients1)
         .concat(recipe.subIngredients2),

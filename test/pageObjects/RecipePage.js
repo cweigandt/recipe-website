@@ -1,4 +1,3 @@
-const { Builder, By, until } = require('selenium-webdriver')
 const Page = require('./Page')
 
 const recipe = {

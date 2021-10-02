@@ -50,6 +50,11 @@ module.exports = {
     FORM_WRAPPER: '#formWrapper',
   },
 
+  ALERTS: {
+    SUCCESS: `[data-test-id='alert']`,
+    CLOSE: `[data-test-id='alert-close']`,
+  },
+
   UPLOAD: {
     NAME: `[data-test-id='upload-field-name']`,
     SECTION: `[data-test-id='upload-field-section']`,
@@ -62,7 +67,9 @@ module.exports = {
     SUB_INGREDIENTS_2_NAME: `[data-test-id='upload-field-subIngredients2Name']`,
     SUB_INGREDIENTS_2: `[data-test-id='upload-field-subIngredients2']`,
     STEPS: `[data-test-id='upload-field-steps']`,
-    TAGS: `.tags-look`,
+    TAGS: `.tagsInput`,
     UPLOADER: `[data-test-id='upload-field-uploader']`,
+
+    SUBMIT: `[data-test-id='upload-submit']`,
   },
 }

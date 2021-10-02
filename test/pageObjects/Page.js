@@ -44,8 +44,8 @@ module.exports = class Page {
   findByCSS(css) {
     return this.driver.wait(
       until.elementLocated(By.css(css)),
-      15000,
-      'Looking for element'
+      3000,
+      `Looking for element matching '${css}'`
     )
   }
 

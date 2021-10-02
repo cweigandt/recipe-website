@@ -2,7 +2,7 @@ const multer = require('multer')
 const multerGoogleStorage = require('multer-google-storage')
 const { Storage } = require('@google-cloud/storage')
 
-const auth = require('./auth')
+const auth = require('../auth')
 
 const mime = require('mime')
 const Jimp = require('jimp')

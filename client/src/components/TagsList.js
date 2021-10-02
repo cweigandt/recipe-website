@@ -20,7 +20,7 @@ function TagsList(props) {
   const sortedTags = Object.keys(tagCounts).sort()
 
   return (
-    <div class='badge-list'>
+    <div className='badge-list'>
       {sortedTags.map((tag) => {
         return (
           <Link
@@ -28,7 +28,7 @@ function TagsList(props) {
             style={{ 'text-decoration': 'none' }}
           >
             <div
-              class='badge badge-primary'
+              className='badge badge-primary'
               style={{ display: 'block', float: 'left', clear: 'left' }}
             >
               {`${tag} - ${tagCounts[tag]}`}

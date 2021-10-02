@@ -9,8 +9,10 @@ export const BOOKMARK_TYPES = {
   STAR: 'star',
 }
 
-function CardBookmark(props) {
-  return <div class={`card-bookmark ${props.type || ''}`}>{props.children}</div>
+const CardBookmark = (props) => {
+  return (
+    <div className={`card-bookmark ${props.type || ''}`}>{props.children}</div>
+  )
 }
 
 CardBookmark.propTypes = {

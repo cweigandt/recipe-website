@@ -67,10 +67,8 @@ const RecipeCard = (props) => {
         <div class='recipe-section'>{props.section}</div>
         <div class='recipe-title'>{props.name}</div>
       </div>
-      {daysOld <= 3 ? (
+      {daysOld <= 3 && (
         <CardBookmark type={BOOKMARK_TYPES.NEW}>NEW</CardBookmark>
-      ) : (
-        ''
       )}
       {daysOld > 3 && renderFavoritesTag()}
     </Link>

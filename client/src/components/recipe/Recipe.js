@@ -46,7 +46,7 @@ function Recipe(props) {
             pathname: '/edit',
             state: { initialRecipeName: recipe.name },
           }}
-          class='btn socialIcon'
+          className='btn socialIcon'
           data-test-id='edit-button'
         >
           <EditSVG />
@@ -57,9 +57,9 @@ function Recipe(props) {
 
   function renderIngredients(ingredients) {
     return (
-      <ul class='ingredients-list' id='ingredientsList'>
+      <ul className='ingredients-list' id='ingredientsList'>
         {ingredients.map((ingredient) => {
-          return <li class='ingredient-item'>{ingredient}</li>
+          return <li className='ingredient-item'>{ingredient}</li>
         })}
       </ul>
     )
@@ -69,7 +69,7 @@ function Recipe(props) {
     return (
       title && (
         <div>
-          <div class='ingredients-title'>{title}</div>
+          <div className='ingredients-title'>{title}</div>
           {renderIngredients(ingredients)}
         </div>
       )
@@ -81,9 +81,9 @@ function Recipe(props) {
       <ul id='stepsList'>
         {steps.map((step, num) => {
           return (
-            <li class='recipe-step-item'>
-              <div class='stepTitle'>Step {num + 1}</div>
-              <div class='stepText'>{step}</div>
+            <li className='recipe-step-item'>
+              <div className='stepTitle'>Step {num + 1}</div>
+              <div className='stepText'>{step}</div>
             </li>
           )
         })}
@@ -94,12 +94,15 @@ function Recipe(props) {
   function renderTags(tags) {
     return (
       tags.length > 0 && (
-        <div class='badge-list noprint'>
-          <div class='tagTitle'>Tags</div>
+        <div className='badge-list noprint'>
+          <div className='tagTitle'>Tags</div>
           {tags.map((tag) => {
             return (
               <Badge>
-                <Link to={'/tag/' + tag.replace(/ /g, '_')} class='tag-link'>
+                <Link
+                  to={'/tag/' + tag.replace(/ /g, '_')}
+                  className='tag-link'
+                >
                   {tag}
                 </Link>
               </Badge>
@@ -120,7 +123,7 @@ function Recipe(props) {
   }, 200)
 
   return (
-    <div id='recipeWrapper' class='print' ref={wrapperRef}>
+    <div id='recipeWrapper' className='print' ref={wrapperRef}>
       <div id='recipeTitle'>{recipe.name}</div>
       <div id='subTitle'>
         <span id='sectionName'>{recipe.section.toLowerCase()}</span>
@@ -130,9 +133,9 @@ function Recipe(props) {
         <span id='dotSeparator'>&#9679;</span>
         {<Nutrition recipe={recipe} />}
       </div>
-      <div id='socialButtons' class='noprint'>
+      <div id='socialButtons' className='noprint'>
         <div
-          class='btn socialIcon'
+          className='btn socialIcon'
           onClick={() => {
             window.print()
             return false
@@ -143,7 +146,7 @@ function Recipe(props) {
         {renderEditButton()}
       </div>
 
-      <div class='image-wrapper'>
+      <div className='image-wrapper'>
         <img id='recipeImage' src={recipe.imageLocation} alt='' />
       </div>
 
@@ -151,8 +154,8 @@ function Recipe(props) {
 
       <div id='recipeBody'>
         <div id='ingredientsColumn'>
-          <div class='sticky' id='ingredientsColumnSticky'>
-            <div class='ingredients-title'>Ingredients</div>
+          <div className='sticky' id='ingredientsColumnSticky'>
+            <div className='ingredients-title'>Ingredients</div>
             {renderIngredients(recipe.ingredients)}
             {renderSubIngredients(
               recipe.subIngredients1Name,

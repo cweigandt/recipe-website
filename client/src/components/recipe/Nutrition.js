@@ -32,35 +32,35 @@ function Nutrition({ recipe }) {
   }, [recipe])
 
   return (
-    <div class='nutrition'>
+    <div className='nutrition'>
       {nutritionInfo.pricePerServing && (
-        <span class='nutrition-price' title='Price per serving'>{`$${(
+        <span className='nutrition-price' title='Price per serving'>{`$${(
           Math.floor(nutritionInfo.pricePerServing) / 100
         ).toFixed(2)}`}</span>
       )}
       {nutritionInfo.vegetarian && (
-        <span class='nutrition-info vegetarian' title='Vegetarian'>
+        <span className='nutrition-info vegetarian' title='Vegetarian'>
           VE
         </span>
       )}
       {nutritionInfo.vegan && (
-        <span class='nutrition-info vegan' title='Vegan'>
+        <span className='nutrition-info vegan' title='Vegan'>
           VN
         </span>
       )}
       {nutritionInfo.dairyFree && (
-        <span class='nutrition-info dairy-free' title='Dairy free'>
+        <span className='nutrition-info dairy-free' title='Dairy free'>
           DF
         </span>
       )}
       {nutritionInfo.glutenFree && (
-        <span class='nutrition-info gluten-free' title='Gluten free'>
+        <span className='nutrition-info gluten-free' title='Gluten free'>
           GF
         </span>
       )}
       {nutritionInfo.error && (
         <span
-          class='nutrition-info nutrition-error'
+          className='nutrition-info nutrition-error'
           title={nutritionInfo.error}
         >
           N/A

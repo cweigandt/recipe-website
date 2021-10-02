@@ -54,7 +54,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
   return (
     <Modal class='sign-in-modal'>
       <div>Sign In</div>
-      <div class='modal-close-button' onClick={handleClose}>
+      <div className='modal-close-button' onClick={handleClose}>
         ❌
       </div>
       <form
@@ -63,13 +63,13 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
         onSubmit={handleFormSubmit}
         ref={formRef}
       >
-        <div class='form-group'>
-          <label for={'username'} class='form-label'>
+        <div className='form-group'>
+          <label for={'username'} className='form-label'>
             Username:
           </label>
           <input
             type='text'
-            class='form-control'
+            className='form-control'
             data-test-id='login-username'
             id='username'
             onKeyDown={(e) => {
@@ -81,13 +81,13 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
             name='username'
           />
         </div>
-        <div class='form-group'>
-          <label for={'password'} class='form-label'>
+        <div className='form-group'>
+          <label for={'password'} className='form-label'>
             Password:
           </label>
           <input
             type='password'
-            class='form-control'
+            className='form-control'
             data-test-id='login-password'
             id='password'
             onKeyDown={(e) => {
@@ -103,7 +103,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
           type='submit'
           id='signOnSubmit'
           data-test-id='login-submit'
-          class='btn'
+          className='btn'
         >
           Submit
         </button>

@@ -40,7 +40,7 @@ const AreYouSureModal = (props) => {
           onClick={handleClose}
           data-test-id='are-you-sure-close'
           id='areYouSureCancel'
-          class='btn'
+          className='btn'
         >
           Cancel
         </button>
@@ -48,7 +48,7 @@ const AreYouSureModal = (props) => {
           type='submit'
           id='areYouSureSubmit'
           data-test-id='are-you-sure-submit'
-          class='btn'
+          className='btn'
         >
           Confirm
         </button>

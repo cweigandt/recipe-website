@@ -7,16 +7,16 @@ import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
 import { ReactComponent as StarSVG } from '../../svg/star.svg'
 
-function RecipeCard(props) {
-  function getDaysOld(uploadTime) {
-    let ms = Date.now() - uploadTime
-    let seconds = ms / 1000
-    let minutes = seconds / 60
-    let hours = minutes / 60
-    let days = hours / 24
-    return Math.floor(days)
-  }
+const getDaysOld = (uploadTime) => {
+  let ms = Date.now() - uploadTime
+  let seconds = ms / 1000
+  let minutes = seconds / 60
+  let hours = minutes / 60
+  let days = hours / 24
+  return Math.floor(days)
+}
 
+const RecipeCard = (props) => {
   const renderFavoritesTag = () => {
     let children = []
     if (props.tags.includes(`Brittany's Favorites`)) {
@@ -46,7 +46,7 @@ function RecipeCard(props) {
   return (
     <Link
       to={linkURL}
-      class='recipe-card'
+      className='recipe-card'
       style={{ '--section-color': `var(--${props.section}-color)` }}
     >
       <LazyLoad
@@ -58,19 +58,17 @@ function RecipeCard(props) {
       >
         <img
           src={imageLocation}
-          class='recipe-image'
+          className='recipe-image'
           alt={props.name}
           loading='lazy'
         />
       </LazyLoad>
-      <div class='recipe-body'>
-        <div class='recipe-section'>{props.section}</div>
-        <div class='recipe-title'>{props.name}</div>
+      <div className='recipe-body'>
+        <div className='recipe-section'>{props.section}</div>
+        <div className='recipe-title'>{props.name}</div>
       </div>
-      {daysOld <= 3 ? (
+      {daysOld <= 3 && (
         <CardBookmark type={BOOKMARK_TYPES.NEW}>NEW</CardBookmark>
-      ) : (
-        ''
       )}
       {daysOld > 3 && renderFavoritesTag()}
     </Link>

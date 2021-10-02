@@ -17,7 +17,7 @@ const RecipeCookedDates = ({ dates }) => {
   const totalTimes = dates.length
   const suffix = totalTimes > 1 ? 'times' : 'time'
   return (
-    <div class='cooked-dates'>
+    <div className='cooked-dates'>
       Last made {formattedMonth} {formattedYear} ({totalTimes} {suffix})
     </div>
   )

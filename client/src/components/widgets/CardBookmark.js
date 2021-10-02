@@ -9,12 +9,14 @@ export const BOOKMARK_TYPES = {
   STAR: 'star',
 }
 
-function CardBookmark(props) {
-  return <div class={`card-bookmark ${props.type || ''}`}>{props.children}</div>
+const CardBookmark = (props) => {
+  return (
+    <div className={`card-bookmark ${props.type || ''}`}>{props.children}</div>
+  )
 }
 
 CardBookmark.propTypes = {
-  type: PropTypes.instanceOf(BOOKMARK_TYPES),
+  type: PropTypes.oneOf(Object.values(BOOKMARK_TYPES)),
 }
 
 export default CardBookmark

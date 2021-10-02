@@ -12,7 +12,7 @@ function RecipeGrid(props) {
   }, [])
 
   return (
-    <div id='recipeGrid' class={recipes.length === 0 ? '' : 'loaded'}>
+    <div id='recipeGrid' className={recipes.length === 0 ? '' : 'loaded'}>
       {recipes
         .filter((recipe) => {
           return recipe.thumbnail && recipe.thumbnail.length > 0

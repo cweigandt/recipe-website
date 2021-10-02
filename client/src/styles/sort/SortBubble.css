@@ -1,0 +1,21 @@
+.sort-bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: lightblue;
+  color: rgb(59, 59, 59);
+
+  border-radius: 3px;
+  border: 1px solid var(--navbar-text-color);
+
+  width: 70px;
+  margin: 10px;
+  padding: 4px;
+
+  cursor: pointer;
+}
+
+.sort-bubble.selected {
+  background-color: lightgreen;
+}

@@ -76,8 +76,8 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
 
   const renderLink = (link, text, icon) => {
     return (
-      <li class='nav-item'>
-        <Link to={link} onClick={toggleMenu} class='navbar-menu-link'>
+      <li className='nav-item'>
+        <Link to={link} onClick={toggleMenu} className='navbar-menu-link'>
           {icon}
           {text}
         </Link>
@@ -94,7 +94,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
   }
 
   const renderSeparator = () => {
-    return <li class='nav-item separator' />
+    return <li className='nav-item separator' />
   }
 
   const toggleMenu = () => {
@@ -126,7 +126,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     if (isLoggedIn) {
       return (
         <div
-          class='navbar-logged-in'
+          className='navbar-logged-in'
           data-test-id='logout-button'
           onClick={handleLogoutClick}
         ></div>
@@ -135,31 +135,31 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
 
     return (
       <div
-        class='navbar-button'
+        className='navbar-button'
         data-test-id='login-button'
         onClick={handleLoginClick}
       >
-        <LoginSVG class='login-svg' />
+        <LoginSVG className='login-svg' />
       </div>
     )
   }
 
   return (
     <Fragment>
-      <nav id='navbarParent' class='noprint navbar'>
+      <nav id='navbarParent' className='noprint navbar'>
         <div
           onClick={toggleMenu}
-          class={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
+          className={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
           data-test-id='navbar-menu-toggle'
         >
           <ChevronsRight />
         </div>
 
-        <Link to='/' class='navbar-brand' id='navBarBrand'>
+        <Link to='/' className='navbar-brand' id='navBarBrand'>
           {title}
         </Link>
 
-        <div class='navbar-right'>{renderLoginButton()}</div>
+        <div className='navbar-right'>{renderLoginButton()}</div>
       </nav>
       {renderMenu()}
     </Fragment>

@@ -1,4 +1,6 @@
-#recipeCardDeck.loaded .recipe-card {
+#recipeCardDeck .recipe-card.animation-enter,
+#recipeCardDeck .recipe-card.animation-enter-active,
+#recipeCardDeck .recipe-card.animation-enter-done {
   opacity: 1;
 }
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import '../../styles/alerts/Alert.css'
 import { removeAlert } from '../../actions/alertsActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
+import withCSSAnimation from '../hoc/withCSSAnimation'
 
 export const ALERT_TYPES = {
   SUCCESS: 'success',
@@ -47,4 +48,4 @@ Alert.propTypes = {
   isMostRecent: PropTypes.bool,
 }
 
-export default connect()(Alert)
+export default connect()(withCSSAnimation(Alert, { timeout: 300 }))

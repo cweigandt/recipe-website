@@ -1,0 +1,27 @@
+#recipeWrapper .image-wrapper {
+  padding-bottom: 20px;
+  padding-top: 40px;
+}
+
+#recipeWrapper #recipeImage {
+  width: 100%;
+  height: 100%;
+  left: 55%;
+  transform: translateX(-50%);
+  position: relative;
+  opacity: 0;
+
+  transition: 0.5s width, 1s opacity, 1s left;
+}
+
+#recipeWrapper #recipeImage.animation-enter {
+  opacity: 0.01;
+}
+#recipeWrapper #recipeImage.animation-enter-active {
+  opacity: 1;
+  left: 50%;
+}
+#recipeWrapper #recipeImage.animation-enter-done {
+  opacity: 1;
+  left: 50%;
+}

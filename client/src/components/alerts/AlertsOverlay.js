@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 
 import Alert from './Alert'
 
-const AlertsOverlay = (props) => {
-  var { alerts } = props
-
+const AlertsOverlay = ({ alerts }) => {
   var renderAlerts = () => {
     return alerts.map((alert, i) => {
       return (

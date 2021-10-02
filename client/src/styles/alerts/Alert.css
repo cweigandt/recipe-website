@@ -15,7 +15,10 @@
   flex-direction: column;
 
   position: relative;
-  top: 80px;
+  top: 0;
+  opacity: 0;
+  transition: 0.3s top ease, 0.3s opacity;
+
   width: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -56,4 +59,11 @@
   background-color: #bbb;
   border: 1px solid black;
   color: black;
+}
+
+.alert.animation-enter,
+.alert.animation-enter-active,
+.alert.animation-enter-done {
+  top: 80px;
+  opacity: 1;
 }

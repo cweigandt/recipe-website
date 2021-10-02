@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -9,14 +10,16 @@ import Nutrition from './Nutrition'
 import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
+import RecipeImage from './RecipeImage'
+import withCSSAnimation from '../hoc/withCSSAnimation'
 
-function Recipe(props) {
+const Recipe = ({ urlName }) => {
   const [recipe, setRecipe] = useState({})
 
   const wrapperRef = React.useRef()
 
   useEffect(() => {
-    const recipeName = props.urlName.replace(/_/g, ' ')
+    const recipeName = urlName.replace(/_/g, ' ')
     const foundRecipe = window.serverData.allRecipes.find(
       (r) => r.name === recipeName
     )
@@ -33,9 +36,9 @@ function Recipe(props) {
     }
 
     setRecipe(foundRecipe)
-  }, [props.urlName])
+  }, [urlName])
 
-  function renderIngredients(ingredients) {
+  const renderIngredients = (ingredients) => {
     return (
       <ul className='ingredients-list' id='ingredientsList'>
         {ingredients.map((ingredient) => {
@@ -45,7 +48,7 @@ function Recipe(props) {
     )
   }
 
-  function renderSubIngredients(title, ingredients) {
+  const renderSubIngredients = (title, ingredients) => {
     return (
       title && (
         <div>
@@ -56,7 +59,7 @@ function Recipe(props) {
     )
   }
 
-  function renderStepsList(steps) {
+  const renderStepsList = (steps) => {
     return (
       <ul id='stepsList'>
         {steps.map((step, num) => {
@@ -71,7 +74,7 @@ function Recipe(props) {
     )
   }
 
-  function renderTags(tags) {
+  const renderTags = (tags) => {
     return (
       tags.length > 0 && (
         <div className='badge-list noprint'>
@@ -98,10 +101,6 @@ function Recipe(props) {
     return <div id='recipeWrapper'></div>
   }
 
-  setTimeout(() => {
-    wrapperRef.current.classList.add('loaded')
-  }, 200)
-
   return (
     <div id='recipeWrapper' className='print' ref={wrapperRef}>
       <div id='recipeTitle'>{recipe.name}</div>
@@ -115,9 +114,7 @@ function Recipe(props) {
       </div>
       <OptionsButtons recipe={recipe} />
 
-      <div className='image-wrapper'>
-        <img id='recipeImage' src={recipe.imageLocation} alt='' />
-      </div>
+      <RecipeImage imageLocation={recipe.imageLocation} />
 
       <RecipeCookedDates dates={recipe.cookedDates} />
 
@@ -156,4 +153,6 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default Recipe
+export default withCSSAnimation(Recipe, {
+  timeout: 200,
+})

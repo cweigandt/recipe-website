@@ -99,6 +99,7 @@ describe('Home', function () {
           .then((el) => el.getAttribute('class'))
           .then((classes) => {
             expect(classes).toContain('selected')
+          })
       })
     })
   })

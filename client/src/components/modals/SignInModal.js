@@ -52,7 +52,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
   }, [dispatch, id])
 
   return (
-    <Modal className='sign-in-modal'>
+    <Modal class='sign-in-modal'>
       <div>Sign In</div>
       <div className='modal-close-button' onClick={handleClose}>
         ❌

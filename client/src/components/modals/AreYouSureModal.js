@@ -24,7 +24,7 @@ const AreYouSureModal = (props) => {
   }
 
   return (
-    <Modal className='are-you-sure-modal'>
+    <Modal class='are-you-sure-modal'>
       <h4 style={{ margin: '20px' }}>Are you sure?</h4>
       <div style={{ 'font-size': '16px', 'font-style': 'italic' }}>
         {props.additionalText}

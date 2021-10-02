@@ -154,6 +154,5 @@ Recipe.propTypes = {
 }
 
 export default withCSSAnimation(Recipe, {
-  cssPrefix: 'recipe-wrapper',
   timeout: 200,
 })

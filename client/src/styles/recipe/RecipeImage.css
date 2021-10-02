@@ -14,14 +14,14 @@
   transition: 0.5s width, 1s opacity, 1s left;
 }
 
-#recipeWrapper #recipeImage.recipe-image-enter {
+#recipeWrapper #recipeImage.animation-enter {
   opacity: 0.01;
 }
-#recipeWrapper #recipeImage.recipe-image-enter-active {
+#recipeWrapper #recipeImage.animation-enter-active {
   opacity: 1;
   left: 50%;
 }
-#recipeWrapper #recipeImage.recipe-image-enter-done {
+#recipeWrapper #recipeImage.animation-enter-done {
   opacity: 1;
   left: 50%;
 }

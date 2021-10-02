@@ -47,13 +47,13 @@
   text-decoration: none;
 }
 
-#recipeWrapper.recipe-wrapper-enter {
+#recipeWrapper.animation-enter {
   opacity: 0.01;
 }
-#recipeWrapper.recipe-wrapper-enter-active {
+#recipeWrapper.animation-enter-active {
   opacity: 1;
 }
-#recipeWrapper.recipe-wrapper-enter-done {
+#recipeWrapper.animation-enter-done {
   opacity: 1;
 }
 

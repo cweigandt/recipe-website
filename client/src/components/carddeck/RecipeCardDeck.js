@@ -35,9 +35,9 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
   }, [])
 
   useEffect(() => {
-    const filteredRecipes =
-      optionalRecipes ||
-      window.serverData.allRecipes.filter((recipe) => filter(recipe))
+    const filteredRecipes = (
+      optionalRecipes || window.serverData.allRecipes
+    ).filter((recipe) => filter(recipe))
 
     initializeData(filteredRecipes)
   }, [filter, initializeData, optionalRecipes])

@@ -25,3 +25,9 @@
   opacity: 1;
   left: 50%;
 }
+
+@media screen and (max-width: 1000px) {
+  #recipeWrapper #recipeImage {
+    width: 111%;
+  }
+}

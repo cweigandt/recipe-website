@@ -136,10 +136,6 @@
     padding-left: 5%;
     padding-right: 5%;
   }
-
-  #recipeWrapper #recipeImage {
-    width: 111%;
-  }
 }
 
 @media screen and (max-width: 559px) {

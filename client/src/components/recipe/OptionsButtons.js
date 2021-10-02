@@ -1,11 +1,18 @@
+import { connect } from 'react-redux'
+
 import { ReactComponent as PrintSVG } from '../../svg/print.svg'
 import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as JSONSVG } from '../../svg/json.svg'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import '../../styles/recipe/OptionsButtons.css'
+import { addAlert } from '../../actions/alertsActions'
+import { ALERT_TYPES } from '../alerts/Alert'
 
-const RecipeButtons = ({ isLoggedIn, recipe }) => {
+const BUTTON_CLASSES = 'btn options-icon'
+
+const OptionsButtons = ({ dispatch, isLoggedIn, recipe }) => {
   const renderEditButton = () => {
     return (
       isLoggedIn && (
@@ -14,7 +21,7 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
             pathname: '/edit',
             state: { initialRecipeName: recipe.name },
           }}
-          className='btn socialIcon'
+          className={BUTTON_CLASSES}
           data-test-id='edit-button'
         >
           <EditSVG />
@@ -26,9 +33,19 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
   const renderJSONButton = () => {
     return (
       <div
-        className='btn options-icon'
+        className={BUTTON_CLASSES}
         onClick={() => {
-          window.navigator.clipboard.writeText(JSON.stringify(recipe, null, 2))
+          const recipeText = JSON.stringify(recipe, null, 2)
+          window.navigator.clipboard.writeText(recipeText).then(
+            () => {
+              dispatch(
+                addAlert(`JSON copied to clipboard`, ALERT_TYPES.SUCCESS)
+              )
+            },
+            () => {
+              addAlert('Unable to write to clipboard', ALERT_TYPES.ERROR)
+            }
+          )
           return false
         }}
       >
@@ -40,7 +57,7 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
   return (
     <div id='optionsButtons' className='noprint'>
       <div
-        className='btn options-icon'
+        className={BUTTON_CLASSES}
         onClick={() => {
           window.print()
           return false
@@ -54,4 +71,12 @@ const RecipeButtons = ({ isLoggedIn, recipe }) => {
   )
 }
 
-export default RecipeButtons
+OptionsButtons.propTypes = {
+  dispatch: PropTypes.object.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  recipe: PropTypes.object.isRequired,
+}
+
+export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
+  OptionsButtons
+)

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -114,7 +113,7 @@ function Recipe(props) {
         <span id='dotSeparator'>&#9679;</span>
         {<Nutrition recipe={recipe} />}
       </div>
-      <OptionsButtons isLoggedIn={props.isLoggedIn} recipe={recipe} />
+      <OptionsButtons recipe={recipe} />
 
       <div className='image-wrapper'>
         <img id='recipeImage' src={recipe.imageLocation} alt='' />
@@ -157,6 +156,4 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
-  Recipe
-)
+export default Recipe

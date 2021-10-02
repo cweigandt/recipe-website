@@ -13,6 +13,8 @@ export const ALERT_TYPES = {
   STATUS: 'status',
 }
 
+const SUCCESS_ALERT_TIMEOUT = 2000
+
 function Alert({ alert, dispatch, isMostRecent = false }) {
   let timeout = null
 
@@ -22,7 +24,7 @@ function Alert({ alert, dispatch, isMostRecent = false }) {
   }
 
   if (alert.style === ALERT_TYPES.SUCCESS) {
-    timeout = setTimeout(handleClose, 4000)
+    timeout = setTimeout(handleClose, SUCCESS_ALERT_TIMEOUT)
   }
 
   if (alert.style === ALERT_TYPES.STATUS && !isMostRecent) {

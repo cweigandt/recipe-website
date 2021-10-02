@@ -1,6 +1,13 @@
 #recipeWrapper #optionsButtons {
   float: right;
   position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding-top: 3px;
+
+  background-color: var(--background-color);
 }
 
 #recipeWrapper #optionsButtons .btn {

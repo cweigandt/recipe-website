@@ -11,6 +11,7 @@ import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
+import withCSSAnimation from '../hoc/withCSSAnimation'
 
 const Recipe = ({ urlName }) => {
   const [recipe, setRecipe] = useState({})
@@ -100,10 +101,6 @@ const Recipe = ({ urlName }) => {
     return <div id='recipeWrapper'></div>
   }
 
-  setTimeout(() => {
-    wrapperRef.current.classList.add('loaded')
-  }, 200)
-
   return (
     <div id='recipeWrapper' className='print' ref={wrapperRef}>
       <div id='recipeTitle'>{recipe.name}</div>
@@ -156,4 +153,7 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default Recipe
+export default withCSSAnimation(Recipe, {
+  cssPrefix: 'recipe-wrapper',
+  timeout: 200,
+})

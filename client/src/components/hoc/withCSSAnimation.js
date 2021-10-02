@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-const withCSSAnimation = (WrappedElement) => {
-  return ({ cssPrefix, timeout = 500 }) => {
+const withCSSAnimation = (WrappedComponent, { cssPrefix, timeout = 500 }) => {
+  return (props) => {
     const [isMounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const withCSSAnimation = (WrappedElement) => {
 
     return (
       <CSSTransition in={isMounted} classNames={cssPrefix} timeout={timeout}>
-        {WrappedElement}
+        <WrappedComponent {...props} />
       </CSSTransition>
     )
   }

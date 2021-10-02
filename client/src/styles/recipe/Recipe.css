@@ -47,9 +47,14 @@
   text-decoration: none;
 }
 
-#recipeWrapper.loaded {
+#recipeWrapper.recipe-wrapper-enter {
+  opacity: 0.01;
+}
+#recipeWrapper.recipe-wrapper-enter-active {
   opacity: 1;
-  transition: padding 0.5s, opacity 0.5s;
+}
+#recipeWrapper.recipe-wrapper-enter-done {
+  opacity: 1;
 }
 
 #recipeWrapper #recipeBody {

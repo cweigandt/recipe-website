@@ -11,7 +11,7 @@ function GridCard(props) {
   const linkURL = '/recipe/' + props.name.replace(/ /g, '_')
 
   return (
-    <Link to={linkURL} class='grid-card'>
+    <Link to={linkURL} className='grid-card'>
       <FlipCard
         front={
           <LazyLoad
@@ -23,7 +23,7 @@ function GridCard(props) {
           >
             <img
               src={props.thumbnail}
-              class='grid-card-image'
+              className='grid-card-image'
               alt={props.name}
               loading='lazy'
             />
@@ -31,16 +31,16 @@ function GridCard(props) {
         }
         back={
           <div
-            class='grid-card-back'
+            className='grid-card-back'
             style={{
               'background-image': `url("${props.thumbnail}")`,
             }}
           >
             <div
-              class='grid-card-back-color'
+              className='grid-card-back-color'
               style={{ '--section-color': `var(--${props.section}-color)` }}
             />
-            <div class='grid-card-title'>{props.name}</div>
+            <div className='grid-card-title'>{props.name}</div>
           </div>
         }
         classes='grid-flip-card'

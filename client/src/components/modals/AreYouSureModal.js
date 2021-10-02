@@ -24,7 +24,7 @@ const AreYouSureModal = (props) => {
   }
 
   return (
-    <Modal class='are-you-sure-modal'>
+    <Modal className='are-you-sure-modal'>
       <h4 style={{ margin: '20px' }}>Are you sure?</h4>
       <div style={{ 'font-size': '16px', 'font-style': 'italic' }}>
         {props.additionalText}
@@ -40,7 +40,7 @@ const AreYouSureModal = (props) => {
           onClick={handleClose}
           data-test-id='are-you-sure-close'
           id='areYouSureCancel'
-          class='btn'
+          className='btn'
         >
           Cancel
         </button>
@@ -48,7 +48,7 @@ const AreYouSureModal = (props) => {
           type='submit'
           id='areYouSureSubmit'
           data-test-id='are-you-sure-submit'
-          class='btn'
+          className='btn'
         >
           Confirm
         </button>

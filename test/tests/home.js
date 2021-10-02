@@ -78,6 +78,29 @@ describe('Home', function () {
           expect(text).toBe('1')
         })
     })
+
+    describe('Sorting', () => {
+      it('Sorts by Upload by default', async () => {
+        await page.visit()
+
+        await page
+          .findByCSS(HOME.SORT_BUBBLE_UPLOAD)
+          .then((el) => el.getAttribute('class'))
+          .then((classes) => {
+            expect(classes).toContain('selected')
+          })
+      })
+
+      it('Switches sort properly', async () => {
+        await page.findByCSS(HOME.SORT_BUBBLE_VISITS).click()
+
+        await page
+          .findByCSS(HOME.SORT_BUBBLE_VISITS)
+          .then((el) => el.getAttribute('class'))
+          .then((classes) => {
+            expect(classes).toContain('selected')
+      })
+    })
   })
 
   after(() => page.driver.quit())

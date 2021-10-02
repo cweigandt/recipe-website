@@ -9,6 +9,10 @@ module.exports = {
     COUNTER: `div[data-test-id='recipe-counter']`,
     SEARCH_BAR: `input[data-test-id='search-bar']`,
 
+    SORT_BUBBLE_UPLOAD: `div[data-test-id='sort-bubble-Upload']`,
+    SORT_BUBBLE_VISITS: `div[data-test-id='sort-bubble-Visits']`,
+    SORT_BUBBLE_COOKED: `div[data-test-id='sort-bubble-Cooked']`,
+
     LIGHT_BODY: `body:not(.dark-theme)`,
     DARK_BODY: `body.dark-theme`,
   },

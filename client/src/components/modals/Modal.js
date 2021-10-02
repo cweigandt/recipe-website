@@ -4,8 +4,8 @@ import '../../styles/modals/Modal.css'
 
 const Modal = (props) => {
   return (
-    <div class='modal-bg'>
-      <div class={`modal ${props.class}`}>{props.children}</div>
+    <div className='modal-bg'>
+      <div className={`modal ${props.class}`}>{props.children}</div>
     </div>
   )
 }

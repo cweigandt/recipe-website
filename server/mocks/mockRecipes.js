@@ -41,6 +41,7 @@ const recipe1 = {
     'When chicken wings are cool, toss half the batch with old bay seasoning and the other half with honey sriracha sauce.',
   ],
   subIngredients2Name: '',
+  visits: 0,
 }
 
 const recipe2 = {
@@ -88,6 +89,7 @@ const recipe2 = {
   subIngredients1: [],
   subIngredients2Name: '',
   subIngredients2: [],
+  visits: 5,
 }
 
 const recipe3 = {
@@ -125,6 +127,7 @@ const recipe3 = {
   imageLocation:
     'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas.jpeg',
   subIngredients2: [],
+  visits: 2,
 }
 
 module.exports = [recipe1, recipe2, recipe3]

@@ -95,13 +95,13 @@ function UploadForm(props) {
     children = null,
   }) => {
     return (
-      <div class='form-group'>
-        <label for={id} class='form-label'>
+      <div className='form-group'>
+        <label for={id} className='form-label'>
           {title}
         </label>
         <input
           type='text'
-          class='form-control'
+          className='form-control'
           id={id}
           onKeyDown={(e) => {
             if (e.keyCode === 13 || e.key === 'Enter') {
@@ -136,11 +136,11 @@ function UploadForm(props) {
           },
         })}
 
-        <div class='form-group'>
-          <label for='sectionInput' class='form-label'>
+        <div className='form-group'>
+          <label for='sectionInput' className='form-label'>
             Section
           </label>
-          <select class='form-control' id='sectionInput' name='section'>
+          <select className='form-control' id='sectionInput' name='section'>
             {sections.map((section) => (
               <option
                 value={section}
@@ -169,24 +169,24 @@ function UploadForm(props) {
           },
         })}
 
-        <div class='form-group'>
-          <label for='imageInput' class='form-label'>
+        <div className='form-group'>
+          <label for='imageInput' className='form-label'>
             Image:
           </label>
           <input
             type='file'
-            class='form-control-file'
+            className='form-control-file'
             id='imageInput'
             name='image'
           />
         </div>
 
-        <div class='form-group'>
-          <label for='ingredientsInput' class='form-label'>
+        <div className='form-group'>
+          <label for='ingredientsInput' className='form-label'>
             Ingredients
           </label>
           <textarea
-            class='form-control'
+            className='form-control'
             id='ingredientsInput'
             name='ingredients'
             rows='10'
@@ -209,7 +209,7 @@ function UploadForm(props) {
           },
           children: (
             <textarea
-              class='form-control'
+              className='form-control'
               id='subIngredients1Input'
               name='subIngredients1'
               rows='5'
@@ -232,7 +232,7 @@ function UploadForm(props) {
           },
           children: (
             <textarea
-              class='form-control'
+              className='form-control'
               id='subIngredients2Input'
               name='subIngredients2'
               rows='5'
@@ -245,12 +245,12 @@ function UploadForm(props) {
           ),
         })}
 
-        <div class='form-group'>
-          <label for='stepsInput' class='form-label'>
+        <div className='form-group'>
+          <label for='stepsInput' className='form-label'>
             Steps
           </label>
           <textarea
-            class='form-control'
+            className='form-control'
             id='stepsInput'
             name='steps'
             rows='12'
@@ -261,8 +261,8 @@ function UploadForm(props) {
           ></textarea>
         </div>
 
-        <div class='form-group'>
-          <label for={'tags'} class='form-label'>
+        <div className='form-group'>
+          <label for={'tags'} className='form-label'>
             Tags
           </label>
           <Tags
@@ -294,7 +294,7 @@ function UploadForm(props) {
           },
         })}
 
-        <button type='submit' id='submitInput' class='btn'>
+        <button type='submit' id='submitInput' className='btn'>
           Submit
         </button>
       </form>

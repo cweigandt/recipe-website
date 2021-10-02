@@ -46,7 +46,7 @@ const RecipeCard = (props) => {
   return (
     <Link
       to={linkURL}
-      class='recipe-card'
+      className='recipe-card'
       style={{ '--section-color': `var(--${props.section}-color)` }}
     >
       <LazyLoad
@@ -58,14 +58,14 @@ const RecipeCard = (props) => {
       >
         <img
           src={imageLocation}
-          class='recipe-image'
+          className='recipe-image'
           alt={props.name}
           loading='lazy'
         />
       </LazyLoad>
-      <div class='recipe-body'>
-        <div class='recipe-section'>{props.section}</div>
-        <div class='recipe-title'>{props.name}</div>
+      <div className='recipe-body'>
+        <div className='recipe-section'>{props.section}</div>
+        <div className='recipe-title'>{props.name}</div>
       </div>
       {daysOld <= 3 && (
         <CardBookmark type={BOOKMARK_TYPES.NEW}>NEW</CardBookmark>

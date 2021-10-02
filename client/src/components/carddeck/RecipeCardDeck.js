@@ -86,7 +86,7 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
         {visibleRecipes.length}
       </div>
       <SortBar selectedType={sortType} onSortChange={handleSortChange} />
-      <div id='recipeCardDeck' class={recipes.length === 0 ? '' : 'loaded'}>
+      <div id='recipeCardDeck' className={recipes.length === 0 ? '' : 'loaded'}>
         {visibleRecipes.map((recipe) => {
           return <RecipeCard key={recipe.name} {...recipe}></RecipeCard>
         })}

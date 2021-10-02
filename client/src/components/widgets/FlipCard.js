@@ -5,10 +5,10 @@ import '../../styles/widgets/FlipCard.css'
 
 function FlipCard({ front, back, classes }) {
   return (
-    <div class={`flip-card ${classes}`}>
-      <div class='flip-card-inner'>
-        <div class='flip-card-front'>{front}</div>
-        <div class='flip-card-back'>{back}</div>
+    <div className={`flip-card ${classes}`}>
+      <div className='flip-card-inner'>
+        <div className='flip-card-front'>{front}</div>
+        <div className='flip-card-back'>{back}</div>
       </div>
     </div>
   )

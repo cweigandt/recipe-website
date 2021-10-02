@@ -44,7 +44,6 @@ describe('RecipeCardDeck', () => {
         <RecipeCardDeck optionalRecipes={mockRecipes} />
       </Router>
     )
-    console.log(rendered.debug())
     expect(rendered.find(RecipeCard)).toHaveLength(mockRecipes.length)
   })
 })

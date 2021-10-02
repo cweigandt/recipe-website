@@ -16,7 +16,7 @@ const CardBookmark = (props) => {
 }
 
 CardBookmark.propTypes = {
-  type: PropTypes.instanceOf(BOOKMARK_TYPES),
+  type: PropTypes.oneOf(Object.values(BOOKMARK_TYPES)),
 }
 
 export default CardBookmark

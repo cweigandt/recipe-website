@@ -49,4 +49,20 @@ module.exports = {
     GRID_WRAPPER: '#recipeGrid',
     FORM_WRAPPER: '#formWrapper',
   },
+
+  UPLOAD: {
+    NAME: `[data-test-id='upload-field-name']`,
+    SECTION: `[data-test-id='upload-field-section']`,
+    SERVINGS: `[data-test-id='upload-field-servings']`,
+    TIME: `[data-test-id='upload-field-time']`,
+    IMAGE: `[data-test-id='upload-field-image']`,
+    INGREDIENTS: `[data-test-id='upload-field-ingredients']`,
+    SUB_INGREDIENTS_1_NAME: `[data-test-id='upload-field-subIngredients1Name']`,
+    SUB_INGREDIENTS_1: `[data-test-id='upload-field-subIngredients1']`,
+    SUB_INGREDIENTS_2_NAME: `[data-test-id='upload-field-subIngredients2Name']`,
+    SUB_INGREDIENTS_2: `[data-test-id='upload-field-subIngredients2']`,
+    STEPS: `[data-test-id='upload-field-steps']`,
+    TAGS: `.tags-look`,
+    UPLOADER: `[data-test-id='upload-field-uploader']`,
+  },
 }

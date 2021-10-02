@@ -34,31 +34,6 @@
   font-size: 0.85rem;
 }
 
-#recipeWrapper #socialButtons {
-  float: right;
-  position: relative;
-}
-
-#recipeWrapper #socialButtons .btn {
-  color: var(--recipe-text-color);
-}
-
-#recipeWrapper #socialButtons .socialIcon {
-  display: inline-block;
-
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  text-align: center;
-  transition: color 0.3s ease-out;
-  padding: 0;
-  margin: 0 3px;
-}
-
-#recipeWrapper #socialButtons .socialIcon:hover {
-  color: #003973;
-}
-
 #recipeWrapper .image-wrapper {
   padding-bottom: 20px;
   padding-top: 40px;

@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 const customDB = require('./getters/getDB')
 require('./requests')(app)
 require('./uploads')(app)
-const auth = require('./auth')
+const auth = require('./getters/getAuth')
 auth.listen(app, customDB)
 
 const html = fs
@@ -67,6 +67,12 @@ app.get('/recipe/:recipeName', (req, res) => {
   dbPromise
     .then((allRecipes) => {
       const requestedRecipe = findRecipe(allRecipes, requestedRecipeName)
+
+      if (!requestedRecipe) {
+        res.status(404)
+        res.end()
+        return
+      }
 
       const htmlCopy = getHTMLString({
         serverData: JSON.stringify({ allRecipes: allRecipes }),

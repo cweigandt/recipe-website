@@ -33,8 +33,12 @@ function Alert({ alert, dispatch, isMostRecent = false }) {
   }
 
   return (
-    <div className={`alert ${alert.style}`} key={alert.id}>
-      <div className='alert-close' onClick={handleClose}>
+    <div className={`alert ${alert.style}`} key={alert.id} data-test-id='alert'>
+      <div
+        className='alert-close'
+        onClick={handleClose}
+        data-test-id='alert-close'
+      >
         <XCircle />
       </div>
       <div className='alert-text'>{alert.text}</div>

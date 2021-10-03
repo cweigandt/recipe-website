@@ -17,15 +17,22 @@ const getDaysOld = (uploadTime) => {
   return Math.floor(days)
 }
 
-const RecipeCard = (props) => {
+const RecipeCard = ({
+  name,
+  section,
+  tags,
+  thumbnail,
+  imageLocation,
+  uploadTime,
+}) => {
   const renderFavoritesTag = () => {
     let children = []
-    if (props.tags.includes(`Brittany's Favorites`)) {
-      children.push(<StarSVG />)
+    if (tags.includes(`Brittany's Favorites`)) {
+      children.push(<StarSVG key='star_1' />)
     }
 
-    if (props.tags.includes(`Christian's Favorites`)) {
-      children.push(<StarSVG />)
+    if (tags.includes(`Christian's Favorites`)) {
+      children.push(<StarSVG key='star_2' />)
     }
 
     if (children.length > 0) {
@@ -35,20 +42,20 @@ const RecipeCard = (props) => {
     return null
   }
 
-  const linkURL = '/recipe/' + props.name.replace(/ /g, '_')
+  const linkURL = '/recipe/' + name.replace(/ /g, '_')
 
-  const imageLocation =
-    props.thumbnail ||
-    props.imageLocation ||
+  const imageSrc =
+    thumbnail ||
+    imageLocation ||
     'https://www.medicinalgenomics.com/wp-content/uploads/2019/01/image-coming-soon-ecc.png'
 
-  const daysOld = getDaysOld(props.uploadTime)
+  const daysOld = getDaysOld(uploadTime)
 
   return (
     <Link
       to={linkURL}
       className='recipe-card'
-      style={{ '--section-color': `var(--${props.section}-color)` }}
+      style={{ '--section-color': `var(--${section}-color)` }}
     >
       <LazyLoad
         height={160}
@@ -58,20 +65,21 @@ const RecipeCard = (props) => {
         style={{ height: '160px', overflow: 'hidden' }}
       >
         <img
-          src={imageLocation}
+          src={imageSrc}
           className='recipe-image'
-          alt={props.name}
+          alt={name}
           loading='lazy'
         />
       </LazyLoad>
       <div className='recipe-body'>
-        <div className='recipe-section'>{props.section}</div>
-        <div className='recipe-title'>{props.name}</div>
+        <div className='recipe-section'>{section}</div>
+        <div className='recipe-title'>{name}</div>
       </div>
-      {daysOld <= 3 && (
+      {daysOld <= 3 ? (
         <CardBookmark type={BOOKMARK_TYPES.NEW}>NEW</CardBookmark>
+      ) : (
+        renderFavoritesTag()
       )}
-      {daysOld > 3 && renderFavoritesTag()}
     </Link>
   )
 }

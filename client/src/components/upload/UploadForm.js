@@ -102,6 +102,7 @@ function UploadForm(props) {
         <input
           type='text'
           className='form-control'
+          data-test-id={`upload-field-${name}`}
           id={id}
           onKeyDown={(e) => {
             if (e.keyCode === 13 || e.key === 'Enter') {
@@ -140,7 +141,12 @@ function UploadForm(props) {
           <label for='sectionInput' className='form-label'>
             Section
           </label>
-          <select className='form-control' id='sectionInput' name='section'>
+          <select
+            className='form-control'
+            id='sectionInput'
+            name='section'
+            data-test-id='upload-field-section'
+          >
             {sections.map((section) => (
               <option
                 value={section}
@@ -178,6 +184,7 @@ function UploadForm(props) {
             className='form-control-file'
             id='imageInput'
             name='image'
+            data-test-id='upload-field-image'
           />
         </div>
 
@@ -189,6 +196,7 @@ function UploadForm(props) {
             className='form-control'
             id='ingredientsInput'
             name='ingredients'
+            data-test-id='upload-field-ingredients'
             rows='10'
             defaultValue={
               props.recipe.ingredients
@@ -212,6 +220,7 @@ function UploadForm(props) {
               className='form-control'
               id='subIngredients1Input'
               name='subIngredients1'
+              data-test-id='upload-field-subIngredients1'
               rows='5'
               defaultValue={
                 props.recipe.subIngredients1
@@ -235,6 +244,7 @@ function UploadForm(props) {
               className='form-control'
               id='subIngredients2Input'
               name='subIngredients2'
+              data-test-id='upload-field-subIngredients2'
               rows='5'
               defaultValue={
                 props.recipe.subIngredients2
@@ -253,6 +263,7 @@ function UploadForm(props) {
             className='form-control'
             id='stepsInput'
             name='steps'
+            data-test-id='upload-field-steps'
             rows='12'
             defaultValue={
               props.recipe.steps ? props.recipe.steps.join('\n') : ''
@@ -294,7 +305,12 @@ function UploadForm(props) {
           },
         })}
 
-        <button type='submit' id='submitInput' className='btn'>
+        <button
+          type='submit'
+          id='submitInput'
+          className='btn'
+          data-test-id='upload-submit'
+        >
           Submit
         </button>
       </form>

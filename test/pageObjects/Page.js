@@ -1,5 +1,6 @@
 const { Builder, By, Capabilities, Key, until } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
+const { ALERTS } = require('../selectors')
 
 const pageRoot = 'http://127.0.0.1:8080'
 
@@ -44,9 +45,13 @@ module.exports = class Page {
   findByCSS(css) {
     return this.driver.wait(
       until.elementLocated(By.css(css)),
-      15000,
-      'Looking for element'
+      3000,
+      `Looking for element matching '${css}'`
     )
+  }
+
+  findSuccessAlert() {
+    return this.findByCSS(ALERTS.SUCCESS)
   }
 
   getElementCount(css) {

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import withCSSAnimation from '../hoc/withCSSAnimation'
 
 import '../../styles/carddeck/DeckBanner.css'
 
@@ -22,12 +23,20 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
     [onSearchText]
   )
 
+  const renderImage = () => {
+    if (!imageLocation) {
+      return null
+    }
+    const AnimatedImg = withCSSAnimation('img', { timeout: 1000 })
+    return <AnimatedImg id='bannerImage' src={imageLocation} alt='' />
+  }
+
   const recipeName = name || ''
   const linkURL = '/recipe/' + recipeName.replace(/ /g, '_')
 
   return (
     <div id='bannerWrapper' className={isSearching ? 'searching' : ''}>
-      {imageLocation && <img id='bannerImage' src={imageLocation} alt='' />}
+      {renderImage()}
       <form className='search-wrapper' onSubmit={() => false}>
         <div className='searchBar-wrapper'>
           <input

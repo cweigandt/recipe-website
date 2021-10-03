@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 
 const withCSSAnimation = (
   WrappedComponent,
-  { cssPrefix = 'animation', timeout = 500 }
+  { cssPrefix = 'animation', timeout = 500 } = {}
 ) => {
   return (props) => {
     const [isMounted, setMounted] = useState(false)

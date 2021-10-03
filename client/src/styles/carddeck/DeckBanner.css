@@ -12,13 +12,20 @@
 #bannerWrapper #bannerImage {
   height: 100%;
   width: 100%;
-  opacity: 1;
+  opacity: 0;
   position: relative;
 
   object-fit: cover;
 
   display: block;
-  transition: 0.5s opacity;
+  transition: 0.5s opacity ease-in-out;
+  transition-delay: 1.2s;
+}
+
+#bannerWrapper #bannerImage.animation-enter,
+#bannerWrapper #bannerImage.animation-enter-active,
+#bannerWrapper #bannerImage.animation-enter-done {
+  opacity: 1;
 }
 
 #bannerWrapper #bannerTitle {

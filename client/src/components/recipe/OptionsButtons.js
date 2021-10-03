@@ -34,6 +34,7 @@ const OptionsButtons = ({ dispatch, isLoggedIn, recipe }) => {
     return (
       <div
         className={BUTTON_CLASSES}
+        data-test-id='json-button'
         onClick={() => {
           const recipeText = JSON.stringify(recipe, null, 2)
           window.navigator.clipboard.writeText(recipeText).then(

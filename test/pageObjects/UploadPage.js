@@ -8,8 +8,8 @@ module.exports = class UploadPage extends Page {
     super()
   }
 
-  visit() {
-    return super.visit('upload')
+  visit(url) {
+    return super.visit(url || 'upload')
   }
 
   async enterRecipe() {

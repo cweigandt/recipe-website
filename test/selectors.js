@@ -40,6 +40,7 @@ module.exports = {
     DARK_MODE_LIGHT_ON: `.slant-toggle-wrapper [data-test-id='slant-toggle-B toggle-on']`,
   },
   RECIPE: {
+    JSON_BUTTON: `[data-test-id='json-button']`,
     EDIT_BUTTON: `[data-test-id='edit-button']`,
     I_MADE_THIS_BUTTON: `button[data-test-id='i-made-this-button']`,
   },
@@ -51,7 +52,7 @@ module.exports = {
   },
 
   ALERTS: {
-    SUCCESS: `[data-test-id='alert']`,
+    SUCCESS: `.alert.success[data-test-id='alert']`,
     CLOSE: `[data-test-id='alert-close']`,
   },
 

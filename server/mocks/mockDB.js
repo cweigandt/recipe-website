@@ -2,6 +2,7 @@ const recipes = require('./mockRecipes')
 const bcrypt = require('bcrypt')
 const { rinseInput } = require('../db/uploadUtils')
 
+console.log('Starting')
 exports.requestRecipe = function (recipeName) {
   return new Promise((resolve, reject) => {
     let found = null
@@ -58,6 +59,8 @@ exports.getRecipeImages = function () {
 exports.handleUploadForm = function (body, file, thumbnail) {
   const recipe = rinseInput(body, file, thumbnail)
   recipes.push(recipe)
+
+  return Promise.resolve()
 }
 
 exports.handleEditForm = function (body, file, thumbnail) {

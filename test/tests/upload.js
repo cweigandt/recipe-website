@@ -1,9 +1,8 @@
 const Page = require('../pageObjects/UploadPage')
 
-const { ALERTS, NAVBAR, UPLOAD } = require('../selectors')
+const { NAVBAR, UPLOAD } = require('../selectors')
 
-// ------ TODO Remove only ----------
-describe.only('Upload', function () {
+describe('Upload', function () {
   this.timeout(10000)
   let page
 
@@ -40,13 +39,13 @@ describe.only('Upload', function () {
 
   it('submits properly', async () => {
     await page.enterRecipe()
-    await page.findByCSS(UPLOAD.SUBMIT).click()
+    await page.findByCSS(UPLOAD.SUBMIT).submit()
 
-    await page.findByCSS(ALERTS.SUCCESS)
+    return page.findSuccessAlert()
   })
 
   it('adds submitted recipe to db as expected', async () => {
-    await page.visit('recipe/My_Recipe')
+    return page.visit('recipe/My_Recipe')
   })
 
   after(() => page.driver.quit())

@@ -1,7 +1,7 @@
 const customDB = require('./getters/getDB')
 const express = require('express')
 
-const auth = require('./auth')
+const auth = require('./getters/getAuth')
 const Storage = require('./getters/getStorage')
 
 module.exports = function (app) {

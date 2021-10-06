@@ -38,3 +38,9 @@
   width: 17px;
   height: 17px;
 }
+
+.card-bookmark svg path,
+.card-bookmark svg rect,
+.card-bookmark svg polygon {
+  fill: white;
+}

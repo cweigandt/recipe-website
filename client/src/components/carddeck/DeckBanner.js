@@ -27,7 +27,7 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
     if (!imageLocation) {
       return null
     }
-    const AnimatedImg = withCSSAnimation('img', { timeout: 1000 })
+    const AnimatedImg = withCSSAnimation('img', { timeout: 700 })
     return <AnimatedImg id='bannerImage' src={imageLocation} alt='' />
   }
 
@@ -48,6 +48,12 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
             placeholder='Search names or tags'
             aria-label='Search'
             onInput={handleSearchText}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13 || e.key === 'Enter') {
+                e.preventDefault()
+                return false
+              }
+            }}
           ></input>
         </div>
       </form>

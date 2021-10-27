@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { forceCheck as forceCheckLazyLoad } from 'react-lazyload'
 
 import RecipeCard from './RecipeCard'
 import DeckBanner from './DeckBanner'
@@ -59,6 +60,8 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
       if (newVisibleRecipes.length > 0) {
         setRandomRecipe(chooseRandomRecipe(newVisibleRecipes))
       }
+
+      forceCheckLazyLoad()
     },
     [recipes, sortType]
   )
@@ -70,6 +73,7 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
       if (visibleRecipes.length > 1) {
         const newVisibleRecipes = sortByType(type, visibleRecipes)
         setVisibleRecipes(newVisibleRecipes)
+        setTimeout(forceCheckLazyLoad, 300)
       }
     },
     [visibleRecipes]

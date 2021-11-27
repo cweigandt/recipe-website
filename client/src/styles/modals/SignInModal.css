@@ -1,9 +1,25 @@
 .modal.sign-in-modal .modal-close-button {
   position: absolute;
-  top: 14px;
-  right: 20px;
+  top: 30px;
+  right: 30px;
 
-  font-size: 20px;
+  transform: scale(1.2);
 
   cursor: pointer;
+}
+
+.modal.sign-in-modal .modal-close-button svg path,
+.modal.sign-in-modal .modal-close-button svg polygon,
+.modal.sign-in-modal .modal-close-button svg rect {
+  fill: #ccc;
+}
+
+
+.modal.sign-in-modal .form-control {
+  background-color: black;
+  border: 1px solid grey;
+}
+
+.modal.sign-in-modal {
+  border: 1px solid grey;
 }

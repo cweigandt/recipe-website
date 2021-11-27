@@ -10,6 +10,7 @@ import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
+import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 
 function SignInModal({ dispatch, id, isLoggedIn }) {
   const formRef = useRef(null)
@@ -55,7 +56,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
     <Modal class='sign-in-modal'>
       <div>Sign In</div>
       <div className='modal-close-button' onClick={handleClose}>
-        ❌
+        <XCircle />
       </div>
       <form
         id='signInForm'

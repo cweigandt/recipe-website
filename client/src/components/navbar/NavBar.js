@@ -15,6 +15,7 @@ import { ReactComponent as HomeSVG } from '../../svg/home.svg'
 import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
+import { ReactComponent as RenameSVG } from '../../svg/rename.svg'
 
 import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
@@ -112,6 +113,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
           {renderLink('/grid', 'Grid', <GridSVG />)}
           {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
           {isLoggedIn && renderLink('/upload', 'Upload', <UploadSVG />)}
+          {isLoggedIn && renderLink('/tags', 'Tag Rename', <RenameSVG />)}
           {renderSeparator()}
           {sections.map((section) => {
             return renderLink('/sections/' + section, section)

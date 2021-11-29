@@ -105,6 +105,11 @@ module.exports = function (app) {
   })
 
   app.post('/rename-tag', express.json(), (req, res) => {
+    if (!auth.validateJWT(req)) {
+      res.status(401).end()
+      return
+    }
+
     const fromTag = req.body.fromTag
     const toTag = req.body.toTag
     customDB

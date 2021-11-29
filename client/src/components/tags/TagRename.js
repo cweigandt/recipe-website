@@ -16,7 +16,22 @@ const TagRename = () => {
 
   const handleSubmit = useCallback(() => {
     const toBadge = tagifyRef.current.value[0].value
-    // TODO hit backend
+
+    fetch('/rename-tag', {
+      method: 'POST',
+      redirect: 'manual',
+      body: { fromTag: fromBadge, toTag: toBadge },
+    }).then((response) => {
+      response.json().then((data) => {
+        let status = ALERT_TYPES.SUCCESS
+        if (response.status !== 200) {
+          status = ALERT_TYPES.ERROR
+          console.log(data.stack)
+        }
+
+        dispatch(addAlert(data.response, status))
+      })
+    })
   }, [fromBadge, tagifyRef])
 
   let recipes = window.serverData.allRecipes

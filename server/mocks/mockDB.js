@@ -77,6 +77,12 @@ exports.handleRecipeVisit = (recipeName) => {
   })
 }
 
+exports.handleTagRename = (fromTag, toTag) => {
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
+}
+
 exports.manuallyUpdate = function (docName, field, value) {
   console.error('should not be manually updating with mock yet')
 }

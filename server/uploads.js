@@ -104,6 +104,23 @@ module.exports = function (app) {
       })
   })
 
+  app.post('/rename-tag', express.json(), (req, res) => {
+    const fromTag = req.body.fromTag
+    const toTag = req.body.toTag
+    customDB
+      .handleTagRename(fromTag, toTag)
+      .then(() => {
+        res.status(200)
+        res.send({
+          response: `Rename from ${fromTag} to ${toTag} was successful`,
+        })
+      })
+      .catch((err) => {
+        res.status(500)
+        res.send({ response: err.message, stack: err.stack })
+      })
+  })
+
   app.get('/manualUpdate', async function (req, res, next) {
     // This code is here for a template
     res.redirect('/')

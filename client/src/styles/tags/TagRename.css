@@ -1,0 +1,47 @@
+.tag-rename-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.tag-rename-wrapper-left {
+  float: left;
+  width: 40%;
+  overflow-x: hidden;
+}
+
+.tag-rename-wrapper-right {
+  float: right;
+  width: 60%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-rename-wrapper-right > * {
+  margin: 20px;
+}
+
+.from-badge {
+  pointer-events: none;
+  white-space: pre;
+}
+
+.tags-list-badge {
+  cursor: pointer;
+}
+
+.tagify--hasMaxTags .tagify__input {
+  display: none;
+}
+
+.tag-rename-submit {
+  cursor: pointer;
+  background-color: #c4ffd6;
+  border: 1px solid green;
+
+  padding: 6px 12px;
+  border-radius: 7px;
+}

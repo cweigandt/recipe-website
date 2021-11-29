@@ -103,6 +103,22 @@ exports.handleRecipeVisit = (recipeName) => {
   })
 }
 
+exports.handleTagRename = (fromTag, toTag) => {
+  getRecipesWithTag(fromTag).then((recipes) => {
+    recipes.forEach((recipe) => {
+      const recipeDoc = getDBRecipe(db, recipe.name)
+      const newTags = recipe.tags
+      const index = recipe.tags.indexOf(fromTag)
+      if (!index) {
+        // shouldn't be possible
+        return
+      }
+      newTags[index] = toTag
+      await recipeDoc.update({ tags: newTags })
+    })
+  })
+}
+
 exports.manuallyUpdate = function (docName, field, value) {
   let item = {}
   item[field] = value

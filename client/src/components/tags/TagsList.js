@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import '../styles/widgets/Badge.css'
+import '../../styles/widgets/Badge.css'
 
 function TagsList({ onBadgeClick }) {
   const [tagCounts, setTagCounts] = useState({})
@@ -23,7 +23,7 @@ function TagsList({ onBadgeClick }) {
       {sortedTags.map((tag) => {
         return (
           <div
-            className='badge badge-primary'
+            className='badge badge-primary tags-list-badge'
             onClick={() => onBadgeClick(tag)}
             style={{ display: 'block', float: 'left', clear: 'left' }}
           >

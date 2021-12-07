@@ -49,6 +49,7 @@ module.exports = {
     RECIPE_WRAPPER: '#recipeWrapper',
     GRID_WRAPPER: '#recipeGrid',
     FORM_WRAPPER: '#formWrapper',
+    TAGS_WRAPPER: '.tag-rename-wrapper',
   },
 
   ALERTS: {

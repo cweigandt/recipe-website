@@ -56,7 +56,7 @@ const TagRename = () => {
         dispatch(addAlert(data.response, status))
       })
     })
-  }, [fromBadge, tagifyRef])
+  }, [dispatch, fromBadge, tagifyRef])
 
   let recipes = window.serverData.allRecipes
   let allTags = {}

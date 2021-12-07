@@ -13,13 +13,27 @@ const TagRename = () => {
   const dispatch = useDispatch()
 
   const [fromBadge, setFromBadge] = useState(' ')
+  const [submitClickable, setSubmitClickable] = useState(true)
 
   const handleBadgeClick = useCallback((tag) => {
     setFromBadge(tag)
   }, [])
 
   const handleSubmit = useCallback(() => {
+    if (fromBadge === ' ' || tagifyRef.current.value.length === 0) {
+      // something isn't filled in
+      dispatch(
+        addAlert(
+          `Both a 'source' badge and a 'destination' badge must be filled in`,
+          ALERT_TYPES.ERROR
+        )
+      )
+      return
+    }
+
     const toBadge = tagifyRef.current.value[0].value
+
+    setSubmitClickable(false)
 
     fetch('/rename-tag', {
       method: 'POST',
@@ -27,6 +41,7 @@ const TagRename = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fromTag: fromBadge, toTag: toBadge }),
     }).then((response) => {
+      setSubmitClickable(true)
       if (response.status === 401) {
         dispatch(addAlert('User not logged in', ALERT_TYPES.ERROR))
         return
@@ -80,7 +95,10 @@ const TagRename = () => {
             },
           }}
         ></Tags>
-        <div className='tag-rename-submit' onClick={handleSubmit}>
+        <div
+          className='tag-rename-submit'
+          onClick={submitClickable && handleSubmit}
+        >
           Submit
         </div>
       </div>

@@ -4,12 +4,16 @@
   height: calc(100vh - 52px); /* minus navbar height */
 }
 
+.tag-rename-wrapper .tags-input {
+  background-color: white;
+}
+
 .tag-rename-wrapper-left {
   float: left;
   width: 40%;
   overflow-x: hidden;
 
-  background-color: lightgrey;
+  background-color: var(--tag-rename-bg);
 }
 
 .tag-rename-wrapper-right {
@@ -27,9 +31,11 @@
   margin: 20px;
 }
 
-.from-badge {
+.tag-rename-wrapper .from-badge {
   pointer-events: none;
   white-space: pre;
+
+  transform: scale(1.5);
 }
 
 .tags-list-badge {

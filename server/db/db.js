@@ -105,17 +105,26 @@ exports.handleRecipeVisit = (recipeName) => {
 
 exports.handleTagRename = (fromTag, toTag) => {
   return Queries.tagRecipes(db, fromTag).then((recipes) => {
+    let errorRecipe = null
+
     recipes.forEach(async (recipe) => {
       const recipeDoc = getDBRecipe(db, recipe.name)
       const newTags = recipe.tags
       const index = recipe.tags.indexOf(fromTag)
-      if (!index) {
+      if (index === -1) {
         // shouldn't be possible
+        errorRecipe = recipe.name
         return
       }
       newTags[index] = toTag
       await recipeDoc.update({ tags: newTags })
     })
+
+    if (errorRecipe) {
+      return Promise.reject(
+        `Internal error: could not find index for tag '${fromTag}' in recipe '${errorRecipe}'`
+      )
+    }
   })
 }
 

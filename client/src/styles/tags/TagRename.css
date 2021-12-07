@@ -1,18 +1,21 @@
 .tag-rename-wrapper {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 52px); /* minus navbar height */
 }
 
 .tag-rename-wrapper-left {
   float: left;
   width: 40%;
   overflow-x: hidden;
+
+  background-color: lightgrey;
 }
 
 .tag-rename-wrapper-right {
   float: right;
   width: 60%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;

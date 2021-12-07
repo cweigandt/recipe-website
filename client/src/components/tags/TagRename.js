@@ -2,11 +2,15 @@ import { useCallback, useRef, useState } from 'react'
 import Tags from '@yaireo/tagify/dist/react.tagify'
 import TagsList from './TagsList'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
+import { ALERT_TYPES } from '../alerts/Alert'
+import { addAlert } from '../../actions/alertsActions'
 
 import '../../styles/tags/TagRename.css'
+import { useDispatch } from 'react-redux'
 
 const TagRename = () => {
   const tagifyRef = useRef(null)
+  const dispatch = useDispatch()
 
   const [fromBadge, setFromBadge] = useState(' ')
 
@@ -20,8 +24,13 @@ const TagRename = () => {
     fetch('/rename-tag', {
       method: 'POST',
       redirect: 'manual',
-      body: { fromTag: fromBadge, toTag: toBadge },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fromTag: fromBadge, toTag: toBadge }),
     }).then((response) => {
+      if (response.status === 401) {
+        dispatch(addAlert('User not logged in', ALERT_TYPES.ERROR))
+        return
+      }
       response.json().then((data) => {
         let status = ALERT_TYPES.SUCCESS
         if (response.status !== 200) {

@@ -104,8 +104,8 @@ exports.handleRecipeVisit = (recipeName) => {
 }
 
 exports.handleTagRename = (fromTag, toTag) => {
-  getRecipesWithTag(fromTag).then((recipes) => {
-    recipes.forEach((recipe) => {
+  return Queries.tagRecipes(db, fromTag).then((recipes) => {
+    recipes.forEach(async (recipe) => {
       const recipeDoc = getDBRecipe(db, recipe.name)
       const newTags = recipe.tags
       const index = recipe.tags.indexOf(fromTag)

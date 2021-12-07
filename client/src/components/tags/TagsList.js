@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
-import '../styles/widgets/Badge.css'
+import '../../styles/widgets/Badge.css'
 
-function TagsList(props) {
+function TagsList({ onBadgeClick }) {
   const [tagCounts, setTagCounts] = useState({})
 
   useEffect(() => {
@@ -23,17 +22,13 @@ function TagsList(props) {
     <div className='badge-list'>
       {sortedTags.map((tag) => {
         return (
-          <Link
-            to={'/tag/' + tag.replace(/ /g, '_')}
-            style={{ 'text-decoration': 'none' }}
+          <div
+            className='badge badge-primary tags-list-badge'
+            onClick={() => onBadgeClick(tag)}
+            style={{ display: 'block', float: 'left', clear: 'left' }}
           >
-            <div
-              className='badge badge-primary'
-              style={{ display: 'block', float: 'left', clear: 'left' }}
-            >
-              {`${tag} - ${tagCounts[tag]}`}
-            </div>
-          </Link>
+            {`${tag} - ${tagCounts[tag]}`}
+          </div>
         )
       })}
     </div>

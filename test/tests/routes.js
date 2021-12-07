@@ -36,6 +36,11 @@ describe('Routes', function () {
     return page.findByCSS(WRAPPERS.PAGE_WRAPPER)
   })
 
+  it('loads /tags', async () => {
+    await page.visit(`tags`)
+    return page.findByCSS(WRAPPERS.TAGS_WRAPPER)
+  })
+
   it('loads /edit', async () => {
     await page.visit(`edit`)
     return page.findByCSS(WRAPPERS.FORM_WRAPPER)

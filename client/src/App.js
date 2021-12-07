@@ -10,10 +10,10 @@ import Recipe from './components/recipe/Recipe'
 import RecipeGrid from './components/grid/RecipeGrid'
 import EditForm from './components/upload/EditForm'
 import UploadForm from './components/upload/UploadForm'
-import TagsList from './components/TagsList'
 import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 import ModalOverlay from './components/modals/ModalOverlay'
+import TagRename from './components/tags/TagRename'
 
 const ScrollToTop = withRouter(({ history }) => {
   useEffect(() => {
@@ -53,7 +53,7 @@ const App = () => {
       <Switch>
         <Route path='/recipe/:recipeName' component={RecipeRoute} />
         <Route path='/grid' component={RecipeGrid} />
-        <Route path='/tags' component={TagsList} />
+        <Route path='/tags' component={TagRename} />
         <Route path='/upload' component={UploadForm} />
         <Route path='/edit' component={EditForm} />
         <Route path='/sections/:sectionName' component={SectionRoute} />

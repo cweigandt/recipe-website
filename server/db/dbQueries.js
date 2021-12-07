@@ -99,7 +99,14 @@ exports.tagRecipes = function (db, tagName) {
     db.collection('recipes')
       .where('tags', 'array-contains', tagName)
       .orderBy('uploadTime', 'desc')
-      .select('name', 'uploadTime', 'section', 'imageLocation', 'thumbnail')
+      .select(
+        'name',
+        'uploadTime',
+        'section',
+        'imageLocation',
+        'tags',
+        'thumbnail'
+      )
       .get()
       .then(partial(resolveWithDocDataArray, resolve))
       .catch((err) => {

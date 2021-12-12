@@ -27,7 +27,7 @@ describe('App', () => {
   it('renders routes', () => {
     const wrapper = shallow(<App />)
     const routes = wrapper.find(Route)
-    expect(routes).toHaveLength(9)
+    expect(routes).toHaveLength(10)
 
     routes.forEach((route) => {
       const routeProps = route.props()

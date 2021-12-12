@@ -7,15 +7,17 @@ import '../../styles/reports/TagWordCloud.css'
 const TagWordCloud = ({ history }) => {
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
-    window.innerWidth || 0,
-    500
+    window.innerWidth || 0
   )
   const vh =
     Math.max(
       document.documentElement.clientHeight || 0,
-      window.innerHeight || 0,
-      800
+      window.innerHeight || 0
     ) - 52 // navbar height
+
+  if (vw <= 0 || vh <= 0) {
+    return <div>Error calculating dimensions</div>
+  }
 
   // On mobile, where width < height, limit font size more
   const maxFontSize = vw > vh ? 64 : 32

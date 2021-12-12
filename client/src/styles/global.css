@@ -35,6 +35,8 @@ body {
 
   --tag-rename-bg: lightgray;
 
+  --word-cloud-hover: black;
+
   --Appetizers-color: #c2185b; /* pink */
   --Breakfast-color: #7b1fa2; /* purple */
   --Dessert-color: #1976d2; /* blue */
@@ -73,6 +75,8 @@ body.dark-theme {
   --badge-border: white;
 
   --tag-rename-bg: darkslategray;
+
+  --word-cloud-hover: white;
 }
 
 svg path,

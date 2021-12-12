@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from 'react'
-
 import '../../styles/widgets/Badge.css'
+import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 
 function TagsList({ onBadgeClick }) {
-  const [tagCounts, setTagCounts] = useState({})
-
-  useEffect(() => {
-    let recipes = window.serverData.allRecipes
-    let allTags = {}
-    recipes.forEach((recipe) => {
-      recipe.tags.forEach((tag) => {
-        allTags[tag] = allTags[tag] !== undefined ? allTags[tag] + 1 : 1
-      })
-    })
-    setTagCounts(allTags)
-  }, [])
-
+  const tagCounts = getAllTagCounts()
   const sortedTags = Object.keys(tagCounts).sort()
 
   return (

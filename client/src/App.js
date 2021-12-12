@@ -14,6 +14,7 @@ import NotFound from './components/NotFound'
 import AlertsOverlay from './components/alerts/AlertsOverlay'
 import ModalOverlay from './components/modals/ModalOverlay'
 import TagRename from './components/tags/TagRename'
+import ReportPage from './components/reports/ReportPage'
 
 const ScrollToTop = withRouter(({ history }) => {
   useEffect(() => {
@@ -58,6 +59,7 @@ const App = () => {
         <Route path='/edit' component={EditForm} />
         <Route path='/sections/:sectionName' component={SectionRoute} />
         <Route path='/tag/:tagName' component={TagRoute} />
+        <Route path='/reports' component={ReportPage} />
         <Route exact path='/' component={RecipeCardDeck} />
         <Route component={NotFound} />
       </Switch>

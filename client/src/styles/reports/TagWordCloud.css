@@ -1,0 +1,7 @@
+.word-cloud svg text {
+  cursor: pointer;
+}
+
+.word-cloud svg text:hover {
+  fill: var(--word-cloud-hover) !important;
+}

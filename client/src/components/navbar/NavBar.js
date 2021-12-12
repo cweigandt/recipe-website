@@ -16,6 +16,7 @@ import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
 import { ReactComponent as RenameSVG } from '../../svg/rename.svg'
+import { ReactComponent as ReportSVG } from '../../svg/report.svg'
 
 import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
@@ -111,6 +112,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
         <ul className='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home', <HomeSVG />)}
           {renderLink('/grid', 'Grid', <GridSVG />)}
+          {renderLink('/reports', 'Reports', <ReportSVG />)}
           {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
           {isLoggedIn && renderLink('/upload', 'Upload', <UploadSVG />)}
           {isLoggedIn && renderLink('/tags', 'Tag Rename', <RenameSVG />)}

@@ -7,6 +7,7 @@
     "canvas-confetti": "^1.4.0",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",
+    "react-d3-cloud": "^1.0.5",
     "react-dom": "^17.0.2",
     "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.4",

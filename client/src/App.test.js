@@ -6,6 +6,7 @@ import NavBar from './components/navbar/NavBar'
 const routePaths = [
   '/recipe/:recipeName',
   '/grid',
+  '/reports',
   '/tags',
   '/upload',
   '/edit',

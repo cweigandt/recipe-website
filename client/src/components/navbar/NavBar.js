@@ -112,7 +112,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
         <ul className='navbar-menu-list' id='navbarListHolder'>
           {renderLink('/', 'Home', <HomeSVG />)}
           {renderLink('/grid', 'Grid', <GridSVG />)}
-          {renderLink('/reports', 'Reports', <ReportSVG />)}
+          {/* {renderLink('/reports', 'Reports', <ReportSVG />)} */}
           {isLoggedIn && renderLink('/edit', 'Edit', <EditSVG />)}
           {isLoggedIn && renderLink('/upload', 'Upload', <UploadSVG />)}
           {isLoggedIn && renderLink('/tags', 'Tag Rename', <RenameSVG />)}

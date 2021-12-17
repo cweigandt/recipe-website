@@ -1,11 +1,11 @@
 import TagWordCloud from './TagWordCloud'
-import DateChart from './DateChart'
+// import DateChart from './DateChart'
 
 const ReportPage = () => {
   return (
     <div className='report-page'>
       <TagWordCloud />
-      <DateChart />
+      {/* <DateChart /> */}
     </div>
   )
 }

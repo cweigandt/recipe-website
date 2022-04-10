@@ -33,28 +33,6 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
     searchParams.get('search') || ''
   )
 
-  const initializeData = useCallback(
-    (recipes) => {
-      setRandomRecipe(chooseRandomRecipe(recipes))
-
-      setRecipes(recipes)
-      setVisibleRecipes(recipes)
-
-      if (initialSearchText !== '') {
-        updateRecipesOnSearch(initialSearchText, recipes)
-      }
-    },
-    [initialSearchText, updateRecipesOnSearch]
-  )
-
-  useEffect(() => {
-    const filteredRecipes = (
-      optionalRecipes || window.serverData.allRecipes
-    ).filter((recipe) => filter(recipe))
-
-    initializeData(filteredRecipes)
-  }, [filter, initializeData, optionalRecipes])
-
   const updateRecipesOnSearch = useCallback(
     (searchText, allRecipes) => {
       let newVisibleRecipes = allRecipes.filter((recipe, index) => {
@@ -77,6 +55,28 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
     },
     [sortType]
   )
+
+  const initializeData = useCallback(
+    (recipes) => {
+      setRandomRecipe(chooseRandomRecipe(recipes))
+
+      setRecipes(recipes)
+      setVisibleRecipes(recipes)
+
+      if (initialSearchText !== '') {
+        updateRecipesOnSearch(initialSearchText, recipes)
+      }
+    },
+    [initialSearchText, updateRecipesOnSearch]
+  )
+
+  useEffect(() => {
+    const filteredRecipes = (
+      optionalRecipes || window.serverData.allRecipes
+    ).filter((recipe) => filter(recipe))
+
+    initializeData(filteredRecipes)
+  }, [filter, initializeData, optionalRecipes])
 
   const handleSearchText = useCallback(
     (searchText) => {

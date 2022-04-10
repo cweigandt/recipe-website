@@ -86,7 +86,7 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
 
   rinsedItem.uploadTime = parseInt(json.uploadTime, 10) || new Date().getTime()
   rinsedItem.visits = parseInt(json.visits, 10) || 0
-  rinsedItem.cookedDates = json.cookedDates ? JSON.parse(json.cookedDates) : []
+  rinsedItem.cookedDates = json.cookedDates || []
 
   return rinsedItem
 }

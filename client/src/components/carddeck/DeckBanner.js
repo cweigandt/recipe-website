@@ -5,8 +5,13 @@ import withCSSAnimation from '../hoc/withCSSAnimation'
 
 import '../../styles/carddeck/DeckBanner.css'
 
-const DeckBanner = ({ name, imageLocation, onSearchText }) => {
-  const [isSearching, setIsSearching] = useState(false)
+const DeckBanner = ({
+  name,
+  imageLocation,
+  initialSearchText,
+  onSearchText,
+}) => {
+  const [isSearching, setIsSearching] = useState(initialSearchText !== '')
 
   const handleSearchText = useCallback(
     (e) => {
@@ -27,7 +32,7 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
     if (!imageLocation) {
       return null
     }
-    const AnimatedImg = withCSSAnimation('img', { timeout: 700 })
+    const AnimatedImg = withCSSAnimation('img', { timeout: 400 })
     return <AnimatedImg id='bannerImage' src={imageLocation} alt='' />
   }
 
@@ -43,6 +48,7 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
             id='searchBar'
             autoComplete='off'
             data-test-id='search-bar'
+            defaultValue={initialSearchText || ''}
             className='form-control'
             type='text'
             placeholder='Search names or tags'
@@ -67,6 +73,7 @@ const DeckBanner = ({ name, imageLocation, onSearchText }) => {
 DeckBanner.propTypes = {
   name: PropTypes.string.isRequired,
   imageLocation: PropTypes.string.isRequired,
+  initialSearchText: PropTypes.string,
   onSearchText: PropTypes.func.isRequired,
 }
 

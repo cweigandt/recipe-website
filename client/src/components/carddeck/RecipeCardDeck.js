@@ -7,6 +7,7 @@ import DeckBanner from './DeckBanner'
 import '../../styles/carddeck/RecipeCardDeck.css'
 import SortBar from '../sort/SortBar'
 import { sortByType, SORT_TYPES } from '../../utilities/SortUtilities'
+import { withRouter } from 'react-router-dom'
 
 const chooseRandomRecipe = (recipes) => {
   // Loop 3 times trying to find a recipe with an image
@@ -19,7 +20,7 @@ const chooseRandomRecipe = (recipes) => {
   return randomRecipe
 }
 
-const RecipeCardDeck = ({ filter, optionalRecipes }) => {
+const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
   const [recipes, setRecipes] = useState(optionalRecipes || [])
   const [visibleRecipes, setVisibleRecipes] = useState(optionalRecipes || [])
   const [randomRecipe, setRandomRecipe] = useState({
@@ -27,12 +28,20 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
     imageLocation: '',
   })
   const [sortType, setSortType] = useState(SORT_TYPES.UPLOAD)
+  const searchParams = new URLSearchParams(location.search)
+  const [initialSearchText, setInitialSearchText] = useState(
+    searchParams.get('search') || ''
+  )
 
   const initializeData = useCallback((recipes) => {
     setRandomRecipe(chooseRandomRecipe(recipes))
 
     setRecipes(recipes)
     setVisibleRecipes(recipes)
+
+    if (initialSearchText !== '') {
+      updateRecipesOnSearch(initialSearchText, recipes)
+    }
   }, [])
 
   useEffect(() => {
@@ -43,9 +52,9 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
     initializeData(filteredRecipes)
   }, [filter, initializeData, optionalRecipes])
 
-  const handleSearchText = useCallback(
-    (searchText) => {
-      let newVisibleRecipes = recipes.filter((recipe, index) => {
+  const updateRecipesOnSearch = useCallback(
+    (searchText, allRecipes) => {
+      let newVisibleRecipes = allRecipes.filter((recipe, index) => {
         return (
           recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null ||
           recipe.tags.some(
@@ -61,9 +70,26 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
         setRandomRecipe(chooseRandomRecipe(newVisibleRecipes))
       }
 
-      forceCheckLazyLoad()
+      setTimeout(forceCheckLazyLoad, 300)
     },
-    [recipes, sortType]
+    [sortType]
+  )
+
+  const handleSearchText = useCallback(
+    (searchText) => {
+      setInitialSearchText('')
+
+      updateRecipesOnSearch(searchText, recipes)
+
+      let searchValue = `?search=${searchText}`
+      if (searchText === '') {
+        searchValue = undefined
+      }
+      history.push({
+        search: searchValue,
+      })
+    },
+    [recipes, updateRecipesOnSearch]
   )
 
   const handleSortChange = useCallback(
@@ -83,6 +109,7 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
     <div id='pageWrapper'>
       <DeckBanner
         onSearchText={handleSearchText}
+        initialSearchText={initialSearchText}
         {...randomRecipe}
       ></DeckBanner>
 
@@ -102,10 +129,12 @@ const RecipeCardDeck = ({ filter, optionalRecipes }) => {
 RecipeCardDeck.propTypes = {
   filter: PropTypes.func.isRequired,
   optionalRecipes: PropTypes.array,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 RecipeCardDeck.defaultProps = {
   filter: () => true,
 }
 
-export default RecipeCardDeck
+export default withRouter(RecipeCardDeck)

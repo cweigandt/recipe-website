@@ -11,7 +11,9 @@ const DeckBanner = ({
   initialSearchText,
   onSearchText,
 }) => {
-  const [isSearching, setIsSearching] = useState(initialSearchText !== '')
+  const [isSearching, setIsSearching] = useState(
+    initialSearchText && initialSearchText !== ''
+  )
 
   const handleSearchText = useCallback(
     (e) => {

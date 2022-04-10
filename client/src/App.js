@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 import NavBar from './components/navbar/NavBar'
@@ -33,19 +33,24 @@ const RecipeRoute = (props) => (
   <Recipe urlName={props.match.params.recipeName} />
 )
 
-const SectionRoute = (props) => (
-  <RecipeCardDeck
-    filter={(recipe) => props.match.params.sectionName === recipe.section}
-  />
-)
+const SectionRoute = (props) => {
+  const sectionName = props.match.params.sectionName
+  const filter = useCallback(
+    (recipe) => sectionName === recipe.section,
+    [sectionName]
+  )
+  return <RecipeCardDeck filter={filter} />
+}
 
-const TagRoute = (props) => (
-  <RecipeCardDeck
-    filter={(recipe) => {
-      return recipe.tags.includes(props.match.params.tagName.replace(/_/g, ' '))
-    }}
-  />
-)
+const TagRoute = (props) => {
+  const tag = props.match.params.tagName
+  const filter = useCallback(
+    (recipe) => recipe.tags.includes(tag.replace(/_/g, ' ')),
+    [tag]
+  )
+
+  return <RecipeCardDeck filter={filter} />
+}
 
 const App = () => {
   const renderRoutes = () => (

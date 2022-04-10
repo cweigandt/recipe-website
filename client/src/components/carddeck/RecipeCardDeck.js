@@ -33,16 +33,19 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
     searchParams.get('search') || ''
   )
 
-  const initializeData = useCallback((recipes) => {
-    setRandomRecipe(chooseRandomRecipe(recipes))
+  const initializeData = useCallback(
+    (recipes) => {
+      setRandomRecipe(chooseRandomRecipe(recipes))
 
-    setRecipes(recipes)
-    setVisibleRecipes(recipes)
+      setRecipes(recipes)
+      setVisibleRecipes(recipes)
 
-    if (initialSearchText !== '') {
-      updateRecipesOnSearch(initialSearchText, recipes)
-    }
-  }, [])
+      if (initialSearchText !== '') {
+        updateRecipesOnSearch(initialSearchText, recipes)
+      }
+    },
+    [initialSearchText, updateRecipesOnSearch]
+  )
 
   useEffect(() => {
     const filteredRecipes = (
@@ -89,7 +92,7 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
         search: searchValue,
       })
     },
-    [recipes, updateRecipesOnSearch]
+    [history, recipes, updateRecipesOnSearch]
   )
 
   const handleSortChange = useCallback(

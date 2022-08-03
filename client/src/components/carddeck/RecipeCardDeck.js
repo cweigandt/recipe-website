@@ -71,9 +71,10 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
   )
 
   useEffect(() => {
-    const filteredRecipes = (
-      optionalRecipes || window.serverData.allRecipes
-    ).filter((recipe) => filter(recipe))
+    const foundRecipes = optionalRecipes || window.serverData.allRecipes
+    const filteredRecipes = filter
+      ? foundRecipes.filter((recipe) => filter(recipe))
+      : foundRecipes
 
     initializeData(filteredRecipes)
   }, [filter, initializeData, optionalRecipes])
@@ -130,14 +131,10 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
 }
 
 RecipeCardDeck.propTypes = {
-  filter: PropTypes.func.isRequired,
+  filter: PropTypes.func,
   optionalRecipes: PropTypes.array,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-}
-
-RecipeCardDeck.defaultProps = {
-  filter: () => true,
 }
 
 export default withRouter(RecipeCardDeck)

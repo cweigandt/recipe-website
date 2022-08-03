@@ -6,6 +6,7 @@ module.exports = {
   },
   HOME: {
     RECIPE_CARD: `a.recipe-card`,
+    RECIPE_TITLE: `div.recipe-title`,
     COUNTER: `div[data-test-id='recipe-counter']`,
     SEARCH_BAR: `input[data-test-id='search-bar']`,
 

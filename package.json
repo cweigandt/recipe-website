@@ -20,29 +20,29 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^4.8.1",
-    "@google-cloud/logging-bunyan": "^3.0.1",
-    "@google-cloud/storage": "^5.7.0",
+    "@google-cloud/firestore": "^4.15.1",
+    "@google-cloud/logging-bunyan": "^3.3.1",
+    "@google-cloud/storage": "^5.20.5",
     "ansi-regex": ">=5.0.1",
-    "axios": ">=0.21.2",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.0",
     "bunyan": "^1.8.14",
-    "cookie-parser": "^1.4.5",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "eslint": "^7.30.0",
-    "express": "^4.17.1",
+    "eslint": "^7.32.0",
+    "express": "^4.18.1",
     "fs": "0.0.1-security",
     "jimp": "^0.16.1",
-    "jshint": "^2.13.0",
+    "jshint": "^2.13.5",
     "jsonwebtoken": "^8.5.1",
-    "mime": "^2.4.4",
-    "multer": "^1.4.2",
+    "mime": "^2.6.0",
+    "multer": "^1.4.4",
     "multer-google-storage": "^1.3.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "partial": "0.0.7",
-    "prettier": "^2.3.2",
-    "prop-types": "^15.7.2",
+    "prettier": "^2.7.1",
+    "prop-types": "^15.8.1",
     "tls": "0.0.1"
   },
   "repository": {
@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "chromedriver": "^103.0.0",
-    "expect": "^27.0.6",
-    "mocha": "^9.0.3",
+    "expect": "^27.5.1",
+    "mocha": "^9.2.2",
     "selenium-webdriver": "^3.6.0",
-    "start-server-and-test": "^1.13.1"
+    "start-server-and-test": "^1.14.0"
   }
 }

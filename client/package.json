@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@yaireo/tagify": "^4.5.0",
+    "@yaireo/tagify": "^4.9.8",
     "canvas-confetti": "^1.4.0",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",

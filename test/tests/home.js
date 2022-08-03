@@ -1,4 +1,4 @@
-const { By, Key } = require('selenium-webdriver')
+const { Key } = require('selenium-webdriver')
 const Page = require('../pageObjects/Page')
 const expect = require('expect')
 const { HOME } = require('../selectors')
@@ -93,6 +93,7 @@ describe('Home', function () {
 
       it('Switches sort properly', async () => {
         await page.findByCSS(HOME.SORT_BUBBLE_VISITS).click()
+        await page.sleep(300)
 
         await page
           .findByCSS(HOME.SORT_BUBBLE_VISITS)
@@ -100,6 +101,11 @@ describe('Home', function () {
           .then((classes) => {
             expect(classes).toContain('selected')
           })
+        await page.findFirstRecipeTitle().then((recipeTitle) => {
+          expect(recipeTitle).toBe(
+            'Scrambled Eggs with Sweet Potato and Brussel Sprout Hash'
+          )
+        })
       })
     })
   })

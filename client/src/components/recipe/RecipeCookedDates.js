@@ -8,13 +8,13 @@ const RecipeCookedDates = ({ dates }) => {
     return null
   }
 
-  const recentDate = new Date(dates[0])
+  const recentDate = new Date(dates[0] || dates)
   const formattedMonth = new Intl.DateTimeFormat('en-US', {
     month: 'long',
   }).format(recentDate)
   const formattedYear = recentDate.getUTCFullYear()
 
-  const totalTimes = dates.length
+  const totalTimes = dates.length || 1
   const suffix = totalTimes > 1 ? 'times' : 'time'
   return (
     <div className='cooked-dates'>

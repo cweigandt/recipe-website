@@ -1,6 +1,6 @@
 const { Builder, By, Capabilities, Key, until } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
-const { ALERTS } = require('../selectors')
+const { ALERTS, HOME } = require('../selectors')
 
 const pageRoot = 'http://127.0.0.1:8080'
 
@@ -48,6 +48,12 @@ module.exports = class Page {
       3000,
       `Looking for element matching '${css}'`
     )
+  }
+
+  findFirstRecipeTitle() {
+    return this.driver
+      .findElement(By.css(HOME.RECIPE_TITLE))
+      .then((firstTitleDiv) => firstTitleDiv.getText())
   }
 
   findSuccessAlert() {

@@ -7,11 +7,13 @@ import { addAlert } from '../../actions/alertsActions'
 
 import '../../styles/tags/TagRename.css'
 import { useDispatch } from 'react-redux'
+import useRecipes from '../../hooks/useRecipes'
 
 const TagRename = () => {
   const tagifyRef = useRef(null)
   const dispatch = useDispatch()
 
+  const recipes = useRecipes()
   const [fromBadge, setFromBadge] = useState(' ')
   const [submitClickable, setSubmitClickable] = useState(true)
 
@@ -58,7 +60,6 @@ const TagRename = () => {
     })
   }, [dispatch, fromBadge, tagifyRef])
 
-  let recipes = window.serverData.allRecipes
   let allTags = {}
   recipes.forEach((recipe) => {
     recipe.tags.forEach((tag) => {

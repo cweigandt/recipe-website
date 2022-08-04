@@ -34,15 +34,8 @@ const html = fs
   .readFileSync(path.resolve(__dirname, '../client/build/index.html'))
   .toString()
 
-const getHTMLString = ({
-  serverData,
-  ogTitle,
-  ogImage,
-  ogDescription,
-  isLightMode,
-}) => {
+const getHTMLString = ({ ogTitle, ogImage, ogDescription, isLightMode }) => {
   let newString = html
-    .replace(/%DATA%/, serverData)
     .replace(/%OG_TITLE%/g, ogTitle)
     .replace(/%OG_IMAGE%/, ogImage)
     .replace(/%OG_DESCRIPTION%/, ogDescription)
@@ -91,24 +84,15 @@ app.get('/recipe/:recipeName', (req, res) => {
 
 // Match all routes and exclude all files with extensions (checking for periods)
 app.get(/^[^\.]*$/, (req, res) => {
-  var dbPromise = getServerData()
-  dbPromise
-    .then((allRecipes) => {
-      const htmlCopy = getHTMLString({
-        serverData: JSON.stringify({ allRecipes: allRecipes }),
-        ogTitle: 'B+C Cookbook',
-        // Use Avocado Toast as default image
-        ogImage:
-          'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Avocado_Toast.jpeg',
-        ogDescription: 'Create delicious recipes',
-        isLightMode: req.cookies['light-mode-enabled'] === 'true',
-      })
-      res.send(htmlCopy)
-    })
-    .catch((err) => {
-      res.status(500)
-      console.log(err)
-    })
+  const htmlCopy = getHTMLString({
+    ogTitle: 'B+C Cookbook',
+    // Use Avocado Toast as default image
+    ogImage:
+      'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Avocado_Toast.jpeg',
+    ogDescription: 'Create delicious recipes',
+    isLightMode: req.cookies['light-mode-enabled'] === 'true',
+  })
+  res.send(htmlCopy)
 })
 
 app.use(express.static(path.resolve(__dirname, '../client/build')))

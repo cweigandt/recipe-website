@@ -12,17 +12,27 @@ import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
 import withCSSAnimation from '../hoc/withCSSAnimation'
+import useRecipes from '../../hooks/useRecipes'
 
 const Recipe = ({ urlName }) => {
+  const recipes = useRecipes()
   const [recipe, setRecipe] = useState({})
 
   const wrapperRef = React.useRef()
 
   useEffect(() => {
     const recipeName = urlName.replace(/_/g, ' ')
-    const foundRecipe = window.serverData.allRecipes.find(
-      (r) => r.name === recipeName
-    )
+    const foundRecipe = recipes.find((r) => r.name === recipeName)
+
+    if (!foundRecipe) {
+      return
+    }
+
+    setRecipe(foundRecipe)
+  }, [recipes, urlName])
+
+  useEffect(() => {
+    const recipeName = urlName.replace(/_/g, ' ')
 
     if (window.location.hostname !== 'localhost') {
       // Only save visits of hosted site
@@ -34,8 +44,6 @@ const Recipe = ({ urlName }) => {
         }),
       })
     }
-
-    setRecipe(foundRecipe)
   }, [urlName])
 
   const renderIngredients = (ingredients) => {

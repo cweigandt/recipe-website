@@ -8,6 +8,7 @@ import '../../styles/carddeck/RecipeCardDeck.css'
 import SortBar from '../sort/SortBar'
 import { sortByType, SORT_TYPES } from '../../utilities/SortUtilities'
 import { withRouter } from 'react-router-dom'
+import useRecipes from '../../hooks/useRecipes'
 
 const chooseRandomRecipe = (recipes) => {
   // Loop 3 times trying to find a recipe with an image
@@ -20,9 +21,9 @@ const chooseRandomRecipe = (recipes) => {
   return randomRecipe
 }
 
-const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
-  const [recipes, setRecipes] = useState(optionalRecipes || [])
-  const [visibleRecipes, setVisibleRecipes] = useState(optionalRecipes || [])
+const RecipeCardDeck = ({ filter, history, location }) => {
+  const recipes = useRecipes()
+  const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState({
     name: '',
     imageLocation: '',
@@ -60,7 +61,6 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
     (recipes) => {
       setRandomRecipe(chooseRandomRecipe(recipes))
 
-      setRecipes(recipes)
       setVisibleRecipes(recipes)
 
       if (initialSearchText !== '') {
@@ -71,13 +71,12 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
   )
 
   useEffect(() => {
-    const foundRecipes = optionalRecipes || window.serverData.allRecipes
     const filteredRecipes = filter
-      ? foundRecipes.filter((recipe) => filter(recipe))
-      : foundRecipes
+      ? recipes.filter((recipe) => filter(recipe))
+      : recipes
 
     initializeData(filteredRecipes)
-  }, [filter, initializeData, optionalRecipes])
+  }, [filter, initializeData, recipes])
 
   const handleSearchText = useCallback(
     (searchText) => {
@@ -109,6 +108,10 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
     [visibleRecipes]
   )
 
+  if (recipes.length === 0) {
+    return null // TODO loading
+  }
+
   return (
     <div id='pageWrapper'>
       <DeckBanner
@@ -132,7 +135,6 @@ const RecipeCardDeck = ({ filter, history, location, optionalRecipes }) => {
 
 RecipeCardDeck.propTypes = {
   filter: PropTypes.func,
-  optionalRecipes: PropTypes.array,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 }

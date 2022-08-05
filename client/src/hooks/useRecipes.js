@@ -12,7 +12,7 @@ const useRecipes = (getAllData) => {
       .then((data) => {
         setRecipes(data)
       })
-  }, [])
+  }, [endpoint])
 
   return recipes
 }

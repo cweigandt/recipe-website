@@ -1,8 +1,11 @@
+import useRecipes from '../../hooks/useRecipes'
 import '../../styles/widgets/Badge.css'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 
 function TagsList({ onBadgeClick }) {
-  const tagCounts = getAllTagCounts()
+  const recipes = useRecipes()
+
+  const tagCounts = getAllTagCounts(recipes)
   const sortedTags = Object.keys(tagCounts).sort()
 
   return (

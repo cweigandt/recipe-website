@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import GridCard from './GridCard'
 import '../../styles/grid/RecipeGrid.css'
+import useRecipes from '../../hooks/useRecipes'
 
 function RecipeGrid(props) {
-  const [recipes, setRecipes] = useState([])
-
-  useEffect(() => {
-    setRecipes(window.serverData.allRecipes)
-  }, [])
+  const recipes = useRecipes()
 
   return (
     <div id='recipeGrid' className={recipes.length === 0 ? '' : 'loaded'}>

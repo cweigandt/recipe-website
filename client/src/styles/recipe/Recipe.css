@@ -6,7 +6,7 @@
   color: var(--recipe-text-color);
   width: 100%;
   position: relative;
-  opacity: 0;
+  opacity: 1;
   overflow: hidden;
   transition: padding 0.5s, opacity 0.5s;
 }

@@ -1,5 +1,4 @@
-export const getAllTags = (optionalRecipes) => {
-  let recipes = optionalRecipes || window.serverData.allRecipes
+export const getAllTags = (recipes) => {
   let allTags = []
   recipes.forEach((recipe) => {
     recipe.tags.forEach((tag) => {
@@ -12,8 +11,7 @@ export const getAllTags = (optionalRecipes) => {
   return allTags
 }
 
-export const getAllTagCounts = (optionalRecipes) => {
-  let recipes = optionalRecipes || window.serverData.allRecipes
+export const getAllTagCounts = (recipes) => {
   let allTags = {}
   recipes.forEach((recipe) => {
     recipe.tags.forEach((tag) => {

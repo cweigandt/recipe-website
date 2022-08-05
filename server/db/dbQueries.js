@@ -42,6 +42,30 @@ exports.allRecipes = function (db) {
     const dbRes = db
       .collection('recipes')
       .orderBy('uploadTime', 'desc')
+      .select(
+        'name',
+        'section',
+        'tags',
+        'thumbnail',
+        'imageLocation',
+        'uploadTime',
+        'visits',
+        'cookedDates'
+      )
+      .get()
+      .then(partial(resolveWithDocDataArray, resolve))
+      .catch((err) => {
+        reject(err)
+      })
+  })
+  return promise
+}
+
+exports.allFullRecipes = function (db) {
+  var promise = new Promise(function (resolve, reject) {
+    const dbRes = db
+      .collection('recipes')
+      .orderBy('uploadTime', 'desc')
       .get()
       .then(partial(resolveWithDocDataArray, resolve))
       .catch((err) => {

@@ -4,17 +4,17 @@ import PropTypes from 'prop-types'
 import RecipePicker from './RecipePicker'
 import UploadForm from './UploadForm'
 import '../../styles/upload/UploadForm.css'
+import useRecipes from '../../hooks/useRecipes'
 
 function EditForm(props) {
+  const recipes = useRecipes(true)
   const [recipeName, setRecipeName] = useState('')
   const [recipe, setRecipe] = useState({})
 
   useEffect(() => {
-    const foundRecipe = window.serverData.allRecipes.find(
-      (r) => r.name === recipeName
-    )
+    const foundRecipe = recipes.find((r) => r.name === recipeName)
     setRecipe(foundRecipe || {})
-  }, [recipeName])
+  }, [recipeName, recipes])
 
   return (
     <div>

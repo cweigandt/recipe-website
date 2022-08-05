@@ -46,6 +46,44 @@ const recipe1 = {
 
 const recipe2 = {
   uploader: 'Brittany Cormier',
+  uploadTime: 1625710383940,
+  section: 'Drinks',
+  name: 'Frozen Strawberry Margaritas',
+  time: '',
+  servings: '2',
+  steps: [
+    'Combine the ingredients in a blender with desired amount of ice and blend until smooth.',
+    'Slice whole strawberries 3/4 way down the middle.',
+    'Pour into glasses and garnish with strawberries.',
+  ],
+  subIngredients1Name: '',
+  subIngredients1: [],
+  ingredients: [
+    '4 oz tequila',
+    '2 oz triple sec',
+    '1 oz fresh lime juice',
+    '1/2 cup strawberries',
+    '2 whole strawberries, for garnish (optional)',
+  ],
+  tags: [
+    'Tequila',
+    'Margarita',
+    'Triple Sec',
+    'Lime Juice',
+    'Strawberries',
+    'Ice',
+  ],
+  subIngredients2Name: '',
+  thumbnail:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas_thumbnail.jpeg',
+  imageLocation:
+    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas.jpeg',
+  subIngredients2: [],
+  visits: 2,
+}
+
+const recipe3 = {
+  uploader: 'Brittany Cormier',
   section: 'Breakfast',
   name: 'Scrambled Eggs with Sweet Potato and Brussel Sprout Hash',
   steps: [
@@ -90,44 +128,6 @@ const recipe2 = {
   subIngredients2Name: '',
   subIngredients2: [],
   visits: 5,
-}
-
-const recipe3 = {
-  uploader: 'Brittany Cormier',
-  uploadTime: 1625710383940,
-  section: 'Drinks',
-  name: 'Frozen Strawberry Margaritas',
-  time: '',
-  servings: '2',
-  steps: [
-    'Combine the ingredients in a blender with desired amount of ice and blend until smooth.',
-    'Slice whole strawberries 3/4 way down the middle.',
-    'Pour into glasses and garnish with strawberries.',
-  ],
-  subIngredients1Name: '',
-  subIngredients1: [],
-  ingredients: [
-    '4 oz tequila',
-    '2 oz triple sec',
-    '1 oz fresh lime juice',
-    '1/2 cup strawberries',
-    '2 whole strawberries, for garnish (optional)',
-  ],
-  tags: [
-    'Tequila',
-    'Margarita',
-    'Triple Sec',
-    'Lime Juice',
-    'Strawberries',
-    'Ice',
-  ],
-  subIngredients2Name: '',
-  thumbnail:
-    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas_thumbnail.jpeg',
-  imageLocation:
-    'https://recipe-website-269020.appspot.com.storage.googleapis.com/public/img/Frozen_Strawberry_Margaritas.jpeg',
-  subIngredients2: [],
-  visits: 2,
 }
 
 module.exports = [recipe1, recipe2, recipe3]

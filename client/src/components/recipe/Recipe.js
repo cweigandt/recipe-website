@@ -11,7 +11,7 @@ import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
-import withCSSAnimation from '../hoc/withCSSAnimation'
+// import withCSSAnimation from '../hoc/withCSSAnimation'
 
 const Recipe = ({ urlName }) => {
   const [recipe, setRecipe] = useState({})
@@ -20,9 +20,14 @@ const Recipe = ({ urlName }) => {
 
   useEffect(() => {
     const recipeName = urlName.replace(/_/g, ' ')
-    const foundRecipe = window.serverData.allRecipes.find(
-      (r) => r.name === recipeName
-    )
+
+    fetch(`/request/recipe/${recipeName}`)
+      .then((data) => data.json())
+      .then((data) => setRecipe(data))
+  }, [urlName])
+
+  useEffect(() => {
+    const recipeName = urlName.replace(/_/g, ' ')
 
     if (window.location.hostname !== 'localhost') {
       // Only save visits of hosted site
@@ -34,8 +39,6 @@ const Recipe = ({ urlName }) => {
         }),
       })
     }
-
-    setRecipe(foundRecipe)
   }, [urlName])
 
   const renderIngredients = (ingredients) => {
@@ -153,6 +156,8 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default withCSSAnimation(Recipe, {
-  timeout: 200,
-})
+// export default withCSSAnimation(Recipe, {
+//   timeout: 200,
+// })
+
+export default Recipe

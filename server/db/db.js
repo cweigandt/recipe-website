@@ -22,6 +22,10 @@ exports.getAllRecipes = function () {
   return Queries.allRecipes(db)
 }
 
+exports.getAllFullRecipes = function () {
+  return Queries.allFullRecipes(db)
+}
+
 exports.getNamesOfRecipes = function () {
   return Queries.allRecipeNames(db)
 }

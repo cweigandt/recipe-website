@@ -13,13 +13,15 @@ import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../modals/ModalTypes'
 
 import { getAllTags } from '../../utilities/RecipesUtilities'
+import useRecipes from '../../hooks/useRecipes'
 
 function UploadForm(props) {
   const [sections, setSections] = useState([])
+  const recipes = useRecipes()
 
   const tagifyRef = useRef(null)
   const formRef = useRef(null)
-  const allTags = getAllTags()
+  const allTags = getAllTags(recipes)
 
   if (props.isLoginUpToDate && !props.isLoggedIn) {
     props.dispatch(showModal(ModalTypes.LOGIN))
@@ -116,6 +118,10 @@ function UploadForm(props) {
         {children}
       </div>
     )
+  }
+
+  if (recipes.length === 0) {
+    return null
   }
 
   return (

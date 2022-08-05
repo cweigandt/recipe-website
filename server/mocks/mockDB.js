@@ -32,6 +32,12 @@ exports.getAllRecipes = function () {
   })
 }
 
+exports.getAllFullRecipes = function () {
+  return new Promise((resolve, reject) => {
+    resolve(recipes)
+  })
+}
+
 exports.getNamesOfRecipes = function () {
   return new Promise((resolve, reject) => {
     resolve(recipes.map((recipe) => recipe.name))

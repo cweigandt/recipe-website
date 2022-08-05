@@ -34,6 +34,10 @@ module.exports = function (app) {
     reactToDBPromise(customDB.getAllRecipes(), res)
   })
 
+  app.get('/request/all-full-recipes', (req, res) => {
+    reactToDBPromise(customDB.getAllFullRecipes(), res)
+  })
+
   app.get('/request/all-grid-recipes', (req, res) => {
     reactToDBPromise(customDB.getRecipeImages(), res)
   })

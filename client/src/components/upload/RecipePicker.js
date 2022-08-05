@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import '../../styles/upload/UploadForm.css'
+import useRecipes from '../../hooks/useRecipes'
 
 const sortRecipes = (recipes) => {
-  return recipes.sort((a, b) => {
+  return [...recipes].sort((a, b) => {
     if (a.name < b.name) {
       return -1
     } else if (a.name > b.name) {
@@ -14,13 +15,15 @@ const sortRecipes = (recipes) => {
   })
 }
 function RecipePicker(props) {
-  const [recipes, setRecipes] = useState([])
+  const recipes = useRecipes()
+  const [sortedRecipes, setSortedRecipes] = useState([])
   const dropdownRef = useRef(null)
 
+  const { onChange } = props
   useEffect(() => {
-    setRecipes(sortRecipes([...window.serverData.allRecipes]))
-    props.onChange({ target: dropdownRef.current })
-  }, [props])
+    setSortedRecipes(sortRecipes([...recipes]))
+    onChange({ target: dropdownRef.current })
+  }, [recipes, onChange])
 
   const renderOption = (name) => {
     return (
@@ -33,7 +36,7 @@ function RecipePicker(props) {
   return (
     <select id='recipePicker' onChange={props.onChange} ref={dropdownRef}>
       {renderOption('')}
-      {recipes.map((recipe) => renderOption(recipe.name))}
+      {sortedRecipes.map((recipe) => renderOption(recipe.name))}
     </select>
   )
 }

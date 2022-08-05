@@ -3,8 +3,11 @@ import { withRouter } from 'react-router'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 
 import '../../styles/reports/TagWordCloud.css'
+import useRecipes from '../../hooks/useRecipes'
 
 const TagWordCloud = ({ history }) => {
+  const recipes = useRecipes()
+
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
@@ -22,7 +25,7 @@ const TagWordCloud = ({ history }) => {
   // On mobile, where width < height, limit font size more
   const maxFontSize = vw > vh ? 64 : 32
 
-  const tags = getAllTagCounts()
+  const tags = getAllTagCounts(recipes)
 
   const data = Object.keys(tags)
     .map((key) => ({

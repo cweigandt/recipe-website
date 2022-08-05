@@ -42,6 +42,16 @@ exports.allRecipes = function (db) {
     const dbRes = db
       .collection('recipes')
       .orderBy('uploadTime', 'desc')
+      .select(
+        'name',
+        'section',
+        'tags',
+        'thumbnail',
+        'imageLocation',
+        'uploadTime',
+        'visits',
+        'cookedDates'
+      )
       .get()
       .then(partial(resolveWithDocDataArray, resolve))
       .catch((err) => {

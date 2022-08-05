@@ -92,4 +92,5 @@ RecipeCard.propTypes = {
   tags: PropTypes.array.isRequired,
 }
 
-export default withCSSAnimation(RecipeCard, { timeout: 200 })
+// export default withCSSAnimation(RecipeCard, { timeout: 200 })
+export default RecipeCard

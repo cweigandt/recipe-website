@@ -69,6 +69,10 @@ const TagRename = () => {
 
   const sortedTags = Object.keys(allTags).sort()
 
+  if (sortedTags.length === 0) {
+    return null
+  }
+
   return (
     <div className='tag-rename-wrapper'>
       <div className='tag-rename-wrapper-left'>

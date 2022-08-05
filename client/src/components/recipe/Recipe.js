@@ -11,25 +11,20 @@ import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
-import withCSSAnimation from '../hoc/withCSSAnimation'
-import useRecipes from '../../hooks/useRecipes'
+// import withCSSAnimation from '../hoc/withCSSAnimation'
 
 const Recipe = ({ urlName }) => {
-  const recipes = useRecipes()
   const [recipe, setRecipe] = useState({})
 
   const wrapperRef = React.useRef()
 
   useEffect(() => {
     const recipeName = urlName.replace(/_/g, ' ')
-    const foundRecipe = recipes.find((r) => r.name === recipeName)
 
-    if (!foundRecipe) {
-      return
-    }
-
-    setRecipe(foundRecipe)
-  }, [recipes, urlName])
+    fetch(`/request/recipe/${recipeName}`)
+      .then((data) => data.json())
+      .then((data) => setRecipe(data))
+  }, [urlName])
 
   useEffect(() => {
     const recipeName = urlName.replace(/_/g, ' ')
@@ -161,6 +156,8 @@ Recipe.propTypes = {
   urlName: PropTypes.string.isRequired,
 }
 
-export default withCSSAnimation(Recipe, {
-  timeout: 200,
-})
+// export default withCSSAnimation(Recipe, {
+//   timeout: 200,
+// })
+
+export default Recipe

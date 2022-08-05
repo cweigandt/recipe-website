@@ -1,4 +1,5 @@
 import { mount, shallow } from 'enzyme'
+import * as useRecipes from '../../../hooks/useRecipes'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { act } from 'react-dom/test-utils'
 import RecipeCard from '../RecipeCard'
@@ -37,6 +38,10 @@ const mockRecipes = [
 ]
 
 describe('RecipeCardDeck', () => {
+  beforeEach(() => {
+    jest.spyOn(useRecipes, 'default').mockImplementation(() => mockRecipes)
+  })
+
   it('renders without error', () => {
     const rendered = shallow(<RecipeCardDeck optionalRecipes={mockRecipes} />)
     expect(rendered).not.toBeNull()
@@ -52,50 +57,39 @@ describe('RecipeCardDeck', () => {
   })
 
   describe('Sort Bar', () => {
-    it('Sorts by upload by default', (done) => {
+    it('Sorts by upload by default', () => {
+      const rendered = mount(
+        <Router>
+          <RecipeCardDeck optionalRecipes={mockRecipes} />
+        </Router>
+      )
+
+      const cards = rendered.find(RecipeCard)
       act(() => {
-        const rendered = mount(
-          <Router>
-            <RecipeCardDeck optionalRecipes={mockRecipes} />
-          </Router>
-        )
-
-        const cards = rendered.find(RecipeCard)
         expect(cards).toHaveLength(mockRecipes.length)
-
-        setTimeout(() => {
-          rendered.update()
-
-          expect(cards.at(0).props().name).toBe('First')
-          expect(cards.at(1).props().name).toBe('Second')
-
-          done()
-        })
+        rendered.update()
       })
+
+      expect(cards.at(0).props().name).toBe('First')
+      expect(cards.at(1).props().name).toBe('Second')
     })
 
-    it('Sorts by visits on click', (done) => {
+    it('Sorts by visits on click', () => {
+      const rendered = mount(
+        <Router>
+          <RecipeCardDeck optionalRecipes={mockRecipes} />
+        </Router>
+      )
+
       act(() => {
-        const rendered = mount(
-          <Router>
-            <RecipeCardDeck optionalRecipes={mockRecipes} />
-          </Router>
-        )
-
         rendered.find(`[data-test-id='sort-bubble-Visits']`).simulate('click')
-
-        setTimeout(() => {
-          rendered.update()
-
-          const cards = rendered.find(RecipeCard)
-          expect(cards).toHaveLength(mockRecipes.length)
-
-          expect(cards.at(0).props().name).toBe('Second')
-          expect(cards.at(1).props().name).toBe('First')
-
-          done()
-        })
+        rendered.update()
       })
+
+      const cards = rendered.find(RecipeCard)
+      expect(cards).toHaveLength(mockRecipes.length)
+      expect(cards.at(0).props().name).toBe('Second')
+      expect(cards.at(1).props().name).toBe('First')
     })
   })
 })

@@ -5,7 +5,7 @@ import '../../styles/upload/UploadForm.css'
 import useRecipes from '../../hooks/useRecipes'
 
 const sortRecipes = (recipes) => {
-  return recipes.sort((a, b) => {
+  return [...recipes].sort((a, b) => {
     if (a.name < b.name) {
       return -1
     } else if (a.name > b.name) {

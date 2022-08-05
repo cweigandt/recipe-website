@@ -28,6 +28,7 @@ const RecipeCardDeck = ({ filter, history, location }) => {
     name: '',
     imageLocation: '',
   })
+  const [hasLoaded, setHasLoaded] = useState(false)
   const [sortType, setSortType] = useState(SORT_TYPES.UPLOAD)
   const searchParams = new URLSearchParams(location.search)
   const [initialSearchText, setInitialSearchText] = useState(
@@ -66,17 +67,22 @@ const RecipeCardDeck = ({ filter, history, location }) => {
       if (initialSearchText !== '') {
         updateRecipesOnSearch(initialSearchText, recipes)
       }
+      setHasLoaded(true)
     },
     [initialSearchText, updateRecipesOnSearch]
   )
 
   useEffect(() => {
+    if (hasLoaded || recipes.length === 0) {
+      return
+    }
+
     const filteredRecipes = filter
       ? recipes.filter((recipe) => filter(recipe))
       : recipes
 
     initializeData(filteredRecipes)
-  }, [filter, initializeData, recipes])
+  }, [hasLoaded, filter, initializeData, recipes])
 
   const handleSearchText = useCallback(
     (searchText) => {

@@ -5,19 +5,19 @@ export const SORT_TYPES = {
 }
 
 const sortByUpload = (recipes) => {
-  return recipes.sort((a, b) => {
-    return b.uploadTime - a.uploadTime
+  return [...recipes].sort((a, b) => {
+    return a.uploadTime - b.uploadTime
   })
 }
 
 const sortByVisits = (recipes) => {
-  return recipes.sort((a, b) => {
+  return [...recipes].sort((a, b) => {
     return b.visits - a.visits
   })
 }
 
 const sortByCookedDate = (recipes) => {
-  return recipes.sort((a, b) => {
+  return [...recipes].sort((a, b) => {
     const aCooked = a.cookedDates || []
     const bCooked = b.cookedDates || []
 

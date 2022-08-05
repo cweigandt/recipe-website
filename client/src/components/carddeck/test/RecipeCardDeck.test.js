@@ -65,10 +65,8 @@ describe('RecipeCardDeck', () => {
       )
 
       const cards = rendered.find(RecipeCard)
-      act(() => {
-        expect(cards).toHaveLength(mockRecipes.length)
-        rendered.update()
-      })
+      expect(cards).toHaveLength(mockRecipes.length)
+      rendered.update()
 
       expect(cards.at(0).props().name).toBe('First')
       expect(cards.at(1).props().name).toBe('Second')
@@ -83,9 +81,9 @@ describe('RecipeCardDeck', () => {
 
       act(() => {
         rendered.find(`[data-test-id='sort-bubble-Visits']`).simulate('click')
-        rendered.update()
       })
 
+      rendered.update()
       const cards = rendered.find(RecipeCard)
       expect(cards).toHaveLength(mockRecipes.length)
       expect(cards.at(0).props().name).toBe('Second')

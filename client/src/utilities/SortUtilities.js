@@ -6,7 +6,7 @@ export const SORT_TYPES = {
 
 const sortByUpload = (recipes) => {
   return [...recipes].sort((a, b) => {
-    return a.uploadTime - b.uploadTime
+    return b.uploadTime - a.uploadTime
   })
 }
 

@@ -19,10 +19,11 @@ function RecipePicker(props) {
   const [sortedRecipes, setSortedRecipes] = useState([])
   const dropdownRef = useRef(null)
 
+  const { onChange } = props
   useEffect(() => {
     setSortedRecipes(sortRecipes([...recipes]))
-    props.onChange({ target: dropdownRef.current })
-  }, [recipes, props.onChange])
+    onChange({ target: dropdownRef.current })
+  }, [recipes, onChange])
 
   const renderOption = (name) => {
     return (
@@ -35,7 +36,7 @@ function RecipePicker(props) {
   return (
     <select id='recipePicker' onChange={props.onChange} ref={dropdownRef}>
       {renderOption('')}
-      {recipes.map((recipe) => renderOption(recipe.name))}
+      {sortedRecipes.map((recipe) => renderOption(recipe.name))}
     </select>
   )
 }

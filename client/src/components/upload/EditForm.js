@@ -7,7 +7,7 @@ import '../../styles/upload/UploadForm.css'
 import useRecipes from '../../hooks/useRecipes'
 
 function EditForm(props) {
-  const recipes = useRecipes()
+  const recipes = useRecipes(true)
   const [recipeName, setRecipeName] = useState('')
   const [recipe, setRecipe] = useState({})
 

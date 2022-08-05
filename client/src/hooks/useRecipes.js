@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 
-const useRecipes = () => {
+const useRecipes = (getAllData) => {
+  const endpoint = getAllData
+    ? '/request/all-full-recipes'
+    : '/request/all-recipes'
+
   const [recipes, setRecipes] = useState([])
   useEffect(() => {
-    fetch('/request/all-recipes')
+    fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         setRecipes(data)

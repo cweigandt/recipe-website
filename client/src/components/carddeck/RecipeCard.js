@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
-import withCSSAnimation from '../hoc/withCSSAnimation'
+// import withCSSAnimation from '../hoc/withCSSAnimation'
 
 import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'

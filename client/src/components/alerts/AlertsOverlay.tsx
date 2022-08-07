@@ -1,9 +1,12 @@
-import React from 'react'
 import { connect } from 'react-redux'
 
 import Alert from './Alert'
+import { AlertType } from '../../types/AlertTypes'
 
-const AlertsOverlay = ({ alerts }) => {
+interface PropsType {
+  alerts: AlertType[]
+}
+const AlertsOverlay = ({ alerts }: PropsType) => {
   var renderAlerts = () => {
     return alerts.map((alert, i) => {
       return (
@@ -15,7 +18,7 @@ const AlertsOverlay = ({ alerts }) => {
   return <div className='alerts-overlay'>{renderAlerts()}</div>
 }
 
-const mapAlertsToProps = (state) => {
+const mapAlertsToProps = (state: any) => {
   return {
     alerts: state.alerts,
   }

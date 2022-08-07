@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import '../../styles/alerts/Alert.css'
 import { removeAlert } from '../../actions/alertsActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import withCSSAnimation from '../hoc/withCSSAnimation'
+import { AlertType } from '../../types/AlertTypes'
+import { Dispatch } from 'redux'
 
 export const ALERT_TYPES = {
   SUCCESS: 'success',
@@ -16,8 +16,14 @@ export const ALERT_TYPES = {
 
 const SUCCESS_ALERT_TIMEOUT = 2000
 
-function Alert({ alert, dispatch, isMostRecent = false }) {
-  let timeout = null
+type PropsType = {
+  alert: AlertType
+  dispatch: Dispatch
+  isMostRecent: boolean
+}
+
+function Alert({ alert, dispatch, isMostRecent = false }: PropsType) {
+  let timeout: NodeJS.Timeout | undefined = undefined
 
   const handleClose = () => {
     clearTimeout(timeout)
@@ -44,12 +50,6 @@ function Alert({ alert, dispatch, isMostRecent = false }) {
       <div className='alert-text'>{alert.text}</div>
     </div>
   )
-}
-
-Alert.propTypes = {
-  alert: PropTypes.object.isRequired,
-  dispatch: PropTypes.object.isRequired,
-  isMostRecent: PropTypes.bool,
 }
 
 export default connect()(withCSSAnimation(Alert, { timeout: 300 }))

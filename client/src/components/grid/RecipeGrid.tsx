@@ -1,11 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 import GridCard from './GridCard'
 import '../../styles/grid/RecipeGrid.css'
 import withRecipes from '../hoc/withRecipes'
+import { PartialRecipe } from '../../types/RecipeTypes'
 
-function RecipeGrid({ recipes }) {
+type Props = {
+  recipes: PartialRecipe[]
+}
+
+function RecipeGrid({ recipes }: Props) {
   return (
     <div id='recipeGrid' className={recipes.length === 0 ? '' : 'loaded'}>
       {recipes
@@ -17,11 +19,6 @@ function RecipeGrid({ recipes }) {
         })}
     </div>
   )
-}
-
-GridCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
 }
 
 export default withRecipes(RecipeGrid)

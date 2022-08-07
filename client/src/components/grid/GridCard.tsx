@@ -1,13 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 import FlipCard from '../widgets/FlipCard'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 
 import '../../styles/grid/GridCard.css'
+import { PartialRecipe } from '../../types/RecipeTypes'
 
-function GridCard(props) {
+function GridCard(props: PartialRecipe) {
   const linkURL = '/recipe/' + props.name.replace(/ /g, '_')
 
   return (
@@ -33,12 +31,16 @@ function GridCard(props) {
           <div
             className='grid-card-back'
             style={{
-              'background-image': `url("${props.thumbnail}")`,
+              backgroundImage: `url("${props.thumbnail}")`,
             }}
           >
             <div
               className='grid-card-back-color'
-              style={{ '--section-color': `var(--${props.section}-color)` }}
+              style={
+                {
+                  '--section-color': `var(--${props.section}-color)`,
+                } as React.CSSProperties
+              }
             />
             <div className='grid-card-title'>{props.name}</div>
           </div>
@@ -47,12 +49,6 @@ function GridCard(props) {
       />
     </Link>
   )
-}
-
-GridCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  section: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
 }
 
 export default GridCard

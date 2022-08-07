@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 
 import GridCard from './GridCard'
 import '../../styles/grid/RecipeGrid.css'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
-function RecipeGrid(props) {
-  const recipes = useRecipes()
-
+function RecipeGrid({ recipes }) {
   return (
     <div id='recipeGrid' className={recipes.length === 0 ? '' : 'loaded'}>
       {recipes
@@ -26,4 +24,4 @@ GridCard.propTypes = {
   thumbnail: PropTypes.string.isRequired,
 }
 
-export default RecipeGrid
+export default withRecipes(RecipeGrid)

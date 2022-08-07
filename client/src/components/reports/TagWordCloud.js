@@ -3,11 +3,9 @@ import { withRouter } from 'react-router'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 
 import '../../styles/reports/TagWordCloud.css'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
-const TagWordCloud = ({ history }) => {
-  const recipes = useRecipes()
-
+const TagWordCloud = ({ history, recipes }) => {
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0
@@ -52,4 +50,4 @@ const TagWordCloud = ({ history }) => {
   )
 }
 
-export default withRouter(TagWordCloud)
+export default withRouter(withRecipes(TagWordCloud))

@@ -1,12 +1,17 @@
 import { useCallback } from 'react'
 import SortBubble from './SortBubble'
-import { SORT_TYPES } from '../../utilities/SortUtilities'
+import { SortType, SORT_TYPES } from '../../constants/SortTypes'
 
 import '../../styles/sort/SortBar.css'
 
-const SortBar = ({ selectedType, onSortChange }) => {
+type Props = {
+  selectedType: SortType
+  onSortChange: (sortType: SortType) => void
+}
+
+const SortBar = ({ selectedType, onSortChange }: Props) => {
   const handleClick = useCallback(
-    (type) => {
+    (type: SortType) => {
       if (selectedType !== type) {
         onSortChange(type)
       }
@@ -14,7 +19,7 @@ const SortBar = ({ selectedType, onSortChange }) => {
     [selectedType, onSortChange]
   )
 
-  const renderBubble = (type, name) => {
+  const renderBubble = (type: SortType, name: string) => {
     return (
       <SortBubble
         isSelected={selectedType === type}

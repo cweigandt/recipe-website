@@ -1,10 +1,5 @@
 import { PartialRecipe } from '../types/RecipeTypes'
-
-export const SORT_TYPES = {
-  UPLOAD: 'upload',
-  VISITS: 'visits',
-  COOKED_DATES: 'cooked-dates',
-}
+import { SORT_TYPES } from '../constants/SortTypes'
 
 const sortByUpload = (recipes: PartialRecipe[]) => {
   return [...recipes].sort((a, b) => {

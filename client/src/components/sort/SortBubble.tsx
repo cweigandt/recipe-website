@@ -1,6 +1,13 @@
+import { MouseEventHandler } from 'react'
 import '../../styles/sort/SortBubble.css'
 
-const SortBubble = ({ isSelected, name, onClick }) => {
+type Props = {
+  isSelected: boolean
+  name: string
+  onClick: MouseEventHandler
+}
+
+const SortBubble = ({ isSelected, name, onClick }: Props) => {
   let clazz = `sort-bubble ${isSelected ? 'selected' : ''}`
   return (
     <div

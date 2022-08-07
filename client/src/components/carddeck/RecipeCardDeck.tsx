@@ -1,17 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useCallback, useEffect, useState } from 'react'
 import { forceCheck as forceCheckLazyLoad } from 'react-lazyload'
+import { RouteComponentProps } from 'react-router-dom'
 
 import RecipeCard from './RecipeCard'
 import DeckBanner from './DeckBanner'
 import '../../styles/carddeck/RecipeCardDeck.css'
 import SortBar from '../sort/SortBar'
 import { sortByType } from '../../utilities/SortUtilities'
-import { SORT_TYPES } from '../../constants/SortTypes'
+import { SortType, SORT_TYPES } from '../../constants/SortTypes'
 import { withRouter } from 'react-router-dom'
 import withRecipes from '../hoc/withRecipes'
+import { PartialRecipe } from '../../types/RecipeTypes'
 
-const chooseRandomRecipe = (recipes) => {
+const chooseRandomRecipe = (recipes: PartialRecipe[]) => {
   // Loop 3 times trying to find a recipe with an image
   let iter = 0
   let randomRecipe = { name: '', imageLocation: '' }
@@ -22,8 +23,18 @@ const chooseRandomRecipe = (recipes) => {
   return randomRecipe
 }
 
-export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
-  const [visibleRecipes, setVisibleRecipes] = useState([])
+interface Props extends RouteComponentProps {
+  filter?: (recipe: PartialRecipe) => boolean
+  recipes: PartialRecipe[]
+}
+
+export const RecipeCardDeck = ({
+  filter,
+  history,
+  location,
+  recipes,
+}: Props) => {
+  const [visibleRecipes, setVisibleRecipes] = useState<PartialRecipe[]>([])
   const [randomRecipe, setRandomRecipe] = useState({
     name: '',
     imageLocation: '',
@@ -36,7 +47,7 @@ export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
   )
 
   const updateRecipesOnSearch = useCallback(
-    (searchText, allRecipes) => {
+    (searchText: string, allRecipes: PartialRecipe[]) => {
       let newVisibleRecipes = allRecipes.filter((recipe, index) => {
         return (
           recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null ||
@@ -59,7 +70,7 @@ export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
   )
 
   const initializeData = useCallback(
-    (recipes) => {
+    (recipes: PartialRecipe[]) => {
       setRandomRecipe(chooseRandomRecipe(recipes))
 
       setVisibleRecipes(recipes)
@@ -85,12 +96,12 @@ export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
   }, [hasLoaded, filter, initializeData, recipes])
 
   const handleSearchText = useCallback(
-    (searchText) => {
+    (searchText: string) => {
       setInitialSearchText('')
 
       updateRecipesOnSearch(searchText, recipes)
 
-      let searchValue = `?search=${searchText}`
+      let searchValue: string | undefined = `?search=${searchText}`
       if (searchText === '') {
         searchValue = undefined
       }
@@ -102,7 +113,7 @@ export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
   )
 
   const handleSortChange = useCallback(
-    (type) => {
+    (type: SortType) => {
       setSortType(type)
 
       if (visibleRecipes.length > 1) {
@@ -137,12 +148,6 @@ export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
       </div>
     </div>
   )
-}
-
-RecipeCardDeck.propTypes = {
-  filter: PropTypes.func,
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default withRouter(withRecipes(RecipeCardDeck))

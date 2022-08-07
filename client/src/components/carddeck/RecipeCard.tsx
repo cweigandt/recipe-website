@@ -1,5 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import LazyLoad from 'react-lazyload'
 // import withCSSAnimation from '../hoc/withCSSAnimation'
@@ -7,8 +5,10 @@ import LazyLoad from 'react-lazyload'
 import '../../styles/carddeck/RecipeCard.css'
 import CardBookmark, { BOOKMARK_TYPES } from '../widgets/CardBookmark'
 import { ReactComponent as StarSVG } from '../../svg/star.svg'
+import { PartialRecipe } from '../../types/RecipeTypes'
+import { Datenum } from '../../types/Aliases'
 
-const getDaysOld = (uploadTime) => {
+const getDaysOld = (uploadTime: Datenum) => {
   let ms = Date.now() - uploadTime
   let seconds = ms / 1000
   let minutes = seconds / 60
@@ -17,6 +17,8 @@ const getDaysOld = (uploadTime) => {
   return Math.floor(days)
 }
 
+interface Props extends PartialRecipe {}
+
 const RecipeCard = ({
   name,
   section,
@@ -24,7 +26,7 @@ const RecipeCard = ({
   thumbnail,
   imageLocation,
   uploadTime,
-}) => {
+}: Props) => {
   const renderFavoritesTag = () => {
     let children = []
     if (tags.includes(`Brittany's Favorites`)) {
@@ -55,7 +57,9 @@ const RecipeCard = ({
     <Link
       to={linkURL}
       className='recipe-card'
-      style={{ '--section-color': `var(--${section}-color)` }}
+      style={
+        { '--section-color': `var(--${section}-color)` } as React.CSSProperties
+      }
     >
       <LazyLoad
         height={160}
@@ -82,14 +86,6 @@ const RecipeCard = ({
       )}
     </Link>
   )
-}
-
-RecipeCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  section: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  uploadTime: PropTypes.number.isRequired,
-  tags: PropTypes.array.isRequired,
 }
 
 // export default withCSSAnimation(RecipeCard, { timeout: 200 })

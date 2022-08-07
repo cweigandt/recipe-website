@@ -1,22 +1,28 @@
-import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import withCSSAnimation from '../hoc/withCSSAnimation'
 
 import '../../styles/carddeck/DeckBanner.css'
+
+type Props = {
+  name: string
+  imageLocation: string
+  initialSearchText?: string
+  onSearchText: (text: string) => void
+}
 
 const DeckBanner = ({
   name,
   imageLocation,
   initialSearchText,
   onSearchText,
-}) => {
+}: Props) => {
   const [isSearching, setIsSearching] = useState(
     initialSearchText && initialSearchText !== ''
   )
 
   const handleSearchText = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       let searchText = e.target.value
       window.scrollTo(0, 0)
       onSearchText(searchText)
@@ -70,13 +76,6 @@ const DeckBanner = ({
       </div>
     </div>
   )
-}
-
-DeckBanner.propTypes = {
-  name: PropTypes.string.isRequired,
-  imageLocation: PropTypes.string.isRequired,
-  initialSearchText: PropTypes.string,
-  onSearchText: PropTypes.func.isRequired,
 }
 
 export default DeckBanner

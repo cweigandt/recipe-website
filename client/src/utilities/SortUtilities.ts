@@ -1,22 +1,24 @@
+import { PartialRecipe } from '../types/RecipeTypes'
+
 export const SORT_TYPES = {
   UPLOAD: 'upload',
   VISITS: 'visits',
   COOKED_DATES: 'cooked-dates',
 }
 
-const sortByUpload = (recipes) => {
+const sortByUpload = (recipes: PartialRecipe[]) => {
   return [...recipes].sort((a, b) => {
     return b.uploadTime - a.uploadTime
   })
 }
 
-const sortByVisits = (recipes) => {
+const sortByVisits = (recipes: PartialRecipe[]) => {
   return [...recipes].sort((a, b) => {
     return b.visits - a.visits
   })
 }
 
-const sortByCookedDate = (recipes) => {
+const sortByCookedDate = (recipes: PartialRecipe[]) => {
   return [...recipes].sort((a, b) => {
     const aCooked = a.cookedDates || []
     const bCooked = b.cookedDates || []
@@ -37,7 +39,10 @@ const sortByCookedDate = (recipes) => {
   })
 }
 
-export const sortByType = (type, recipes) => {
+export const sortByType = (
+  type: typeof SORT_TYPES[keyof typeof SORT_TYPES],
+  recipes: PartialRecipe[]
+) => {
   switch (type) {
     case SORT_TYPES.UPLOAD:
       return sortByUpload(recipes)

@@ -1,8 +1,10 @@
-import React from 'react'
-
 import '../../styles/widgets/Badge.css'
 
-function Badge(props) {
+type Props = {
+  children?: React.ReactNode
+}
+
+const Badge = (props: Props) => {
   return <div className='badge badge-primary'>{props.children}</div>
 }
 

@@ -1,6 +1,17 @@
 import { useCallback } from 'react'
 import '../../styles/widgets/SlantToggle.css'
 
+type Side = 'A' | 'B'
+
+type Props = {
+  AComponent: React.ReactNode
+  BComponent: React.ReactNode
+  colorA: string
+  colorB: string
+  onChange: (side: Side) => void
+  selectedSide: Side
+}
+
 const SlantToggle = ({
   AComponent,
   BComponent,
@@ -8,9 +19,9 @@ const SlantToggle = ({
   colorB,
   onChange,
   selectedSide,
-}) => {
+}: Props) => {
   const handleClick = useCallback(
-    (side) => {
+    (side: Side) => {
       if (side !== selectedSide) {
         onChange(side)
       }

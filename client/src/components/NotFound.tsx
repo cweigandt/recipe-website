@@ -1,8 +1,6 @@
-import React from 'react'
-
 import '../styles/NotFound.css'
 
-function GridCard(props) {
+const GridCard = () => {
   return (
     <div className='container'>
       <div className='row'>

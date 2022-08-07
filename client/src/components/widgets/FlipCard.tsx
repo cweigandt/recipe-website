@@ -1,9 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 import '../../styles/widgets/FlipCard.css'
 
-function FlipCard({ front, back, classes }) {
+type Props = {
+  front: React.ReactNode
+  back: React.ReactNode
+  classes: string
+}
+function FlipCard({ front, back, classes }: Props) {
   return (
     <div className={`flip-card ${classes}`}>
       <div className='flip-card-inner'>
@@ -12,12 +14,6 @@ function FlipCard({ front, back, classes }) {
       </div>
     </div>
   )
-}
-
-FlipCard.propTypes = {
-  front: PropTypes.node.isRequired,
-  back: PropTypes.node.isRequired,
-  classes: PropTypes.string,
 }
 
 export default FlipCard

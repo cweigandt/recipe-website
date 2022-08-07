@@ -1,12 +1,24 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import { loadedRecipes } from '../../actions/recipeActions'
+import { RootState } from '../../reducers'
+import { FullRecipe, PartialRecipe } from '../../types/RecipeTypes'
 
-const withRecipes = (WrappedComponent, useFullRecipes) => {
-  return connect((state) => ({
+type Props = {
+  dispatch: Dispatch
+  recipes: PartialRecipe[] | FullRecipe[]
+  hasFullRecipes: boolean
+}
+
+const withRecipes = (
+  WrappedComponent: React.FC<any>,
+  useFullRecipes = false
+) => {
+  return connect((state: RootState) => ({
     recipes: state.recipes.allRecipes,
     hasFullRecipes: state.recipes.hasFullRecipes,
-  }))((props) => {
+  }))((props: Props) => {
     const { dispatch, recipes, hasFullRecipes } = props
 
     useEffect(() => {

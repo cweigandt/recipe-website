@@ -4,20 +4,14 @@ import '../../styles/alerts/Alert.css'
 import { removeAlert } from '../../actions/alertsActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import withCSSAnimation from '../hoc/withCSSAnimation'
-import { AlertType } from '../../types/AlertTypes'
+import { AlertObjectType } from '../../types/AlertTypes'
 import { Dispatch } from 'redux'
-
-export const ALERT_TYPES = {
-  SUCCESS: 'success',
-  WARNING: 'warning',
-  ERROR: 'error',
-  STATUS: 'status',
-}
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 
 const SUCCESS_ALERT_TIMEOUT = 2000
 
 type PropsType = {
-  alert: AlertType
+  alert: AlertObjectType
   dispatch: Dispatch
   isMostRecent: boolean
 }

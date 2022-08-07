@@ -6,11 +6,12 @@ import '../../styles/modals/SignInModal.css'
 import Modal from './Modal'
 
 import { addAlert } from '../../actions/alertsActions'
-import { ALERT_TYPES } from '../alerts/Alert'
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { Dispatch } from 'redux'
+import { RootState } from '../../reducers'
 
 type Props = {
   dispatch: Dispatch
@@ -119,6 +120,6 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
   )
 }
 
-export default connect((state: any) => ({
+export default connect((state: RootState) => ({
   isLoggedIn: state.login.isLoggedIn,
 }))(SignInModal)

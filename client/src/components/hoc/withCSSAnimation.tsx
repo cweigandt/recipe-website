@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 const withCSSAnimation = (
-  WrappedComponent,
+  WrappedComponent: string | React.ComponentType<any>,
   { cssPrefix = 'animation', timeout = 500 } = {}
 ) => {
-  return (props) => {
+  return (props: any) => {
     const [isMounted, setMounted] = useState(false)
 
     useEffect(() => {

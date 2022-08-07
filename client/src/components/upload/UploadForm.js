@@ -8,7 +8,7 @@ import '@yaireo/tagify/dist/tagify.css'
 import confetti from 'canvas-confetti'
 
 import { addAlert } from '../../actions/alertsActions'
-import { ALERT_TYPES } from '../alerts/Alert'
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
 

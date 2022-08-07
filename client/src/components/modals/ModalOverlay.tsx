@@ -4,6 +4,7 @@ import { ModalType, LOGIN, ARE_YOU_SURE } from '../../constants/ModalTypes'
 
 import SignInModal from './SignInModal'
 import AreYouSureModal from './AreYouSureModal'
+import { RootState } from '../../reducers'
 
 type Props = {
   modal: ModalType
@@ -26,7 +27,7 @@ const ModalOverlay = ({ modal, id, additionalText }: Props) => {
   return <div className='modal-overlay'>{renderModal()}</div>
 }
 
-const mapModalToProps = (state: any) => {
+const mapModalToProps = (state: RootState) => {
   return {
     ...state.modal,
   }

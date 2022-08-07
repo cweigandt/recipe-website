@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 import Tags from '@yaireo/tagify/dist/react.tagify'
 import TagsList from './TagsList'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
-import { ALERT_TYPES } from '../alerts/Alert'
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 import { addAlert } from '../../actions/alertsActions'
 
 import '../../styles/tags/TagRename.css'

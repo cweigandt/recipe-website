@@ -4,17 +4,11 @@ import './index.css'
 import './styles/global.css'
 import App from './App'
 // import reportWebVitals from './reportWebVitals'
-import reducer from './reducers'
+import store from './reducers'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
 
 ReactDOM.render(
   <React.StrictMode>

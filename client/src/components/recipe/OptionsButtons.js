@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 import '../../styles/recipe/OptionsButtons.css'
 import { addAlert } from '../../actions/alertsActions'
-import { ALERT_TYPES } from '../alerts/Alert'
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 
 const BUTTON_CLASSES = 'btn options-icon'
 

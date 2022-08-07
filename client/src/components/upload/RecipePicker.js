@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import '../../styles/upload/UploadForm.css'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
 const sortRecipes = (recipes) => {
   return [...recipes].sort((a, b) => {
@@ -15,11 +15,10 @@ const sortRecipes = (recipes) => {
   })
 }
 function RecipePicker(props) {
-  const recipes = useRecipes()
   const [sortedRecipes, setSortedRecipes] = useState([])
   const dropdownRef = useRef(null)
 
-  const { onChange } = props
+  const { onChange, recipes } = props
   useEffect(() => {
     setSortedRecipes(sortRecipes([...recipes]))
     onChange({ target: dropdownRef.current })
@@ -46,4 +45,4 @@ RecipePicker.propTypes = {
   initialRecipeName: PropTypes.string,
 }
 
-export default RecipePicker
+export default withRecipes(RecipePicker)

@@ -1,9 +1,9 @@
-import { mount, shallow } from 'enzyme'
-import * as useRecipes from '../../../hooks/useRecipes'
+/* eslint-disable testing-library/render-result-naming-convention */
+import { mount } from 'enzyme'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { act } from 'react-dom/test-utils'
 import RecipeCard from '../RecipeCard'
-import RecipeCardDeck from '../RecipeCardDeck'
+import { RecipeCardDeck } from '../RecipeCardDeck'
 
 const rightNow = new Date().getTime()
 const mockRecipes = [
@@ -37,33 +37,33 @@ const mockRecipes = [
   },
 ]
 
-describe('RecipeCardDeck', () => {
-  beforeEach(() => {
-    jest.spyOn(useRecipes, 'default').mockImplementation(() => mockRecipes)
-  })
+const DEFAULT_PROPS = {
+  recipes: mockRecipes,
+  location: { search: '' },
+  history: {},
+}
 
+const renderDeck = () => {
+  return mount(
+    <Router>
+      <RecipeCardDeck {...DEFAULT_PROPS} />
+    </Router>
+  )
+}
+describe('RecipeCardDeck', () => {
   it('renders without error', () => {
-    const rendered = shallow(<RecipeCardDeck optionalRecipes={mockRecipes} />)
+    const rendered = renderDeck()
     expect(rendered).not.toBeNull()
   })
 
   it('renders all recipes', () => {
-    const rendered = mount(
-      <Router>
-        <RecipeCardDeck optionalRecipes={mockRecipes} />
-      </Router>
-    )
+    const rendered = renderDeck()
     expect(rendered.find(RecipeCard)).toHaveLength(mockRecipes.length)
   })
 
   describe('Sort Bar', () => {
     it('Sorts by upload by default', () => {
-      const rendered = mount(
-        <Router>
-          <RecipeCardDeck optionalRecipes={mockRecipes} />
-        </Router>
-      )
-
+      const rendered = renderDeck()
       const cards = rendered.find(RecipeCard)
       expect(cards).toHaveLength(mockRecipes.length)
       rendered.update()
@@ -73,11 +73,7 @@ describe('RecipeCardDeck', () => {
     })
 
     it('Sorts by visits on click', () => {
-      const rendered = mount(
-        <Router>
-          <RecipeCardDeck optionalRecipes={mockRecipes} />
-        </Router>
-      )
+      const rendered = renderDeck()
 
       act(() => {
         rendered.find(`[data-test-id='sort-bubble-Visits']`).simulate('click')

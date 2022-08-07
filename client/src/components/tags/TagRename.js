@@ -7,13 +7,12 @@ import { addAlert } from '../../actions/alertsActions'
 
 import '../../styles/tags/TagRename.css'
 import { useDispatch } from 'react-redux'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
-const TagRename = () => {
+const TagRename = ({ recipes }) => {
   const tagifyRef = useRef(null)
   const dispatch = useDispatch()
 
-  const recipes = useRecipes()
   const [fromBadge, setFromBadge] = useState(' ')
   const [submitClickable, setSubmitClickable] = useState(true)
 
@@ -111,4 +110,4 @@ const TagRename = () => {
   )
 }
 
-export default TagRename
+export default withRecipes(TagRename)

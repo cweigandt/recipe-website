@@ -13,11 +13,11 @@ import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../modals/ModalTypes'
 
 import { getAllTags } from '../../utilities/RecipesUtilities'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
 function UploadForm(props) {
+  const { recipes } = props
   const [sections, setSections] = useState([])
-  const recipes = useRecipes()
 
   const tagifyRef = useRef(null)
   const formRef = useRef(null)
@@ -349,4 +349,4 @@ UploadForm.defaultProps = {
 export default connect((state) => ({
   isLoggedIn: state.login.isLoggedIn,
   isLoginUpToDate: state.login.isUpToDate,
-}))(UploadForm)
+}))(withRecipes(UploadForm))

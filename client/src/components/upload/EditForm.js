@@ -4,10 +4,9 @@ import PropTypes from 'prop-types'
 import RecipePicker from './RecipePicker'
 import UploadForm from './UploadForm'
 import '../../styles/upload/UploadForm.css'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
-function EditForm(props) {
-  const recipes = useRecipes(true)
+function EditForm({ recipes, location }) {
   const [recipeName, setRecipeName] = useState('')
   const [recipe, setRecipe] = useState({})
 
@@ -21,7 +20,7 @@ function EditForm(props) {
       <RecipePicker
         onChange={(e) => setRecipeName(e.target.value)}
         initialRecipeName={
-          props.location.state ? props.location.state.initialRecipeName : null
+          location.state ? location.state.initialRecipeName : null
         }
       ></RecipePicker>
       <UploadForm recipe={recipe} formSubmitAction='/edit-recipe'></UploadForm>
@@ -33,4 +32,4 @@ EditForm.propTypes = {
   location: PropTypes.shape({ state: PropTypes.object }),
 }
 
-export default EditForm
+export default withRecipes(EditForm, true)

@@ -1,10 +1,8 @@
-import useRecipes from '../../hooks/useRecipes'
 import '../../styles/widgets/Badge.css'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
+import withRecipes from '../hoc/withRecipes'
 
-function TagsList({ onBadgeClick }) {
-  const recipes = useRecipes()
-
+function TagsList({ onBadgeClick, recipes }) {
   const tagCounts = getAllTagCounts(recipes)
   const sortedTags = Object.keys(tagCounts).sort()
 
@@ -25,4 +23,4 @@ function TagsList({ onBadgeClick }) {
   )
 }
 
-export default TagsList
+export default withRecipes(TagsList)

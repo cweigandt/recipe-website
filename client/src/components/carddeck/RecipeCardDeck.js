@@ -8,7 +8,7 @@ import '../../styles/carddeck/RecipeCardDeck.css'
 import SortBar from '../sort/SortBar'
 import { sortByType, SORT_TYPES } from '../../utilities/SortUtilities'
 import { withRouter } from 'react-router-dom'
-import useRecipes from '../../hooks/useRecipes'
+import withRecipes from '../hoc/withRecipes'
 
 const chooseRandomRecipe = (recipes) => {
   // Loop 3 times trying to find a recipe with an image
@@ -21,8 +21,7 @@ const chooseRandomRecipe = (recipes) => {
   return randomRecipe
 }
 
-const RecipeCardDeck = ({ filter, history, location }) => {
-  const recipes = useRecipes()
+export const RecipeCardDeck = ({ filter, history, location, recipes }) => {
   const [visibleRecipes, setVisibleRecipes] = useState([])
   const [randomRecipe, setRandomRecipe] = useState({
     name: '',
@@ -145,4 +144,4 @@ RecipeCardDeck.propTypes = {
   location: PropTypes.object.isRequired,
 }
 
-export default withRouter(RecipeCardDeck)
+export default withRouter(withRecipes(RecipeCardDeck))

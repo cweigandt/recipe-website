@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import '../../styles/recipe/Recipe.css'
@@ -11,12 +10,18 @@ import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
+import { FullRecipe } from '../../types/RecipeTypes'
+import { useRef } from 'react'
 // import withCSSAnimation from '../hoc/withCSSAnimation'
 
-const Recipe = ({ urlName }) => {
-  const [recipe, setRecipe] = useState({})
+type Props = {
+  urlName: string
+}
 
-  const wrapperRef = React.useRef()
+const Recipe = ({ urlName }: Props) => {
+  const [recipe, setRecipe] = useState<FullRecipe | null>(null)
+
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const recipeName = urlName.replace(/_/g, ' ')
@@ -41,7 +46,7 @@ const Recipe = ({ urlName }) => {
     }
   }, [urlName])
 
-  const renderIngredients = (ingredients) => {
+  const renderIngredients = (ingredients: string[]) => {
     return (
       <ul className='ingredients-list' id='ingredientsList'>
         {ingredients.map((ingredient) => {
@@ -51,7 +56,7 @@ const Recipe = ({ urlName }) => {
     )
   }
 
-  const renderSubIngredients = (title, ingredients) => {
+  const renderSubIngredients = (title: string, ingredients: string[]) => {
     return (
       title && (
         <div>
@@ -62,7 +67,7 @@ const Recipe = ({ urlName }) => {
     )
   }
 
-  const renderStepsList = (steps) => {
+  const renderStepsList = (steps: string[]) => {
     return (
       <ul id='stepsList'>
         {steps.map((step, num) => {
@@ -77,7 +82,7 @@ const Recipe = ({ urlName }) => {
     )
   }
 
-  const renderTags = (tags) => {
+  const renderTags = (tags: string[]) => {
     return (
       tags.length > 0 && (
         <div className='badge-list noprint'>
@@ -99,7 +104,7 @@ const Recipe = ({ urlName }) => {
     )
   }
 
-  if (!recipe.name) {
+  if (!recipe) {
     // Recipe hasn't finished loading
     return <div id='recipeWrapper'></div>
   }
@@ -150,10 +155,6 @@ const Recipe = ({ urlName }) => {
       </div>
     </div>
   )
-}
-
-Recipe.propTypes = {
-  urlName: PropTypes.string.isRequired,
 }
 
 // export default withCSSAnimation(Recipe, {

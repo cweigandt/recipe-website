@@ -1,14 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 import '../../styles/recipe/RecipeCookedDates.css'
+import { Datenum } from '../../types/Aliases'
 
-const RecipeCookedDates = ({ dates }) => {
+type Props = {
+  dates: Datenum[]
+}
+
+const RecipeCookedDates = ({ dates }: Props) => {
   if (!dates || dates.length === 0) {
     return null
   }
 
-  const recentDate = new Date(dates[0] || dates)
+  const isSingleDate = typeof dates === 'number'
+
+  const recentDate = new Date(isSingleDate ? dates : dates[0])
   const formattedMonth = new Intl.DateTimeFormat('en-US', {
     month: 'long',
   }).format(recentDate)
@@ -21,10 +25,6 @@ const RecipeCookedDates = ({ dates }) => {
       Last made {formattedMonth} {formattedYear} ({totalTimes} {suffix})
     </div>
   )
-}
-
-RecipeCookedDates.propTypes = {
-  cookedDates: PropTypes.array,
 }
 
 export default RecipeCookedDates

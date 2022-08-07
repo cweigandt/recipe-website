@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useCallback, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
@@ -8,15 +7,25 @@ import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
 
 import '../../styles/recipe/RecipeMadeButton.css'
+import { Dispatch } from 'redux'
+import { RootState } from '../../reducers'
+import { Datenum } from '../../types/Aliases'
 
 let modalId = -1
+
+type Props = {
+  confirmedAreYouSureIds: number[]
+  recipeName: string
+  cookedDates: Datenum[]
+  dispatch: Dispatch
+}
 
 const RecipeMadeButton = ({
   confirmedAreYouSureIds,
   recipeName,
   cookedDates,
   dispatch,
-}) => {
+}: Props) => {
   const [showButton, setShowButton] = useState(true)
 
   const handleButtonClick = useCallback(() => {
@@ -49,7 +58,7 @@ const RecipeMadeButton = ({
     const today = new Date()
     const recent = new Date(cookedDates[0])
 
-    const msDiff = today - recent
+    const msDiff = today.getTime() - recent.getTime()
     const numDaysDiff = msDiff / 1000 / 60 / 60 / 24
 
     if (numDaysDiff < 1) {
@@ -71,15 +80,10 @@ const RecipeMadeButton = ({
   )
 }
 
-RecipeMadeButton.propTypes = {
-  confirmedAreYouSureIds: PropTypes.array.isRequired,
-  recipeName: PropTypes.string.isRequired,
-  cookedDates: PropTypes.array,
-}
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
 })
 export default connect(mapStateToProps)(
+  // @ts-expect-error no idea
   withLoggedInVisibility(RecipeMadeButton)
 )

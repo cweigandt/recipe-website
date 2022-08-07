@@ -4,15 +4,23 @@ import { ReactComponent as PrintSVG } from '../../svg/print.svg'
 import { ReactComponent as EditSVG } from '../../svg/edit.svg'
 import { ReactComponent as JSONSVG } from '../../svg/json.svg'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import '../../styles/recipe/OptionsButtons.css'
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
+import { Dispatch } from 'redux'
+import { FullRecipe } from '../../types/RecipeTypes'
+import { RootState } from '../../reducers'
 
 const BUTTON_CLASSES = 'btn options-icon'
 
-const OptionsButtons = ({ dispatch, isLoggedIn, recipe }) => {
+type Props = {
+  dispatch: Dispatch
+  isLoggedIn: boolean
+  recipe: FullRecipe
+}
+
+const OptionsButtons = ({ dispatch, isLoggedIn, recipe }: Props) => {
   const renderEditButton = () => {
     return (
       isLoggedIn && (
@@ -72,12 +80,6 @@ const OptionsButtons = ({ dispatch, isLoggedIn, recipe }) => {
   )
 }
 
-OptionsButtons.propTypes = {
-  dispatch: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  recipe: PropTypes.object.isRequired,
-}
-
-export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
-  OptionsButtons
-)
+export default connect((state: RootState) => ({
+  isLoggedIn: state.login.isLoggedIn,
+}))(OptionsButtons)

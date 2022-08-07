@@ -1,6 +1,5 @@
-import { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
@@ -20,13 +19,27 @@ import { ReactComponent as RenameSVG } from '../../svg/rename.svg'
 
 import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
+import { Dispatch } from 'redux'
+import { RootState } from '../../reducers'
 
 let modalId = -1
 
-function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
+type Props = {
+  confirmedAreYouSureIds: number[]
+  dispatch: Dispatch
+  title: string
+  isLoggedIn: boolean
+}
+
+function NavBar({
+  confirmedAreYouSureIds,
+  dispatch,
+  title,
+  isLoggedIn,
+}: Props) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
-  const [cookies] = useCookies(['user'])
+  const [cookies] = useCookies<any>(['user'])
 
   useEffect(() => {
     // query api
@@ -76,7 +89,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
     dispatch(action)
   }
 
-  const renderLink = (link, text, icon) => {
+  const renderLink = (link: string, text: string, icon?: React.ReactNode) => {
     return (
       <li className='nav-item'>
         <Link to={link} onClick={toggleMenu} className='navbar-menu-link'>
@@ -170,12 +183,7 @@ function NavBar({ confirmedAreYouSureIds, dispatch, title, isLoggedIn }) {
   )
 }
 
-NavBar.propTypes = {
-  confirmedAreYouSureIds: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
-}
-
-export default connect((state) => ({
+export default connect((state: RootState) => ({
   confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
   isLoggedIn: state.login.isLoggedIn,
 }))(NavBar)

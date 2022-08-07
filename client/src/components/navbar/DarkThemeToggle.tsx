@@ -1,4 +1,4 @@
-import SlantToggle from '../widgets/SlantToggle'
+import SlantToggle, { Side } from '../widgets/SlantToggle'
 import { useCookies } from 'react-cookie'
 
 import { ReactComponent as MoonSVG } from '../../svg/moon.svg'
@@ -9,7 +9,7 @@ import '../../styles/navbar/DarkThemeToggle.css'
 
 const DarkThemeToggle = () => {
   const isInitialMount = useRef(true)
-  const [cookies, setCookie] = useCookies(['user'])
+  const [cookies, setCookie] = useCookies<any>(['user'])
   const [isDarkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const DarkThemeToggle = () => {
     }
   }, [isDarkMode, setCookie])
 
-  const handleChange = useCallback((side) => {
+  const handleChange = useCallback((side: Side) => {
     setDarkMode(side === 'A')
   }, [])
 

@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import '../../styles/widgets/SlantToggle.css'
 
-type Side = 'A' | 'B'
+export type Side = 'A' | 'B'
 
 type Props = {
   AComponent: React.ReactNode

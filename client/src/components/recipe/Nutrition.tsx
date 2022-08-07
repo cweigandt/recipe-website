@@ -1,12 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
 
 import '../../styles/recipe/Nutrition.css'
+import { FullRecipe } from '../../types/RecipeTypes'
 
-const cachedNutritionInfo = {}
+type Props = {
+  recipe: FullRecipe
+}
 
-function Nutrition({ recipe }) {
-  const [nutritionInfo, setNutritionInfo] = useState({})
+type NutritionInfo = {
+  pricePerServing?: number
+  vegetarian?: boolean
+  vegan?: boolean
+  dairyFree?: boolean
+  glutenFree?: boolean
+  error?: string
+}
+
+const cachedNutritionInfo: { [recipeName: string]: NutritionInfo } = {}
+
+function Nutrition({ recipe }: Props) {
+  const [nutritionInfo, setNutritionInfo] = useState<NutritionInfo>({})
 
   useEffect(() => {
     if (Object.keys(recipe).length === 0) {
@@ -68,10 +81,6 @@ function Nutrition({ recipe }) {
       )}
     </div>
   )
-}
-
-Nutrition.propTypes = {
-  recipe: PropTypes.object.isRequired,
 }
 
 export default Nutrition

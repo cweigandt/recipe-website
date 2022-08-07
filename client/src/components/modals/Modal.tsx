@@ -1,8 +1,11 @@
-import React from 'react'
-
 import '../../styles/modals/Modal.css'
 
-const Modal = (props) => {
+type Props = {
+  children: React.ReactNode
+  class: string
+}
+
+const Modal = (props: Props) => {
   return (
     <div className='modal-bg'>
       <div className={`modal ${props.class}`}>{props.children}</div>

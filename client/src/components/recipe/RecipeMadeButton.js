@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
 
 import { showModal } from '../../actions/modalActions'
-import * as ModalTypes from '../modals/ModalTypes'
+import * as ModalTypes from '../../constants/ModalTypes'
 
 import '../../styles/recipe/RecipeMadeButton.css'
 

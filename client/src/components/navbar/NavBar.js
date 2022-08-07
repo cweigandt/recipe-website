@@ -1,11 +1,11 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import { showModal } from '../../actions/modalActions'
-import * as ModalTypes from '../modals/ModalTypes'
+import * as ModalTypes from '../../constants/ModalTypes'
 
 import { logIn, logInStatusSynced, logOut } from '../../actions/loginActions'
 

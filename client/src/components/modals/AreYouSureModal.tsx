@@ -1,32 +1,38 @@
-import React, { useRef } from 'react'
+import { FormEventHandler, useRef } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import '../../styles/modals/AreYouSureModal.css'
 
 import Modal from './Modal'
 import { confirmAreYouSure, hideModal } from '../../actions/modalActions'
+import { Dispatch } from 'redux'
 
-const AreYouSureModal = (props) => {
+type Props = {
+  dispatch: Dispatch
+  id: number
+  additionalText: string
+}
+
+const AreYouSureModal = (props: Props) => {
   const formRef = useRef(null)
 
-  const handleFormSubmit = (e) => {
+  const handleClose = () => {
+    props.dispatch(hideModal(props.id))
+  }
+
+  const handleFormSubmit: FormEventHandler = (e) => {
     e.preventDefault()
 
     props.dispatch(confirmAreYouSure(props.id))
 
-    handleClose(e)
+    handleClose()
     return false
-  }
-
-  const handleClose = (e) => {
-    props.dispatch(hideModal(props.id))
   }
 
   return (
     <Modal class='are-you-sure-modal'>
       <h4 style={{ margin: '20px' }}>Are you sure?</h4>
-      <div style={{ 'font-size': '16px', 'font-style': 'italic' }}>
+      <div style={{ fontSize: '16px', fontStyle: 'italic' }}>
         {props.additionalText}
       </div>
       <form
@@ -56,12 +62,5 @@ const AreYouSureModal = (props) => {
     </Modal>
   )
 }
-
-AreYouSureModal.propTypes = {
-  id: PropTypes.number.isRequired,
-  additionalText: PropTypes.string,
-}
-
-AreYouSureModal.defaultProps = {}
 
 export default connect()(AreYouSureModal)

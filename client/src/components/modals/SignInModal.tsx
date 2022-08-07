@@ -1,6 +1,5 @@
-import React, { useCallback, useRef } from 'react'
+import { useCallback, useRef, FormEventHandler } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import '../../styles/modals/SignInModal.css'
 
@@ -11,18 +10,25 @@ import { ALERT_TYPES } from '../alerts/Alert'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
+import { Dispatch } from 'redux'
 
-function SignInModal({ dispatch, id, isLoggedIn }) {
-  const formRef = useRef(null)
+type Props = {
+  dispatch: Dispatch
+  id: number
+  isLoggedIn: boolean
+}
+
+function SignInModal({ dispatch, id, isLoggedIn }: Props) {
+  const formRef = useRef<HTMLFormElement>(null)
 
   if (isLoggedIn) {
     dispatch(hideModal(id))
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit: FormEventHandler = (e) => {
     e.preventDefault()
 
-    const formData = new FormData(formRef.current)
+    const formData = new FormData(formRef.current!)
 
     fetch('/signin', {
       method: 'POST',
@@ -40,7 +46,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
         status = ALERT_TYPES.ERROR
         dispatch(addAlert('Error logging in', status))
       } else {
-        formRef.current.reset()
+        formRef.current && formRef.current.reset()
         dispatch(logIn())
         dispatch(addAlert('Logged in', status))
       }
@@ -65,7 +71,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
         ref={formRef}
       >
         <div className='form-group'>
-          <label for={'username'} className='form-label'>
+          <label htmlFor={'username'} className='form-label'>
             Username:
           </label>
           <input
@@ -83,7 +89,7 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
           />
         </div>
         <div className='form-group'>
-          <label for={'password'} className='form-label'>
+          <label htmlFor={'password'} className='form-label'>
             Password:
           </label>
           <input
@@ -113,12 +119,6 @@ function SignInModal({ dispatch, id, isLoggedIn }) {
   )
 }
 
-SignInModal.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-}
-
-export default connect((state) => ({ isLoggedIn: state.login.isLoggedIn }))(
-  SignInModal
-)
+export default connect((state: any) => ({
+  isLoggedIn: state.login.isLoggedIn,
+}))(SignInModal)

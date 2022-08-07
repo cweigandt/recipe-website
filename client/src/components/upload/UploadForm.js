@@ -10,7 +10,7 @@ import confetti from 'canvas-confetti'
 import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../alerts/Alert'
 import { showModal } from '../../actions/modalActions'
-import * as ModalTypes from '../modals/ModalTypes'
+import * as ModalTypes from '../../constants/ModalTypes'
 
 import { getAllTags } from '../../utilities/RecipesUtilities'
 import withRecipes from '../hoc/withRecipes'

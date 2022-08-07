@@ -12,7 +12,7 @@ type Props = {
 }
 
 const withRecipes = (
-  WrappedComponent: React.FC<any>,
+  WrappedComponent: React.ComponentType<any>,
   useFullRecipes = false
 ) => {
   return connect((state: RootState) => ({

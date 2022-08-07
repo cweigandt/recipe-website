@@ -1,11 +1,17 @@
 import WordCloud from 'react-d3-cloud'
 import { withRouter } from 'react-router'
+import { RouteComponentProps } from 'react-router-dom'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 
 import '../../styles/reports/TagWordCloud.css'
 import withRecipes from '../hoc/withRecipes'
+import { PartialRecipe } from '../../types/RecipeTypes'
 
-const TagWordCloud = ({ history, recipes }) => {
+interface Props extends RouteComponentProps {
+  recipes: PartialRecipe[]
+}
+
+const TagWordCloud = ({ history, recipes }: Props) => {
   const vw = Math.max(
     document.documentElement.clientWidth || 0,
     window.innerWidth || 0

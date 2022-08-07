@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
@@ -14,13 +13,42 @@ import * as ModalTypes from '../../constants/ModalTypes'
 
 import { getAllTags } from '../../utilities/RecipesUtilities'
 import withRecipes from '../hoc/withRecipes'
+import { FullRecipe, PartialRecipe } from '../../types/RecipeTypes'
+import { Dispatch } from 'redux'
+import Tagify from '@yaireo/tagify'
+import { RootState } from '../../reducers'
+import { FormEventHandler } from 'react'
 
-function UploadForm(props) {
-  const { recipes } = props
+type Props = {
+  recipes: PartialRecipe[]
+  isLoginUpToDate: boolean
+  isLoggedIn: boolean
+  dispatch: Dispatch
+  formSubmitAction?: string
+  recipe?: FullRecipe
+}
+
+const EmptyRecipe = {
+  name: undefined,
+  section: undefined,
+  servings: undefined,
+  time: undefined,
+  ingredients: undefined,
+  subIngredients1Name: undefined,
+  subIngredients1: undefined,
+  subIngredients2Name: undefined,
+  subIngredients2: undefined,
+  steps: undefined,
+  tags: undefined,
+  uploader: undefined,
+}
+
+function UploadForm(props: Props) {
+  const { recipe = EmptyRecipe, recipes } = props
   const [sections, setSections] = useState([])
 
-  const tagifyRef = useRef(null)
-  const formRef = useRef(null)
+  const tagifyRef = useRef<Tagify | undefined>(undefined)
+  const formRef = useRef<HTMLFormElement>(null)
   const allTags = getAllTags(recipes)
 
   if (props.isLoginUpToDate && !props.isLoggedIn) {
@@ -37,6 +65,10 @@ function UploadForm(props) {
   }, [])
 
   const handleUploadSuccess = () => {
+    if (!formRef.current) {
+      return
+    }
+
     formRef.current.reset()
     window.scrollTo(0, 0)
 
@@ -47,24 +79,25 @@ function UploadForm(props) {
     })
   }
 
+  // @ts-expect-error window
   window.confetti = handleUploadSuccess
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit: FormEventHandler = (e) => {
     const { dispatch, formSubmitAction, recipe } = props
     e.preventDefault()
 
-    const formData = new FormData(formRef.current)
+    const formData = new FormData(formRef.current!)
     if (recipe && recipe.name !== formData.get('name')) {
       formData.set('oldName', recipe.name)
     }
     if (recipe && recipe.uploadTime) {
-      formData.set('uploadTime', recipe.uploadTime)
+      formData.set('uploadTime', `${recipe.uploadTime}`)
     }
     if (recipe && recipe.visits) {
-      formData.set('visits', recipe.visits)
+      formData.set('visits', `${recipe.visits}`)
     }
     if (recipe && recipe.cookedDates) {
-      formData.set('cookedDates', recipe.cookedDates)
+      formData.set('cookedDates', JSON.stringify(recipe.cookedDates))
     }
 
     dispatch(addAlert('Uploading', ALERT_TYPES.STATUS))
@@ -95,10 +128,16 @@ function UploadForm(props) {
     name,
     additionalProps = {},
     children = null,
+  }: {
+    id: string
+    title: string
+    name: string
+    additionalProps?: {}
+    children?: React.ReactNode
   }) => {
     return (
       <div className='form-group'>
-        <label for={id} className='form-label'>
+        <label htmlFor={id} className='form-label'>
           {title}
         </label>
         <input
@@ -139,12 +178,12 @@ function UploadForm(props) {
           additionalProps: {
             required: true,
             placeholder: 'Recipe',
-            defaultValue: props.recipe.name || '',
+            defaultValue: recipe.name || '',
           },
         })}
 
         <div className='form-group'>
-          <label for='sectionInput' className='form-label'>
+          <label htmlFor='sectionInput' className='form-label'>
             Section
           </label>
           <select
@@ -156,7 +195,7 @@ function UploadForm(props) {
             {sections.map((section) => (
               <option
                 value={section}
-                selected={props.recipe.section === section ? true : false}
+                selected={recipe.section === section ? true : false}
               >
                 {section}
               </option>
@@ -168,7 +207,7 @@ function UploadForm(props) {
           id: 'servingsInput',
           title: 'Servings',
           name: 'servings',
-          additionalProps: { defaultValue: props.recipe.servings || '' },
+          additionalProps: { defaultValue: recipe.servings || '' },
         })}
 
         {renderTextLineInput({
@@ -177,12 +216,12 @@ function UploadForm(props) {
           name: 'time',
           additionalProps: {
             placeholder: 'e.g. 1h 30m',
-            defaultValue: props.recipe.time || '',
+            defaultValue: recipe.time || '',
           },
         })}
 
         <div className='form-group'>
-          <label for='imageInput' className='form-label'>
+          <label htmlFor='imageInput' className='form-label'>
             Image:
           </label>
           <input
@@ -195,7 +234,7 @@ function UploadForm(props) {
         </div>
 
         <div className='form-group'>
-          <label for='ingredientsInput' className='form-label'>
+          <label htmlFor='ingredientsInput' className='form-label'>
             Ingredients
           </label>
           <textarea
@@ -203,11 +242,9 @@ function UploadForm(props) {
             id='ingredientsInput'
             name='ingredients'
             data-test-id='upload-field-ingredients'
-            rows='10'
+            rows={10}
             defaultValue={
-              props.recipe.ingredients
-                ? props.recipe.ingredients.join('\n')
-                : ''
+              recipe.ingredients ? recipe.ingredients.join('\n') : ''
             }
             required
           ></textarea>
@@ -219,7 +256,7 @@ function UploadForm(props) {
           name: 'subIngredients1Name',
           additionalProps: {
             placeholder: 'Name',
-            defaultValue: props.recipe.subIngredients1Name || '',
+            defaultValue: recipe.subIngredients1Name || '',
           },
           children: (
             <textarea
@@ -227,11 +264,9 @@ function UploadForm(props) {
               id='subIngredients1Input'
               name='subIngredients1'
               data-test-id='upload-field-subIngredients1'
-              rows='5'
+              rows={5}
               defaultValue={
-                props.recipe.subIngredients1
-                  ? props.recipe.subIngredients1.join('\n')
-                  : ''
+                recipe.subIngredients1 ? recipe.subIngredients1.join('\n') : ''
               }
             ></textarea>
           ),
@@ -243,7 +278,7 @@ function UploadForm(props) {
           name: 'subIngredients2Name',
           additionalProps: {
             placeholder: 'Name',
-            defaultValue: props.recipe.subIngredients2Name || '',
+            defaultValue: recipe.subIngredients2Name || '',
           },
           children: (
             <textarea
@@ -251,18 +286,16 @@ function UploadForm(props) {
               id='subIngredients2Input'
               name='subIngredients2'
               data-test-id='upload-field-subIngredients2'
-              rows='5'
+              rows={5}
               defaultValue={
-                props.recipe.subIngredients2
-                  ? props.recipe.subIngredients2.join('\n')
-                  : ''
+                recipe.subIngredients2 ? recipe.subIngredients2.join('\n') : ''
               }
             ></textarea>
           ),
         })}
 
         <div className='form-group'>
-          <label for='stepsInput' className='form-label'>
+          <label htmlFor='stepsInput' className='form-label'>
             Steps
           </label>
           <textarea
@@ -270,23 +303,21 @@ function UploadForm(props) {
             id='stepsInput'
             name='steps'
             data-test-id='upload-field-steps'
-            rows='12'
-            defaultValue={
-              props.recipe.steps ? props.recipe.steps.join('\n') : ''
-            }
+            rows={12}
+            defaultValue={recipe.steps ? recipe.steps.join('\n') : ''}
             required
           ></textarea>
         </div>
 
         <div className='form-group'>
-          <label for={'tags'} className='form-label'>
+          <label htmlFor='tags' className='form-label'>
             Tags
           </label>
           <Tags
             tagifyRef={tagifyRef}
             name='tags'
             className='tagsInput'
-            value={props.recipe.tags ? props.recipe.tags.join(', ').trim() : ''}
+            value={recipe.tags ? recipe.tags.join(', ').trim() : ''}
             settings={{
               whitelist: allTags,
               placeholder: 'e.g. Desserts, Breakfast',
@@ -307,7 +338,7 @@ function UploadForm(props) {
           title: 'Uploader',
           name: 'uploader',
           additionalProps: {
-            defaultValue: props.recipe.uploader || 'Brittany Weigandt',
+            defaultValue: recipe.uploader || 'Brittany Weigandt',
           },
         })}
 
@@ -324,29 +355,7 @@ function UploadForm(props) {
   )
 }
 
-UploadForm.propTypes = {
-  formSubmitAction: PropTypes.string,
-  recipe: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    section: PropTypes.string.isRequired,
-    servings: PropTypes.number.isRequired,
-    time: PropTypes.string.isRequired,
-    ingredients: PropTypes.array.isRequired,
-    subIngredients1Name: PropTypes.string.isRequired,
-    subIngredients1: PropTypes.array.isRequired,
-    subIngredients2Name: PropTypes.string.isRequired,
-    subIngredients2: PropTypes.array.isRequired,
-    steps: PropTypes.array.isRequired,
-    tags: PropTypes.array.isRequired,
-    uploader: PropTypes.string.isRequired,
-  }),
-}
-
-UploadForm.defaultProps = {
-  recipe: {},
-}
-
-export default connect((state) => ({
+export default connect((state: RootState) => ({
   isLoggedIn: state.login.isLoggedIn,
   isLoginUpToDate: state.login.isUpToDate,
 }))(withRecipes(UploadForm))

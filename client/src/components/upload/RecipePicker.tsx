@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState, useRef } from 'react'
 
 import '../../styles/upload/UploadForm.css'
+import { PartialRecipe } from '../../types/RecipeTypes'
 import withRecipes from '../hoc/withRecipes'
 
-const sortRecipes = (recipes) => {
+const sortRecipes = (recipes: PartialRecipe[]) => {
   return [...recipes].sort((a, b) => {
     if (a.name < b.name) {
       return -1
@@ -14,17 +14,24 @@ const sortRecipes = (recipes) => {
     return 0
   })
 }
-function RecipePicker(props) {
-  const [sortedRecipes, setSortedRecipes] = useState([])
+
+type Props = {
+  onChange: (obj: { target: HTMLSelectElement }) => void
+  initialRecipeName?: string
+  recipes: PartialRecipe[]
+}
+
+function RecipePicker(props: Props) {
+  const [sortedRecipes, setSortedRecipes] = useState<PartialRecipe[]>([])
   const dropdownRef = useRef(null)
 
   const { onChange, recipes } = props
   useEffect(() => {
     setSortedRecipes(sortRecipes([...recipes]))
-    onChange({ target: dropdownRef.current })
+    onChange({ target: dropdownRef.current! })
   }, [recipes, onChange])
 
-  const renderOption = (name) => {
+  const renderOption = (name: string) => {
     return (
       <option value={name} selected={name === props.initialRecipeName}>
         {name}
@@ -38,11 +45,6 @@ function RecipePicker(props) {
       {sortedRecipes.map((recipe) => renderOption(recipe.name))}
     </select>
   )
-}
-
-RecipePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  initialRecipeName: PropTypes.string,
 }
 
 export default withRecipes(RecipePicker)

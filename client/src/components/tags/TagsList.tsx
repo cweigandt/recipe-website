@@ -1,8 +1,14 @@
 import '../../styles/widgets/Badge.css'
+import { PartialRecipe } from '../../types/RecipeTypes'
 import { getAllTagCounts } from '../../utilities/RecipesUtilities'
 import withRecipes from '../hoc/withRecipes'
 
-function TagsList({ onBadgeClick, recipes }) {
+type Props = {
+  onBadgeClick: (tag: string) => void
+  recipes: PartialRecipe[]
+}
+
+function TagsList({ onBadgeClick, recipes }: Props) {
   const tagCounts = getAllTagCounts(recipes)
   const sortedTags = Object.keys(tagCounts).sort()
 

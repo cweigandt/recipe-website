@@ -42,7 +42,6 @@
     "node-fetch": "^2.6.7",
     "partial": "0.0.7",
     "prettier": "^2.7.1",
-    "prop-types": "^15.8.1",
     "tls": "0.0.1"
   },
   "repository": {

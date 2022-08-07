@@ -8,19 +8,29 @@ import { addAlert } from '../../actions/alertsActions'
 import '../../styles/tags/TagRename.css'
 import { useDispatch } from 'react-redux'
 import withRecipes from '../hoc/withRecipes'
+import { PartialRecipe } from '../../types/RecipeTypes'
+import Tagify from '@yaireo/tagify'
 
-const TagRename = ({ recipes }) => {
-  const tagifyRef = useRef(null)
+type Props = {
+  recipes: PartialRecipe[]
+}
+
+const TagRename = ({ recipes }: Props) => {
+  const tagifyRef = useRef<Tagify | undefined>(undefined)
   const dispatch = useDispatch()
 
   const [fromBadge, setFromBadge] = useState(' ')
   const [submitClickable, setSubmitClickable] = useState(true)
 
-  const handleBadgeClick = useCallback((tag) => {
+  const handleBadgeClick = useCallback((tag: string) => {
     setFromBadge(tag)
   }, [])
 
   const handleSubmit = useCallback(() => {
+    if (!tagifyRef.current) {
+      return
+    }
+
     if (fromBadge === ' ' || tagifyRef.current.value.length === 0) {
       // something isn't filled in
       dispatch(
@@ -59,7 +69,7 @@ const TagRename = ({ recipes }) => {
     })
   }, [dispatch, fromBadge, tagifyRef])
 
-  let allTags = {}
+  let allTags: { [tag: string]: number } = {}
   recipes.forEach((recipe) => {
     recipe.tags.forEach((tag) => {
       allTags[tag] = allTags[tag] !== undefined ? allTags[tag] + 1 : 1
@@ -75,6 +85,7 @@ const TagRename = ({ recipes }) => {
   return (
     <div className='tag-rename-wrapper'>
       <div className='tag-rename-wrapper-left'>
+        {/* @ts-expect-error i dont know */}
         <TagsList onBadgeClick={handleBadgeClick} />
       </div>
       <div className='tag-rename-wrapper-right'>
@@ -101,7 +112,7 @@ const TagRename = ({ recipes }) => {
         ></Tags>
         <div
           className='tag-rename-submit'
-          onClick={submitClickable && handleSubmit}
+          onClick={submitClickable ? handleSubmit : undefined}
         >
           Submit
         </div>

@@ -10,9 +10,7 @@ const RecipeCookedDates = ({ dates }: Props) => {
     return null
   }
 
-  const isSingleDate = typeof dates === 'number'
-
-  const recentDate = new Date(isSingleDate ? dates : dates[0])
+  const recentDate = new Date(dates[0])
   const formattedMonth = new Intl.DateTimeFormat('en-US', {
     month: 'long',
   }).format(recentDate)

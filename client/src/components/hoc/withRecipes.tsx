@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { loadedRecipes } from '../../actions/recipeActions'
 import { RootState } from '../../reducers'
+import recipesSlice from '../../reducers/recipes'
 import { FullRecipe, PartialRecipe } from '../../types/RecipeTypes'
 
 type Props = {
@@ -30,13 +30,23 @@ const withRecipes = (
         fetch(endpoint)
           .then((response) => response.json())
           .then((data) => {
-            dispatch(loadedRecipes(data, useFullRecipes))
+            dispatch(
+              recipesSlice.actions.loadedRecipes({
+                recipes: data,
+                isFullRecipes: useFullRecipes,
+              })
+            )
           })
       } else if (useFullRecipes && !hasFullRecipes) {
         fetch(endpoint)
           .then((response) => response.json())
           .then((data) => {
-            dispatch(loadedRecipes(data, true))
+            dispatch(
+              recipesSlice.actions.loadedRecipes({
+                recipes: data,
+                isFullRecipes: true,
+              })
+            )
           })
       }
     }, [dispatch, hasFullRecipes, recipes])

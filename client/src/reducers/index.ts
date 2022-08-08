@@ -4,13 +4,13 @@ import { combineReducers } from 'redux'
 import alerts from './alerts'
 import loginReducer from './loginReducer'
 import modalReducer from './modalReducer'
-import recipesReducer from './recipesReducer'
+import recipes from './recipes'
 
 const reducer = combineReducers({
   alerts: alerts.reducer,
   login: loginReducer,
   modal: modalReducer,
-  recipes: recipesReducer,
+  recipes: recipes.reducer,
 })
 
 const store = configureStore({

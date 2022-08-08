@@ -6,12 +6,12 @@ import '../../styles/modals/SignInModal.css'
 import Modal from './Modal'
 
 import { AlertType, ALERT_TYPES } from '../../constants/AlertTypes'
-import { logIn } from '../../actions/loginActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
 import alertSlice from '../../reducers/alerts'
 import modalSlice from '../../reducers/modal'
+import loginSlice from '../../reducers/login'
 
 type Props = {
   dispatch: Dispatch
@@ -53,7 +53,7 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
         )
       } else {
         formRef.current && formRef.current.reset()
-        dispatch(logIn())
+        dispatch(loginSlice.actions.logIn({}))
         dispatch(
           alertSlice.actions.addAlert({ text: 'Logged in', style: status })
         )

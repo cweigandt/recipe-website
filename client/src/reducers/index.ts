@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
 import alerts from './alerts'
-import loginReducer from './loginReducer'
+import login from './login'
 import modal from './modal'
 import recipes from './recipes'
 
 const reducer = combineReducers({
   alerts: alerts.reducer,
-  login: loginReducer,
+  login: login.reducer,
   modal: modal.reducer,
   recipes: recipes.reducer,
 })

@@ -5,8 +5,6 @@ import { useCookies } from 'react-cookie'
 
 import * as ModalTypes from '../../constants/ModalTypes'
 
-import { logIn, logInStatusSynced, logOut } from '../../actions/loginActions'
-
 import '../../styles/navbar/NavBar.css'
 import { ReactComponent as GridSVG } from '../../svg/grid-alt.svg'
 import { ReactComponent as HomeSVG } from '../../svg/home.svg'
@@ -21,6 +19,7 @@ import DarkThemeToggle from './DarkThemeToggle'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
 import modalSlice, { generateUniqueId } from '../../reducers/modal'
+import loginSlice from '../../reducers/login'
 
 let modalId = -1
 
@@ -53,9 +52,9 @@ function NavBar({
   useEffect(() => {
     // Navbar is responsible for setting initial logged in state
     if (cookies['token']) {
-      dispatch(logIn())
+      dispatch(loginSlice.actions.logIn({}))
     }
-    dispatch(logInStatusSynced())
+    dispatch(loginSlice.actions.loginSynced({}))
   }, [dispatch, cookies])
 
   useEffect(() => {
@@ -72,7 +71,7 @@ function NavBar({
       },
     }).then((response) => {
       modalId = -1
-      dispatch(logOut())
+      dispatch(loginSlice.actions.logOut({}))
     })
   }, [confirmedAreYouSureIds, dispatch])
 

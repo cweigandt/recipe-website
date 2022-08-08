@@ -29,7 +29,7 @@ const initialState: StateType = {
 export const generateUniqueId = () => uid++
 
 const modalSlice = createSlice({
-  name: 'recipes',
+  name: 'modal',
   initialState,
   reducers: {
     showModal(state, action: PayloadAction<ShowModalActionType>) {

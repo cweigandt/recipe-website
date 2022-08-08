@@ -6,7 +6,6 @@ import '../../styles/upload/UploadForm.css'
 import '@yaireo/tagify/dist/tagify.css'
 import confetti from 'canvas-confetti'
 
-import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
 import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
@@ -18,6 +17,7 @@ import { Dispatch } from 'redux'
 import Tagify from '@yaireo/tagify'
 import { RootState } from '../../reducers'
 import { FormEventHandler } from 'react'
+import alertSlice from '../../reducers/alerts'
 
 type Props = {
   recipes: PartialRecipe[]
@@ -100,7 +100,12 @@ function UploadForm(props: Props) {
       formData.set('cookedDates', JSON.stringify(recipe.cookedDates))
     }
 
-    dispatch(addAlert('Uploading', ALERT_TYPES.STATUS))
+    dispatch(
+      alertSlice.actions.addAlert({
+        text: 'Uploading',
+        style: ALERT_TYPES.STATUS,
+      })
+    )
 
     fetch(formSubmitAction || '/upload-recipe', {
       method: 'POST',
@@ -116,7 +121,9 @@ function UploadForm(props: Props) {
           handleUploadSuccess()
         }
 
-        dispatch(addAlert(data.response, status))
+        dispatch(
+          alertSlice.actions.addAlert({ text: data.response, style: status })
+        )
       })
     })
     return false

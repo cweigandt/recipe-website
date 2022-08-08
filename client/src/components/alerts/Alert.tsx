@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
 import '../../styles/alerts/Alert.css'
-import { removeAlert } from '../../actions/alertsActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import withCSSAnimation from '../hoc/withCSSAnimation'
 import { AlertObjectType } from '../../types/AlertTypes'
 import { Dispatch } from 'redux'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
+import alertSlice from '../../reducers/alerts'
 
 const SUCCESS_ALERT_TIMEOUT = 2000
 
@@ -21,7 +21,7 @@ function Alert({ alert, dispatch, isMostRecent = false }: PropsType) {
 
   const handleClose = () => {
     clearTimeout(timeout)
-    dispatch(removeAlert(alert.id))
+    dispatch(alertSlice.actions.removeAlert({ id: alert.id }))
   }
 
   if (alert.style === ALERT_TYPES.SUCCESS) {
@@ -29,7 +29,7 @@ function Alert({ alert, dispatch, isMostRecent = false }: PropsType) {
   }
 
   if (alert.style === ALERT_TYPES.STATUS && !isMostRecent) {
-    dispatch(removeAlert(alert.id))
+    dispatch(alertSlice.actions.removeAlert({ id: alert.id }))
   }
 
   return (

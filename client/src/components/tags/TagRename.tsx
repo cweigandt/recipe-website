@@ -3,13 +3,13 @@ import Tags from '@yaireo/tagify/dist/react.tagify'
 import TagsList from './TagsList'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
-import { addAlert } from '../../actions/alertsActions'
 
 import '../../styles/tags/TagRename.css'
 import { useDispatch } from 'react-redux'
 import withRecipes from '../hoc/withRecipes'
 import { PartialRecipe } from '../../types/RecipeTypes'
 import Tagify from '@yaireo/tagify'
+import alertSlice from '../../reducers/alerts'
 
 type Props = {
   recipes: PartialRecipe[]
@@ -34,10 +34,10 @@ const TagRename = ({ recipes }: Props) => {
     if (fromBadge === ' ' || tagifyRef.current.value.length === 0) {
       // something isn't filled in
       dispatch(
-        addAlert(
-          `Both a 'source' badge and a 'destination' badge must be filled in`,
-          ALERT_TYPES.ERROR
-        )
+        alertSlice.actions.addAlert({
+          text: `Both a 'source' badge and a 'destination' badge must be filled in`,
+          style: ALERT_TYPES.ERROR,
+        })
       )
       return
     }
@@ -54,7 +54,12 @@ const TagRename = ({ recipes }: Props) => {
     }).then((response) => {
       setSubmitClickable(true)
       if (response.status === 401) {
-        dispatch(addAlert('User not logged in', ALERT_TYPES.ERROR))
+        dispatch(
+          alertSlice.actions.addAlert({
+            text: 'User not logged in',
+            style: ALERT_TYPES.ERROR,
+          })
+        )
         return
       }
       response.json().then((data) => {
@@ -64,7 +69,9 @@ const TagRename = ({ recipes }: Props) => {
           console.log(data.stack)
         }
 
-        dispatch(addAlert(data.response, status))
+        dispatch(
+          alertSlice.actions.addAlert({ text: data.response, style: status })
+        )
       })
     })
   }, [dispatch, fromBadge, tagifyRef])

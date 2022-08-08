@@ -21,7 +21,7 @@ const AlertsOverlay = ({ alerts }: PropsType) => {
 
 const mapAlertsToProps = (state: RootState) => {
   return {
-    alerts: state.alerts,
+    alerts: state.alerts.activeAlerts,
   }
 }
 

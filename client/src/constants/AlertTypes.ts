@@ -5,4 +5,4 @@ export const ALERT_TYPES = {
   STATUS: 'status',
 }
 
-export type AlertType = 'success' | 'warning' | 'error' | 'status'
+export type AlertType = typeof ALERT_TYPES[keyof typeof ALERT_TYPES]

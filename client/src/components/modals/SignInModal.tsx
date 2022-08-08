@@ -5,13 +5,13 @@ import '../../styles/modals/SignInModal.css'
 
 import Modal from './Modal'
 
-import { addAlert } from '../../actions/alertsActions'
-import { ALERT_TYPES } from '../../constants/AlertTypes'
+import { AlertType, ALERT_TYPES } from '../../constants/AlertTypes'
 import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
+import alertSlice from '../../reducers/alerts'
 
 type Props = {
   dispatch: Dispatch
@@ -42,14 +42,21 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     }).then((response) => {
-      let status = ALERT_TYPES.SUCCESS
+      let status: AlertType = ALERT_TYPES.SUCCESS
       if (response.status !== 200) {
         status = ALERT_TYPES.ERROR
-        dispatch(addAlert('Error logging in', status))
+        dispatch(
+          alertSlice.actions.addAlert({
+            text: 'Error logging in',
+            style: status,
+          })
+        )
       } else {
         formRef.current && formRef.current.reset()
         dispatch(logIn())
-        dispatch(addAlert('Logged in', status))
+        dispatch(
+          alertSlice.actions.addAlert({ text: 'Logged in', style: status })
+        )
       }
     })
     return false

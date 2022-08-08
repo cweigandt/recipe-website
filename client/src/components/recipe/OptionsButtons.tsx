@@ -6,11 +6,11 @@ import { ReactComponent as JSONSVG } from '../../svg/json.svg'
 import { Link } from 'react-router-dom'
 
 import '../../styles/recipe/OptionsButtons.css'
-import { addAlert } from '../../actions/alertsActions'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
 import { Dispatch } from 'redux'
 import { FullRecipe } from '../../types/RecipeTypes'
 import { RootState } from '../../reducers'
+import alertSlice from '../../reducers/alerts'
 
 const BUTTON_CLASSES = 'btn options-icon'
 
@@ -48,11 +48,17 @@ const OptionsButtons = ({ dispatch, isLoggedIn, recipe }: Props) => {
           window.navigator.clipboard.writeText(recipeText).then(
             () => {
               dispatch(
-                addAlert(`JSON copied to clipboard`, ALERT_TYPES.SUCCESS)
+                alertSlice.actions.addAlert({
+                  text: `JSON copied to clipboard`,
+                  style: ALERT_TYPES.SUCCESS,
+                })
               )
             },
             () => {
-              addAlert('Unable to write to clipboard', ALERT_TYPES.ERROR)
+              alertSlice.actions.addAlert({
+                text: 'Unable to write to clipboard',
+                style: ALERT_TYPES.ERROR,
+              })
             }
           )
           return false

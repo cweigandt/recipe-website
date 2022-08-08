@@ -24,9 +24,9 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
   if (/_/.test(name)) {
     throw new Error('Name cannot contain an underscore')
   }
-  if (/[^-a-zA-Z0-9 ',]/.test(name)) {
+  if (/[^-a-zA-Z0-9 ',()]/.test(name)) {
     throw new Error(
-      `Name can only contain letters, numbers, space ( ), hyphen (-), comma (,), and single quote (')`
+      `Name can only contain letters, numbers, parens, space ( ), hyphen (-), comma (,), and single quote (')`
     )
   }
 
@@ -86,7 +86,7 @@ exports.rinseInput = function (json, imageFile, thumbnail) {
 
   rinsedItem.uploadTime = parseInt(json.uploadTime, 10) || new Date().getTime()
   rinsedItem.visits = parseInt(json.visits, 10) || 0
-  rinsedItem.cookedDates = json.cookedDates || []
+  rinsedItem.cookedDates = json.cookedDates ? JSON.parse(json.cookedDates) : []
 
   return rinsedItem
 }

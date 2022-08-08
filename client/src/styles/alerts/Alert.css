@@ -15,8 +15,8 @@
   flex-direction: column;
 
   position: relative;
-  top: 0;
-  opacity: 0;
+  top: 80px;
+  opacity: 1;
   transition: 0.3s top ease, 0.3s opacity;
 
   width: 50%;

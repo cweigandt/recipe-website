@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 import withLoggedInVisibility from '../hoc/withLoggedInVisibility'
 
-import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
 
 import '../../styles/recipe/RecipeMadeButton.css'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
 import { Datenum } from '../../types/Aliases'
+import modalSlice, { generateUniqueId } from '../../reducers/modal'
 
 let modalId = -1
 
@@ -29,11 +29,12 @@ const RecipeMadeButton = ({
   const [showButton, setShowButton] = useState(true)
 
   const handleButtonClick = useCallback(() => {
-    const action = showModal(
-      ModalTypes.ARE_YOU_SURE,
-      'Did you really make this today?'
-    )
-    modalId = action.id
+    modalId = generateUniqueId()
+    const action = modalSlice.actions.showModal({
+      modal: ModalTypes.ARE_YOU_SURE,
+      id: modalId,
+      additionalText: 'Did you really make this today?',
+    })
     dispatch(action)
   }, [dispatch])
 

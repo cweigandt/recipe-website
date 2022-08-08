@@ -4,26 +4,26 @@ import { connect } from 'react-redux'
 import '../../styles/modals/AreYouSureModal.css'
 
 import Modal from './Modal'
-import { confirmAreYouSure, hideModal } from '../../actions/modalActions'
 import { Dispatch } from 'redux'
+import modalSlice from '../../reducers/modal'
 
 type Props = {
   dispatch: Dispatch
   id: number
-  additionalText: string
+  additionalText?: string
 }
 
 const AreYouSureModal = (props: Props) => {
   const formRef = useRef(null)
 
   const handleClose = () => {
-    props.dispatch(hideModal(props.id))
+    props.dispatch(modalSlice.actions.hideModal({ id: props.id }))
   }
 
   const handleFormSubmit: FormEventHandler = (e) => {
     e.preventDefault()
 
-    props.dispatch(confirmAreYouSure(props.id))
+    props.dispatch(modalSlice.actions.confirmAreYouSure({ id: props.id }))
 
     handleClose()
     return false

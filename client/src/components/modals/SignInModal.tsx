@@ -6,12 +6,12 @@ import '../../styles/modals/SignInModal.css'
 import Modal from './Modal'
 
 import { AlertType, ALERT_TYPES } from '../../constants/AlertTypes'
-import { hideModal } from '../../actions/modalActions'
 import { logIn } from '../../actions/loginActions'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
 import alertSlice from '../../reducers/alerts'
+import modalSlice from '../../reducers/modal'
 
 type Props = {
   dispatch: Dispatch
@@ -23,7 +23,7 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
   const formRef = useRef<HTMLFormElement>(null)
 
   if (isLoggedIn) {
-    dispatch(hideModal(id))
+    dispatch(modalSlice.actions.hideModal({ id }))
   }
 
   const handleFormSubmit: FormEventHandler = (e) => {
@@ -63,7 +63,7 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
   }
 
   const handleClose = useCallback(() => {
-    dispatch(hideModal(id))
+    dispatch(modalSlice.actions.hideModal({ id }))
   }, [dispatch, id])
 
   return (

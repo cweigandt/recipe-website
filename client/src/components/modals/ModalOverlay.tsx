@@ -7,20 +7,20 @@ import AreYouSureModal from './AreYouSureModal'
 import { RootState } from '../../reducers'
 
 type Props = {
-  modal: ModalType
-  id: number
-  additionalText: string
+  modal?: ModalType
+  id?: number
+  additionalText?: string
 }
 
 const ModalOverlay = ({ modal, id, additionalText }: Props) => {
   var renderModal = () => {
     // switch on modal type to show LoginModal, etc.
     if (modal === LOGIN) {
-      return <SignInModal id={id} />
+      return <SignInModal id={id!} />
     }
 
     if (modal === ARE_YOU_SURE) {
-      return <AreYouSureModal id={id} additionalText={additionalText} />
+      return <AreYouSureModal id={id!} additionalText={additionalText} />
     }
   }
 

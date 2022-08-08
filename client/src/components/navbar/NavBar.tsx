@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
-import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
 
 import { logIn, logInStatusSynced, logOut } from '../../actions/loginActions'
@@ -21,6 +20,7 @@ import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
+import modalSlice, { generateUniqueId } from '../../reducers/modal'
 
 let modalId = -1
 
@@ -77,15 +77,21 @@ function NavBar({
   }, [confirmedAreYouSureIds, dispatch])
 
   const handleLoginClick = () => {
-    dispatch(showModal(ModalTypes.LOGIN))
+    dispatch(
+      modalSlice.actions.showModal({
+        modal: ModalTypes.LOGIN,
+        id: generateUniqueId(),
+      })
+    )
   }
 
   const handleLogoutClick = () => {
-    const action = showModal(
-      ModalTypes.ARE_YOU_SURE,
-      'Would you like to log out?'
-    )
-    modalId = action.id
+    modalId = generateUniqueId()
+    const action = modalSlice.actions.showModal({
+      modal: ModalTypes.ARE_YOU_SURE,
+      id: modalId,
+      additionalText: 'Would you like to log out?',
+    })
     dispatch(action)
   }
 

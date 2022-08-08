@@ -7,7 +7,6 @@ import '@yaireo/tagify/dist/tagify.css'
 import confetti from 'canvas-confetti'
 
 import { ALERT_TYPES } from '../../constants/AlertTypes'
-import { showModal } from '../../actions/modalActions'
 import * as ModalTypes from '../../constants/ModalTypes'
 
 import { getAllTags } from '../../utilities/RecipesUtilities'
@@ -18,6 +17,7 @@ import Tagify from '@yaireo/tagify'
 import { RootState } from '../../reducers'
 import { FormEventHandler } from 'react'
 import alertSlice from '../../reducers/alerts'
+import modalSlice, { generateUniqueId } from '../../reducers/modal'
 
 type Props = {
   recipes: PartialRecipe[]
@@ -52,7 +52,12 @@ function UploadForm(props: Props) {
   const allTags = getAllTags(recipes)
 
   if (props.isLoginUpToDate && !props.isLoggedIn) {
-    props.dispatch(showModal(ModalTypes.LOGIN))
+    props.dispatch(
+      modalSlice.actions.showModal({
+        modal: ModalTypes.LOGIN,
+        id: generateUniqueId(),
+      })
+    )
   }
 
   useEffect(() => {

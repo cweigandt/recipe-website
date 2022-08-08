@@ -3,13 +3,13 @@ import { combineReducers } from 'redux'
 
 import alerts from './alerts'
 import loginReducer from './loginReducer'
-import modalReducer from './modalReducer'
+import modal from './modal'
 import recipes from './recipes'
 
 const reducer = combineReducers({
   alerts: alerts.reducer,
   login: loginReducer,
-  modal: modalReducer,
+  modal: modal.reducer,
   recipes: recipes.reducer,
 })
 

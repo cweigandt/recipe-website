@@ -12,6 +12,7 @@ import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
 import { FullRecipe } from '../../types/RecipeTypes'
 import { useRef } from 'react'
+import { convertURLLinks } from '../../utilities/RecipesUtilities'
 // import withCSSAnimation from '../hoc/withCSSAnimation'
 
 type Props = {
@@ -74,7 +75,10 @@ const Recipe = ({ urlName }: Props) => {
           return (
             <li className='recipe-step-item'>
               <div className='stepTitle'>Step {num + 1}</div>
-              <div className='stepText'>{step}</div>
+              <div
+                className='stepText'
+                dangerouslySetInnerHTML={{ __html: convertURLLinks(step) }}
+              ></div>
             </li>
           )
         })}

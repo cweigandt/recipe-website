@@ -1,4 +1,4 @@
-import { getAllTags } from '../RecipesUtilities'
+import { convertURLLinks, getAllTags } from '../RecipesUtilities'
 
 const expectExactTags = (expectedTags, tags) => {
   let disappearingTags = expectedTags
@@ -44,6 +44,21 @@ describe('RecipeUtilities', () => {
 
       let expectedTags = ['TAG_1', 'TAG_2']
       expectExactTags(expectedTags, result)
+    })
+  })
+
+  describe('convertURLLinks', () => {
+    const expectConversion = (str) => {
+      expect(convertURLLinks(str)).not.toBe(str)
+    }
+    it('handles various url formats', () => {
+      expectConversion('hello https://www.myWebsite.com')
+      expectConversion('http://www.myWebsite.com')
+    })
+
+    it('does not convert non-urls', () => {
+      const str = `htt://ww.badurl.com and other stuff.`
+      expect(convertURLLinks(str)).toBe(str)
     })
   })
 })

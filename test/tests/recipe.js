@@ -54,6 +54,10 @@ describe('Recipe', function () {
           expect(imgSrc).toBe(page.recipe.imageLocation)
         })
     })
+
+    it('renders link in steps', async () => {
+      return page.findByCSS(`a[href="https://www.google.com"]`)
+    })
   })
 
   describe('Meta', () => {

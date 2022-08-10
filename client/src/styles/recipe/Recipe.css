@@ -94,6 +94,10 @@
   width: 60%;
 }
 
+#recipeWrapper #stepsColumn a {
+  color: var(--recipe-text-color);
+}
+
 #recipeWrapper #ingredientsColumn .tagTitle,
 #recipeWrapper #stepsColumn .tagTitle {
   font-weight: bold;

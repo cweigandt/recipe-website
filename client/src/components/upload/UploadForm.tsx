@@ -26,6 +26,7 @@ type Props = {
   dispatch: Dispatch
   formSubmitAction?: string
   recipe?: FullRecipe
+  hasFullRecipes: boolean
 }
 
 const EmptyRecipe = {
@@ -44,7 +45,7 @@ const EmptyRecipe = {
 }
 
 function UploadForm(props: Props) {
-  const { recipe = EmptyRecipe, recipes } = props
+  const { recipe = EmptyRecipe, recipes, hasFullRecipes } = props
   const [sections, setSections] = useState([])
 
   const tagifyRef = useRef<Tagify | undefined>(undefined)
@@ -105,12 +106,12 @@ function UploadForm(props: Props) {
       formData.set('cookedDates', JSON.stringify(recipe.cookedDates))
     }
 
-    dispatch(
-      alertSlice.actions.addAlert({
-        text: 'Uploading',
-        style: ALERT_TYPES.STATUS,
-      })
-    )
+    // dispatch(
+    //   alertSlice.actions.addAlert({
+    //     text: 'Uploading',
+    //     style: ALERT_TYPES.STATUS,
+    //   })
+    // )
 
     fetch(formSubmitAction || '/upload-recipe', {
       method: 'POST',
@@ -171,7 +172,8 @@ function UploadForm(props: Props) {
     )
   }
 
-  if (recipes.length === 0) {
+  // If recipes haven't loaded or we are editing and haven't loaded full recipes
+  if (recipes.length === 0 || (recipe.name && !hasFullRecipes)) {
     return null
   }
 

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import '../../styles/alerts/Alert.css'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
-// import withCSSAnimation from '../hoc/withCSSAnimation'
+import withCSSAnimation from '../hoc/withCSSAnimation'
 import { AlertObjectType } from '../../types/AlertTypes'
 import { Dispatch } from 'redux'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
@@ -46,5 +46,5 @@ function Alert({ alert, dispatch, isMostRecent = false }: PropsType) {
   )
 }
 
-// export default connect()(withCSSAnimation(Alert, { timeout: 300 }))
-export default connect()(Alert)
+export default connect()(withCSSAnimation(Alert, { timeout: 300 }))
+// export default connect()(Alert)

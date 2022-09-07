@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "start-test-env": "export NODE_ENV='test' && npm start && export NODE_ENV=''",
-    "dev": "export PORT=3001 && node --inspect server/index.js",
+    "dev": "export PORT=3001 && node --inspect --trace-warnings server/index.js",
     "test": "mocha ./test/tests",
     "unit-test": "cd client && npm test",
     "unit-test-all": "export CI=true && npm run unit-test && export CI=false",

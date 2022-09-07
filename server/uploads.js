@@ -34,9 +34,14 @@ module.exports = function (app) {
         return
       }
 
-      Storage.saveThumbnail(req, res).then((thumbnail) => {
-        handleUploadForm(req, res, thumbnail)
-      })
+      Storage.saveThumbnail(req, res)
+        .then((thumbnail) => {
+          handleUploadForm(req, res, thumbnail)
+        })
+        .catch((err) => {
+          res.status(500)
+          res.send({ response: err.message, stack: err.stack })
+        })
     }
   )
 
@@ -50,18 +55,25 @@ module.exports = function (app) {
       }
 
       try {
-        Storage.saveThumbnail(req, res).then((thumbnail) => {
-          customDB
-            .handleEditForm(req.body, req.file, thumbnail)
-            .then(() => {
-              res.status(200)
-              res.send({ response: `Edit for ${req.body.name} was successful` })
-            })
-            .catch((err) => {
-              res.status(500)
-              res.send({ response: err.message, stack: err.stack })
-            })
-        })
+        Storage.saveThumbnail(req, res)
+          .then((thumbnail) => {
+            customDB
+              .handleEditForm(req.body, req.file, thumbnail)
+              .then(() => {
+                res.status(200)
+                res.send({
+                  response: `Edit for ${req.body.name} was successful`,
+                })
+              })
+              .catch((err) => {
+                res.status(500)
+                res.send({ response: err.message, stack: err.stack })
+              })
+          })
+          .catch((err) => {
+            res.status(500)
+            res.send({ response: err.message, stack: err.stack })
+          })
       } catch (err) {
         res.status(500)
         res.send({ response: err.message, stack: err.stack })

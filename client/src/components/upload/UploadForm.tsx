@@ -117,21 +117,30 @@ function UploadForm(props: Props) {
       method: 'POST',
       redirect: 'manual',
       body: formData,
-    }).then((response) => {
-      response.json().then((data) => {
-        let status = ALERT_TYPES.SUCCESS
-        if (response.status !== 200) {
-          status = ALERT_TYPES.ERROR
-          console.log(data.stack)
-        } else {
-          handleUploadSuccess()
-        }
+    })
+      .then((response) => {
+        response.json().then((data) => {
+          let status = ALERT_TYPES.SUCCESS
+          if (response.status !== 200) {
+            status = ALERT_TYPES.ERROR
+            console.log(data.stack)
+          } else {
+            handleUploadSuccess()
+          }
 
+          dispatch(
+            alertSlice.actions.addAlert({ text: data.response, style: status })
+          )
+        })
+      })
+      .catch((err: Error) => {
         dispatch(
-          alertSlice.actions.addAlert({ text: data.response, style: status })
+          alertSlice.actions.addAlert({
+            text: err.message,
+            style: ALERT_TYPES.ERROR,
+          })
         )
       })
-    })
     return false
   }
 

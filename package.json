@@ -50,7 +50,7 @@
     "url": "https://github.com/cweigandt/recipe-website.git"
   },
   "devDependencies": {
-    "chromedriver": "^103.0.0",
+    "chromedriver": "^105.0.0",
     "expect": "^27.5.1",
     "mocha": "^9.2.2",
     "selenium-webdriver": "^3.6.0",

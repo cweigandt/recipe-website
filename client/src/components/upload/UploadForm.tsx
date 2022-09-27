@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
+import { decompress } from 'compress-json'
+
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
 import '../../styles/upload/UploadForm.css'
@@ -66,7 +68,7 @@ function UploadForm(props: Props) {
     fetch('/request/sections')
       .then((response) => response.json())
       .then((data) => {
-        setSections(data)
+        setSections(decompress(data))
       })
   }, [])
 

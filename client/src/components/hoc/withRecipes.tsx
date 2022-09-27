@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
 import recipesSlice from '../../reducers/recipes'
 import { FullRecipe, PartialRecipe } from '../../types/RecipeTypes'
+import { decompress } from 'compress-json'
 
 type Props = {
   dispatch: Dispatch
@@ -32,7 +33,7 @@ const withRecipes = (
           .then((data) => {
             dispatch(
               recipesSlice.actions.loadedRecipes({
-                recipes: data,
+                recipes: decompress(data),
                 isFullRecipes: useFullRecipes,
               })
             )
@@ -43,7 +44,7 @@ const withRecipes = (
           .then((data) => {
             dispatch(
               recipesSlice.actions.loadedRecipes({
-                recipes: data,
+                recipes: decompress(data),
                 isFullRecipes: true,
               })
             )

@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import { decompress } from 'compress-json'
 
 import * as ModalTypes from '../../constants/ModalTypes'
 
@@ -45,7 +46,7 @@ function NavBar({
     fetch('/request/sections')
       .then((response) => response.json())
       .then((data) => {
-        setSections(data)
+        setSections(decompress(data))
       })
   }, [])
 

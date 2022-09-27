@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { decompress } from 'compress-json'
 
 import '../../styles/recipe/Nutrition.css'
 import { FullRecipe } from '../../types/RecipeTypes'
@@ -40,7 +41,7 @@ function Nutrition({ recipe }: Props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        setNutritionInfo(response)
+        setNutritionInfo(decompress(response))
       })
   }, [recipe])
 

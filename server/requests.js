@@ -1,4 +1,5 @@
 const express = require('express')
+const { compress } = require('compress-json')
 
 const customDB = require('./getters/getDB')
 const api = require('./getters/getAPI')
@@ -7,7 +8,8 @@ const reactToDBPromise = (promise, res) => {
   promise
     .then(
       (data) => {
-        res.send(data)
+        let compressedData = compress(data)
+        res.send(compressedData)
       },
       (err) => {
         res.status(500)

@@ -79,6 +79,22 @@ describe('Home', function () {
         })
     })
 
+    it('searches each word individually', async () => {
+      await page.findByCSS(HOME.SEARCH_BAR).clear()
+
+      // Look for recipe Game Day Board
+      await page
+        .findByCSS(HOME.SEARCH_BAR)
+        .then((el) => el.sendKeys('Day Game'))
+
+      await page
+        .findByCSS(HOME.COUNTER)
+        .getText()
+        .then((text) => {
+          expect(text).toBe('1')
+        })
+    })
+
     describe('Sorting', () => {
       it('Sorts by Upload by default', async () => {
         await page.visit()

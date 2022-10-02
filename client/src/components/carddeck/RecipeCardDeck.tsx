@@ -48,14 +48,19 @@ export const RecipeCardDeck = ({
 
   const updateRecipesOnSearch = useCallback(
     (searchText: string, allRecipes: PartialRecipe[]) => {
-      let newVisibleRecipes = allRecipes.filter((recipe, index) => {
-        return (
-          recipe.name.toUpperCase().match(searchText.toUpperCase()) !== null ||
-          recipe.tags.some(
-            (tag) => tag.toUpperCase().match(searchText.toUpperCase()) !== null
-          )
-        )
-      })
+      let newVisibleRecipes = searchText
+        .split(' ')
+        .reduce((accum, searchWord) => {
+          const upperCaseSearchWord = searchWord.toUpperCase()
+          return accum.filter((recipe, index) => {
+            return (
+              recipe.name.toUpperCase().match(upperCaseSearchWord) !== null ||
+              recipe.tags.some(
+                (tag) => tag.toUpperCase().match(upperCaseSearchWord) !== null
+              )
+            )
+          })
+        }, allRecipes)
 
       newVisibleRecipes = sortByType(sortType, newVisibleRecipes)
       setVisibleRecipes(newVisibleRecipes)

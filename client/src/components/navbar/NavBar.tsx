@@ -46,7 +46,8 @@ function NavBar({
     fetch('/request/sections')
       .then((response) => response.json())
       .then((data) => {
-        setSections(decompress(data))
+        const sorted = decompress(data).sort()
+        setSections(sorted)
       })
   }, [])
 

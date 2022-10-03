@@ -48,7 +48,7 @@ module.exports = {
   WRAPPERS: {
     PAGE_WRAPPER: '.App #pageWrapper',
     RECIPE_WRAPPER: '#recipeWrapper',
-    GROCERIES_WRAPPER: '#groceries-container',
+    GROCERIES_WRAPPER: '#groceriesContainer',
     GRID_WRAPPER: '#recipeGrid',
     FORM_WRAPPER: '#formWrapper',
     TAGS_WRAPPER: '.tag-rename-wrapper',

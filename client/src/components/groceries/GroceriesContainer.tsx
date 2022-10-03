@@ -50,10 +50,10 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
         style: ALERT_TYPES.SUCCESS,
       })
     )
-  }, [ingredients])
+  }, [dispatch, ingredients])
 
   return (
-    <div id='groceries-container'>
+    <div id='groceriesContainer'>
       <div id='recipeCardDeck'>
         {cart.map((recipe, index) => (
           <RecipeCard {...recipe}>

@@ -21,6 +21,11 @@ describe('Routes', function () {
     return page.findByCSS(WRAPPERS.GRID_WRAPPER)
   })
 
+  it('loads /groceries', async () => {
+    await page.visit(`groceries`)
+    return page.findByCSS(WRAPPERS.GROCERIES_WRAPPER)
+  })
+
   it('loads /recipe', async () => {
     await page.visit(`recipe/Game_Day_Board`)
     return page.findByCSS(WRAPPERS.RECIPE_WRAPPER)

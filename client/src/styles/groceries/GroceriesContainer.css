@@ -1,26 +1,26 @@
-#groceries-container {
+#groceriesContainer {
 }
 
-#groceries-container .groceries-ingredients {
+#groceriesContainer .groceries-ingredients {
   margin-top: 20px;
   margin-left: 20px;
 }
 
-#groceries-container .ingredient {
+#groceriesContainer .ingredient {
   color: var(--recipe-text-color);
 }
 
-#groceries-container #copy-ingredients {
+#groceriesContainer #copy-ingredients {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#groceries-container #copy-ingredients svg {
+#groceriesContainer #copy-ingredients svg {
   cursor: pointer;
 }
 
-#groceries-container .clear-from-cart {
+#groceriesContainer .clear-from-cart {
   position: absolute;
   top: 8px;
   left: 8px;

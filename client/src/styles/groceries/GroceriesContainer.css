@@ -1,0 +1,6 @@
+#groceries-container {
+}
+
+#groceries-container .ingredient {
+  color: var(--recipe-text-color);
+}

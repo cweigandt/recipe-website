@@ -59,6 +59,7 @@ const App = () => {
       <Switch>
         <Route path='/recipe/:recipeName' component={RecipeRoute} />
         <Route path='/grid' component={RecipeGrid} />
+        <Route path='/groceries' component={RecipeCardDeck} />
         <Route path='/tags' component={TagRename} />
         <Route path='/upload' component={UploadForm} />
         <Route path='/edit' component={EditForm} />

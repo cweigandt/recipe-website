@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { RootState } from '../../reducers'
 import { FullRecipe } from '../../types/RecipeTypes'
 
 import '../../styles/groceries/GroceriesContainer.css'
 import RecipeCard from '../carddeck/RecipeCard'
+import alertSlice from '../../reducers/alerts'
 import groceriesSlice from '../../reducers/groceries'
+
+import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
+import { ReactComponent as Copy } from '../../svg/copy.svg'
+import { ALERT_TYPES } from '../../constants/AlertTypes'
 
 interface GroceriesContainerProps {
   cart: FullRecipe[]
@@ -37,6 +42,16 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
     dispatch(groceriesSlice.actions.removeFromCart({ index }))
   }
 
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(ingredients.join('\n'))
+    dispatch(
+      alertSlice.actions.addAlert({
+        text: `Ingredients copied to clipboard`,
+        style: ALERT_TYPES.SUCCESS,
+      })
+    )
+  }, [ingredients])
+
   return (
     <div id='groceries-container'>
       <div id='recipeCardDeck'>
@@ -46,10 +61,13 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
               className='clear-from-cart'
               onClick={(e) => handleRemoveFromCart(e, index)}
             >
-              X
+              <XCircle />
             </div>
           </RecipeCard>
         ))}
+      </div>
+      <div id='copy-ingredients' onClick={handleCopy}>
+        <Copy />
       </div>
       <div className='groceries-ingredients'>
         {ingredients.map((ingredient) => (

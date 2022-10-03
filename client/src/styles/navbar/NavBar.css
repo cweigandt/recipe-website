@@ -21,6 +21,10 @@
   padding: 0.5rem 1rem;
 }
 
+.navbar.shopping {
+  background-color: green;
+}
+
 .navbar .menu-toggler {
   color: gray;
   font-size: 24px;
@@ -79,6 +83,24 @@
 
 .navbar-button {
   cursor: pointer;
+}
+
+.cart {
+  width: 24px;
+  height: 24px;
+
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  background-color: aquamarine;
+
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
 }
 
 .navbar-logged-in {

@@ -128,6 +128,18 @@
   top: 70px;
 }
 
+#recipeWrapper .add-to-cart {
+  width: 100%;
+  height: 52px;
+
+  background-color: brown;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 1500px) {
   #recipeWrapper {
     padding-left: 15%;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment, useCallback } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { decompress } from 'compress-json'
 
@@ -14,11 +14,13 @@ import { ReactComponent as UploadSVG } from '../../svg/upload.svg'
 import { ReactComponent as ChevronsRight } from '../../svg/chevrons-right.svg'
 import { ReactComponent as RenameSVG } from '../../svg/rename.svg'
 // import { ReactComponent as ReportSVG } from '../../svg/report.svg'
+import { ReactComponent as CartSVG } from '../../svg/cart.svg'
 
 import { ReactComponent as LoginSVG } from '../../svg/login.svg'
 import DarkThemeToggle from './DarkThemeToggle'
 import { Dispatch } from 'redux'
 import { RootState } from '../../reducers'
+import groceriesSlice from '../../reducers/groceries'
 import modalSlice, { generateUniqueId } from '../../reducers/modal'
 import loginSlice from '../../reducers/login'
 
@@ -29,6 +31,8 @@ type Props = {
   dispatch: Dispatch
   title: string
   isLoggedIn: boolean
+  isShopping: boolean
+  cartSize: number
 }
 
 function NavBar({
@@ -36,10 +40,13 @@ function NavBar({
   dispatch,
   title,
   isLoggedIn,
+  isShopping,
+  cartSize,
 }: Props) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [cookies] = useCookies<any>(['user'])
+  const history = useHistory()
 
   useEffect(() => {
     // query api
@@ -96,6 +103,14 @@ function NavBar({
     dispatch(action)
   }
 
+  const handleGroceriesClick = useCallback(() => {
+    if (!isShopping) {
+      dispatch(groceriesSlice.actions.startShopping({}))
+    } else {
+      history.push('/groceries')
+    }
+  }, [dispatch, history, isShopping])
+
   const renderLink = (link: string, text: string, icon?: React.ReactNode) => {
     return (
       <li className='nav-item'>
@@ -149,11 +164,17 @@ function NavBar({
   const renderLoginButton = () => {
     if (isLoggedIn) {
       return (
-        <div
-          className='navbar-logged-in'
-          data-test-id='logout-button'
-          onClick={handleLogoutClick}
-        ></div>
+        <>
+          <>
+            <CartSVG className='cart' onClick={handleGroceriesClick} />
+            {cartSize > 0 && <div className='cart-count'>{cartSize}</div>}
+          </>
+          <div
+            className='navbar-logged-in'
+            data-test-id='logout-button'
+            onClick={handleLogoutClick}
+          ></div>
+        </>
       )
     }
 
@@ -170,7 +191,10 @@ function NavBar({
 
   return (
     <Fragment>
-      <nav id='navbarParent' className='noprint navbar'>
+      <nav
+        id='navbarParent'
+        className={`noprint navbar ${isShopping ? 'shopping' : ''}`}
+      >
         <div
           onClick={toggleMenu}
           className={'menu-toggler ' + (showMenu ? 'open' : 'closed')}
@@ -193,4 +217,6 @@ function NavBar({
 export default connect((state: RootState) => ({
   confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
   isLoggedIn: state.login.isLoggedIn,
+  isShopping: state.groceries.isShopping,
+  cartSize: state.groceries.cart.length,
 }))(NavBar)

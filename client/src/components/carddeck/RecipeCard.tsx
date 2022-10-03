@@ -17,9 +17,12 @@ const getDaysOld = (uploadTime: Datenum) => {
   return Math.floor(days)
 }
 
-interface Props extends PartialRecipe {}
+interface Props extends PartialRecipe {
+  children?: React.ReactNode
+}
 
 const RecipeCard = ({
+  children,
   name,
   section,
   tags,
@@ -84,6 +87,7 @@ const RecipeCard = ({
       ) : (
         renderFavoritesTag()
       )}
+      {children}
     </Link>
   )
 }

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { RootState } from '../../reducers'
 import { FullRecipe } from '../../types/RecipeTypes'
 
 import '../../styles/groceries/GroceriesContainer.css'
 import RecipeCard from '../carddeck/RecipeCard'
+import groceriesSlice from '../../reducers/groceries'
 
 interface GroceriesContainerProps {
   cart: FullRecipe[]
@@ -14,6 +15,7 @@ const REMOVE_NUMBER_REGEX = /^[ 0-9,-]*/g
 
 const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
   const [ingredients, setIngredients] = useState<string[]>([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
     let cartIngredients = cart
@@ -29,11 +31,24 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
     setIngredients(cartIngredients)
   }, [cart])
 
+  const handleRemoveFromCart = (e: React.MouseEvent, index: number) => {
+    e.stopPropagation()
+    e.preventDefault()
+    dispatch(groceriesSlice.actions.removeFromCart({ index }))
+  }
+
   return (
     <div id='groceries-container'>
       <div id='recipeCardDeck'>
-        {cart.map((recipe) => (
-          <RecipeCard {...recipe} />
+        {cart.map((recipe, index) => (
+          <RecipeCard {...recipe}>
+            <div
+              className='clear-from-cart'
+              onClick={(e) => handleRemoveFromCart(e, index)}
+            >
+              X
+            </div>
+          </RecipeCard>
         ))}
       </div>
       <div className='groceries-ingredients'>

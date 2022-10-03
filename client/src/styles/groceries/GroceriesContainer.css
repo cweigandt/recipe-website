@@ -4,3 +4,17 @@
 #groceries-container .ingredient {
   color: var(--recipe-text-color);
 }
+
+#groceries-container .clear-from-cart {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}

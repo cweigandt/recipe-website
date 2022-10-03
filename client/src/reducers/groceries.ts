@@ -8,6 +8,10 @@ export type AddToCart = {
   recipe: FullRecipe
 }
 
+export type RemoveFromCart = {
+  index: number
+}
+
 type StateType = {
   isShopping: boolean
   cart: FullRecipe[]
@@ -24,6 +28,9 @@ const alertSlice = createSlice({
     },
     addToCart(state, action: PayloadAction<AddToCart>) {
       state.cart.push(action.payload.recipe)
+    },
+    removeFromCart(state, action: PayloadAction<RemoveFromCart>) {
+      state.cart.splice(action.payload.index, 1)
     },
   },
 })

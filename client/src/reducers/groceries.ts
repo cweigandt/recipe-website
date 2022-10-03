@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { PartialRecipe } from '../types/RecipeTypes'
+import { FullRecipe } from '../types/RecipeTypes'
 
 export type StartShoppingActionType = {}
 
 export type AddToCart = {
-  recipe: PartialRecipe
+  recipe: FullRecipe
 }
 
 type StateType = {
   isShopping: boolean
-  cart: PartialRecipe[]
+  cart: FullRecipe[]
 }
 
 const initialState: StateType = { isShopping: false, cart: [] }

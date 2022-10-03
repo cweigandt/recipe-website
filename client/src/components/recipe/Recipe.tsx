@@ -14,6 +14,7 @@ import RecipeImage from './RecipeImage'
 import { FullRecipe } from '../../types/RecipeTypes'
 import { useRef } from 'react'
 import { convertURLLinks } from '../../utilities/RecipesUtilities'
+import AddToCart from './AddToCart'
 // import withCSSAnimation from '../hoc/withCSSAnimation'
 
 type Props = {
@@ -116,6 +117,7 @@ const Recipe = ({ urlName }: Props) => {
 
   return (
     <div id='recipeWrapper' className='print' ref={wrapperRef}>
+      <AddToCart recipe={recipe} />
       <div id='recipeTitle'>{recipe.name}</div>
       <div id='subTitle'>
         <span id='sectionName'>{recipe.section.toLowerCase()}</span>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment, useCallback } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { decompress } from 'compress-json'
 
@@ -32,6 +32,7 @@ type Props = {
   title: string
   isLoggedIn: boolean
   isShopping: boolean
+  cartSize: number
 }
 
 function NavBar({
@@ -40,10 +41,12 @@ function NavBar({
   title,
   isLoggedIn,
   isShopping,
+  cartSize,
 }: Props) {
   const [sections, setSections] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const [cookies] = useCookies<any>(['user'])
+  const history = useHistory()
 
   useEffect(() => {
     // query api
@@ -100,8 +103,12 @@ function NavBar({
   }
 
   const handleGroceriesClick = useCallback(() => {
-    dispatch(groceriesSlice.actions.startShopping({}))
-  }, [dispatch])
+    if (!isShopping) {
+      dispatch(groceriesSlice.actions.startShopping({}))
+    } else {
+      history.push('/groceries')
+    }
+  }, [dispatch, history, isShopping])
 
   const renderLink = (link: string, text: string, icon?: React.ReactNode) => {
     return (
@@ -157,7 +164,10 @@ function NavBar({
     if (isLoggedIn) {
       return (
         <>
-          <CartSVG className='cart' onClick={handleGroceriesClick} />
+          <>
+            <CartSVG className='cart' onClick={handleGroceriesClick} />
+            {cartSize > 0 && <div className='cart-count'>{cartSize}</div>}
+          </>
           <div
             className='navbar-logged-in'
             data-test-id='logout-button'
@@ -207,4 +217,5 @@ export default connect((state: RootState) => ({
   confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
   isLoggedIn: state.login.isLoggedIn,
   isShopping: state.groceries.isShopping,
+  cartSize: state.groceries.cart.length,
 }))(NavBar)

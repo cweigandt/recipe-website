@@ -65,14 +65,17 @@ const GroceriesContainer = () => {
 
   return (
     <div id='groceriesContainer'>
-      <div id='recipeCardDeck'>
+      <div data-testid='card-deck' id='recipeCardDeck'>
         {Object.values(cart).map((cartItem, index) => (
           <RecipeCard key={index} {...cartItem.recipe}>
             <div
               className='clear-from-cart'
               onClick={(e) => handleRemoveFromCart(e, cartItem.recipe)}
             >
-              <XCircle className='grocery-recipe-x' />
+              <XCircle
+                data-testid='grocery-recipe-remove'
+                className='grocery-recipe-x'
+              />
             </div>
           </RecipeCard>
         ))}

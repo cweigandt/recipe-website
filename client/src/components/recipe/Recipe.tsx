@@ -11,7 +11,7 @@ import RecipeMadeButton from './RecipeMadeButton'
 import RecipeCookedDates from './RecipeCookedDates'
 import OptionsButtons from './OptionsButtons'
 import RecipeImage from './RecipeImage'
-import { FullRecipe } from '../../types/RecipeTypes'
+import { FullRecipe, IngredientType } from '../../types/RecipeTypes'
 import { useRef } from 'react'
 import { convertURLLinks } from '../../utilities/RecipesUtilities'
 import AddToCart from './AddToCart'
@@ -59,11 +59,18 @@ const Recipe = ({ urlName }: Props) => {
     )
   }
 
-  const renderSubIngredients = (title: string, ingredients: string[]) => {
+  const renderSubIngredients = (
+    title: string,
+    ingredients: string[],
+    ingredientType: IngredientType
+  ) => {
     return (
       title && (
         <div>
-          <div className='ingredients-title'>{title}</div>
+          <div className='ingredients-title'>
+            {title}
+            <AddToCart recipe={recipe!} ingredientType={ingredientType} />
+          </div>
           {renderIngredients(ingredients)}
         </div>
       )
@@ -117,7 +124,6 @@ const Recipe = ({ urlName }: Props) => {
 
   return (
     <div id='recipeWrapper' className='print' ref={wrapperRef}>
-      <AddToCart recipe={recipe} />
       <div id='recipeTitle'>{recipe.name}</div>
       <div id='subTitle'>
         <span id='sectionName'>{recipe.section.toLowerCase()}</span>
@@ -136,15 +142,20 @@ const Recipe = ({ urlName }: Props) => {
       <div id='recipeBody'>
         <div id='ingredientsColumn'>
           <div className='sticky' id='ingredientsColumnSticky'>
-            <div className='ingredients-title'>Ingredients</div>
+            <div className='ingredients-title'>
+              Ingredients
+              <AddToCart recipe={recipe} />
+            </div>
             {renderIngredients(recipe.ingredients)}
             {renderSubIngredients(
               recipe.subIngredients1Name,
-              recipe.subIngredients1
+              recipe.subIngredients1,
+              'subIngredients1'
             )}
             {renderSubIngredients(
               recipe.subIngredients2Name,
-              recipe.subIngredients2
+              recipe.subIngredients2,
+              'subIngredients2'
             )}
             {renderTags(recipe.tags)}
           </div>

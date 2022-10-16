@@ -5,13 +5,15 @@ import alerts from './alerts'
 import groceries from './groceries'
 import login from './login'
 import modal from './modal'
+import nutrition from './nutrition'
 import recipes from './recipes'
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   alerts: alerts.reducer,
   groceries: groceries.reducer,
   login: login.reducer,
   modal: modal.reducer,
+  nutrition: nutrition.reducer,
   recipes: recipes.reducer,
 })
 

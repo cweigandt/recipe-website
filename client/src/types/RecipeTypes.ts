@@ -22,3 +22,8 @@ export interface FullRecipe extends PartialRecipe {
   steps: string[]
   uploader: string
 }
+
+export type IngredientType =
+  | 'ingredients'
+  | 'subIngredients1'
+  | 'subIngredients2'

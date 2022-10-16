@@ -1,4 +1,12 @@
-#groceriesContainer {
+#groceriesContainer .cart-empty {
+  color: var(--recipe-text-color);
+  text-align: center;
+  height: 300px;
+  padding-top: 150px;
+}
+
+#groceriesContainer svg.grocery-recipe-x path {
+  fill: white;
 }
 
 #groceriesContainer .groceries-ingredients {

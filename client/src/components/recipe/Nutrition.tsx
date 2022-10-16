@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { decompress } from 'compress-json'
 
 import '../../styles/recipe/Nutrition.css'
 import { FullRecipe } from '../../types/RecipeTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import nutritionSlice from '../../reducers/nutrition'
+import { nutrition } from '../../selectors'
 
 type Props = {
   recipe: FullRecipe
 }
 
-type NutritionInfo = {
-  pricePerServing?: number
-  vegetarian?: boolean
-  vegan?: boolean
-  dairyFree?: boolean
-  glutenFree?: boolean
-  error?: string
-}
-
-const cachedNutritionInfo: { [recipeName: string]: NutritionInfo } = {}
-
 function Nutrition({ recipe }: Props) {
-  const [nutritionInfo, setNutritionInfo] = useState<NutritionInfo>({})
+  const nutritionInfo = useSelector(nutrition(recipe.name))
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (Object.keys(recipe).length === 0) {
+    if (nutritionInfo) {
       return
     }
-
-    if (cachedNutritionInfo.hasOwnProperty(recipe.name)) {
-      setNutritionInfo({
-        ...cachedNutritionInfo[recipe.name],
-      })
-      return
-    }
-
     fetch('/request/nutrition', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,9 +26,18 @@ function Nutrition({ recipe }: Props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        setNutritionInfo(decompress(response))
+        dispatch(
+          nutritionSlice.actions.saveNutrition({
+            recipeName: recipe.name,
+            nutrition: decompress(response),
+          })
+        )
       })
-  }, [recipe])
+  }, [dispatch, nutritionInfo, recipe])
+
+  if (!nutritionInfo) {
+    return null
+  }
 
   return (
     <div className='nutrition'>

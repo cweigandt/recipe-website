@@ -1,32 +1,32 @@
-import { useSelector } from 'react-redux'
-import { ExtendedIngredient, NutritionInfo } from '../../types/Nutrition'
-import { FullRecipe } from '../../types/RecipeTypes'
-import { allNutrition } from '../../selectors'
+// import { useSelector } from 'react-redux'
+// import { ExtendedIngredient, NutritionInfo } from '../../types/Nutrition'
+// import { FullRecipe } from '../../types/RecipeTypes'
+// import { allNutrition } from '../../selectors'
 
 interface IngredientsListProps {
   ingredients: string[]
 }
 
-const buildMap = (
-  cart: FullRecipe[],
-  nutritionMap: { [recipeName: string]: NutritionInfo }
-) => {
-  const ingredientMap: { [aisle: string]: ExtendedIngredient[] } = {}
+// const buildMap = (
+//   cart: FullRecipe[],
+//   nutritionMap: { [recipeName: string]: NutritionInfo }
+// ) => {
+//   const ingredientMap: { [aisle: string]: ExtendedIngredient[] } = {}
 
-  cart.forEach((recipe) => {
-    const info = nutritionMap[recipe.name]
-    if (!info || !info.extendedIngredients) {
-      console.error(`Could not find nutrition info for ${recipe.name}`)
-    } else {
-      info.extendedIngredients.forEach((ing) => {
-        const current = ingredientMap[ing.aisle] || []
-        ingredientMap[ing.aisle] = current.concat(ing)
-      })
-    }
-  })
+//   cart.forEach((recipe) => {
+//     const info = nutritionMap[recipe.name]
+//     if (!info || !info.extendedIngredients) {
+//       console.error(`Could not find nutrition info for ${recipe.name}`)
+//     } else {
+//       info.extendedIngredients.forEach((ing) => {
+//         const current = ingredientMap[ing.aisle] || []
+//         ingredientMap[ing.aisle] = current.concat(ing)
+//       })
+//     }
+//   })
 
-  return ingredientMap
-}
+//   return ingredientMap
+// }
 
 const IngredientsList = ({ ingredients }: IngredientsListProps) => {
   // const nutritionMap = useSelector(allNutrition)

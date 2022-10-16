@@ -131,6 +131,7 @@
 #recipeWrapper .add-to-cart {
   width: 100%;
   height: 52px;
+  margin: 10px 0 10px 0;
 
   background-color: brown;
   cursor: pointer;
@@ -143,8 +144,9 @@
 #recipeWrapper .in-cart {
   width: 100%;
   height: 52px;
+  margin: 10px 0 10px 0;
 
-  background-color: greenyellow;
+  background-color: green;
   cursor: pointer;
 
   color: black;

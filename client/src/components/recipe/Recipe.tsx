@@ -68,7 +68,7 @@ const Recipe = ({ urlName }: Props) => {
       title && (
         <div>
           <div className='ingredients-title'>
-            {title}{' '}
+            {title}
             <AddToCart recipe={recipe!} ingredientType={ingredientType} />
           </div>
           {renderIngredients(ingredients)}
@@ -143,7 +143,8 @@ const Recipe = ({ urlName }: Props) => {
         <div id='ingredientsColumn'>
           <div className='sticky' id='ingredientsColumnSticky'>
             <div className='ingredients-title'>
-              Ingredients <AddToCart recipe={recipe} />
+              Ingredients
+              <AddToCart recipe={recipe} />
             </div>
             {renderIngredients(recipe.ingredients)}
             {renderSubIngredients(

@@ -55,6 +55,14 @@ const GroceriesContainer = () => {
     )
   }, [dispatch, ingredients])
 
+  if (Object.values(cart).length === 0) {
+    return (
+      <div id='groceriesContainer'>
+        <div className='cart-empty'>Add items to your cart to get started!</div>
+      </div>
+    )
+  }
+
   return (
     <div id='groceriesContainer'>
       <div id='recipeCardDeck'>

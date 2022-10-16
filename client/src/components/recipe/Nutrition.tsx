@@ -5,7 +5,7 @@ import '../../styles/recipe/Nutrition.css'
 import { FullRecipe } from '../../types/RecipeTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import nutritionSlice from '../../reducers/nutrition'
-import { nutrition } from '../selectors'
+import { nutrition } from '../../selectors'
 
 type Props = {
   recipe: FullRecipe

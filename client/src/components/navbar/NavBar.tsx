@@ -218,5 +218,5 @@ export default connect((state: RootState) => ({
   confirmedAreYouSureIds: state.modal.confirmedAreYouSureIds,
   isLoggedIn: state.login.isLoggedIn,
   isShopping: state.groceries.isShopping,
-  cartSize: state.groceries.cart.length,
+  cartSize: Object.keys(state.groceries.cart).length,
 }))(NavBar)

@@ -1,25 +1,51 @@
-import { FullRecipe } from '../../types/RecipeTypes'
+import { FullRecipe, IngredientType } from '../../types/RecipeTypes'
 import { ReactComponent as CartAddSVG } from '../../svg/cart-add.svg'
 import { useCallback } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import groceriesSlice from '../../reducers/groceries'
-import { RootState } from '../../reducers'
+import { cartSelector, isShoppingSelector } from '../../selectors'
 
 interface AddToCartProps {
-  isShopping: boolean
   recipe: FullRecipe
+  ingredientType?: IngredientType
 }
 
-const AddToCart = ({ isShopping, recipe }: AddToCartProps) => {
+const AddToCart = ({
+  ingredientType = 'ingredients',
+  recipe,
+}: AddToCartProps) => {
+  const isShopping = useSelector(isShoppingSelector)
+  const cart = useSelector(cartSelector)
   const dispatch = useDispatch()
 
   const handleAddClick = useCallback(() => {
-    dispatch(groceriesSlice.actions.addToCart({ recipe }))
-  }, [dispatch, recipe])
+    dispatch(groceriesSlice.actions.addToCart({ ingredientType, recipe }))
+  }, [dispatch, ingredientType, recipe])
+
+  const handleRemoveClick = useCallback(() => {
+    dispatch(
+      groceriesSlice.actions.removeIngredientsFromCart({
+        ingredientType,
+        recipe,
+      })
+    )
+  }, [dispatch, ingredientType, recipe])
 
   if (!isShopping) {
     return null
+  }
+
+  if (cart[recipe.name]) {
+    const hasIngredientInCart =
+      cart[recipe.name].ingredientTypes.includes(ingredientType)
+    if (hasIngredientInCart) {
+      return (
+        <div className='in-cart' onClick={handleRemoveClick}>
+          In Cart
+        </div>
+      )
+    }
   }
 
   return (
@@ -29,6 +55,4 @@ const AddToCart = ({ isShopping, recipe }: AddToCartProps) => {
   )
 }
 
-export default connect((state: RootState) => ({
-  isShopping: state.groceries.isShopping,
-}))(AddToCart)
+export default AddToCart

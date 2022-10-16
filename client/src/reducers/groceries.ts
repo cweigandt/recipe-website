@@ -1,23 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { FullRecipe } from '../types/RecipeTypes'
+import { FullRecipe, IngredientType } from '../types/RecipeTypes'
 
 export type StartShoppingActionType = {}
 
 export type AddToCart = {
   recipe: FullRecipe
+  ingredientType: IngredientType
 }
 
 export type RemoveFromCart = {
-  index: number
+  recipe: FullRecipe
+}
+
+export type RemoveIngredientFromCart = {
+  recipe: FullRecipe
+  ingredientType: IngredientType
 }
 
 type StateType = {
   isShopping: boolean
-  cart: FullRecipe[]
+  cart: {
+    [recipeName: string]: {
+      recipe: FullRecipe
+      ingredientTypes: IngredientType[]
+    }
+  }
 }
 
-const initialState: StateType = { isShopping: false, cart: [] }
+const initialState: StateType = {
+  isShopping: false,
+  cart: {},
+}
 
 const alertSlice = createSlice({
   name: 'groceries',
@@ -27,10 +41,33 @@ const alertSlice = createSlice({
       state.isShopping = true
     },
     addToCart(state, action: PayloadAction<AddToCart>) {
-      state.cart.push(action.payload.recipe)
+      const existing = state.cart[action.payload.recipe.name] || {
+        ingredientTypes: [],
+      }
+      state.cart[action.payload.recipe.name] = {
+        recipe: action.payload.recipe,
+        ingredientTypes: [
+          ...existing.ingredientTypes,
+          action.payload.ingredientType,
+        ],
+      }
     },
     removeFromCart(state, action: PayloadAction<RemoveFromCart>) {
-      state.cart.splice(action.payload.index, 1)
+      delete state.cart[action.payload.recipe.name]
+    },
+    removeIngredientsFromCart(
+      state,
+      action: PayloadAction<RemoveIngredientFromCart>
+    ) {
+      state.cart[action.payload.recipe.name].ingredientTypes = state.cart[
+        action.payload.recipe.name
+      ].ingredientTypes.filter((ing) => {
+        return ing !== action.payload.ingredientType
+      })
+
+      if (state.cart[action.payload.recipe.name].ingredientTypes.length === 0) {
+        delete state.cart[action.payload.recipe.name]
+      }
     },
   },
 })

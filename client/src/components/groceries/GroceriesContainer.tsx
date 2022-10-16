@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { RootState } from '../../reducers'
-import { FullRecipe } from '../../types/RecipeTypes'
+import { useDispatch, useSelector } from 'react-redux'
 
 import '../../styles/groceries/GroceriesContainer.css'
 import RecipeCard from '../carddeck/RecipeCard'
@@ -12,22 +10,25 @@ import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { ReactComponent as Copy } from '../../svg/copy.svg'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
 import IngredientsList from './IngredientsList'
-
-interface GroceriesContainerProps {
-  cart: FullRecipe[]
-}
+import { cartSelector } from '../../selectors'
+import { FullRecipe } from '../../types/RecipeTypes'
 
 const REMOVE_NUMBER_REGEX = /^[ 0-9,-]*/g
 
-const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
+const GroceriesContainer = () => {
   const [ingredients, setIngredients] = useState<string[]>([])
+  const cart = useSelector(cartSelector)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    let cartIngredients = cart
-      .reduce((accum: string[], recipe) => {
-        return accum.concat(...recipe.ingredients)
+    let cartIngredients = Object.values(cart)
+      .reduce((accum: string[], cartItem) => {
+        const newIngredients: string[] = []
+        cartItem.ingredientTypes.forEach((ingredientType) => {
+          newIngredients.push(...cartItem.recipe[ingredientType])
+        })
+        return accum.concat(...newIngredients)
       }, [])
       .sort((i1, i2) => {
         return i1
@@ -38,10 +39,10 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
     setIngredients(cartIngredients)
   }, [cart])
 
-  const handleRemoveFromCart = (e: React.MouseEvent, index: number) => {
+  const handleRemoveFromCart = (e: React.MouseEvent, recipe: FullRecipe) => {
     e.stopPropagation()
     e.preventDefault()
-    dispatch(groceriesSlice.actions.removeFromCart({ index }))
+    dispatch(groceriesSlice.actions.removeFromCart({ recipe }))
   }
 
   const handleCopy = useCallback(() => {
@@ -57,11 +58,11 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
   return (
     <div id='groceriesContainer'>
       <div id='recipeCardDeck'>
-        {cart.map((recipe, index) => (
-          <RecipeCard {...recipe}>
+        {Object.values(cart).map((cartItem, index) => (
+          <RecipeCard key={index} {...cartItem.recipe}>
             <div
               className='clear-from-cart'
-              onClick={(e) => handleRemoveFromCart(e, index)}
+              onClick={(e) => handleRemoveFromCart(e, cartItem.recipe)}
             >
               <XCircle className='grocery-recipe-x' />
             </div>
@@ -71,11 +72,9 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
       <div id='copy-ingredients' onClick={handleCopy}>
         <Copy />
       </div>
-      <IngredientsList cart={cart} />
+      <IngredientsList ingredients={ingredients} />
     </div>
   )
 }
 
-export default connect((state: RootState) => ({
-  cart: state.groceries.cart,
-}))(GroceriesContainer)
+export default GroceriesContainer

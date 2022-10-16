@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux'
 import { ExtendedIngredient, NutritionInfo } from '../../types/Nutrition'
 import { FullRecipe } from '../../types/RecipeTypes'
-import { allNutrition } from '../selectors'
+import { allNutrition } from '../../selectors'
 
 interface IngredientsListProps {
-  cart: FullRecipe[]
+  ingredients: string[]
 }
 
 const buildMap = (
@@ -28,21 +28,33 @@ const buildMap = (
   return ingredientMap
 }
 
-const IngredientsList = ({ cart }: IngredientsListProps) => {
-  const nutritionMap = useSelector(allNutrition)
-  const ingredientsMap = buildMap(cart, nutritionMap)
+const IngredientsList = ({ ingredients }: IngredientsListProps) => {
+  // const nutritionMap = useSelector(allNutrition)
+  // const ingredientsMap = buildMap(cart, nutritionMap)
+
+  // return (
+  //   <div className='groceries-ingredients'>
+  //     {Object.keys(ingredientsMap).map((aisle) => {
+  //       return (
+  //         <div>
+  //           <div className='ingredient' style={{ marginTop: 10 }}>
+  //             <strong>{aisle}</strong>
+  //           </div>
+  //           {ingredientsMap[aisle].map((ing) => {
+  //             return <div className='ingredient'>{ing.originalName}</div>
+  //           })}
+  //         </div>
+  //       )
+  //     })}
+  //   </div>
+  // )
 
   return (
     <div className='groceries-ingredients'>
-      {Object.keys(ingredientsMap).map((aisle) => {
+      {ingredients.map((ingredient) => {
         return (
-          <div>
-            {/* <div className='ingredient' style={{ marginTop: 10 }}>
-              <strong>{aisle}</strong>
-            </div> */}
-            {ingredientsMap[aisle].map((ing) => {
-              return <div className='ingredient'>{ing.originalName}</div>
-            })}
+          <div className='ingredient' style={{ marginTop: 10 }}>
+            <div className='ingredient'>{ingredient}</div>
           </div>
         )
       })}

@@ -37,9 +37,9 @@ const IngredientsList = ({ cart }: IngredientsListProps) => {
       {Object.keys(ingredientsMap).map((aisle) => {
         return (
           <div>
-            <div className='ingredient' style={{ marginTop: 10 }}>
+            {/* <div className='ingredient' style={{ marginTop: 10 }}>
               <strong>{aisle}</strong>
-            </div>
+            </div> */}
             {ingredientsMap[aisle].map((ing) => {
               return <div className='ingredient'>{ing.originalName}</div>
             })}

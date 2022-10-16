@@ -1,5 +1,296 @@
+const mockNutrition = {
+  vegetarian: false,
+  vegan: false,
+  glutenFree: true,
+  dairyFree: false,
+  veryHealthy: false,
+  cheap: false,
+  veryPopular: false,
+  sustainable: false,
+  lowFodmap: true,
+  weightWatcherSmartPoints: 6,
+  gaps: 'GAPS_FULL',
+  preparationMinutes: -1,
+  cookingMinutes: -1,
+  aggregateLikes: 0,
+  healthScore: 55,
+  creditsText: '',
+  sourceName: '',
+  pricePerServing: 490.59,
+  extendedIngredients: [
+    {
+      id: 15110,
+      aisle: 'Seafood',
+      image: 'swordfish.jpg',
+      consistency: 'SOLID',
+      name: 'swordfish filets',
+      nameClean: 'swordfish',
+      original: 'Swordfish filets',
+      originalName: 'Swordfish filets',
+      amount: 2,
+      unit: 'servings',
+      meta: [],
+      measures: {
+        us: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+        metric: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+      },
+    },
+    {
+      id: 2047,
+      aisle: 'Spices and Seasonings',
+      image: 'salt.jpg',
+      consistency: 'SOLID',
+      name: 'salt',
+      nameClean: 'table salt',
+      original: 'Salt',
+      originalName: 'Salt',
+      amount: 2,
+      unit: 'servings',
+      meta: [],
+      measures: {
+        us: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+        metric: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+      },
+    },
+    {
+      id: 10211821,
+      aisle: 'Produce',
+      image: 'bell-pepper-orange.png',
+      consistency: 'SOLID',
+      name: 'bell pepper',
+      nameClean: 'bell pepper',
+      original: 'Pepper',
+      originalName: 'Pepper',
+      amount: 2,
+      unit: 'servings',
+      meta: [],
+      measures: {
+        us: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+        metric: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+      },
+    },
+    {
+      id: 1001,
+      aisle: 'Milk, Eggs, Other Dairy',
+      image: 'butter-sliced.jpg',
+      consistency: 'SOLID',
+      name: 'butter',
+      nameClean: 'butter',
+      original: 'Butter',
+      originalName: 'Butter',
+      amount: 2,
+      unit: 'servings',
+      meta: [],
+      measures: {
+        us: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+        metric: {
+          amount: 2,
+          unitShort: 'servings',
+          unitLong: 'servings',
+        },
+      },
+    },
+    {
+      id: 11477,
+      aisle: 'Produce',
+      image: 'zucchini.jpg',
+      consistency: 'SOLID',
+      name: 'zucchini',
+      nameClean: 'zucchini',
+      original: '1 zucchini',
+      originalName: 'zucchini',
+      amount: 1,
+      unit: '',
+      meta: [],
+      measures: {
+        us: {
+          amount: 1,
+          unitShort: '',
+          unitLong: '',
+        },
+        metric: {
+          amount: 1,
+          unitShort: '',
+          unitLong: '',
+        },
+      },
+    },
+    {
+      id: 11641,
+      aisle: 'Produce',
+      image: 'yellow-squash.jpg',
+      consistency: 'SOLID',
+      name: 'summer squash',
+      nameClean: 'summer squash',
+      original: '1 summer squash',
+      originalName: 'summer squash',
+      amount: 1,
+      unit: '',
+      meta: [],
+      measures: {
+        us: {
+          amount: 1,
+          unitShort: '',
+          unitLong: '',
+        },
+        metric: {
+          amount: 1,
+          unitShort: '',
+          unitLong: '',
+        },
+      },
+    },
+  ],
+  id: -1,
+  title: 'Cast Iron Swordfish with Sauteed Zucchini and Squash',
+  readyInMinutes: -1,
+  servings: 2,
+  summary: null,
+  cuisines: [],
+  dishTypes: [],
+  diets: ['gluten free', 'primal', 'fodmap friendly', 'pescatarian'],
+  occasions: [],
+  instructions:
+    'Rinse zucchini and squash. Chop into half circles. Heat cast iron over medium heat. When pan begins smoking, add some butter and swordfish fillets. Season with salt and pepper. Cook on one side for 5 minutes, flip swordfish, and cook on the other side for 3 minutes. Heat another saute pan over medium high heat. Add olive oil, zucchini, and squash. Season with salt and pepper, letting it brown while cooking.',
+  analyzedInstructions: [
+    {
+      name: '',
+      steps: [
+        {
+          number: 1,
+          step: 'Rinse zucchini and squash. Chop into half circles.',
+          ingredients: [
+            {
+              id: 11477,
+              name: 'zucchini',
+              localizedName: 'zucchini',
+              image: 'zucchini.jpg',
+            },
+            {
+              id: 10011485,
+              name: 'squash',
+              localizedName: 'squash',
+              image: 'butternut-squash.jpg',
+            },
+          ],
+          equipment: [],
+        },
+        {
+          number: 2,
+          step: 'Heat cast iron over medium heat. When pan begins smoking, add some butter and swordfish fillets. Season with salt and pepper. Cook on one side for 5 minutes, flip swordfish, and cook on the other side for 3 minutes.',
+          ingredients: [
+            {
+              id: 1102047,
+              name: 'salt and pepper',
+              localizedName: 'salt and pepper',
+              image: 'salt-and-pepper.jpg',
+            },
+            {
+              id: 15110,
+              name: 'swordfish',
+              localizedName: 'swordfish',
+              image: 'swordfish.jpg',
+            },
+            {
+              id: 1001,
+              name: 'butter',
+              localizedName: 'butter',
+              image: 'butter-sliced.jpg',
+            },
+          ],
+          equipment: [
+            {
+              id: 404645,
+              name: 'frying pan',
+              localizedName: 'frying pan',
+              image: 'pan.png',
+            },
+          ],
+          length: {
+            number: 8,
+            unit: 'minutes',
+          },
+        },
+        {
+          number: 3,
+          step: 'Heat another saute pan over medium high heat.',
+          ingredients: [],
+          equipment: [
+            {
+              id: 404645,
+              name: 'frying pan',
+              localizedName: 'frying pan',
+              image: 'pan.png',
+            },
+          ],
+        },
+        {
+          number: 4,
+          step: 'Add olive oil, zucchini, and squash. Season with salt and pepper, letting it brown while cooking.',
+          ingredients: [
+            {
+              id: 1102047,
+              name: 'salt and pepper',
+              localizedName: 'salt and pepper',
+              image: 'salt-and-pepper.jpg',
+            },
+            {
+              id: 4053,
+              name: 'olive oil',
+              localizedName: 'olive oil',
+              image: 'olive-oil.jpg',
+            },
+            {
+              id: 11477,
+              name: 'zucchini',
+              localizedName: 'zucchini',
+              image: 'zucchini.jpg',
+            },
+            {
+              id: 10011485,
+              name: 'squash',
+              localizedName: 'squash',
+              image: 'butternut-squash.jpg',
+            },
+          ],
+          equipment: [],
+        },
+      ],
+    },
+  ],
+  originalId: null,
+}
+
 exports.spoonacularFetch = (body) => {
   return new Promise((resolve, reject) => {
-    resolve({ error: 'Using test env - error is ok' })
+    resolve({ ...mockNutrition, error: 'Using test env - error is ok' })
   })
 }

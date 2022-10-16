@@ -5,16 +5,14 @@ import '../../styles/recipe/Nutrition.css'
 import { FullRecipe } from '../../types/RecipeTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import nutritionSlice from '../../reducers/nutrition'
-import { RootState } from '../../reducers'
+import { nutrition } from '../selectors'
 
 type Props = {
   recipe: FullRecipe
 }
 
 function Nutrition({ recipe }: Props) {
-  const nutritionInfo = useSelector(
-    (state: RootState) => state.nutrition.nutritionMap[recipe.name]
-  )
+  const nutritionInfo = useSelector(nutrition(recipe.name))
   const dispatch = useDispatch()
 
   useEffect(() => {

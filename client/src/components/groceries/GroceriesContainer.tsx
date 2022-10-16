@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../reducers'
 import { FullRecipe } from '../../types/RecipeTypes'
 
@@ -11,6 +11,8 @@ import groceriesSlice from '../../reducers/groceries'
 import { ReactComponent as XCircle } from '../../svg/x-circle.svg'
 import { ReactComponent as Copy } from '../../svg/copy.svg'
 import { ALERT_TYPES } from '../../constants/AlertTypes'
+import { allNutrition } from '../selectors'
+import IngredientsList from './IngredientsList'
 
 interface GroceriesContainerProps {
   cart: FullRecipe[]
@@ -20,6 +22,7 @@ const REMOVE_NUMBER_REGEX = /^[ 0-9,-]*/g
 
 const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
   const [ingredients, setIngredients] = useState<string[]>([])
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -69,11 +72,7 @@ const GroceriesContainer = ({ cart }: GroceriesContainerProps) => {
       <div id='copy-ingredients' onClick={handleCopy}>
         <Copy />
       </div>
-      <div className='groceries-ingredients'>
-        {ingredients.map((ingredient) => (
-          <div className='ingredient'>{ingredient}</div>
-        ))}
-      </div>
+      <IngredientsList cart={cart} />
     </div>
   )
 }

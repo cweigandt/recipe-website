@@ -49,7 +49,11 @@ const AddToCart = ({
   }
 
   return (
-    <div className='add-to-cart' onClick={handleAddClick}>
+    <div
+      data-testid='addToCart'
+      className='add-to-cart'
+      onClick={handleAddClick}
+    >
       <CartAddSVG />
     </div>
   )

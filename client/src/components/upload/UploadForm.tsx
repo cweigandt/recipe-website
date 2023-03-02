@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import { decompress } from 'compress-json'
 
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
@@ -68,7 +67,7 @@ function UploadForm(props: Props) {
     fetch('/request/sections')
       .then((response) => response.json())
       .then((data) => {
-        setSections(decompress(data))
+        setSections(data)
       })
   }, [])
 
@@ -216,6 +215,7 @@ function UploadForm(props: Props) {
             id='sectionInput'
             name='section'
             data-test-id='upload-field-section'
+            placeholder=''
           >
             {sections.map((section) => (
               <option

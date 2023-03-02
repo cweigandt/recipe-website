@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { decompress } from 'compress-json'
 
 import { Link } from 'react-router-dom'
 
@@ -31,7 +30,7 @@ const Recipe = ({ urlName }: Props) => {
 
     fetch(`/request/recipe/${recipeName}`)
       .then((data) => data.json())
-      .then((data) => setRecipe(decompress(data)))
+      .then((data) => setRecipe(data))
   }, [urlName])
 
   useEffect(() => {

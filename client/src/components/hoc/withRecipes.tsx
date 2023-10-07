@@ -37,6 +37,9 @@ const withRecipes = (
               })
             )
           })
+          .catch((err) => {
+            console.error(err)
+          })
       } else if (useFullRecipes && !hasFullRecipes) {
         fetch(endpoint)
           .then((response) => response.json())
@@ -47,6 +50,9 @@ const withRecipes = (
                 isFullRecipes: true,
               })
             )
+          })
+          .catch((err) => {
+            console.error(err)
           })
       }
     }, [dispatch, hasFullRecipes, recipes])

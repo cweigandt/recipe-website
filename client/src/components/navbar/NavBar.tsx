@@ -55,6 +55,9 @@ function NavBar({
         const sorted = data.sort()
         setSections(sorted)
       })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [])
 
   useEffect(() => {
@@ -77,10 +80,14 @@ function NavBar({
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-    }).then((response) => {
-      modalId = -1
-      dispatch(loginSlice.actions.logOut({}))
     })
+      .then((response) => {
+        modalId = -1
+        dispatch(loginSlice.actions.logOut({}))
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [confirmedAreYouSureIds, dispatch])
 
   const handleLoginClick = () => {

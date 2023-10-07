@@ -51,29 +51,33 @@ const TagRename = ({ recipes }: Props) => {
       redirect: 'manual',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fromTag: fromBadge, toTag: toBadge }),
-    }).then((response) => {
-      setSubmitClickable(true)
-      if (response.status === 401) {
-        dispatch(
-          alertSlice.actions.addAlert({
-            text: 'User not logged in',
-            style: ALERT_TYPES.ERROR,
-          })
-        )
-        return
-      }
-      response.json().then((data) => {
-        let status = ALERT_TYPES.SUCCESS
-        if (response.status !== 200) {
-          status = ALERT_TYPES.ERROR
-          console.log(data.stack)
-        }
-
-        dispatch(
-          alertSlice.actions.addAlert({ text: data.response, style: status })
-        )
-      })
     })
+      .then((response) => {
+        setSubmitClickable(true)
+        if (response.status === 401) {
+          dispatch(
+            alertSlice.actions.addAlert({
+              text: 'User not logged in',
+              style: ALERT_TYPES.ERROR,
+            })
+          )
+          return
+        }
+        response.json().then((data) => {
+          let status = ALERT_TYPES.SUCCESS
+          if (response.status !== 200) {
+            status = ALERT_TYPES.ERROR
+            console.log(data.stack)
+          }
+
+          dispatch(
+            alertSlice.actions.addAlert({ text: data.response, style: status })
+          )
+        })
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [dispatch, fromBadge, tagifyRef])
 
   let allTags: { [tag: string]: number } = {}

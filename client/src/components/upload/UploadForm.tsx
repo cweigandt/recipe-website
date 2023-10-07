@@ -69,6 +69,9 @@ function UploadForm(props: Props) {
       .then((data) => {
         setSections(data)
       })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [])
 
   const handleUploadSuccess = () => {

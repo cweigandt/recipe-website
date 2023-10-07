@@ -10,6 +10,14 @@ type Props = {
 }
 
 const RecipeImage = ({ imageLocation }: Props) => {
+  if (!imageLocation) {
+    return (
+      <div className='image-wrapper'>
+        <div className='missing-image'>No image yet</div>
+      </div>
+    )
+  }
+
   return (
     <div className='image-wrapper'>
       <ImageWithTransition id='recipeImage' src={imageLocation} alt='' />

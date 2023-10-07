@@ -52,7 +52,7 @@ const RecipeCard = ({
   const imageSrc =
     thumbnail ||
     imageLocation ||
-    'https://www.medicinalgenomics.com/wp-content/uploads/2019/01/image-coming-soon-ecc.png'
+    'https://storage.googleapis.com/recipe-website-269020.appspot.com/public/common/coming_soon.jpeg'
 
   const daysOld = getDaysOld(uploadTime)
 

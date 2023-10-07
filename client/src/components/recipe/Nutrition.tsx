@@ -32,6 +32,9 @@ function Nutrition({ recipe }: Props) {
           })
         )
       })
+      .catch((err) => {
+        console.error(err)
+      })
   }, [dispatch, nutritionInfo, recipe])
 
   if (!nutritionInfo) {

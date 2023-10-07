@@ -31,6 +31,9 @@ const Recipe = ({ urlName }: Props) => {
     fetch(`/request/recipe/${recipeName}`)
       .then((data) => data.json())
       .then((data) => setRecipe(data))
+      .catch((err) => {
+        console.error(err)
+      })
   }, [urlName])
 
   useEffect(() => {
@@ -44,6 +47,8 @@ const Recipe = ({ urlName }: Props) => {
         body: JSON.stringify({
           recipeName,
         }),
+      }).catch((err) => {
+        console.error(err)
       })
     }
   }, [urlName])

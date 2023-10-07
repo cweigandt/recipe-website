@@ -41,24 +41,28 @@ function SignInModal({ dispatch, id, isLoggedIn }: Props) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-    }).then((response) => {
-      let status: AlertType = ALERT_TYPES.SUCCESS
-      if (response.status !== 200) {
-        status = ALERT_TYPES.ERROR
-        dispatch(
-          alertSlice.actions.addAlert({
-            text: 'Error logging in',
-            style: status,
-          })
-        )
-      } else {
-        formRef.current && formRef.current.reset()
-        dispatch(loginSlice.actions.logIn({}))
-        dispatch(
-          alertSlice.actions.addAlert({ text: 'Logged in', style: status })
-        )
-      }
     })
+      .then((response) => {
+        let status: AlertType = ALERT_TYPES.SUCCESS
+        if (response.status !== 200) {
+          status = ALERT_TYPES.ERROR
+          dispatch(
+            alertSlice.actions.addAlert({
+              text: 'Error logging in',
+              style: status,
+            })
+          )
+        } else {
+          formRef.current && formRef.current.reset()
+          dispatch(loginSlice.actions.logIn({}))
+          dispatch(
+            alertSlice.actions.addAlert({ text: 'Logged in', style: status })
+          )
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      })
     return false
   }
 

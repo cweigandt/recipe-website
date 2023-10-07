@@ -52,6 +52,8 @@ const RecipeMadeButton = ({
       body: JSON.stringify({
         recipeName,
       }),
+    }).catch((err) => {
+      console.error(err)
     })
   }, [confirmedAreYouSureIds, setShowButton, recipeName])
 
